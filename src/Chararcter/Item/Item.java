@@ -4,7 +4,7 @@ public abstract class Item {
 
     protected String name;
     protected String value;
-    protected String rankOfItemjakosc;
+    protected String quality;
 
 
     public void takeToInventory(){}
