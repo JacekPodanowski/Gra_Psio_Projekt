@@ -10,7 +10,7 @@ public class Weapon extends Item{
     protected String luck;
 
     @Override
-    public void useTheItem() {
+    public void useItem() {
 
     }
 }

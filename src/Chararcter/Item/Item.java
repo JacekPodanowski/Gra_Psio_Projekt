@@ -7,7 +7,6 @@ public abstract class Item {
     protected String quality;
 
 
-    public void takeToInventory(){}
 
-    public abstract void useTheItem();
+    public abstract void useItem();
 }

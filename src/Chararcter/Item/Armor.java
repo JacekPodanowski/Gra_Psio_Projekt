@@ -2,12 +2,16 @@ package Chararcter.Item;
 
 public class Armor extends Item{
 
-    protected boolean ifProtectsStrength;
-    protected boolean isIfProtectsFromInteligence;
-    protected boolean isIfProtectsFromAbility;
+    protected boolean isUsed=false;
+    protected int StrengthProtection;
+    protected int MagicProtection;
+    protected int AgilityProtection;
+
 
     @Override
-    public void useTheItem() {
+    public void useItem() {
+        //isUsed=true; moze to do playera bo jak wyrzucic akutalny przedmiot stąd
+        
 
     }
 }
