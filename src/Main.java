@@ -1,5 +1,7 @@
 import Chararcter.*;
+import Chararcter.Item.Weapon;
 import Game.*;
+import Game.Event.Walka;
 
 public class Main {
     public static void main (String[] args){
