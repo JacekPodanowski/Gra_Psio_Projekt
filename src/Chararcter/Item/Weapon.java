@@ -1,4 +1,4 @@
 package Chararcter.Item;
 
-public class Weapon {
+public class Weapon extends Item{
 }

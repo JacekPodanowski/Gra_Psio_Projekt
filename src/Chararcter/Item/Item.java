@@ -1,4 +1,4 @@
 package Chararcter.Item;
 
-public class Item {
+public abstract class Item {
 }
