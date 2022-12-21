@@ -1,7 +1,6 @@
 package Chararcter;
 
-import Chararcter.Item.Armor;
-import Chararcter.Item.Weapon;
+import Chararcter.Item.*;
 
 public class Player extends Character{
     private long exp;
@@ -11,6 +10,20 @@ public class Player extends Character{
 
     @Override
     public void attack(Character character) {
-
+    
+    }
+    
+    public void pickUpItem(Item item){
+        boolean succes= false;
+        for (int i = 0; i < inventory.length; i++) {
+            if(inventory[i]==null){
+                inventory[i]=item;
+                System.out.println("Podniesiono " + "nazwa przedmiotu "+ "na " + i + "miejsce w eq");
+                succes = true;
+            }
+        }
+        if(!succes){
+            System.out.println("Ekwipunek pelny");
+        }
     }
 }

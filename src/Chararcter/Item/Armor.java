@@ -7,6 +7,12 @@ public class Armor extends Item{
     protected int MagicProtection;
     protected int AgilityProtection;
 
+    public Armor(String name, int value, String quality, int strengthProtection, int magicProtection, int agilityProtection) {
+        super(name, value, quality);
+        StrengthProtection = strengthProtection;
+        MagicProtection = magicProtection;
+        AgilityProtection = agilityProtection;
+    }
 
     @Override
     public void useItem() {
