@@ -3,6 +3,8 @@ package Game;
 import Chararcter.Player;
 
 import java.io.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Game {
     private int day;
@@ -59,5 +61,21 @@ public class Game {
         }catch(IOException e){
             System.out.println("Nie udało się wczytać gry." + e.getMessage());
         }
+    }
+    public static int askForChoice(){
+
+        int choice;
+        while(true) {
+            Scanner input = new Scanner(System.in);
+            try {
+                if ((choice = input.nextInt()) >= 1 && choice <= 4)
+                    break;
+                else
+                    System.out.println("Niepoprawny wybór! Wybierz spośród 1-4.");
+            }catch(InputMismatchException eeee){
+                System.out.println("Podaj liczbę!");
+            }
+        }
+        return choice;
     }
 }

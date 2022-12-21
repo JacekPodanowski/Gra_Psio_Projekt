@@ -8,4 +8,9 @@ public class Player extends Character{
     public Player(int health, int strength, int agility, int intelligence, int gold, int level) {
         super(health, strength, agility, intelligence, gold, level);
     }
+
+    @Override
+    public void attack(Character character) {
+
+    }
 }
