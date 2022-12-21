@@ -17,10 +17,9 @@ public abstract class Character {
     public Character() {
         this.health = 100;
         this.inventory = new Item[5];
+        this.agility = 1;
         for (int i = 0; i < inventory.length; i++)
             inventory[i]=null;
-
-
     }
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level) { //do gracza
@@ -110,6 +109,8 @@ public abstract class Character {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public abstract void attack(Character character);
 
     public Item[] getInventory() {
         return inventory;

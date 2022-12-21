@@ -8,6 +8,11 @@ public class Player extends Character{
         super(health, strength, agility, intelligence, gold, level);
     }
 
+    @Override
+    public void attack(Character character) {
+    
+    }
+    
     public void pickUpItem(Item item){
         boolean succes= false;
         for (int i = 0; i < inventory.length; i++) {
