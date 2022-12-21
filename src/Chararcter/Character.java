@@ -11,15 +11,22 @@ public abstract class Character {
     protected int level;
     private Weapon weapon;
     private Armor armor;
-    private Item[] inventory;
+    protected Item[] inventory;
+
 
     public Character() {
         this.health = 100;
         this.inventory = new Item[5];
+        for (int i = 0; i < inventory.length; i++)
+            inventory[i]=null;
+
+
     }
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level) { //do gracza
         this.inventory = new Item[5];
+        for (int i = 0; i < inventory.length; i++)
+            inventory[i]=null;
         this.health = health;
         this.strength = strength;
         this.agility = agility;
@@ -33,6 +40,8 @@ public abstract class Character {
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level, Weapon weapon, Armor armor) { // do wroga
         this.inventory = new Item[5];
+        for (int i = 0; i < inventory.length; i++)
+            inventory[i]=null;
         this.health = health;
         this.strength = 0;//kurwa kondziu po co te zera tu wpisujesz, 10 min kminiłem co nie działa. (health = health a nie 0)
         this.agility = 0;//zamieniaj sam to sie nauczysz
@@ -51,7 +60,6 @@ public abstract class Character {
 
 
     //zamysł uniku jest taki aby dać go do walki tam sie to będzie liczyć, tak uważam. Z poważaniemm jacek podanowksi
-
 
 
 
@@ -103,4 +111,7 @@ public abstract class Character {
         this.level = level;
     }
 
+    public Item[] getInventory() {
+        return inventory;
+    }
 }
