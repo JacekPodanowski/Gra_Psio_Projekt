@@ -11,7 +11,7 @@ public class Armor extends Item{
     @Override
     public void useItem() {
         //isUsed=true; moze to do playera bo jak wyrzucic akutalny przedmiot stąd
-        
+
 
     }
 }
