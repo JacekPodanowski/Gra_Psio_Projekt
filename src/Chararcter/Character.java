@@ -42,7 +42,7 @@ public abstract class Character {
         for (int i = 0; i < inventory.length; i++)
             inventory[i]=null;
         this.health = health;
-        this.strength = 0;//kurwa kondziu po co te zera tu wpisujesz, 10 min kminiłem co nie działa. (health = health a nie 0)
+        this.strength = 0;//kondziu bambusie po co te zera tu wpisujesz, 10 min kminiłem co nie działa. (health = health a nie 0)
         this.agility = 0;//zamieniaj sam to sie nauczysz
         this.intelligence = 0;
         this.gold = 0;
