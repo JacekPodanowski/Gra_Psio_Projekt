@@ -22,4 +22,15 @@ public class Weapon extends Item{
     public void useItem() {
 
     }
+
+    public double calculatedmg(){
+        //podstawowy atak postaci, liczy damage
+        double damage = basicDMG;
+        switch(this.type) {
+            case "strength":
+
+
+        }
+        return damage;
+    }
 }
