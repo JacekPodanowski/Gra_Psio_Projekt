@@ -9,8 +9,8 @@ public abstract class Character {
     protected int agility;
     protected int gold;
     protected int level;
-    private Weapon weapon;
-    private Armor armor;
+    protected Weapon weapon;
+    protected Armor armor;
     protected Item[] inventory;
 
 
