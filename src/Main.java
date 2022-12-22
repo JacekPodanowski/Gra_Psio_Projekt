@@ -1,6 +1,7 @@
 import Chararcter.*;
 import Chararcter.Item.Weapon;
-import Game.Event.Fight;
+import Game.*;
+
 
 public class Main {
     public static void main (String[] args){
