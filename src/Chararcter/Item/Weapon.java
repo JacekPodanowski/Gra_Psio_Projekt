@@ -25,9 +25,10 @@ public class Weapon extends Item{
 
     public double calculatedmg(){
         //podstawowy atak postaci, liczy damage
-        double damage = 0;
+        double damage = basicDMG;
         switch(this.type) {
             case "strength":
+
 
         }
         return damage;

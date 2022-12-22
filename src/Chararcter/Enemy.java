@@ -17,7 +17,7 @@ public class Enemy extends Character{
     }
 
     @Override
-    public void attack(Character character) {
+    public void attack(Character character, int skillNumber) {
 
     }
 }

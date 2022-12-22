@@ -110,7 +110,7 @@ public abstract class Character {
         this.level = level;
     }
 
-    public abstract void attack(Character character);
+    public abstract void attack(Character character, int skillNumber);
 
     public Item[] getInventory() {
         return inventory;

@@ -3,15 +3,18 @@ package Game.Event;
 import Chararcter.*;
 import Game.*;
 
-public class Walka implements Event{
+import java.util.Random;
+
+public class Fight implements Event{
     private Enemy enemy;
     private boolean playerTurn = true; //Określa czyja tura jest wykonywana
 
-    public Walka(){
+    public Fight(){
         enemy = new Enemy();
     }
 
     public void event(Player player){
+        Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())
             this.playerTurn = false;
         while(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
@@ -22,8 +25,8 @@ public class Walka implements Event{
                 //uzywa umiejetnosci zaleznie od returna metody wyzej
                 this.playerTurn = false;
             }
-            else{
-                enemy.attack(player);
+            else {
+                enemy.attack(player, generate.nextInt(1, 5));
                 this.playerTurn = true;
             }
         }
