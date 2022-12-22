@@ -15,18 +15,20 @@ public class Fight implements Event{
 
     public void event(Player player){
         Random generate = new Random();
-        if (this.enemy.getAgility() > player.getAgility())
+        if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
             this.playerTurn = false;
         while(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
             if(playerTurn){
+                int wybor = Game.askForChoice();
                 System.out.println("Wybierz umiejętność: \n" +
                         "1. player.umiejetnosc[0].getName() itd. \n");
-                System.out.println("Użyłeś umięjętności " + Game.askForChoice());
+                System.out.println("Użyłeś umięjętności " + wybor);
+                //player.attack(enemy, wybor)
                 //uzywa umiejetnosci zaleznie od returna metody wyzej
                 this.playerTurn = false;
             }
             else {
-                enemy.attack(player, generate.nextInt(1, 5));
+                enemy.attack(player, generate.nextInt(1, 5));//dana bron ma zakres od liczb losowych i tutaj można wywołać broń
                 this.playerTurn = true;
             }
         }
