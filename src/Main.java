@@ -1,6 +1,7 @@
 import Chararcter.*;
 import Chararcter.Item.Weapon;
 import Game.*;
+import Game.Event.Fight;
 
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         Fight w = new Fight();
         w.event(P1);
         
-        Weapon mlotek = new Weapon("Mlotek",1,"Budowlany","sila",2,1,70);
+        Weapon mlotek = new Weapon("Mlotek",1,"Budowlany","S",2,1,70);
         //cel jest taki żeby dać graczpwi mlotek
     }
 }
