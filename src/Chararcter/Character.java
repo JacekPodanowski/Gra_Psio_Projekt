@@ -54,7 +54,7 @@ public abstract class Character {
 
 
 
-    //public abstract void death();
+    public abstract void death();
 
 
 

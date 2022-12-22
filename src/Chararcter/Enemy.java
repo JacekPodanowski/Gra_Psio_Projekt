@@ -17,6 +17,11 @@ public class Enemy extends Character{
     }
 
     @Override
+    public void death() {
+
+    }
+
+    @Override
     public void attack(Character character, int skillNumber) {
 
     }

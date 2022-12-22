@@ -13,7 +13,7 @@ public class Fight implements Event{
         enemy = new Enemy();
     }
 
-    public void event(Player player){
+    public Event event(Player player){
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
             this.playerTurn = false;
@@ -28,9 +28,16 @@ public class Fight implements Event{
                 this.playerTurn = false;
             }
             else {
-                enemy.attack(player, generate.nextInt(1, 5));//dana bron ma zakres od liczb losowych i tutaj można wywołać broń
+                enemy.attack(player, generate.nextInt(1, 5));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
                 this.playerTurn = true;
             }
+        }
+        if(player.getHealth() < 0){
+            player.death();
+            return null;
+        }
+        else{
+            return new Loot(null);
         }
     }
 }

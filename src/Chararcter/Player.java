@@ -9,6 +9,11 @@ public class Player extends Character{
     }
 
     @Override
+    public void death() {
+
+    }
+
+    @Override
     public void attack(Character character, int skillNumber) {
         //umiejetnosc[skillNumber].use(this.weapon.calculatedmg());
         //character.setHealth(getHealth() - umiejetnosc.use[skillNumber](this.weapon.calculatedmg);
