@@ -13,5 +13,8 @@ public class Main {
         
         Weapon mlotek = new Weapon("Mlotek",1,"Budowlany","S",2,1,70);
         //cel jest taki żeby dać graczpwi mlotek
+
+        Game g2 = new Game();
+        g2.restartGame();
     }
 }
