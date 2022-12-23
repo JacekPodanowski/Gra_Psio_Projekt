@@ -23,7 +23,7 @@ public class Fight implements Event{
                 System.out.println("Wybierz umiejętność: \n" +
                         "1. player.umiejetnosc[0].getName() itd. \n");
                 System.out.println("Użyłeś umięjętności " + wybor);
-                //player.attack(enemy, wybor)
+                player.attack(enemy, wybor);
                 //uzywa umiejetnosci zaleznie od returna metody wyzej
                 this.playerTurn = false;
             }
