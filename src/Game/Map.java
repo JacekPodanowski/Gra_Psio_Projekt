@@ -18,7 +18,7 @@ public class Map {
 
 
 
-    public static void GenerateMap() {
+    public void GenerateMap() {
         Map map = new Map();
         Random random = new Random();
 
