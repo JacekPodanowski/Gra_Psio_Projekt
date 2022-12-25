@@ -13,10 +13,10 @@ public class Game {
 
     public Game(){
         this.day = 0;
-        map = new Map();
+        Player P1 = new Player();
+        map = new Map(P1);
         map.displayMapFloor(1);
-        System.out.println("Rozpoczoles nowa gre");
-        Player P1= new Player();
+        System.out.println("Rozpocząłeś nową grę");
     }
 
     public Game(int day, Map map){

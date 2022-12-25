@@ -1,4 +1,6 @@
 package Game;
+import Chararcter.Player;
+
 import java.util.Random;
 
 public class Map {
@@ -12,23 +14,23 @@ public class Map {
         this.TabOfRoom = tabOfRoom;
     }
 
-    public Map() {
+    public Map(Player player) {
         TabOfRoom = new Room[5][5];
-        generateMap();
+        generateMap(player);
     }
 
-    public Map(int row, int col) {
+    public Map(int row, int col, Player player){
         TabOfRoom = new Room[row][col];
-        generateMap();
+        generateMap(player);
     }
 
-    public void generateMap() {
+    public void generateMap(Player player) {
         Random random = new Random();
 
         // przypisanie pokojow do tablicy mapy
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                this.TabOfRoom[i][j] = new Room(i, j);
+                this.TabOfRoom[i][j] = new Room(i, j, player);
             }
         }
 
