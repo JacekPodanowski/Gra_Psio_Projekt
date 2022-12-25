@@ -1,15 +1,30 @@
 package Chararcter;
 
 import Chararcter.Item.*;
+import Game.Game;
 
 public class Player extends Character{
+
+    private int location_X;
+    private int location_Y;
     private long exp;
+
+    public Player() {
+        System.out.println("Wybierz profesje : ");
+        System.out.println("1- Pracownik fizyczny ");
+        //System.out.println("2- mag ognia (spawacz) ");
+        //System.out.println("3- jakis dzikus inny ");
+        Game.askForChoice(1);
+    }
+
     public Player(int health, int strength, int agility, int intelligence, int gold, int level) {
         super(health, strength, agility, intelligence, gold, level);
     }
 
     @Override
     public void death() {
+        System.out.println("No coz, umarles");
+        //wyswietyla statystyki
 
     }
 

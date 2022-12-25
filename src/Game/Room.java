@@ -65,15 +65,16 @@ public class Room {
 
     public void randomEvent(){
         Random generate = new Random();
-        switch(generate.nextInt(5)){
-            case 1:
+        switch(generate.nextInt(3)){
+            case 0:
                 this.event = new Fight();
                 break;
-            case 2:
+            case 1:
                 this.event = new EmptyRoom();
                 break;
-            case 3:
+            case 2:
                 this.event = new Loot();
+                break;
             default:
                 System.out.println("Błąd przy losowaniu eventu!");
                 break;

@@ -14,6 +14,8 @@ public class Game {
     public Game(){
         this.day = 0;
         map = new Map();
+        System.out.println("Rozpoczoles nowa gre");
+        Player P1= new Player();
     }
 
     public Game(int day, Map map){
@@ -73,6 +75,23 @@ public class Game {
                     break;
                 else
                     System.out.println("Niepoprawny wybór! Wybierz spośród 1-4.");
+            }catch(InputMismatchException eeee){
+                System.out.println("Podaj liczbę!");
+            }
+        }
+        return choice;
+    }
+
+    public static int askForChoice(int limit){
+
+        int choice;
+        while(true) {
+            Scanner input = new Scanner(System.in);
+            try {
+                if ((choice = input.nextInt()) >= 1 && choice <= limit)
+                    break;
+                else
+                    System.out.println("Niepoprawny wybór! Wybierz spośród 1-" + limit);
             }catch(InputMismatchException eeee){
                 System.out.println("Podaj liczbę!");
             }

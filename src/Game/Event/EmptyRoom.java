@@ -8,8 +8,8 @@ public class EmptyRoom implements Event {
     public Event event(Player player) {
         int wybor;
         do{
-            wybor = Game.askForChoice();
             System.out.println("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Odpocznij.\t 3. Użyj przedmiotu.");
+            wybor = Game.askForChoice();
             switch(wybor) {
                 case 1:
                     System.out.println("Przechodzenie do następnego pokoju.");
