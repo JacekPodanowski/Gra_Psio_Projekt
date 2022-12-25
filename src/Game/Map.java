@@ -65,10 +65,10 @@ public class Map {
     }
 
     public void displayMapFloor(int pientro) {
-
+        System.out.println("Mapa piętra: " + pientro);
         for (int i = 0; i < TabOfRoom.length; i++) {
             for (int j = 0; j < TabOfRoom[0].length; j++) {
-                System.out.print("[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString()+", ");
+                System.out.printf("%-12s", "[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString());
             }
             System.out.println();
         }

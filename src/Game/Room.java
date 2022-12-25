@@ -63,9 +63,9 @@ public class Room {
     public int getColRoom() {
         return colRoom;
     }
-    public void eventLoop(Event event, Player player){
+    public void eventLoop(Player player){
         do
-            event = event.event(player);
+            this.event = this.event.event(player);
         while(event != null);
         if(player.getHealth() < 0)
             System.out.println("Przegrałeś");
@@ -79,13 +79,13 @@ public class Room {
         Random generate = new Random();
         switch(generate.nextInt(3)){
             case 0:
-                eventLoop(new Fight(), player);
+                this.event = new Fight();
                 break;
             case 1:
-                eventLoop(new Loot(), player);
+                this.event = new Loot();
                 break;
             case 2:
-                eventLoop(new EmptyRoom(), player);
+                this.event = new EmptyRoom();
                 break;
             default:
                 System.out.println("Błąd przy losowaniu eventu!");
