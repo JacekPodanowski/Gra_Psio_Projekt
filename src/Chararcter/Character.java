@@ -54,9 +54,8 @@ public abstract class Character {
 
 
 
-    //public abstract void death();
-
-
+    public abstract void death();
+    public abstract void attack(Character character, int skillNumber);
 
     //zamysł uniku jest taki aby dać go do walki tam sie to będzie liczyć, tak uważam. Z poważaniemm jacek podanowksi
 
@@ -110,7 +109,7 @@ public abstract class Character {
         this.level = level;
     }
 
-    public abstract void attack(Character character, int skillNumber);
+
 
     public Item[] getInventory() {
         return inventory;

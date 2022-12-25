@@ -13,18 +13,19 @@ public class Map {
 
     public Map() {
         TabOfRoom = new Room[5][5];
+        generateMap();
+    }
+    public Map(int row, int col){
+        TabOfRoom = new Room[row][col];
+        generateMap();
     }
 
-
-
-
-    public static void GenerateMap() {
-        Map map = new Map();
+    public void generateMap() {
         Random random = new Random();
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                map.TabOfRoom[i][j] = new Room(i,j);// przypisanie pokojow do tablicy mapy
+                this.TabOfRoom[i][j] = new Room(i,j);// przypisanie pokojow do tablicy mapy
             }
         }
         // losujemy jedno wejście i jedno wyjście
@@ -32,17 +33,17 @@ public class Map {
 
 
 
-        map.TabOfRoom[4*random.nextInt(2)][4*random.nextInt(2)].setEnter(true);
+        this.TabOfRoom[4*random.nextInt(2)][4*random.nextInt(2)].setEnter(true);
         {
             int rowTemp = random.nextInt(5);
             // if
             int colTemp = 4*random.nextInt(2);
-            while (!map.TabOfRoom[rowTemp][colTemp].getEnter() || map.TabOfRoom[rowTemp][colTemp].getExit()){}
+            while (!this.TabOfRoom[rowTemp][colTemp].getEnter() || this.TabOfRoom[rowTemp][colTemp].getExit()){}
 
         }
 
-        for (int i = 0; i < map.TabOfRoom.length; i++) {
-            for (int j = 0; j < map.TabOfRoom[i].length; j++) {
+        for (int i = 0; i < this.TabOfRoom.length; i++) {
+            for (int j = 0; j < this.TabOfRoom[i].length; j++) {
 
             }
 

@@ -13,6 +13,7 @@ public class Game {
 
     public Game(){
         this.day = 0;
+        map = new Map();
     }
 
     public Game(int day, Map map){
