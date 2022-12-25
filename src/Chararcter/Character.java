@@ -2,6 +2,8 @@ package Chararcter;
 
 import Chararcter.Item.*;
 
+import java.util.Arrays;
+
 public abstract class Character {
     protected int health;
     protected int strength;
@@ -18,14 +20,12 @@ public abstract class Character {
         this.health = 100;
         this.inventory = new Item[5];
         this.agility = 1;
-        for (int i = 0; i < inventory.length; i++)
-            inventory[i]=null;
+        Arrays.fill(inventory, null);
     }
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level) { //do gracza
         this.inventory = new Item[5];
-        for (int i = 0; i < inventory.length; i++)
-            inventory[i]=null;
+        Arrays.fill(inventory, null);
         this.health = health;
         this.strength = strength;
         this.agility = agility;
@@ -39,8 +39,7 @@ public abstract class Character {
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level, Weapon weapon, Armor armor) { // do wroga
         this.inventory = new Item[5];
-        for (int i = 0; i < inventory.length; i++)
-            inventory[i]=null;
+        Arrays.fill(inventory, null);
         this.health = health;
         this.strength = 0;//kondziu bambusie po co te zera tu wpisujesz, 10 min kminiłem co nie działa. (health = health a nie 0)
         this.agility = 0;//zamieniaj sam to sie nauczysz
