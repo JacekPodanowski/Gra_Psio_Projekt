@@ -4,6 +4,7 @@ import Chararcter.Player;
 import Game.Game;
 
 public class EmptyRoom implements Event {
+    private String name = "Pusty";
     @Override
     public Event event(Player player) {
         int wybor;
@@ -34,4 +35,5 @@ public class EmptyRoom implements Event {
         }while (wybor != 1);
         return null;
     }
+    public String toString() {return name;}
 }

@@ -63,6 +63,8 @@ public class Room {
         return colRoom;
     }
 
+    public Event getEvent() {return event;}
+
     public void randomEvent(){
         Random generate = new Random();
         switch(generate.nextInt(3)){

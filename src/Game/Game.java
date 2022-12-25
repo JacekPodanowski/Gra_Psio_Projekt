@@ -14,6 +14,7 @@ public class Game {
     public Game(){
         this.day = 0;
         map = new Map();
+        map.displayMapFloor(1);
         System.out.println("Rozpoczoles nowa gre");
         Player P1= new Player();
     }
