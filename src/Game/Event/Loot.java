@@ -10,6 +10,9 @@ public class Loot implements Event{
     public Loot(Item[] lootTab){
         this.lootTab = lootTab;
     }
+    public Loot(){
+        //losowanie lootu
+    }
     @Override
     public Event event(Player player) {
         for(int i = 0; i < lootTab.length; i++) {

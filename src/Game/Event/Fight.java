@@ -37,7 +37,7 @@ public class Fight implements Event{
             return null;
         }
         else{
-            return new Loot(null);
+            return new Loot(enemy.getInventory());
         }
     }
 }
