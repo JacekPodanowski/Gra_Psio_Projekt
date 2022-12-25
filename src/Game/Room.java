@@ -73,6 +73,8 @@ public class Room {
             System.out.println("Przechodzisz do następnego pokoju.");
     }
 
+    public Event getEvent() {return event;}
+
     public void randomEvent(Player player){
         Random generate = new Random();
         switch(generate.nextInt(3)){

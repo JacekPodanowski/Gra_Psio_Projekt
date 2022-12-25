@@ -4,12 +4,13 @@ import Chararcter.Player;
 import java.util.Random;
 
 public class Map {
-    private Room [][] TabOfRoom;  // tablica z pokojow 5x5 (na razie)
+    private Room[][] TabOfRoom;  // tablica z pokojow 5x5 (na razie)
 
-    public Room [][] getTabOfRoom() {
+    public Room[][] getTabOfRoom() {
         return TabOfRoom;
     }
-    public void setTabOfRoom(Room [][] tabOfRoom) {
+
+    public void setTabOfRoom(Room[][] tabOfRoom) {
         this.TabOfRoom = tabOfRoom;
     }
 
@@ -17,6 +18,7 @@ public class Map {
         TabOfRoom = new Room[5][5];
         generateMap(player);
     }
+
     public Map(int row, int col, Player player){
         TabOfRoom = new Room[row][col];
         generateMap(player);
@@ -59,10 +61,16 @@ public class Map {
             }
 
         }
-
-
-
-
         /*/
+    }
+
+    public void displayMapFloor(int pientro) {
+
+        for (int i = 0; i < TabOfRoom.length; i++) {
+            for (int j = 0; j < TabOfRoom[0].length; j++) {
+                System.out.print("[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString()+", ");
+            }
+            System.out.println();
+        }
     }
 }

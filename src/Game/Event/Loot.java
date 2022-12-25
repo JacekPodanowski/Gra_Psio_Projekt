@@ -5,8 +5,9 @@ import Chararcter.Player;
 import Game.Game;
 
 public class Loot implements Event{
-    private Item[] lootTab;
 
+    private String name = "Loot";
+    private Item[] lootTab;
     public Loot(Item[] lootTab){
         this.lootTab = lootTab;
         System.out.println("Pokonany przeciwnik był zaopatrzony w przedmioty.");
@@ -31,4 +32,9 @@ public class Loot implements Event{
         }
         return new EmptyRoom();
     }
+
+
+
+    @Override
+    public String toString() {return name;}
 }

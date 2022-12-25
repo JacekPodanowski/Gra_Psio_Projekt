@@ -15,6 +15,7 @@ public class Game {
         this.day = 0;
         player = new Player();
         map = new Map(this.player);
+        map.displayMapFloor(1);
         System.out.println("Rozpocząłeś nową grę");
     }
 

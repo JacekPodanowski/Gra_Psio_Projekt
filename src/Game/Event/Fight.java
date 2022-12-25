@@ -6,6 +6,7 @@ import Game.*;
 import java.util.Random;
 
 public class Fight implements Event{
+    private String name = "Walka";
     private Enemy enemy;
     private boolean playerTurn = true; //Określa czyja tura jest wykonywana
 
@@ -47,4 +48,5 @@ public class Fight implements Event{
             return new Loot(enemy.getInventory());
         }
     }
+    public String toString() {return name;}
 }
