@@ -13,9 +13,9 @@ public class Game {
 
     public Game(){
         this.day = 0;
-        map = new Map();
-        System.out.println("Rozpoczoles nowa gre");
-        Player P1= new Player();
+        Player P1 = new Player();
+        map = new Map(this.player);
+        System.out.println("Rozpocząłeś nową grę");
     }
 
     public Game(int day, Map map){

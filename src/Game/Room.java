@@ -1,5 +1,6 @@
 package Game;
 
+import Chararcter.Player;
 import Game.Event.EmptyRoom;
 import Game.Event.Event;
 import Game.Event.Fight;
@@ -23,14 +24,14 @@ public class Room {
     public boolean getExit() {
         return exit;
     }
-    public Room(int rowRoom, int colRoom){
+    public Room(int rowRoom, int colRoom, Player player){
         this.rowRoom = rowRoom;
         this.colRoom = colRoom;
         enter = false;
         exit = false;
         pathSet = new int[4][2];
         difficulty = 0;
-        randomEvent();
+        randomEvent(player);
     }
     public boolean isEnter() {
         return enter;
@@ -62,18 +63,22 @@ public class Room {
     public int getColRoom() {
         return colRoom;
     }
+    public void eventLoop(Event event, Player player){
+        while(this.event != null)
+            this.event = event.event(player);
+    }
 
-    public void randomEvent(){
+    public void randomEvent(Player player){
         Random generate = new Random();
         switch(generate.nextInt(3)){
             case 0:
-                this.event = new Fight();
+                eventLoop(new Fight(), player);
                 break;
             case 1:
-                this.event = new EmptyRoom();
+                eventLoop(new Loot(), player);
                 break;
             case 2:
-                this.event = new Loot();
+                eventLoop(new EmptyRoom(), player);
                 break;
             default:
                 System.out.println("Błąd przy losowaniu eventu!");
