@@ -4,6 +4,9 @@ import Chararcter.Player;
 import Game.Game;
 
 public class EmptyRoom implements Event {
+    public EmptyRoom(){
+
+    }
     @Override
     public Event event(Player player) {
         int wybor;

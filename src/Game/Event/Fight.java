@@ -11,6 +11,7 @@ public class Fight implements Event{
 
     public Fight(){
         enemy = new Enemy();
+        System.out.println("Spotkałeś na swojej drodze przeciwnika!");
     }
 
     public Event event(Player player){
@@ -19,11 +20,17 @@ public class Fight implements Event{
             this.playerTurn = false;
         while(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
             if(playerTurn){
-                int wybor = Game.askForChoice();
                 System.out.println("Wybierz umiejętność: \n" +
                         "1. player.umiejetnosc[0].getName() itd. \n");
+                int wybor = Game.askForChoice();
                 System.out.println("Użyłeś umięjętności " + wybor);
                 player.attack(enemy, wybor);
+                //===== DO TESTOW ======
+                if(wybor == 1)
+                    player.setHealth(0);
+                if(wybor == 2)
+                    this.enemy.setHealth(0);
+                //
                 //uzywa umiejetnosci zaleznie od returna metody wyzej
                 this.playerTurn = false;
             }
@@ -32,7 +39,7 @@ public class Fight implements Event{
                 this.playerTurn = true;
             }
         }
-        if(player.getHealth() < 0){
+        if(player.getHealth() <= 0){
             player.death();
             return null;
         }

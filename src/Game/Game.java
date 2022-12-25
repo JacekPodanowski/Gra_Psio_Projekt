@@ -13,7 +13,7 @@ public class Game {
 
     public Game(){
         this.day = 0;
-        Player P1 = new Player();
+        player = new Player();
         map = new Map(this.player);
         System.out.println("Rozpocząłeś nową grę");
     }

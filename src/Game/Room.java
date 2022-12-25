@@ -64,8 +64,13 @@ public class Room {
         return colRoom;
     }
     public void eventLoop(Event event, Player player){
-        while(this.event != null)
-            this.event = event.event(player);
+        do
+            event = event.event(player);
+        while(event != null);
+        if(player.getHealth() < 0)
+            System.out.println("Przegrałeś");
+        else
+            System.out.println("Przechodzisz do następnego pokoju.");
     }
 
     public void randomEvent(Player player){

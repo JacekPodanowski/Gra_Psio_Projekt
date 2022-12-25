@@ -10,6 +10,7 @@ public class Player extends Character{
     private long exp;
 
     public Player() {
+        super();
         System.out.println("Wybierz profesje : ");
         System.out.println("1- Pracownik fizyczny ");
         //System.out.println("2- mag ognia (spawacz) ");
