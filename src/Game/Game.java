@@ -39,6 +39,14 @@ public class Game {
     public void setMapa(Map mapa) {
         this.map = mapa;
     }
+    public void startGame(){
+        System.out.println("Aby wejść do kostki wpisz 1");
+        int wybor = askForChoice();
+        if(wybor == 1)
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                    this.map.getTabOfRoom()[i][j].getEvent().event(this.player);
+    }
 
     public void restartGame(){
         this.map = null; //POWINNO LOSOWAĆ NOWĄ MAPĘ
