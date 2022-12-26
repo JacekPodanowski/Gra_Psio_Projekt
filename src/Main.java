@@ -7,13 +7,12 @@ import Game.Event.Fight;
 public class Main {
     public static void main (String[] args){
 
-        System.out.println("Witaj w grze : Proba Ucieczki Z Kostki");
-        System.out.println("1 - Rozpocznij nową gre");
-        System.out.println("2 - Wczytaj zapisaną gre");
-        System.out.println("3 - Wyjdź");
+        System.out.println("Witaj w grze: Proba Ucieczki Z Kostki");
+        System.out.println("1. Rozpocznij nową gre\t\t2. Wczytaj zapisaną gre\t\t3. Wyjdź");
         switch (Game.askForChoice()){
             case 1:
                 Game g1 = new Game();
+                g1.startGame();
                 break;
             case 2:
                 //Game g1 = new Game(Plik zapisu);

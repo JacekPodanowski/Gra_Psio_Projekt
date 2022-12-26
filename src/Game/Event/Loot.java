@@ -10,23 +10,20 @@ public class Loot implements Event{
     private Item[] lootTab;
     public Loot(Item[] lootTab){
         this.lootTab = lootTab;
-        System.out.println("Pokonany przeciwnik był zaopatrzony w przedmioty.");
     }
     public Loot(){
         //losowanie lootu
-        System.out.println("Znalazłeś skarb!");
     }
     @Override
     public Event event(Player player) {
+        System.out.println("\n\nNatrafiasz na skarb!");
         if (this.lootTab != null) {
             for (int i = 0; i < lootTab.length; i++) {
                 System.out.println("Czy chcesz podnieść " + lootTab[i].getName() + "?");
                 System.out.println("1. Tak" + '\t' + "2. Nie");
-                int wybor = Game.askForChoice();
+                int wybor = Game.askForChoice(2);
                 if (wybor == 1) {
                     player.pickUpItem(lootTab[i]);
-                } else if (wybor != 2) {
-                    System.out.println("Niepoprawny wybór!");
                 }
             }
         }

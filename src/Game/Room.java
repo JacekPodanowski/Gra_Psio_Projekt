@@ -1,14 +1,12 @@
 package Game;
 
 import Chararcter.Player;
-import Game.Event.EmptyRoom;
-import Game.Event.Event;
-import Game.Event.Fight;
-import Game.Event.Loot;
+import Game.Event.*;
 
 import java.util.Random;
 
 public class Room {
+    //================================================= ATRYBUTY KLASY =================================================
     private boolean enter;
     private boolean exit;
     private int rowRoom;
@@ -17,21 +15,16 @@ public class Room {
     private int difficulty;  // + lub - od lewela gracza
     private Event event;
 
+    //==================================================================================================================
 
+
+
+    //============================================= GETTERY I SETTERY ==================================================
     public boolean getEnter() {
         return enter;
     }
     public boolean getExit() {
         return exit;
-    }
-    public Room(int rowRoom, int colRoom, Player player){
-        this.rowRoom = rowRoom;
-        this.colRoom = colRoom;
-        enter = false;
-        exit = false;
-        pathSet = new int[4][2];
-        difficulty = 0;
-        randomEvent(player);
     }
     public boolean isEnter() {
         return enter;
@@ -63,18 +56,53 @@ public class Room {
     public int getColRoom() {
         return colRoom;
     }
-    public void eventLoop(Player player){
+    public Event getEvent() {
+        return event;
+    }
+    public void setRowRoom(int rowRoom) {
+        this.rowRoom = rowRoom;
+    }
+
+    public void setColRoom(int colRoom) {
+        this.colRoom = colRoom;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    //==================================================================================================================
+
+
+
+    //================================================ KONSTRUKTORY ====================================================
+    public Room(int rowRoom, int colRoom, Player player){
+        this.rowRoom = rowRoom;
+        this.colRoom = colRoom;
+        enter = false;
+        exit = false;
+        pathSet = new int[4][2];
+        difficulty = 0;
+        randomEvent(player);
+    }
+
+    //==================================================================================================================
+
+
+
+    //================================================== METODY KLASY ==================================================
+    public boolean eventLoop(Player player){
         do
             this.event = this.event.event(player);
         while(event != null);
-        if(player.getHealth() < 0)
+        if(!(player.getHealth() > 0)) {
             System.out.println("Przegrałeś");
+            player.death();
+            return false;
+        }
         else
-            System.out.println("Przechodzisz do następnego pokoju.");
+            return true;
     }
-
-    public Event getEvent() {return event;}
-
     public void randomEvent(Player player){
         Random generate = new Random();
         switch(generate.nextInt(3)){
@@ -93,4 +121,5 @@ public class Room {
         }
     }
 
+    //==================================================================================================================
 }
