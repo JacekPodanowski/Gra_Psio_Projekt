@@ -11,13 +11,13 @@ public class EmptyRoom implements Event {
 
     @Override
     public Event event(Player player) {
+        System.out.println("\n\nZnalazłeś się w pustym pokoju, masz chwilę dla siebie.");
         int wybor;
         do{
             System.out.println("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Odpocznij.\t 3. Użyj przedmiotu.");
             wybor = Game.askForChoice();
             switch(wybor) {
                 case 1:
-                    System.out.println("Przechodzenie do następnego pokoju.");
                     //metody które przechodzą do next room
                     break;
                 case 2:

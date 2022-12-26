@@ -18,9 +18,8 @@ public abstract class Character {
 
     public Character() {
         this.health = 100;
-        this.inventory = new Item[5];
+        this.inventory = null;
         this.agility = 1;
-        Arrays.fill(inventory, null);
     }
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level) { //do gracza

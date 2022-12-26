@@ -7,23 +7,32 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
+    //============================================ ATRYBUTY KLASY ======================================================
     private int day;
     private Map map;
     private Player player;
 
+    //==================================================================================================================
+
+
+
+    //============================================= KONSTRUKTORY =======================================================
     public Game(){
         this.day = 0;
         player = new Player();
         map = new Map(this.player);
         map.displayMapFloor(1);
-        System.out.println("Rozpocząłeś nową grę");
+        System.out.println("\nRozpocząłeś nową grę!\n\n");
     }
-
     public Game(int day, Map map){
         this.day = day;
         this.map = map;
     }
+    //==================================================================================================================
 
+
+
+    //========================================= SETTERY I GETTERY ======================================================
     public int getDay() {
         return day;
     }
@@ -39,15 +48,21 @@ public class Game {
     public void setMapa(Map mapa) {
         this.map = mapa;
     }
+
+    //==================================================================================================================
+
+
+
+    //============================================= METODY KLASY =======================================================
     public void startGame(){
         System.out.println("Aby wejść do kostki wpisz 1");
         int wybor = askForChoice();
         if(wybor == 1)
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
-                    this.map.getTabOfRoom()[i][j].getEvent().event(this.player);
+                    if(!this.map.getTabOfRoom()[i][j].eventLoop(player))
+                        System.exit(5);
     }
-
     public void restartGame(){
         this.map = null; //POWINNO LOSOWAĆ NOWĄ MAPĘ
         this.day = 0;
@@ -75,7 +90,6 @@ public class Game {
         }
     }
     public static int askForChoice(){
-
         int choice;
         while(true) {
             Scanner input = new Scanner(System.in);
@@ -92,7 +106,6 @@ public class Game {
     }
 
     public static int askForChoice(int limit){
-
         int choice;
         while(true) {
             Scanner input = new Scanner(System.in);
@@ -100,11 +113,13 @@ public class Game {
                 if ((choice = input.nextInt()) >= 1 && choice <= limit)
                     break;
                 else
-                    System.out.println("Niepoprawny wybór! Wybierz spośród 1-" + limit);
+                    System.out.println("Niepoprawny wybór! Wybierz spośród 1 - " + limit);
             }catch(InputMismatchException eeee){
                 System.out.println("Podaj liczbę!");
             }
         }
         return choice;
     }
+
+    //==================================================================================================================
 }

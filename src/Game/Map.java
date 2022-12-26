@@ -4,16 +4,14 @@ import Chararcter.Player;
 import java.util.Random;
 
 public class Map {
+    //================================================= ATRYBUTY KLASY =================================================
     private Room[][] TabOfRoom;  // tablica z pokojow 5x5 (na razie)
 
-    public Room[][] getTabOfRoom() {
-        return TabOfRoom;
-    }
+    //==================================================================================================================
 
-    public void setTabOfRoom(Room[][] tabOfRoom) {
-        this.TabOfRoom = tabOfRoom;
-    }
 
+
+    //================================================== KONSTRUKTORY ==================================================
     public Map(Player player) {
         TabOfRoom = new Room[5][5];
         generateMap(player);
@@ -23,7 +21,23 @@ public class Map {
         TabOfRoom = new Room[row][col];
         generateMap(player);
     }
+    //==================================================================================================================
 
+
+
+    //============================================= GETTERY I SETTERY ==================================================
+    public Room[][] getTabOfRoom() {
+        return TabOfRoom;
+    }
+
+    public void setTabOfRoom(Room[][] tabOfRoom) {
+        this.TabOfRoom = tabOfRoom;
+    }
+    //==================================================================================================================
+
+
+
+    //============================================= METODY KLASY =======================================================
     public void generateMap(Player player) {
         Random random = new Random();
 
@@ -42,7 +56,7 @@ public class Map {
         int y = 4 * random.nextInt(2);
         this.TabOfRoom[x][y].setExit(true);
         this.TabOfRoom[0][0].setEnter(true);
-        System.out.println("    Nota techniczna - Wspolzednde wyjscia to : [" + x + "," + y + "]");
+        //System.out.println("Nota techniczna - Współrzędne wyjscia to : [" + x + "," + y + "]");
         //this.TabOfRoom[4*random.nextInt(2)][4*random.nextInt(2)].setEnter(true);
 
         //nwm do czego to sluzy
@@ -64,8 +78,8 @@ public class Map {
         /*/
     }
 
-    public void displayMapFloor(int pientro) {
-        System.out.println("Mapa piętra: " + pientro);
+    public void displayMapFloor(int floor) {
+        System.out.println("Mapa piętra: " + floor);
         for (int i = 0; i < TabOfRoom.length; i++) {
             for (int j = 0; j < TabOfRoom[0].length; j++) {
                 System.out.printf("%-12s", "[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString());
@@ -74,3 +88,4 @@ public class Map {
         }
     }
 }
+//======================================================================================================================
