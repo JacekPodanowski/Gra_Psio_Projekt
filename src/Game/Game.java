@@ -27,6 +27,7 @@ public class Game {
         map = new Map(this.player,mapSize);
         map.displayMapFloor(1);
         System.out.println("\nRozpocząłeś nową grę!\n\n");
+        this.startGame();
     }
     public Game(int day, Player player,Map map){
         this.day = day;

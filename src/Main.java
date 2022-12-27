@@ -12,7 +12,6 @@ public class Main {
         switch (Game.askForChoice()){
             case 1:
                 Game g1 = new Game();
-                g1.startGame();
                 break;
             case 2:
                 //Game g1 = new Game(Plik zapisu);
