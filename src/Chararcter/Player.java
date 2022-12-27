@@ -9,6 +9,7 @@ public class Player extends Character{
     private int location_Y;
     private int location_X;
     private long exp;
+    private boolean alive = true;
 
     public Player(int size) {
         super();
@@ -27,6 +28,7 @@ public class Player extends Character{
 
     @Override
     public void death() {
+        alive=false;
         System.out.println("No coz, umarles");
         //wyswietyla statystyki
 
@@ -75,5 +77,13 @@ public class Player extends Character{
 
     public void setExp(long exp) {
         this.exp = exp;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }

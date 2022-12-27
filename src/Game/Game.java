@@ -3,6 +3,7 @@ package Game;
 import Chararcter.Player;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -62,11 +63,22 @@ public class Game {
         System.out.println("Aby wejść do kostki wpisz 1");
         int wybor = askForChoice();
         if(wybor == 1)
-            for (int i = 0; i < mapSize; i++)
-                for (int j = 0; j < mapSize; j++)
-                    if(!this.map.getTabOfRoom()[i][j].eventLoop(player))
-                        System.exit(5);
+            while(player.isAlive()) {
+                this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player);
+                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length; i++) {
+                    System.out.print((i+1)+" - ");
+                    System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[i]));
+                }
+                System.out.println("Gdzie chesz iść ? ");
+                int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length);
+                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][0]);
+                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][1]);
+                }
+                //zmiana lokalizacki
+        System.out.printf("Nie zyjesz");
+        System.exit(5);
     }
+
     public void restartGame(){
         this.map = null; //POWINNO LOSOWAĆ NOWĄ MAPĘ
         this.day = 0;
