@@ -4,9 +4,6 @@ import Chararcter.Player;
 import Game.Game;
 
 public class EmptyRoom implements Event {
-    public EmptyRoom(){
-
-    }
     private String name = "Pusty";
 
     @Override

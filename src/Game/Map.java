@@ -1,5 +1,6 @@
 package Game;
 import Chararcter.Player;
+import Game.Event.Entrance;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -54,6 +55,7 @@ public class Map {
 
         // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
         this.TabOfRoom[this.TabOfRoom.length-1][0].setEnter(true);
+        this.TabOfRoom[this.TabOfRoom.length-1][0].setEvent(new Entrance());
 
         // losujemy wyjście na górnej lub na prawej granice mapy
         // jeśli losuje sie true, to wyjście jest na górnej granicy mapy
@@ -299,7 +301,7 @@ public class Map {
         System.out.println("Mapa piętra: " + floor);
         for (int i = 0; i < TabOfRoom.length; i++) {
             for (int j = 0; j < TabOfRoom[0].length; j++) {
-                System.out.printf("%-12s", "[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString());
+                System.out.printf("%-14s", "[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString());
             }
             System.out.println();
         }
