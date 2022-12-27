@@ -14,12 +14,19 @@ public class Room {
     private int [][] pathSet;
     private int difficulty;  // + lub - od lewela gracza
     private Event event;
+    private int numRoom;
 
     //==================================================================================================================
 
 
 
     //============================================= GETTERY I SETTERY ==================================================
+    public int getNumRoom() {
+        return numRoom;
+    }
+    public void setNumRoom(int numRoom) {
+        this.numRoom = numRoom;
+    }
     public boolean getEnter() {
         return enter;
     }
