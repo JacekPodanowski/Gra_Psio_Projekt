@@ -9,13 +9,14 @@ public class Map {
     //================================================= ATRYBUTY KLASY =================================================
     private Room[][] TabOfRoom;  // tablica z pokojow 5x5 (na razie)
 
+
     //==================================================================================================================
 
 
 
     //================================================== KONSTRUKTORY ==================================================
-    public Map(Player player) {
-        TabOfRoom = new Room[5][5];
+    public Map(Player player,int size) {
+        TabOfRoom = new Room[size][size];
         generateMap(player);
     }
 
@@ -35,6 +36,7 @@ public class Map {
     public void setTabOfRoom(Room[][] tabOfRoom) {
         this.TabOfRoom = tabOfRoom;
     }
+
     //==================================================================================================================
 
 
@@ -68,10 +70,10 @@ public class Map {
             exitCol = this.TabOfRoom.length-1;
             this.TabOfRoom[exitRow][0].setExit(true);
         }
-        // temp druk
+        /*/ temp druk
         System.out.println(exitRow);
         System.out.println(exitCol);
-
+/*/
         // numeracja pokoi w tablicy
         int numRoom = 0;
 
@@ -218,15 +220,15 @@ public class Map {
             crawl = pred[crawl];
         }
 
-        // Print distance
-        System.out.println("Shortest path length is: " + dist[dest]);
+        /*/ Print distance
+       // System.out.println("Shortest path length is: " + dist[dest]);
 
         // Print path
         System.out.println("Path is ::");
         for (int i = path.size() - 1; i >= 0; i--) {
             System.out.print(path.get(i) + " ");
         }
-
+        /*/
         return path;
     }
 
