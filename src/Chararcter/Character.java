@@ -54,6 +54,11 @@ public abstract class Character {
 
     public abstract void death();
     public abstract void attack(Character character, int skillNumber);
+    public void displayInventory(){
+        for(int i = 0; i < this.inventory.length; i++)
+            if(this.inventory[i] != null)
+                System.out.println(this.inventory[i].toString());
+    }
 
     //zamysł uniku jest taki aby dać go do walki tam sie to będzie liczyć, tak uważam. Z poważaniemm jacek podanowksi
 

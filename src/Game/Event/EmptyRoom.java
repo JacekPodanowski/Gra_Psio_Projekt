@@ -4,9 +4,6 @@ import Chararcter.Player;
 import Game.Game;
 
 public class EmptyRoom implements Event {
-    public EmptyRoom(){
-
-    }
     private String name = "Pusty";
 
     @Override
@@ -18,7 +15,7 @@ public class EmptyRoom implements Event {
             wybor = Game.askForChoice();
             switch(wybor) {
                 case 1:
-                    //metody które przechodzą do next room
+                    //nic
                     break;
                 case 2:
                     System.out.println("Odpoczywasz.");
