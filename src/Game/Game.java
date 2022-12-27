@@ -63,8 +63,7 @@ public class Game {
         System.out.println("Aby wejść do kostki wpisz 1");
         int wybor = askForChoice();
         if(wybor == 1)
-            while(player.isAlive()) {
-                this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player);
+            while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
                 for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length; i++) {
                     System.out.print((i+1)+" - ");
                     System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[i]));
@@ -74,7 +73,6 @@ public class Game {
                 player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][0]);
                 player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][1]);
                 }
-                //zmiana lokalizacki
         System.out.printf("Nie zyjesz");
         System.exit(5);
     }
