@@ -155,14 +155,7 @@ public class Map {
             ToExitRooms[i] = FindRoomByNum(toExit.get(i), this.TabOfRoom);
         }
 
-<<<<<<< Updated upstream
-        // pokoj wejsciowy
-        ToExitRooms[ToExitRooms.length-1].setPathSet(new int[][]{{ToExitRooms[ToExitRooms.length-2].getRowRoom(),
-                ToExitRooms[ToExitRooms.length-2].getColRoom()}});
-        // pokoj wyjsciowy
-        ToExitRooms[0].setPathSet(new int[][]{{ToExitRooms[1].getRowRoom(), ToExitRooms[1].getColRoom()}});
-        // pokoje posrednie
-=======
+
         // przypisujemy ścieżki jako atrybuty do obiektów pokoi. Wyjście i wejście ma tylko po jednym pokoju
         // sąsiednim, dlatego przypisujemy do nich oddzielnie, nie przez pętlę.
         ArrayList<int []> tempArr = new ArrayList<int[]>(4); // pomocnicza tablica służąca do przekazania
@@ -178,18 +171,16 @@ public class Map {
         tempArr.clear();
 
         // pokoje posrednie:
->>>>>>> Stashed changes
+
         for (int i = 1; i < ToExitRooms.length-2; i++) {
             tempArr.add(new int[]{ToExitRooms[i-1].getRowRoom(),ToExitRooms[i-1].getColRoom()});
             tempArr.add(new int[]{ToExitRooms[i+1].getRowRoom(),ToExitRooms[i+1].getColRoom()});
             ToExitRooms[i].setPathSet(tempArr);
             tempArr.clear();
         }
-<<<<<<< Updated upstream
 
-=======
         tempArr=null;
->>>>>>> Stashed changes
+
     }
 
     // metoda wyszukania pokoju wedlug numera pokoju

@@ -62,25 +62,22 @@ public class Game {
         System.out.println("Aby wejść do kostki wpisz 1");
         int wybor = askForChoice();
         if(wybor == 1)
-<<<<<<< Updated upstream
-            for (int i = 0; i < mapSize; i++)
-                for (int j = 0; j < mapSize; j++)
-                    if(!this.map.getTabOfRoom()[i][j].eventLoop(player))
-                        System.exit(5);
-=======
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
                 for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
                     System.out.print((i+1)+" - ");
-                    System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
+                    System.out.print("[");
+                    System.out.print(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)[0]);
+                    System.out.print(", ");
+                    System.out.print(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)[1]);
+                    System.out.println("]");
                 }
                 System.out.println("Gdzie chesz iść ? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
-                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][0]);
-                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][1]);
+                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
+                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
                 }
         System.out.printf("Nie zyjesz");
         System.exit(5);
->>>>>>> Stashed changes
     }
     public void restartGame(){
         this.map = null; //POWINNO LOSOWAĆ NOWĄ MAPĘ
