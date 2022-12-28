@@ -93,10 +93,20 @@ public class Map {
             adj.add(new ArrayList<Integer>());
         }
 
+//          Numeracja pokoi, która odpowiada współżędnym w tablicy dla 5x5
+//            0   1   2   3   4         [0,0]   [0,1]   [0,2]   [0,3]   [0,4]
+//            5   6   7   8   9         [1,0]   [1,1]   [1,2]   [1,3]   [1,4]
+//            10  11  12  13  14        [2,0]   [2,1]   [2,2]   [2,3]   [2,4]
+//            15  16  17  18  19        [3,0]   [3,1]   [3,2]   [3,3]   [3,4]
+//            20  21  22  23  24        [4,0]   [4,1]   [4,2]   [4,3]   [4,4]
 
-        //generacja wszystkich ścieżek dla wszystkich pokoi
+        //generacja wszystkich ścieżek i numerów dla wszystkich pokoi
+        //robi się to dlatego, żeby znaleźć najkrótszą ścieżkę poprzez już gotowy
+        //algorytm z internetu. Nazwa wykorzystanego algorytmu niżej:
+        //Shortest path in an unweighted graph (strona Geeksforgeeks)
+
         int MapLength = this.TabOfRoom.length; // pomocnicza zmienna
-        //ścieżki do pokojow sąsiednich dla pokojów na rogach:
+        //ścieżki do pokojow sąsiednich dla pokojów na rogach (pierwsze po adj, to numer pokoju, drugie - to nr pokoju sąsiedniego):
         addEdge(adj, 0, 1);
         addEdge(adj, 0, MapLength);
         addEdge(adj, MapLength-1, MapLength-2);
@@ -106,7 +116,7 @@ public class Map {
         addEdge(adj, MapLength*MapLength -1 , MapLength*MapLength-2);
         addEdge(adj, MapLength*MapLength -1,  MapLength*(MapLength-1)-1);
 
-        // generacja ścieżek dla lewej granicy tablicy
+        // generacja ścieżek dla lewej granicy tablicy (pierwsze po adj, to numer pokoju, drugie - to nr pokoju sąsiedniego)
         for (int i = 1; i < MapLength-1; i++) {
             addEdge(adj, MapLength*i, MapLength*i+1);
             addEdge(adj, MapLength*i, MapLength*(i-1));
@@ -147,27 +157,28 @@ public class Map {
 
         // przepisanie wynikowej ścieżki z LinkedList to ArrayList
         ArrayList<Integer> toExit = new ArrayList<>();
-        toExit.addAll(printShortestDistance(adj, source, dest, numRoom));
+        toExit.addAll(pathShortestDistance(adj, source, dest, numRoom));
 
-        // przypisanie ścieżek do pokoi
-        Room roomTemp = null;
+        // jako wynik mieliśmy tablicę numerów pokoi,
+        // przerabiamy to na tablicę pokoi, szukając według numeru pokoi (metoda FindRoomByNum)
         Room [] ToExitRooms = new Room[toExit.size()];
 
         for (int i = 0; i < toExit.size(); i++) {
             ToExitRooms[i] = FindRoomByNum(toExit.get(i), this.TabOfRoom);
         }
 
-        // pokoj wejsciowy
+        // przypisujemy ścieżki jako atrybuty do obiektów pokoi. Wyjście i wejście ma tylko po jednym pokoju
+        // sąsiednim, dlatego przypisujemy do nich oddzielnie, nie przez pętlę.
+        // Pokoj wejsciowy:
         ToExitRooms[ToExitRooms.length-1].setPathSet(new int[][]{{ToExitRooms[ToExitRooms.length-2].getRowRoom(),
-                ToExitRooms[ToExitRooms.length-2].getColRoom()}});
-        // pokoj wyjsciowy
+                                                                  ToExitRooms[ToExitRooms.length-2].getColRoom()}});
+        // pokoj wyjsciowy:
         ToExitRooms[0].setPathSet(new int[][]{{ToExitRooms[1].getRowRoom(), ToExitRooms[1].getColRoom()}});
-        // pokoje posrednie
+        // pokoje posrednie:
         for (int i = 1; i < ToExitRooms.length-2; i++) {
             ToExitRooms[i].setPathSet(new int[][]{{ToExitRooms[i-1].getRowRoom(),ToExitRooms[i-1].getColRoom()},
                     {ToExitRooms[i+1].getRowRoom(),ToExitRooms[i+1].getColRoom()}});
         }
-
     }
 
     // metoda wyszukania pokoju wedlug numera pokoju
@@ -193,10 +204,11 @@ public class Map {
     }
 
 
+    //=========================Początek pobranego algorytmu. Shortest path in an unweighted graph:
 
     // function to print the shortest distance and path
     // between source vertex and destination vertex
-    private static LinkedList<Integer> printShortestDistance(
+    private static LinkedList<Integer> pathShortestDistance(
             ArrayList<ArrayList<Integer>> adj,
             int s, int dest, int v)
     {
@@ -289,7 +301,7 @@ public class Map {
 //    public void main(String[] args) {
 //        generateMap(new Player());
 //    }
-
+//============================================Koniec Metod od generowania mapy==========================================
 
 
 
