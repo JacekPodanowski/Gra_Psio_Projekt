@@ -7,17 +7,24 @@ import Game.Event.Fight;
 public class Main {
     public static void main (String[] args){
 
+        //Tworzę sobie uchyt
+        Game g1 = null;
+        Saver saver = new Saver();
+
         System.out.println("Witaj w grze: Proba Ucieczki Z Kostki");
-        System.out.println("1. Rozpocznij nową gre\t\t2. Wczytaj zapisaną gre\t\t3. Wyjdź");
+        System.out.println("1. Rozpocznij nową gre\t\t");
+        System.out.println("2. Wczytaj zapisaną gre\t\t");
+        System.out.println("3. Zapisz grę\t\t");
+        System.out.println("4. Wyjdź\t\t");
         switch (Game.askForChoice()){
             case 1:
-                Game g1 = new Game();
+                g1 = new Game();
                 break;
             case 2:
-                //Game g1 = new Game(Plik zapisu);
+                g1 = saver.load();
                 break;
             case 3:
-                System.exit(0);
+                saver.save(g1);
                 break;
             case 4:
                 System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
