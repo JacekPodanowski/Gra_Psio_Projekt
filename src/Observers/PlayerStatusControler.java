@@ -9,7 +9,10 @@ public class PlayerStatusControler implements Observer{
         this.health = health;
     }
 
-    public void checkDifficulty(){
-
+    public void checkLifeStatus(){
+        if(this.health < 20) {
+            System.out.println("Jesteś mocno ranny, czy chcesz użyć jakiegoś przedmiotu?");
+            
+        }
     }
 }

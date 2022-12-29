@@ -1,13 +1,16 @@
 package Game;
 
 import Chararcter.Player;
+import Observable.Subject;
+import Observers.Observer;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements Subject {
     //============================================ ATRYBUTY KLASY ======================================================
     private int day;
     private Map map;
@@ -15,6 +18,7 @@ public class Game {
     private int startY;
     private int startX;
     private int mapSize =5;// rozmiar mapy
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     //==================================================================================================================
 
@@ -69,6 +73,7 @@ public class Game {
                     System.out.print((i+1)+" - ");
                     System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[i]));
                 }
+                this.notifyObservers();
                 System.out.println("Gdzie chesz iść ? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length);
                 player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][0]);
@@ -136,5 +141,20 @@ public class Game {
         return choice;
     }
 
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(int i = 0; i < observers.size(); i++)
+            observers.get(i).update(this.player.getHealth());
+    }
     //==================================================================================================================
 }
