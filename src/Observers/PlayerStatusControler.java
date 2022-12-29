@@ -11,7 +11,7 @@ public class PlayerStatusControler implements Observer{
 
     public void checkLifeStatus(){
         if(this.health < 20) {
-            System.out.println("Jesteś mocno ranny, czy chcesz użyć jakiegoś przedmiotu?");
+            System.out.println("Jesteś mocno ranny, czy chcesz użyć jakiegoś przedmiotu lub odpocząć?");
             
         }
     }
