@@ -34,7 +34,7 @@ public abstract class Character {
         //this.weapon = mlotek; //początkowa bron to mlotek
         //this.armor = null; //początkowy armor to brak
     }
-
+//3
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level, Weapon weapon, Armor armor) { // do wroga
         this.inventory = new Item[5];

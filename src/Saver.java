@@ -29,7 +29,7 @@ public class Saver {
 
     public void save(Game game, int slotNumber){
 
-        //game.saveGame("SaveGame"+slotNumber+".bin");
+        game.saveGame("SaveGame"+slotNumber+".bin");
         slots[slotNumber -1] = LocalDateTime.now();
         saveSlots();
     }
