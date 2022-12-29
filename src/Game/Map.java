@@ -159,7 +159,32 @@ public class Map {
 
 
         for(int i = 0; i < toExitRooms.size(); i++){
+            int col = toExitRooms.get(i).getColRoom();
+            int row = toExitRooms.get(i).getRowRoom();
 
+            try {
+                if (toExitRooms.contains(TabOfRoom[row][col + 1])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
+                }
+            }catch (IndexOutOfBoundsException e){}
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row][col - 1])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
+                }
+            }catch (IndexOutOfBoundsException e){}
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row+1][col])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
+                }
+            }catch (IndexOutOfBoundsException e){}
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row-1][col])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
+                }
+            }catch (IndexOutOfBoundsException e){}
         }
 
 
