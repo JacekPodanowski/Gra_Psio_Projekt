@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Saver {
 
+
     private final int numberOfSlots = 4;
     private LocalDateTime[] slots;
     private final String filePath = "save.bin";
@@ -17,7 +18,7 @@ public class Saver {
         File file = new File(filePath);
 
         if (file.exists()){
-
+            slots = loadSlots();
         }else {
 
         }
@@ -25,37 +26,17 @@ public class Saver {
 
     }
 
-    public void print(){
-        for (int i=0; i<slots.length; i++){
-            System.out.println((i+1)+ " ");
-            if(slots ==null){
-                System.out.println(" - brak");
-            } else{
-                System.out.println(slots[i]);
-            }
-        }
-    }
 
-    public void save(Game game){
-        System.out.println("Zapisz Grę");
-        print();
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("numer: ");
+    public void save(Game game, int slotNumber){
 
-        int number = scanner.nextInt();
-        game.saveGame("SaveGame"+number+".bin");
-        slots[number-1] = LocalDateTime.now();
+        //game.saveGame("SaveGame"+slotNumber+".bin");
+        slots[slotNumber -1] = LocalDateTime.now();
         saveSlots();
     }
 
-    public Game load(){
-        System.out.println("Odczytaj Grę");
-        print();
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("numer: ");
+    public Game load(int slotIndex){
 
-        int number = scanner.nextInt();
-        return Game.loadGame("SaveGame"+number+".bin");
+        return Game.loadGame("SaveGame"+slotIndex+".bin");
     }
 
     private LocalDateTime[] loadSlots(){
@@ -74,10 +55,9 @@ public class Saver {
         }
     return slots;}
 
-
     private void saveSlots(){
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));) {
-            outputStream.writeObject(this);
+            outputStream.writeObject(slots);
         }catch (FileNotFoundException e){
             System.out.println("Nie znalezione Pliku");
             e.printStackTrace();
@@ -87,6 +67,16 @@ public class Saver {
         }
     }
 
+    public int getNumberOfSlots(){
+        return  numberOfSlots;
+    }
 
+    public String getTextForSlot(int index){
+        if( slots[index] == null){
+            return "puste";
+        } else {
+            return slots[index].toString();
+        }
+    }
 
 }
