@@ -1,6 +1,7 @@
 package Game;
 
 import Chararcter.Player;
+import Game.Event.EmptyRoom;
 import Observable.Subject;
 import Observers.Observer;
 
@@ -59,6 +60,53 @@ public class Game implements Subject {
         this.map = mapa;
     }
 
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public int getMapSize() {
+        return mapSize;
+    }
+
+    public void setMapSize(int mapSize) {
+        this.mapSize = mapSize;
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(ArrayList<Observer> observers) {
+        this.observers = observers;
+    }
     //==================================================================================================================
 
 
@@ -70,10 +118,10 @@ public class Game implements Subject {
         if(wybor == 1)
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
                 for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length; i++) {
+                    this.notifyObservers();
                     System.out.print((i+1)+" - ");
                     System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[i]));
                 }
-                this.notifyObservers();
                 System.out.println("Gdzie chesz iść ? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length);
                 player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][0]);
@@ -154,7 +202,7 @@ public class Game implements Subject {
     @Override
     public void notifyObservers() {
         for(int i = 0; i < observers.size(); i++)
-            observers.get(i).update(this.player.getHealth());
+            observers.get(i).update(this);
     }
     //==================================================================================================================
 }

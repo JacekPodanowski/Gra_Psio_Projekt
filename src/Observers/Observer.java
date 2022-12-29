@@ -1,5 +1,7 @@
 package Observers;
 
+import Game.Game;
+
 public interface Observer {
-    public void update(double health);
+    public void update(Game game);
 }
