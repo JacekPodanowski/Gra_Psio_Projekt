@@ -151,37 +151,40 @@ public class Map {
 
         // przypisanie ścieżek do pokoi
         Room roomTemp = null;
-        Room [] ToExitRooms = new Room[toExit.size()];
+        ArrayList<Room> toExitRooms = new ArrayList<Room>();
 
         for (int i = 0; i < toExit.size(); i++) {
-            ToExitRooms[i] = FindRoomByNum(toExit.get(i), this.TabOfRoom);
+            toExitRooms.add(FindRoomByNum(toExit.get(i), this.TabOfRoom));
+        }
+
+
+        for(int i = 0; i < toExitRooms.size(); i++){
+
         }
 
 
         // przypisujemy ścieżki jako atrybuty do obiektów pokoi. Wyjście i wejście ma tylko po jednym pokoju
         // sąsiednim, dlatego przypisujemy do nich oddzielnie, nie przez pętlę.
-        ArrayList<int []> tempArr = new ArrayList<int[]>(4); // pomocnicza tablica służąca do przekazania
+//        ArrayList<int []> tempArr = new ArrayList<int[]>(4); // pomocnicza tablica służąca do przekazania
+//
+//        // Pokoj wejsciowy:
+//        tempArr.add(new int[]{toExitRooms[toExitRooms.length-2].getRowRoom(),toExitRooms[toExitRooms.length-2].getColRoom()});
+//        toExitRooms[toExitRooms.length-1].setPathSet(tempArr);
+//
+//        // pokoj wyjsciowy:
+//        ArrayList<int []> tempArr1 = new ArrayList<int[]>(4);
+//        tempArr1.add(new int[]{toExitRooms[1].getRowRoom(), toExitRooms[1].getColRoom()});
+//        toExitRooms[0].setPathSet(tempArr1);
+//
+//        // pokoje posrednie:
+//        ArrayList<int []> tempArr2 = new ArrayList<int[]>(4);
+//        for (int i = 1; i < toExitRooms.length-2; i++) {
+//            tempArr2.add(new int[]{toExitRooms[i-1].getRowRoom(),toExitRooms[i-1].getColRoom()});
+//            tempArr2.add(new int[]{toExitRooms[i+1].getRowRoom(),toExitRooms[i+1].getColRoom()});
+//            toExitRooms[i].setPathSet(tempArr2);
+//        }
 
-        // Pokoj wejsciowy:
-        tempArr.add(new int[]{ToExitRooms[ToExitRooms.length-2].getRowRoom(),ToExitRooms[ToExitRooms.length-2].getColRoom()});
-        ToExitRooms[ToExitRooms.length-1].setPathSet(tempArr);
-        tempArr.clear();
-
-        // pokoj wyjsciowy:
-        tempArr.add(new int[]{ToExitRooms[1].getRowRoom(), ToExitRooms[1].getColRoom()});
-        ToExitRooms[0].setPathSet(tempArr);
-        tempArr.clear();
-
-        // pokoje posrednie:
-
-        for (int i = 1; i < ToExitRooms.length-2; i++) {
-            tempArr.add(new int[]{ToExitRooms[i-1].getRowRoom(),ToExitRooms[i-1].getColRoom()});
-            tempArr.add(new int[]{ToExitRooms[i+1].getRowRoom(),ToExitRooms[i+1].getColRoom()});
-            ToExitRooms[i].setPathSet(tempArr);
-            tempArr.clear();
-        }
-
-        tempArr=null;
+        //tempArr=null;
 
     }
 
