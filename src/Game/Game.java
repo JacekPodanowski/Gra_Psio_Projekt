@@ -27,7 +27,6 @@ public class Game {
         map = new Map(this.player,mapSize);
         map.displayMapFloor(1);
         System.out.println("\nRozpocząłeś nową grę!\n\n");
-        this.startGame();
     }
     public Game(int day, Player player,Map map){
         this.day = day;
@@ -65,14 +64,18 @@ public class Game {
         int wybor = askForChoice();
         if(wybor == 1)
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length; i++) {
+                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
                     System.out.print((i+1)+" - ");
-                    System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[i]));
+                    System.out.print("[");
+                    System.out.print(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)[0]);
+                    System.out.print(", ");
+                    System.out.print(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)[1]);
+                    System.out.println("]");
                 }
                 System.out.println("Gdzie chesz iść ? ");
-                int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length);
-                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][0]);
-                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet()[choice-1][1]);
+                int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
+                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
+                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
                 }
         System.out.printf("Nie zyjesz");
         System.exit(5);
