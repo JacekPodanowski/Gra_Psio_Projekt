@@ -106,6 +106,7 @@ public class Room {
         do
             this.event = this.event.event(player);
         while(event != null);
+        this.event = new EmptyRoom();
         if(!(player.getHealth() > 0)) {
             System.out.println("Przegrałeś");
             player.death();

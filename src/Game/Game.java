@@ -116,7 +116,7 @@ public class Game implements Subject {
         int wybor = askForChoice();
         if(wybor == 1)
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().length; i++) {
+                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
                     this.notifyObservers();
                     System.out.print((i+1)+" - ");
                     System.out.print("[");
