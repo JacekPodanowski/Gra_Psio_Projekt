@@ -3,6 +3,7 @@ package Game;
 import Chararcter.Player;
 import Game.Event.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Room {
@@ -11,7 +12,7 @@ public class Room {
     private boolean exit;
     private int rowRoom;
     private int colRoom;
-    private int [][] pathSet;
+    private ArrayList<int[]> pathSet;
     private int difficulty;  // + lub - od lewela gracza
     private Event event;
     private int numRoom;
@@ -45,12 +46,15 @@ public class Room {
     public void setExit(boolean exit) {
         this.exit = exit;
     }
-    public int[][] getPathSet() {
+
+    public ArrayList<int[]> getPathSet() {
         return pathSet;
     }
-    public void setPathSet(int[][] pathSet) {
+
+    public void setPathSet(ArrayList<int[]> pathSet) {
         this.pathSet = pathSet;
     }
+
     public int getDifficulty() {
         return difficulty;
     }
@@ -88,7 +92,7 @@ public class Room {
         this.colRoom = colRoom;
         enter = false;
         exit = false;
-        pathSet = new int[4][2];
+        pathSet = new ArrayList<int[]>();
         difficulty = 0;
         randomEvent(player);
     }
