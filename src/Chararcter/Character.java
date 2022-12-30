@@ -1,6 +1,8 @@
 package Chararcter;
 
 import Chararcter.Item.*;
+import Chararcter.Profession.Profession;
+import Chararcter.Skills.Skills;
 
 import java.util.Arrays;
 

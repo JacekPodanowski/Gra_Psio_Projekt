@@ -1,10 +1,11 @@
 package Chararcter;
 
 import Chararcter.Item.*;
+import Chararcter.Profession.Profession;
 import Game.Game;
 import Game.Map;
 
-public class Player extends Character{
+public class Player extends Character {
 
     private int location_Y;
     private int location_X;
