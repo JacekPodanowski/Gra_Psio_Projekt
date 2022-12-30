@@ -349,5 +349,18 @@ public class Map {
             System.out.println();
         }
     }
+    public void displayCurrentMapFloor(int floor) {
+        System.out.println("Mapa piętra: " + floor);
+        for (int i = 0; i < TabOfRoom.length; i++) {
+            for (int j = 0; j < TabOfRoom[0].length; j++) {
+                if(TabOfRoom[i][j].isVisited())
+                    System.out.printf("%-14s", "[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString());
+                else{
+                    System.out.printf("%-14s", "");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
 //======================================================================================================================

@@ -8,10 +8,11 @@ public class PlayerOnMapPosition implements Observer{
     @Override
     public void update(Game game) {
         this.game = game;
+        displayCurrentMap();
     }
 
     public void displayCurrentMap(){
-
+        this.game.getMap().displayCurrentMapFloor(1);
     }
 
 }

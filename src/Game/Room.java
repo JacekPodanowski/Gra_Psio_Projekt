@@ -10,6 +10,7 @@ public class Room {
     //================================================= ATRYBUTY KLASY =================================================
     private boolean enter;
     private boolean exit;
+    private boolean visited;
     private int rowRoom;
     private int colRoom;
     private ArrayList<int[]> pathSet;
@@ -82,6 +83,13 @@ public class Room {
         this.event = event;
     }
 
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
     //==================================================================================================================
 
 
@@ -92,6 +100,7 @@ public class Room {
         this.colRoom = colRoom;
         enter = false;
         exit = false;
+        visited = false;
         pathSet = new ArrayList<int[]>();
         difficulty = 0;
         randomEvent(player);
@@ -106,6 +115,7 @@ public class Room {
         do
             this.event = this.event.event(player);
         while(event != null);
+        this.visited = true;
         this.event = new EmptyRoom();
         if(!(player.getHealth() > 0)) {
             System.out.println("Przegrałeś");
