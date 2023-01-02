@@ -1,6 +1,7 @@
 package Game;
 import Chararcter.Player;
 import Game.Event.Entrance;
+import Game.Event.Exit;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -67,10 +68,12 @@ public class Map {
             exitRow = 0;
             exitCol = random.nextInt(this.TabOfRoom.length);
             this.TabOfRoom[0][exitCol].setExit(true);
+            this.TabOfRoom[0][exitCol].setEvent(new Exit());
         } else {
             exitRow = random.nextInt(this.TabOfRoom.length);
             exitCol = this.TabOfRoom.length-1;
-            this.TabOfRoom[exitRow][0].setExit(true);
+            this.TabOfRoom[exitRow][4].setExit(true);
+            this.TabOfRoom[exitRow][4].setEvent(new Exit());
         }
         /*/ temp druk
         System.out.println(exitRow);
