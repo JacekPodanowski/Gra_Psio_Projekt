@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class Map {
     //================================================= ATRYBUTY KLASY =================================================
-    private Room[][] TabOfRoom;  // tablica z pokojow 5x5 (na razie)
-
+    private Room[][] tabOfRoom;  // tablica z pokojow 5x5 (na razie)
+    private ArrayList<Room> toExitRooms;
 
     //==================================================================================================================
 
@@ -18,12 +18,12 @@ public class Map {
 
     //================================================== KONSTRUKTORY ==================================================
     public Map(Player player,int size) {
-        TabOfRoom = new Room[size][size];
+        tabOfRoom = new Room[size][size];
         generateMap(player);
     }
 
     public Map(int row, int col, Player player){
-        TabOfRoom = new Room[row][col];
+        tabOfRoom = new Room[row][col];
         generateMap(player);
     }
     //==================================================================================================================
@@ -32,11 +32,11 @@ public class Map {
 
     //============================================= GETTERY I SETTERY ==================================================
     public Room[][] getTabOfRoom() {
-        return TabOfRoom;
+        return tabOfRoom;
     }
 
     public void setTabOfRoom(Room[][] tabOfRoom) {
-        this.TabOfRoom = tabOfRoom;
+        this.tabOfRoom = tabOfRoom;
     }
 
     //==================================================================================================================
@@ -48,15 +48,15 @@ public class Map {
         Random random = new Random();
 
         // przypisanie pokojow do tablicy mapy
-        for (int i = 0; i < this.TabOfRoom.length; i++) {
-            for (int j = 0; j < this.TabOfRoom[i].length; j++) {
-                this.TabOfRoom[i][j] = new Room(i,j, player);
+        for (int i = 0; i < this.tabOfRoom.length; i++) {
+            for (int j = 0; j < this.tabOfRoom[i].length; j++) {
+                this.tabOfRoom[i][j] = new Room(i,j, player);
             }
         }
 
         // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
-        this.TabOfRoom[this.TabOfRoom.length-1][0].setEnter(true);
-        this.TabOfRoom[this.TabOfRoom.length-1][0].setEvent(new Entrance());
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
 
         // losujemy wyjście na górnej lub na prawej granice mapy
         // jeśli losuje sie true, to wyjście jest na górnej granicy mapy
@@ -66,14 +66,14 @@ public class Map {
 
         if (random.nextBoolean()) {
             exitRow = 0;
-            exitCol = random.nextInt(this.TabOfRoom.length);
-            this.TabOfRoom[0][exitCol].setExit(true);
-            this.TabOfRoom[0][exitCol].setEvent(new Exit());
+            exitCol = random.nextInt(this.tabOfRoom.length);
+            this.tabOfRoom[0][exitCol].setExit(true);
+            this.tabOfRoom[0][exitCol].setEvent(new Exit());
         } else {
-            exitRow = random.nextInt(this.TabOfRoom.length);
-            exitCol = this.TabOfRoom.length-1;
-            this.TabOfRoom[exitRow][4].setExit(true);
-            this.TabOfRoom[exitRow][4].setEvent(new Exit());
+            exitRow = random.nextInt(this.tabOfRoom.length);
+            exitCol = this.tabOfRoom.length-1;
+            this.tabOfRoom[exitRow][4].setExit(true);
+            this.tabOfRoom[exitRow][4].setEvent(new Exit());
         }
         /*/ temp druk
         System.out.println(exitRow);
@@ -82,9 +82,9 @@ public class Map {
         // numeracja pokoi w tablicy
         int numRoom = 0;
 
-        for (int i = 0; i < this.TabOfRoom.length; i++) {
-            for (int j = 0; j < this.TabOfRoom.length; j++) {
-                this.TabOfRoom[i][j].setNumRoom(numRoom);
+        for (int i = 0; i < this.tabOfRoom.length; i++) {
+            for (int j = 0; j < this.tabOfRoom.length; j++) {
+                this.tabOfRoom[i][j].setNumRoom(numRoom);
                 numRoom++;
             }
         }
@@ -98,7 +98,7 @@ public class Map {
 
 
         //generacja wszystkich ścieżek dla wszystkich pokoi
-        int MapLength = this.TabOfRoom.length; // pomocnicza zmienna
+        int MapLength = this.tabOfRoom.length; // pomocnicza zmienna
         //ścieżki do pokojow sąsiednich dla pokojów na rogach:
         addEdge(adj, 0, 1);
         addEdge(adj, 0, MapLength);
@@ -145,8 +145,8 @@ public class Map {
         }
 
         // source and destination of exit and enter
-        int source = this.TabOfRoom[this.TabOfRoom.length-1][0].getNumRoom();
-        int dest = this.TabOfRoom[exitRow][exitCol].getNumRoom();
+        int source = this.tabOfRoom[this.tabOfRoom.length-1][0].getNumRoom();
+        int dest = this.tabOfRoom[exitRow][exitCol].getNumRoom();
 
         // przepisanie wynikowej ścieżki z LinkedList to ArrayList
         ArrayList<Integer> toExit = new ArrayList<>();
@@ -154,10 +154,10 @@ public class Map {
 
         // przypisanie ścieżek do pokoi
         Room roomTemp = null;
-        ArrayList<Room> toExitRooms = new ArrayList<Room>();
+        toExitRooms = new ArrayList<Room>();
 
         for (int i = 0; i < toExit.size(); i++) {
-            toExitRooms.add(FindRoomByNum(toExit.get(i), this.TabOfRoom));
+            toExitRooms.add(FindRoomByNum(toExit.get(i), this.tabOfRoom));
         }
 
 
@@ -166,26 +166,30 @@ public class Map {
             int row = toExitRooms.get(i).getRowRoom();
 
             try {
-                if (toExitRooms.contains(TabOfRoom[row][col + 1])) {
-                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
+                if (toExitRooms.contains(tabOfRoom[row][col + 1])) {
+                    tabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row][col + 1]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
-                if (toExitRooms.contains(TabOfRoom[row][col - 1])) {
-                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
+                if (toExitRooms.contains(tabOfRoom[row][col - 1])) {
+                    tabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row][col - 1]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
-                if (toExitRooms.contains(TabOfRoom[row+1][col])) {
-                    TabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
+                if (toExitRooms.contains(tabOfRoom[row+1][col])) {
+                    tabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row + 1][col]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
-                if (toExitRooms.contains(TabOfRoom[row-1][col])) {
-                    TabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
+                if (toExitRooms.contains(tabOfRoom[row-1][col])) {
+                    tabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row - 1][col]);
                 }
             }catch (IndexOutOfBoundsException e){}
         }
@@ -345,12 +349,59 @@ public class Map {
 
     public void displayMapFloor(int floor) {
         System.out.println("Mapa piętra: " + floor);
-        for (int i = 0; i < TabOfRoom.length; i++) {
-            for (int j = 0; j < TabOfRoom[0].length; j++) {
-                System.out.printf("%-14s", "[" + i + "," + j + "]" + TabOfRoom[i][j].getEvent().toString());
+        for (int i = 0; i < tabOfRoom.length; i++) {
+            for (int j = 0; j < tabOfRoom[0].length; j++) {
+                System.out.printf("%-14s", "[" + i + "," + j + "]" + tabOfRoom[i][j].getEvent().toString());
+            }
+            System.out.println();
+        }
+    }
+    public void displayCurrentMapFloor(int floor, Player player) {
+        System.out.println("Mapa piętra: " + floor);
+        for (int i = 0; i < tabOfRoom.length; i++) {
+            for (int j = 0; j < tabOfRoom[0].length; j++) {
+                int[] tab = {player.getLocation_X(), player.getLocation_Y()};
+                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
+                    System.out.printf("%-6s", "[ x ]");
+                } else if(tabOfRoom[i][j].isVisited()) {
+                    System.out.printf("%-6s", "[   ]");
+                } else if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()])) {
+                    System.out.printf("%-6s", "[ ? ]");
+                } else{
+                    System.out.printf("%-6s", "");
+                }
             }
             System.out.println();
         }
     }
 }
 //======================================================================================================================
+
+//for(int i = 0; i < toExitRooms.size(); i++){
+//            int col = toExitRooms.get(i).getColRoom();
+//            int row = toExitRooms.get(i).getRowRoom();
+//
+//            try {
+//                if (getPathSet.contains(TabOfRoom[row][col + 1])) {
+//                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
+//                }
+//            }catch (IndexOutOfBoundsException e){}
+//
+//            try {
+//                if (toExitRooms.contains(TabOfRoom[row][col - 1])) {
+//                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
+//                }
+//            }catch (IndexOutOfBoundsException e){}
+//
+//            try {
+//                if (toExitRooms.contains(TabOfRoom[row+1][col])) {
+//                    TabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
+//                }
+//            }catch (IndexOutOfBoundsException e){}
+//
+//            try {
+//                if (toExitRooms.contains(TabOfRoom[row-1][col])) {
+//                    TabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
+//                }
+//            }catch (IndexOutOfBoundsException e){}
+//        }
