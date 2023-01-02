@@ -62,10 +62,12 @@ public abstract class Character {
                 System.out.println(this.inventory[i].toString());
     }
 
-    //zamysł uniku jest taki aby dać go do walki tam sie to będzie liczyć, tak uważam. Z poważaniemm jacek podanowksi
+    public void addBasicAttacks(){
+        //abilities[0] = new Skill();//szybki
+    }
 
 
-
+//================================================================================================================================================
     public double getHealth() {
         return health;
     }
@@ -128,10 +130,15 @@ public abstract class Character {
         this.weapon = weapon;
     }
 
-    public void addBasicAttack(){
+    public Weapon getWeapon() {
+        return weapon;
+    }
 
-        abilities[0] = new Skill() {
+    public Armor getArmor() {
+        return armor;
+    }
 
-        };
+    public Skill[] getAbilities() {
+        return abilities;
     }
 }

@@ -38,7 +38,7 @@ public class Saver {
 
         Game g= new Game();
         g.loadGame("SaveGame"+slotIndex+".bin");
-        return g;
+        return g;//musialem zmienic bo wywaloało
     }
 
     private LocalDateTime[] loadSlots(){
