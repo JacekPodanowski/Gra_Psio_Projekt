@@ -66,7 +66,6 @@ public class Player extends Character {
         }
     }
 
-    public int ResetStats(){}
 
 //===========================================================SETERY I GETERY=====================================================================================
     public int getLocation_Y() {

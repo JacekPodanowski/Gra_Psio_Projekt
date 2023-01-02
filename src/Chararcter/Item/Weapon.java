@@ -37,7 +37,7 @@ public class Weapon extends Item{
         double damage = basicDMG;
         switch(this.type) {
             case 'S': //sila
-                damage = basicDMG *
+               // damage = basicDMG *
 
         }
         return damage;

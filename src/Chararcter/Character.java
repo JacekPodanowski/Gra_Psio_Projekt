@@ -1,7 +1,6 @@
 package Chararcter;
 
 import Chararcter.Item.*;
-import Chararcter.Skill.Skills;
 
 import java.util.Arrays;
 
@@ -133,6 +132,6 @@ public abstract class Character {
 
         abilities[0] = new Skill() {
 
-        }
+        };
     }
 }

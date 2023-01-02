@@ -12,16 +12,11 @@ public class Mage implements Profession{
         character.setAgility(5);
         character.setIntelligence(6);
         character.setStrength(4);
-        character.setWeapon(new Weapon("Magiczny kij", 6, "pospolity", 'I', 10, 8, 5));
+        character.setWeapon(new Weapon("Magiczny kij", 6, "pospolity", 'I', 8, 5));
     }
 
     @Override
     public void SpecialAbility(Character character) {
 
-        }
     }
-
-
-
-
 }

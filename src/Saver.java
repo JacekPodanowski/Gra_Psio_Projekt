@@ -36,7 +36,9 @@ public class Saver {
 
     public Game load(int slotIndex){
 
-        return Game.loadGame("SaveGame"+slotIndex+".bin");
+        Game g= new Game();
+        g.loadGame("SaveGame"+slotIndex+".bin");
+        return g;
     }
 
     private LocalDateTime[] loadSlots(){

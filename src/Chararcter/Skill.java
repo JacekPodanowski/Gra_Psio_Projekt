@@ -10,10 +10,10 @@ public class Skill {
     private int accuracy;
     private char type;
 
-    public
+    //public
 
-    public int Use(Player player, Enemy enemy){
+    //public int Use(Player player, Enemy enemy){
 
-    }
+    //}
 
 }
