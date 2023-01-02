@@ -4,7 +4,7 @@ import Chararcter.Player;
 import Game.Game;
 
 public class Exit implements Event{
-    private String name = "Wyjście";
+    private String name = "WYJŚCIE";
     @Override
     public Event event(Player player) {
         System.out.println("Widzisz świetlisty tunel na końcu tego pokoju");
