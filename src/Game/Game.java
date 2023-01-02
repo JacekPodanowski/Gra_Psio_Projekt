@@ -4,6 +4,7 @@ import Chararcter.Player;
 import Game.Event.EmptyRoom;
 import Observable.Subject;
 import Observers.Observer;
+import Observers.PlayerOnMapPosition;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Game implements Serializable, Subject{
         player = new Player(mapSize);
         map = new Map(this.player,mapSize);
         map.displayMapFloor(1);
+        this.registerObserver(new PlayerOnMapPosition());
         System.out.println("\nRozpocząłeś nową grę!\n\n");
         this.startGame();
     }
@@ -117,16 +119,18 @@ public class Game implements Serializable, Subject{
         int wybor = askForChoice();
         if(wybor == 1)
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
+                this.notifyObservers();
                 for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
                     System.out.print((i+1)+" - ");
                     System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
                 }
                 System.out.println("Gdzie chesz iść ? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
+                int x = player.getLocation_X();
                 player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
-                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
-                }
-        System.out.printf("Nie zyjesz");
+                player.setLocation_Y(this.map.getTabOfRoom()[x][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
+            }
+        System.out.print("Nie zyjesz");
         System.exit(5);
     }
 
