@@ -1,6 +1,7 @@
 package Game;
 import Chararcter.Player;
 import Game.Event.Entrance;
+import Game.Event.Exit;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -67,10 +68,12 @@ public class Map {
             exitRow = 0;
             exitCol = random.nextInt(this.TabOfRoom.length);
             this.TabOfRoom[0][exitCol].setExit(true);
+            this.TabOfRoom[0][exitCol].setEvent(new Exit());
         } else {
             exitRow = random.nextInt(this.TabOfRoom.length);
             exitCol = this.TabOfRoom.length-1;
-            this.TabOfRoom[exitRow][0].setExit(true);
+            this.TabOfRoom[exitRow][4].setExit(true);
+            this.TabOfRoom[exitRow][4].setEvent(new Exit());
         }
         /*/ temp druk
         System.out.println(exitRow);
@@ -151,22 +154,65 @@ public class Map {
 
         // przypisanie ścieżek do pokoi
         Room roomTemp = null;
-        Room [] ToExitRooms = new Room[toExit.size()];
+        ArrayList<Room> toExitRooms = new ArrayList<Room>();
 
         for (int i = 0; i < toExit.size(); i++) {
-            ToExitRooms[i] = FindRoomByNum(toExit.get(i), this.TabOfRoom);
+            toExitRooms.add(FindRoomByNum(toExit.get(i), this.TabOfRoom));
         }
 
-        // pokoj wejsciowy
-        ToExitRooms[ToExitRooms.length-1].setPathSet(new int[][]{{ToExitRooms[ToExitRooms.length-2].getRowRoom(),
-                ToExitRooms[ToExitRooms.length-2].getColRoom()}});
-        // pokoj wyjsciowy
-        ToExitRooms[0].setPathSet(new int[][]{{ToExitRooms[1].getRowRoom(), ToExitRooms[1].getColRoom()}});
-        // pokoje posrednie
-        for (int i = 1; i < ToExitRooms.length-2; i++) {
-            ToExitRooms[i].setPathSet(new int[][]{{ToExitRooms[i-1].getRowRoom(),ToExitRooms[i-1].getColRoom()},
-                    {ToExitRooms[i+1].getRowRoom(),ToExitRooms[i+1].getColRoom()}});
+
+        for(int i = 0; i < toExitRooms.size(); i++){
+            int col = toExitRooms.get(i).getColRoom();
+            int row = toExitRooms.get(i).getRowRoom();
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row][col + 1])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
+                }
+            }catch (IndexOutOfBoundsException e){}
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row][col - 1])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
+                }
+            }catch (IndexOutOfBoundsException e){}
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row+1][col])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
+                }
+            }catch (IndexOutOfBoundsException e){}
+
+            try {
+                if (toExitRooms.contains(TabOfRoom[row-1][col])) {
+                    TabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
+                }
+            }catch (IndexOutOfBoundsException e){}
         }
+
+
+        // przypisujemy ścieżki jako atrybuty do obiektów pokoi. Wyjście i wejście ma tylko po jednym pokoju
+        // sąsiednim, dlatego przypisujemy do nich oddzielnie, nie przez pętlę.
+//        ArrayList<int []> tempArr = new ArrayList<int[]>(4); // pomocnicza tablica służąca do przekazania
+//
+//        // Pokoj wejsciowy:
+//        tempArr.add(new int[]{toExitRooms[toExitRooms.length-2].getRowRoom(),toExitRooms[toExitRooms.length-2].getColRoom()});
+//        toExitRooms[toExitRooms.length-1].setPathSet(tempArr);
+//
+//        // pokoj wyjsciowy:
+//        ArrayList<int []> tempArr1 = new ArrayList<int[]>(4);
+//        tempArr1.add(new int[]{toExitRooms[1].getRowRoom(), toExitRooms[1].getColRoom()});
+//        toExitRooms[0].setPathSet(tempArr1);
+//
+//        // pokoje posrednie:
+//        ArrayList<int []> tempArr2 = new ArrayList<int[]>(4);
+//        for (int i = 1; i < toExitRooms.length-2; i++) {
+//            tempArr2.add(new int[]{toExitRooms[i-1].getRowRoom(),toExitRooms[i-1].getColRoom()});
+//            tempArr2.add(new int[]{toExitRooms[i+1].getRowRoom(),toExitRooms[i+1].getColRoom()});
+//            toExitRooms[i].setPathSet(tempArr2);
+//        }
+
+        //tempArr=null;
 
     }
 

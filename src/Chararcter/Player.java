@@ -11,6 +11,7 @@ public class Player extends Character {
     private int location_X;
     private long exp;
     private boolean alive = true;
+    //private ability Abilities[];
 
 
     public Player(int size) {

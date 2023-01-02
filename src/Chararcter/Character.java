@@ -6,7 +6,7 @@ import Chararcter.Skill.Skills;
 import java.util.Arrays;
 
 public abstract class Character {
-    protected int health;
+    protected double health;
     protected int strength;
     protected int intelligence;
     protected int agility;
@@ -67,11 +67,11 @@ public abstract class Character {
 
 
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 
