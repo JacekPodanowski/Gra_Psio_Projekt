@@ -12,7 +12,7 @@ public class PlayerOnMapPosition implements Observer{
     }
 
     public void displayCurrentMap(){
-        this.game.getMap().displayCurrentMapFloor(1);
+        this.game.getMap().displayCurrentMapFloor(1, this.game.getPlayer());
     }
 
 }

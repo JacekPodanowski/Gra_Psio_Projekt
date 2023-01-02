@@ -13,7 +13,8 @@ public class Room {
     private boolean visited;
     private int rowRoom;
     private int colRoom;
-    private ArrayList<int[]> pathSet;
+    private ArrayList<int[]> pathSet; //arraylista przechowujaca wspolrzedne pokojow do ktorych mozna pojsc z danego pokoju
+    private ArrayList<Room> availableRoomsAround = new ArrayList<Room>();
     private int difficulty;  // + lub - od lewela gracza
     private Event event;
     private int numRoom;
@@ -89,6 +90,14 @@ public class Room {
 
     public void setVisited(boolean visited) {
         this.visited = visited;
+    }
+
+    public ArrayList<Room> getAvailableRoomsAround() {
+        return availableRoomsAround;
+    }
+
+    public void setAvailableRoomsAround(ArrayList<Room> availableRoomsAround) {
+        this.availableRoomsAround = availableRoomsAround;
     }
     //==================================================================================================================
 
