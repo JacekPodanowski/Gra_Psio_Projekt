@@ -10,9 +10,11 @@ public class Room {
     //================================================= ATRYBUTY KLASY =================================================
     private boolean enter;
     private boolean exit;
+    private boolean visited;
     private int rowRoom;
     private int colRoom;
-    private ArrayList<int[]> pathSet;
+    private ArrayList<int[]> pathSet; //arraylista przechowujaca wspolrzedne pokojow do ktorych mozna pojsc z danego pokoju
+    private ArrayList<Room> availableRoomsAround = new ArrayList<Room>();
     private int difficulty;  // + lub - od lewela gracza
     private Event event;
     private int numRoom;
@@ -82,6 +84,21 @@ public class Room {
         this.event = event;
     }
 
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public ArrayList<Room> getAvailableRoomsAround() {
+        return availableRoomsAround;
+    }
+
+    public void setAvailableRoomsAround(ArrayList<Room> availableRoomsAround) {
+        this.availableRoomsAround = availableRoomsAround;
+    }
     //==================================================================================================================
 
 
@@ -92,6 +109,7 @@ public class Room {
         this.colRoom = colRoom;
         enter = false;
         exit = false;
+        visited = false;
         pathSet = new ArrayList<int[]>();
         difficulty = 0;
         randomEvent(player);
@@ -106,6 +124,7 @@ public class Room {
         do
             this.event = this.event.event(player);
         while(event != null);
+        this.visited = true;
         this.event = new EmptyRoom();
         if(!(player.getHealth() > 0)) {
             System.out.println("Przegrałeś");
