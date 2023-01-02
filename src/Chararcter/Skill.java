@@ -58,6 +58,11 @@ public class Skill {
         dmg=dmg*(1-(double)(resist*5)/100);
         return dmg;
         }
+
+    @Override
+    public String toString() {
+        return name;
     }
+}
 
 
