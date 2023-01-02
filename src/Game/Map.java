@@ -58,30 +58,24 @@ public class Map {
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
 
-        // losujemy wyjście na górnej lub na prawej granice mapy
-        // jeśli losuje sie true, to wyjście jest na górnej granicy mapy
-        // jeśli losuje sie false, to wyjście jest na prawej granicy mapy
-//        int exitRow; // numer komórki w tablicy: row and col
-//        int exitCol;
-        this.tabOfRoom[0][0].setExit(true);
-        this.tabOfRoom[0][0].setEvent(new Exit());
+//         losujemy wyjście na górnej lub na prawej granice mapy
+//         jeśli losuje sie true, to wyjście jest na górnej granicy mapy
+//         jeśli losuje sie false, to wyjście jest na prawej granicy mapy
+        int exitRow; // numer komórki w tablicy: row and col
+        int exitCol;
 
+        if (random.nextBoolean()) {
+            exitRow = 0;
+            exitCol = random.nextInt(this.tabOfRoom.length);
+            this.tabOfRoom[0][exitCol].setExit(true);
+            this.tabOfRoom[0][exitCol].setEvent(new Exit());
+        } else {
+            exitRow = random.nextInt(this.tabOfRoom.length);
+            exitCol = this.tabOfRoom.length-1;
+            this.tabOfRoom[exitRow][4].setExit(true);
+            this.tabOfRoom[exitRow][4].setEvent(new Exit());
+        }
 
-//        if (random.nextBoolean()) {
-//            exitRow = 0;
-//            exitCol = random.nextInt(this.tabOfRoom.length);
-//            this.tabOfRoom[0][exitCol].setExit(true);
-//            this.tabOfRoom[0][exitCol].setEvent(new Exit());
-//        } else {
-//            exitRow = random.nextInt(this.tabOfRoom.length);
-//            exitCol = this.tabOfRoom.length-1;
-//            this.tabOfRoom[exitRow][4].setExit(true);
-//            this.tabOfRoom[exitRow][4].setEvent(new Exit());
-//        }
-        /*/ temp druk
-        System.out.println(exitRow);
-        System.out.println(exitCol);
-/*/
         // numeracja pokoi w tablicy
         int numRoom = 0;
 
@@ -149,8 +143,8 @@ public class Map {
 
         // source and destination of exit and enter
         int source = this.tabOfRoom[this.tabOfRoom.length-1][0].getNumRoom();
-//        int dest = this.tabOfRoom[exitRow][exitCol].getNumRoom();
-        int dest = this.tabOfRoom[0][0].getNumRoom();
+        int dest = this.tabOfRoom[exitRow][exitCol].getNumRoom();
+
 
         // przepisanie wynikowej ścieżki z LinkedList to ArrayList
         ArrayList<Integer> toExit = new ArrayList<>();
