@@ -129,8 +129,9 @@ public class Game implements Subject {
                 }
                 System.out.println("Gdzie chesz iść ? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
+                int x = player.getLocation_X();
                 player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
-                player.setLocation_Y(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
+                player.setLocation_Y(this.map.getTabOfRoom()[x][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
             }
         System.out.print("Nie zyjesz");
         System.exit(5);
