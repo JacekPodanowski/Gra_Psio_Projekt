@@ -63,7 +63,7 @@ public abstract class Character {
     }
 
     public void addBasicAttacks(){
-        abilities[0] = new Skill("Szybki atak",0.5,90,0);
+        abilities[0] = new Skill("Precyzyjny atak",0.5,90,0);
         abilities[1] = new Skill("Zwykły atak",1,75,0);
         abilities[2] = new Skill("Potężny atak",2,50,0);
     }

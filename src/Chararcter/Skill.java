@@ -2,6 +2,8 @@ package Chararcter;
 
 import Chararcter.Item.Weapon;
 
+import java.util.Random;
+
 public class Skill {
 
 
@@ -56,6 +58,13 @@ public class Skill {
         int Basicdmg = player.getWeapon().getBasicDMG();
         dmg = Basicdmg*reqDmgmuliplyer*damageMultiPlayer;
         dmg=dmg*(1-(double)(resist*5)/100);
+
+
+        Random r = new Random();
+        if(r.nextInt(100)>accuracy) {
+            System.out.println("Nie trafiasz");
+            dmg = 0;
+        }
         return dmg;
         }
 
