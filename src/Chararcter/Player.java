@@ -12,6 +12,7 @@ public class Player extends Character {
     private long exp;
     private boolean alive = true;
 
+
     public Player(int size) {
         super();
         location_Y=0;
@@ -38,8 +39,12 @@ public class Player extends Character {
     @Override
     public void attack(Character character, int skillNumber) {
         int choiceOfSkill = skillNumber;
+
+        System.out.println("Wybierz sposób ataku");
+        System.out.print("1 - Normalny atak \t 2 - Szybki atak \t 3 - Potężny atak");
         switch (choiceOfSkill){
             case 0:
+                character.setHealth(getHealth() - this.weapon.calculatedmg());
 
         }
         //umiejetnosc[skillNumber].use(this.weapon.calculatedmg());
@@ -59,6 +64,8 @@ public class Player extends Character {
             System.out.println("Ekwipunek pelny");
         }
     }
+
+    public int ResetStats(){}
 
 //===========================================================SETERY I GETERY=====================================================================================
     public int getLocation_Y() {

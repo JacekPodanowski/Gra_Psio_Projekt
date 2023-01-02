@@ -1,8 +1,7 @@
 package Chararcter;
 
 import Chararcter.Item.*;
-import Chararcter.Profession.Profession;
-import Chararcter.Skills.Skills;
+import Chararcter.Skill.Skills;
 
 import java.util.Arrays;
 
@@ -16,6 +15,7 @@ public abstract class Character {
     protected Weapon weapon;
     protected Armor armor;
     protected Item[] inventory;
+    protected Skill[] abilities;
 
 
     public Character() {
@@ -33,7 +33,8 @@ public abstract class Character {
         this.intelligence = intelligence;
         this.gold = gold;
         this.level = level;
-        //this.weapon = mlotek; //początkowa bron to mlotek
+
+        this.weapon = new Weapon(); //początkowa bron to mlotek
         //this.armor = null; //początkowy armor to brak
     }
 //3
@@ -118,5 +119,20 @@ public abstract class Character {
 
     public Item[] getInventory() {
         return inventory;
+    }
+
+    public Weapon weapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void addBasicAttack(){
+
+        abilities[0] = new Skill() {
+
+        }
     }
 }

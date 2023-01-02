@@ -1,8 +1,14 @@
 package Chararcter.Profession;
 
+import Chararcter.Character;
 import Chararcter.Item.Weapon;
 
 public interface Profession  {
+
+
+    void setAtributesOfProfession(Character character);
+
+    void SpecialAbility(Character character);
 
      private void warrior_attac(int strength,Weapon){ //w tym miejscu potrzebuje napisac pobieranie danych z klasy weapon ale nie moge wiedziec jak tak samo jak podpiąć to pod interface
          double warrior_base_attac= strength*//tutaj ma być broń woja
