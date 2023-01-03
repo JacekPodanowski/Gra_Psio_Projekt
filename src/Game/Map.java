@@ -19,11 +19,13 @@ public class Map {
     //================================================== KONSTRUKTORY ==================================================
     public Map(Player player,int size) {
         tabOfRoom = new Room[size][size];
+        toExitRooms = new ArrayList<Room>();
         generateMap(player);
     }
 
     public Map(int row, int col, Player player){
         tabOfRoom = new Room[row][col];
+//        toExitRooms = new ArrayList<Room>();
         generateMap(player);
     }
     //==================================================================================================================
@@ -75,8 +77,8 @@ public class Map {
             this.tabOfRoom[exitRow][4].setExit(true);
             this.tabOfRoom[exitRow][4].setEvent(new Exit());
         }
-
-        // numeracja pokoi w tablicy
+        
+        // przelicza i numeruje pokoi w tablicy
         int numRoom = 0;
 
         for (int i = 0; i < this.tabOfRoom.length; i++) {
@@ -86,7 +88,38 @@ public class Map {
             }
         }
 
-        // Adjacency list for storing which vertices are connected
+        // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
+
+        // losujemy wyjście i dwa zaułki na górnej lub na prawej granice mapy
+        // losowanie wyjścia
+        Room roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        int exitNum = roomTemp.getNumRoom();
+        this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setExit(true);
+        this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent(new Exit());
+
+        // losowanie ślepego zaułku nr1
+        roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        int blindEnd1_Num = roomTemp.getNumRoom();
+        // jeśli się powtarza, to losowanie jesczsze raz
+        while (blindEnd1_Num == exitNum) {
+            roomTemp = RandRoomOnEdge(this.tabOfRoom);
+            blindEnd1_Num = roomTemp.getNumRoom();
+        }
+
+        // losowanie ślepego zaułku nr2
+        roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        int blindEnd2_Num = roomTemp.getNumRoom();
+        // jeśli się powtarza, to losowanie jesczsze raz
+        while (blindEnd2_Num == exitNum || blindEnd2_Num == blindEnd1_Num) {
+            roomTemp = RandRoomOnEdge(this.tabOfRoom);
+            blindEnd2_Num = roomTemp.getNumRoom();
+        }
+
+
+        // Adjacency list dla przechowywania połączeń między numerami pokojów
+        // to jest pomocnicza tablica, która przekazywana do metody odnalezienia najkrótszej drogi
         ArrayList<ArrayList<Integer>> adj =
                 new ArrayList<ArrayList<Integer>>(numRoom);
         for (int i = 0; i < numRoom; i++) {
@@ -94,7 +127,8 @@ public class Map {
         }
 
 
-        //generacja wszystkich ścieżek dla wszystkich pokoi
+        // generacja wszystkich ścieżek dla wszystkich pokoi i
+        // przypisywanie tych ścieżek do Adjacency list
         int MapLength = this.tabOfRoom.length; // pomocnicza zmienna
         //ścieżki do pokojow sąsiednich dla pokojów na rogach:
         addEdge(adj, 0, 1);
@@ -132,8 +166,8 @@ public class Map {
         }
 
         // generacja ścieżek dla środkowej części tablicy pokojów
-        for (int i = 1; i < MapLength-2; i++) {
-            for (int j = 1; j < MapLength-2; j++) {
+        for (int i = 1; i < MapLength-1; i++) {
+            for (int j = 1; j < MapLength-1; j++) {
                 addEdge(adj, MapLength*i+j, MapLength*i+j+1);
                 addEdge(adj, MapLength*i+j, MapLength*i+j-1);
                 addEdge(adj, MapLength*i+j, MapLength*(i-1)+j);
@@ -141,24 +175,87 @@ public class Map {
             }
         }
 
-        // source and destination of exit and enter
+
+        // source and destination przekazywane do metody, między czym będzie odnajdywana najkrótsza droga
         int source = this.tabOfRoom[this.tabOfRoom.length-1][0].getNumRoom();
         int dest = this.tabOfRoom[exitRow][exitCol].getNumRoom();
+        int destination = exitNum;
 
-
-        // przepisanie wynikowej ścieżki z LinkedList to ArrayList
+        // wywołanie metody "findshortestdistance" i przepisanie wynikowej ścieżki z LinkedList to ArrayList
         ArrayList<Integer> toExit = new ArrayList<>();
-        toExit.addAll(printShortestDistance(adj, source, dest, numRoom));
+        toExit.addAll(findShortestDistance(adj, source, destination, numRoom));
 
-        // przypisanie ścieżek do pokoi
-        Room roomTemp = null;
-        toExitRooms = new ArrayList<Room>();
+        // skasowanie ścieżek przejścia z pokoju wyjściowego dla tego, żeby zaułki się generowały nie przez exit
+        adj.get(exitNum).clear();
 
+
+        // tu szukamy najkrótszej ścieżki z pokoju ślepego zaułku do ścieżki toExit.
+        // Dla łatwiejszego zrozumienia kodu nie wyrzucam powielanie na zewnątrz w oddzielną funkcję (Dla ślepego zaułka 1 i 2)
+        source = blindEnd1_Num;
+
+        ArrayList<Integer> toBlind1 = new ArrayList<>();
+        for (int i = 1; i < toExit.size()-1; i++) {
+            destination = toExit.get(i);
+
+            LinkedList<Integer> pathRoom = findShortestDistance(adj, source, destination, numRoom);
+            // sprawdzamy czy ścieżka krótsza, niż poprzednio. Jeśli tak, to przepisujemy na krótszą
+            if (toBlind1.size() == 0 || pathRoom.size()<toBlind1.size()) {
+                toBlind1.clear();
+                toBlind1.addAll(pathRoom);
+            }
+            pathRoom.clear();
+        }
+
+        // tu szukamy najkrótszej ścieżki z pokoju ślepego zaułku nr2 do ścieżki toExit
+        source = blindEnd2_Num;
+
+        ArrayList<Integer> toBlind2 = new ArrayList<>();
+        for (int i = 1; i < toExit.size()-1; i++) {
+            destination = toExit.get(i);
+
+            LinkedList<Integer> pathRoom = findShortestDistance(adj, source, destination, numRoom);
+            // sprawdzamy czy ścieżka krótsza, niż poprzednio. Jeśli tak, to przepisujemy na krótszą
+            if (toBlind2.size() == 0 || pathRoom.size()<toBlind2.size()) {
+                toBlind2.clear();
+                toBlind2.addAll(pathRoom);
+            }
+        }
+
+        // robimy tablicę wszystkich numerów pokoi (toExit, toBlind1, toBlind2)
+        // poprostu dodajemy do istniejącej toExit dodatkowe pokoje z toBlind1, toBlind2
+        for (int i = 0; i < toBlind1.size(); i++) {
+            if (toExit.contains(toBlind1.get(i)) ) {
+            } else {
+                toExit.add(toBlind1.get(i));
+            }
+        }
+        for (int i = 0; i < toBlind2.size(); i++) {
+            if (toExit.contains(toBlind2.get(i)) ) {
+            } else {
+                toExit.add(toBlind2.get(i));
+            }
+        }
+
+        // (możliwość techniczna) drukowanie tablicy możliwych pokoi do przejsia
+        // + oznacza pokój możliwy do odwiedzenia
+        for (int i = 0; i < this.tabOfRoom.length; i++) {
+            for (int j = 0; j < this.tabOfRoom[0].length; j++) {
+                if (toExit.contains(this.tabOfRoom[i][j].getNumRoom())) {
+                    System.out.print(this.tabOfRoom[i][j].getNumRoom() + "+\t\t");
+                } else {
+                    System.out.print(this.tabOfRoom[i][j].getNumRoom() + "\t\t");
+                }
+            }
+            System.out.println();
+        }
+
+
+        // przypisanie ścieżek do pokoi. Najpierw robimy tablice obiektów pokoi zamiast ich numerów
         for (int i = 0; i < toExit.size(); i++) {
             toExitRooms.add(FindRoomByNum(toExit.get(i), this.tabOfRoom));
         }
 
-
+        // mamy zbiór pokoi przez które może player się poruszać. Przypisujemy ścieżki przejść do każdego z tych pokoi
         for(int i = 0; i < toExitRooms.size(); i++){
             int col = toExitRooms.get(i).getColRoom();
             int row = toExitRooms.get(i).getRowRoom();
@@ -166,56 +263,49 @@ public class Map {
             try {
                 if (toExitRooms.contains(tabOfRoom[row][col + 1])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
-                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row][col + 1]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
                 if (toExitRooms.contains(tabOfRoom[row][col - 1])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
-                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row][col - 1]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
                 if (toExitRooms.contains(tabOfRoom[row+1][col])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
-                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row + 1][col]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
                 if (toExitRooms.contains(tabOfRoom[row-1][col])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
-                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row - 1][col]);
                 }
             }catch (IndexOutOfBoundsException e){}
         }
+    }
+//===========================KONIEC METODY generateMap==============================================================
 
 
-        // przypisujemy ścieżki jako atrybuty do obiektów pokoi. Wyjście i wejście ma tylko po jednym pokoju
-        // sąsiednim, dlatego przypisujemy do nich oddzielnie, nie przez pętlę.
-//        ArrayList<int []> tempArr = new ArrayList<int[]>(4); // pomocnicza tablica służąca do przekazania
-//
-//        // Pokoj wejsciowy:
-//        tempArr.add(new int[]{toExitRooms[toExitRooms.length-2].getRowRoom(),toExitRooms[toExitRooms.length-2].getColRoom()});
-//        toExitRooms[toExitRooms.length-1].setPathSet(tempArr);
-//
-//        // pokoj wyjsciowy:
-//        ArrayList<int []> tempArr1 = new ArrayList<int[]>(4);
-//        tempArr1.add(new int[]{toExitRooms[1].getRowRoom(), toExitRooms[1].getColRoom()});
-//        toExitRooms[0].setPathSet(tempArr1);
-//
-//        // pokoje posrednie:
-//        ArrayList<int []> tempArr2 = new ArrayList<int[]>(4);
-//        for (int i = 1; i < toExitRooms.length-2; i++) {
-//            tempArr2.add(new int[]{toExitRooms[i-1].getRowRoom(),toExitRooms[i-1].getColRoom()});
-//            tempArr2.add(new int[]{toExitRooms[i+1].getRowRoom(),toExitRooms[i+1].getColRoom()});
-//            toExitRooms[i].setPathSet(tempArr2);
-//        }
 
-        //tempArr=null;
+    // metoda, która losowo wybiera pokój na górnej lub prawej granice mapy
+    // jeśli losuje sie true, to wyjście jest na górnej granicy mapy
+    // jeśli losuje sie false, to wyjście jest na prawej granicy mapy
+    public static Room RandRoomOnEdge(Room [][] TabOfRoom) {
+        Random random = new Random();
+        int row;
+        int col;
 
+        if (random.nextBoolean()) {
+            row = 0;
+            col = random.nextInt(TabOfRoom.length);
+        } else {
+            row = random.nextInt(TabOfRoom.length);
+            col = TabOfRoom.length-1;
+        }
+
+        return TabOfRoom[row][col];
     }
 
     // metoda wyszukania pokoju wedlug numera pokoju
@@ -232,38 +322,38 @@ public class Map {
         return room;
     }
 
-    // function to form edge between two vertices
+    // metoda do tworzenia ścieżki pomiędzy dwoma pokojami
     // source and dest
     private static void addEdge(ArrayList<ArrayList<Integer>> adj, int i, int j)
     {
         adj.get(i).add(j);
-        //adj.get(j).add(i);
     }
 
 
-
-    // function to print the shortest distance and path
-    // between source vertex and destination vertex
-    private static LinkedList<Integer> printShortestDistance(
+    // metoda do odnalezienia najkrótszej drogi między dwoma pokojami
+    // metoda pobiera adj - lista połączeń pomiędzy pokojami,
+    // source and destination - to numery pokojów, między którymi szukamy drogi
+    // v - to liczba wierzchołków, czyli liczba pokojów
+    private static LinkedList<Integer> findShortestDistance(
             ArrayList<ArrayList<Integer>> adj,
-            int s, int dest, int v)
+            int source, int destination, int v)
     {
         // predecessor[i] array stores predecessor of
         // i and distance array stores distance of i
-        // from s
+        // from source
         int pred[] = new int[v];
         int dist[] = new int[v];
         // LinkedList to store path
         LinkedList<Integer> path = new LinkedList<Integer>();
 
-        if (BFS(adj, s, dest, v, pred, dist) == false) {
+        if (BFS(adj, source, destination, v, pred, dist) == false) {
             System.out.println("Given source and destination" +
                     "are not connected");
             return path;
         }
 
         // wypisanie ścieżki
-        int crawl = dest;
+        int crawl = destination;
         path.add(crawl);
         while (pred[crawl] != -1) {
             path.add(pred[crawl]);
@@ -271,7 +361,7 @@ public class Map {
         }
 
         /*/ Print distance
-       // System.out.println("Shortest path length is: " + dist[dest]);
+       // System.out.println("Shortest path length is: " + dist[destination]);
 
         // Print path
         System.out.println("Path is ::");
@@ -334,14 +424,6 @@ public class Map {
         return false;
     }
 
-//    public void main(String[] args) {
-//        generateMap(new Player());
-//    }
-
-
-
-
-
 
 
 
@@ -375,31 +457,3 @@ public class Map {
 }
 //======================================================================================================================
 
-//for(int i = 0; i < toExitRooms.size(); i++){
-//            int col = toExitRooms.get(i).getColRoom();
-//            int row = toExitRooms.get(i).getRowRoom();
-//
-//            try {
-//                if (getPathSet.contains(TabOfRoom[row][col + 1])) {
-//                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
-//                }
-//            }catch (IndexOutOfBoundsException e){}
-//
-//            try {
-//                if (toExitRooms.contains(TabOfRoom[row][col - 1])) {
-//                    TabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
-//                }
-//            }catch (IndexOutOfBoundsException e){}
-//
-//            try {
-//                if (toExitRooms.contains(TabOfRoom[row+1][col])) {
-//                    TabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
-//                }
-//            }catch (IndexOutOfBoundsException e){}
-//
-//            try {
-//                if (toExitRooms.contains(TabOfRoom[row-1][col])) {
-//                    TabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
-//                }
-//            }catch (IndexOutOfBoundsException e){}
-//        }
