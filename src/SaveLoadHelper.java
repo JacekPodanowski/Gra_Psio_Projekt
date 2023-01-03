@@ -1,48 +1,51 @@
 import Game.Game;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Scanner;
 
-public class Saver {
-
-
+public class SaveLoadHelper {
     private final int numberOfSlots = 4;
     private LocalDateTime[] slots;
     private final String filePath = "save.bin";
 
-
-    public Saver(){
+    public SaveLoadHelper(){
         File file = new File(filePath);
-
         if (file.exists()){
             slots = loadSlots();
         }else {
-
+            slots = new LocalDateTime[numberOfSlots];
         }
-        slots = new LocalDateTime[numberOfSlots];
-
     }
 
+    public int getNumberOfSlots() {
+        return numberOfSlots;
+    }
 
-    public void save(Game game, int slotNumber){
+    public String getTextForSlot(int index)
+    {
+        if(slots[index] ==null){
+            return "puste";
+        } else{
+            return slots[index].toString();
+        }
+    }
+    public boolean isEmptySlot(int index)
+    {
+        return slots[index]==null;
+    }
 
-        game.saveGame("SaveGame"+slotNumber+".bin");
-        slots[slotNumber -1] = LocalDateTime.now();
+    public void save(Game game, int slotIndex){
+        //game.saveGame("SaveGame"+slotNumber+".bin");
+        slots[slotIndex] = LocalDateTime.now();
         saveSlots();
     }
 
     public Game load(int slotIndex){
-
-        Game g= new Game();
-        g.loadGame("SaveGame"+slotIndex+".bin");
-        return g;
+        //return Game.loadGame("SaveGame"+slotIndex+".bin");
+        return null;
     }
 
     private LocalDateTime[] loadSlots(){
-
         LocalDateTime[] slots = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath))){
             slots = (LocalDateTime[]) inputStream.readObject();
@@ -55,7 +58,7 @@ public class Saver {
             System.out.println("Podana klasa jest niepoprawna");
             throw new RuntimeException(e);
         }
-    return slots;}
+        return slots;}
 
     private void saveSlots(){
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));) {
@@ -69,16 +72,6 @@ public class Saver {
         }
     }
 
-    public int getNumberOfSlots(){
-        return  numberOfSlots;
-    }
 
-    public String getTextForSlot(int index){
-        if( slots[index] == null){
-            return "puste";
-        } else {
-            return slots[index].toString();
-        }
-    }
 
 }

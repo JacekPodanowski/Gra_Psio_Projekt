@@ -1,7 +1,4 @@
-import Chararcter.*;
-import Chararcter.Item.Weapon;
 import Game.*;
-import Game.Event.Fight;
 
 
 public class Main {
@@ -9,7 +6,7 @@ public class Main {
 
         //Tworzę sobie uchyt
         Game g1 = null;
-        Saver saver = new Saver();
+        SaveLoadHelper saver = new SaveLoadHelper();
         //new SaveWindow(g1, saver);
 
         int choice = 0;
@@ -25,11 +22,17 @@ public class Main {
                         g1 = new Game();
                         break;
                     case 2:
-                        //g1 = saver.load();
+                        SaveLoadWindow loadWindow = new SaveLoadWindow(g1, new LoadStrategy());
+                        loadWindow.setModal(true);
+                        loadWindow.setAlwaysOnTop(true);
+                        loadWindow.setVisible(true);
+
+                        g1 =loadWindow.getGame();
                         break;
                     case 3:
-                        SaveWindow saveWindow = new SaveWindow(g1);
+                        SaveLoadWindow saveWindow = new SaveLoadWindow(g1, new SaveStrategy());
                         saveWindow.setModal(true);
+                        saveWindow.setAlwaysOnTop(true);
                         saveWindow.setVisible(true);
 
                         break;
