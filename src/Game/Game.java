@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game implements Subject {
+public class Game implements Serializable, Subject{
     //============================================ ATRYBUTY KLASY ======================================================
     private int day;
     private Map map;
@@ -34,6 +34,7 @@ public class Game implements Subject {
         map.displayMapFloor(1);
         this.registerObserver(new PlayerOnMapPosition());
         System.out.println("\nRozpocząłeś nową grę!\n\n");
+        this.startGame();
     }
     public Game(int day, Player player,Map map){
         this.day = day;
@@ -121,11 +122,7 @@ public class Game implements Subject {
                 this.notifyObservers();
                 for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
                     System.out.print((i+1)+" - ");
-                    System.out.print("[");
-                    System.out.print(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)[0]);
-                    System.out.print(", ");
-                    System.out.print(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)[1]);
-                    System.out.println("]");
+                    System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
                 }
                 System.out.println("Gdzie chesz iść ? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());

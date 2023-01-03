@@ -56,6 +56,28 @@ public class Map {
             }
         }
 
+        // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
+
+//         losujemy wyjście na górnej lub na prawej granice mapy
+//         jeśli losuje sie true, to wyjście jest na górnej granicy mapy
+//         jeśli losuje sie false, to wyjście jest na prawej granicy mapy
+        int exitRow; // numer komórki w tablicy: row and col
+        int exitCol;
+
+        if (random.nextBoolean()) {
+            exitRow = 0;
+            exitCol = random.nextInt(this.tabOfRoom.length);
+            this.tabOfRoom[0][exitCol].setExit(true);
+            this.tabOfRoom[0][exitCol].setEvent(new Exit());
+        } else {
+            exitRow = random.nextInt(this.tabOfRoom.length);
+            exitCol = this.tabOfRoom.length-1;
+            this.tabOfRoom[exitRow][4].setExit(true);
+            this.tabOfRoom[exitRow][4].setEvent(new Exit());
+        }
+        
         // przelicza i numeruje pokoi w tablicy
         int numRoom = 0;
 
@@ -156,6 +178,7 @@ public class Map {
 
         // source and destination przekazywane do metody, między czym będzie odnajdywana najkrótsza droga
         int source = this.tabOfRoom[this.tabOfRoom.length-1][0].getNumRoom();
+        int dest = this.tabOfRoom[exitRow][exitCol].getNumRoom();
         int destination = exitNum;
 
         // wywołanie metody "findshortestdistance" i przepisanie wynikowej ścieżki z LinkedList to ArrayList

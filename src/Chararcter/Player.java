@@ -1,16 +1,18 @@
 package Chararcter;
 
 import Chararcter.Item.*;
+import Chararcter.Profession.Profession;
 import Game.Game;
 import Game.Map;
 
-public class Player extends Character{
+public class Player extends Character {
 
     private int location_Y;
     private int location_X;
     private long exp;
     private boolean alive = true;
     //private ability Abilities[];
+
 
     public Player(int size) {
         super();
@@ -37,6 +39,15 @@ public class Player extends Character{
 
     @Override
     public void attack(Character character, int skillNumber) {
+        int choiceOfSkill = skillNumber;
+
+        System.out.println("Wybierz sposób ataku");
+        System.out.print("1 - Normalny atak \t 2 - Szybki atak \t 3 - Potężny atak");
+        switch (choiceOfSkill){
+            case 0:
+                character.setHealth(getHealth() - this.weapon.calculatedmg());
+
+        }
         //umiejetnosc[skillNumber].use(this.weapon.calculatedmg());
         //character.setHealth(getHealth() - umiejetnosc.use[skillNumber](this.weapon.calculatedmg);
     }
@@ -54,6 +65,7 @@ public class Player extends Character{
             System.out.println("Ekwipunek pelny");
         }
     }
+
 
 //===========================================================SETERY I GETERY=====================================================================================
     public int getLocation_Y() {
@@ -87,4 +99,6 @@ public class Player extends Character{
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+
 }

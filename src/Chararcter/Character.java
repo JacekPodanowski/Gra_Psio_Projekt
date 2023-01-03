@@ -14,6 +14,7 @@ public abstract class Character {
     protected Weapon weapon;
     protected Armor armor;
     protected Item[] inventory;
+    protected Skill[] abilities;
 
 
     public Character() {
@@ -31,10 +32,11 @@ public abstract class Character {
         this.intelligence = intelligence;
         this.gold = gold;
         this.level = level;
-        //this.weapon = mlotek; //początkowa bron to mlotek
+
+        this.weapon = new Weapon(); //początkowa bron to mlotek
         //this.armor = null; //początkowy armor to brak
     }
-
+//3
 
     public Character(int health, int strength, int agility, int intelligence, int gold, int level, Weapon weapon, Armor armor) { // do wroga
         this.inventory = new Item[5];
@@ -60,10 +62,14 @@ public abstract class Character {
                 System.out.println(this.inventory[i].toString());
     }
 
-    //zamysł uniku jest taki aby dać go do walki tam sie to będzie liczyć, tak uważam. Z poważaniemm jacek podanowksi
+    public void addBasicAttacks(){
+        abilities[0] = new Skill("Precyzyjny atak",0.5,90,0);
+        abilities[1] = new Skill("Zwykły atak",1,75,0);
+        abilities[2] = new Skill("Potężny atak",2,50,0);
+    }
 
 
-
+//================================================================================================================================================
     public double getHealth() {
         return health;
     }
@@ -116,5 +122,25 @@ public abstract class Character {
 
     public Item[] getInventory() {
         return inventory;
+    }
+
+    public Weapon weapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public Skill[] getAbilities() {
+        return abilities;
     }
 }
