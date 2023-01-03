@@ -8,7 +8,7 @@ public class Mage implements Profession{
 
 
     @Override
-    public void setAtributesOfProfession(Character character) {
+    public void attributesInitiation(Character character) {
         character.setAgility(5);
         character.setIntelligence(6);
         character.setStrength(4);
@@ -16,7 +16,7 @@ public class Mage implements Profession{
     }
 
     @Override
-    public void SpecialAbility(Character character) {
+    public void specialAbility(Character character) {
 
     }
 }
