@@ -11,6 +11,7 @@ public class Player extends Character {
     private int location_X;
     private long exp;
     private boolean alive = true;
+    private boolean playerTurn;
     //private ability Abilities[];
 
 
@@ -100,5 +101,11 @@ public class Player extends Character {
         this.alive = alive;
     }
 
+    public boolean isPlayerTurn() {
+        return playerTurn;
+    }
 
+    public void setPlayerTurn(boolean playerTurn) {
+        this.playerTurn = playerTurn;
+    }
 }

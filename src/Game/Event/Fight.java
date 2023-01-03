@@ -10,7 +10,6 @@ public class Fight implements Event{
     //================================================= ATRYBUTY KLASY =================================================
     private String name = "Walka";
     private Enemy enemy;
-    private boolean playerTurn = true; //Określa czyja tura jest wykonywana
     //==================================================================================================================
 
 
@@ -32,14 +31,6 @@ public class Fight implements Event{
         this.enemy = enemy;
     }
 
-    public boolean isPlayerTurn() {
-        return playerTurn;
-    }
-
-    public void setPlayerTurn(boolean playerTurn) {
-        this.playerTurn = playerTurn;
-    }
-
     //==================================================================================================================
 
 
@@ -57,9 +48,9 @@ public class Fight implements Event{
         System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
-            this.playerTurn = false;
+            player.setPlayerTurn(false);
         while(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
-            if(playerTurn){
+            if(player.isPlayerTurn()){
                 System.out.println("Wybierz umiejętność, którą chcesz go zaatakować: \n" +
                         "1. Umiejętność 1\t\t2. Umiejętność 2\t\t3. Umiejętność 3\t\t 4. Umiejętność 4");
                 int wybor = Game.askForChoice();
@@ -72,11 +63,11 @@ public class Fight implements Event{
                 if(wybor == 2)
                     this.enemy.setHealth(0);
                 //uzywa umiejetnosci zaleznie od returna metody wyzej
-                this.playerTurn = false;
+                player.setPlayerTurn(false);
             }
             else {
                 enemy.attack(player, generate.nextInt(1, 5));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
-                this.playerTurn = true;
+                player.setPlayerTurn(true);
                 System.out.println("Przeciwnik atakuje cię i zadaje " + "x" + " obrażeń!\n");
             }
         }

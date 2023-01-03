@@ -143,4 +143,19 @@ public abstract class Character {
     public Skill[] getAbilities() {
         return abilities;
     }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public void setInventory(Item[] inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setAbilities(Skill[] abilities) {
+        this.abilities = abilities;
+    }
+    public void setAbility(Skill ability, int abilityNumber) {
+        this.abilities[abilityNumber] = ability;
+    }
 }
