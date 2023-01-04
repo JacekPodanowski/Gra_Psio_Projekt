@@ -27,30 +27,33 @@ public class Skill {
             case 'S':
                 resist = enemy.getArmor().getStrengthProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getStrength());
-                if(this.bonus != 0)
-                    player.setPlayerTurn(false);
+                if (this.bonus != 0)
+                    this.turnSetter(player);
                 break;
 
             case 'I':
                 resist = enemy.getArmor().getMagicProtection();
-                if(this.bonus == 0) {
+                if (this.bonus == 0) {
                     reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
-                }
-                else
+                    this.turnSetter(player);
+                } else {
                     player.setHealth(player.getHealth() + this.bonus * 10);
+                    this.turnSetter(player);
+                }
                 break;
 
             case 'A':
                 resist = enemy.getArmor().getAgilityProtection();
-                if(this.bonus == 0)
-                    reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
+                reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
+                if (this.bonus != 0)
+                    this.turnSetter(player);
                 break;
         }
             //==================================REZISTY==============================================
 
         int Basicdmg = player.getWeapon().getBasicDMG();
         dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;
-        dmg = dmg * (1 - (double)(resist*5)/100);
+        dmg = dmg * (1 - (double)(resist * 5) / 100);
 
 
         Random r = new Random();
@@ -68,6 +71,12 @@ public class Skill {
         } else
             reqDmgMultiplier = 1 + (req - attribute) / 10.0;
         return reqDmgMultiplier;
+    }
+    public void turnSetter(Player player){
+        if(player.isPlayerTurn())
+            player.setPlayerTurn(false);
+        else
+            player.setPlayerTurn(true);
     }
 
     @Override
