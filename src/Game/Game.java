@@ -166,7 +166,6 @@ public class Game implements Serializable, Subject{
             Scanner input = new Scanner(System.in);
             try {
                 if ((choice = input.nextInt()) >= 1 && choice <= 4) {
-                    input.close();
                     break;
                 }
                 else
@@ -184,7 +183,6 @@ public class Game implements Serializable, Subject{
             Scanner input = new Scanner(System.in);
             try {
                 if ((choice = input.nextInt()) >= 1 && choice <= limit) {
-                    input.close();
                     break;
                 }
                 else
