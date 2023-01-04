@@ -165,8 +165,10 @@ public class Game implements Serializable, Subject{
         while(true) {
             Scanner input = new Scanner(System.in);
             try {
-                if ((choice = input.nextInt()) >= 1 && choice <= 4)
+                if ((choice = input.nextInt()) >= 1 && choice <= 4) {
+                    input.close();
                     break;
+                }
                 else
                     System.out.println("Niepoprawny wybór! Wybierz spośród 1-4.");
             }catch(InputMismatchException eeee){
@@ -181,8 +183,10 @@ public class Game implements Serializable, Subject{
         while(true) {
             Scanner input = new Scanner(System.in);
             try {
-                if ((choice = input.nextInt()) >= 1 && choice <= limit)
+                if ((choice = input.nextInt()) >= 1 && choice <= limit) {
+                    input.close();
                     break;
+                }
                 else
                     System.out.println("Niepoprawny wybór! Wybierz spośród 1 - " + limit);
             }catch(InputMismatchException eeee){
