@@ -13,9 +13,9 @@ public class Main {
 
             while(choice!=4){
                 System.out.println("Witaj w grze: Proba Ucieczki Z Kostki");
-                System.out.println("1. Rozpocznij nową gre\t\t");
-                System.out.println("2. Wczytaj zapisaną gre\t\t");
-                System.out.println("3. Zapisz grę\t\t");
+                System.out.print("1. Rozpocznij nową gre\t\t");
+                System.out.print("2. Wczytaj zapisaną gre\t\t");
+                System.out.print("3. Zapisz grę\t\t");
                 System.out.println("4. Wyjdź\t\t");
                 switch (Game.askForChoice(4)){
                     case 1:

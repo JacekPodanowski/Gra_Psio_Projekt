@@ -136,8 +136,8 @@ public class Room {
     }
     public void randomEvent(Player player){
         Random generate = new Random();
-        switch(generate.nextInt(3)){
-            case 0:
+        switch(generate.nextInt(4)){
+            case 0, 3:
                 this.event = new Fight();
                 break;
             case 1:

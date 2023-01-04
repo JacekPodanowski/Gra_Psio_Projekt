@@ -2,15 +2,18 @@ package Game.Event;
 
 import Chararcter.*;
 import Game.*;
+import Observable.Subject;
+import Observers.Observer;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-public class Fight implements Event{
+public class Fight implements Event {
 
     //================================================= ATRYBUTY KLASY =================================================
     private String name = "Walka";
     private Enemy enemy;
-    private boolean playerTurn = true; //Określa czyja tura jest wykonywana
+    private ArrayList<Observer> observers = new ArrayList<>();
     //==================================================================================================================
 
 
@@ -32,14 +35,6 @@ public class Fight implements Event{
         this.enemy = enemy;
     }
 
-    public boolean isPlayerTurn() {
-        return playerTurn;
-    }
-
-    public void setPlayerTurn(boolean playerTurn) {
-        this.playerTurn = playerTurn;
-    }
-
     //==================================================================================================================
 
 
@@ -57,27 +52,26 @@ public class Fight implements Event{
         System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
-            this.playerTurn = false;
+            player.setPlayerTurn(false);
         while(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
-            if(playerTurn){
+            double health;
+            if(player.isPlayerTurn()){
                 System.out.println("Wybierz umiejętność, którą chcesz go zaatakować: \n" +
-                        "1. Umiejętność 1\t\t2. Umiejętność 2\t\t3. Umiejętność 3\t\t 4. Umiejętność 4");
+                        "1. " + player.getAbilities()[0].toString() + "\t\t" +
+                        "2. " + player.getAbilities()[1].toString() + "\t\t" +
+                        "3. " + player.getAbilities()[2].toString() + "\t\t" +
+                        "4. " + player.getAbilities()[3].toString());
                 int wybor = Game.askForChoice();
-                System.out.print("Użyłeś umięjętności " + wybor);
-                player.attack(enemy, wybor);
-                System.out.println(" i zadałeś " + "x" + " obrażeń.");
-                //===== DO TESTOW ======
-                if(wybor == 1)
-                    player.setHealth(0);
-                if(wybor == 2)
-                    this.enemy.setHealth(0);
-                //uzywa umiejetnosci zaleznie od returna metody wyzej
-                this.playerTurn = false;
+                health = this.enemy.getHealth();
+                System.out.print("Użyłeś umiejętności " + player.getAbilities()[wybor - 1].toString());
+                player.attack(enemy, wybor - 1);
+                System.out.println(", zadałeś " + (health - this.enemy.getHealth()) + " obrażeń.");
             }
             else {
-                enemy.attack(player, generate.nextInt(1, 5));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
-                this.playerTurn = true;
-                System.out.println("Przeciwnik atakuje cię i zadaje " + "x" + " obrażeń!\n");
+                health = player.getHealth();
+                System.out.print("Przeciwnik atakuje ");
+                enemy.attack(player, generate.nextInt(0, 4));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
+                System.out.println(", zadaje " + (health - player.getHealth()) + " obrażeń!\n");
             }
         }
         if(player.getHealth() > 0){
