@@ -65,13 +65,13 @@ public class Fight implements Event {
                 health = this.enemy.getHealth();
                 System.out.print("Użyłeś umiejętności " + player.getAbilities()[wybor - 1].toString());
                 player.attack(enemy, wybor - 1);
-                System.out.println(", zadałeś " + (this.enemy.getHealth() - health) + " obrażeń.");
+                System.out.println(", zadałeś " + (health - this.enemy.getHealth()) + " obrażeń.");
             }
             else {
                 health = player.getHealth();
                 System.out.println("Przeciwnik atakuje ");
                 enemy.attack(player, generate.nextInt(0, 4));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
-                System.out.println(", zadaje " + (player.getHealth() - health) + " obrażeń!\n");
+                System.out.println(", zadaje " + (health - player.getHealth()) + " obrażeń!\n");
             }
         }
         if(player.getHealth() > 0){
