@@ -240,24 +240,28 @@ public class Map {
             try {
                 if (toExitRooms.contains(tabOfRoom[row][col + 1])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row, col + 1});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row][col+1]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
                 if (toExitRooms.contains(tabOfRoom[row][col - 1])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row, col - 1});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row][col-1]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
                 if (toExitRooms.contains(tabOfRoom[row+1][col])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row+1, col});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row+1][col]);
                 }
             }catch (IndexOutOfBoundsException e){}
 
             try {
                 if (toExitRooms.contains(tabOfRoom[row-1][col])) {
                     tabOfRoom[row][col].getPathSet().add(new int[]{row-1, col});
+                    tabOfRoom[row][col].getAvailableRoomsAround().add(tabOfRoom[row-1][col]);
                 }
             }catch (IndexOutOfBoundsException e){}
         }
@@ -417,7 +421,7 @@ public class Map {
         System.out.println("Mapa piętra: " + floor);
         for (int i = 0; i < tabOfRoom.length; i++) {
             for (int j = 0; j < tabOfRoom[0].length; j++) {
-                int[] tab = {player.getLocation_X(), player.getLocation_Y()};
+//              int[] tab = {player.getLocation_X(), player.getLocation_Y()};
                 if(i == player.getLocation_X() && j == player.getLocation_Y()) {
                     System.out.printf("%-6s", "[ x ]");
                 } else if(tabOfRoom[i][j].isVisited()) {
@@ -432,30 +436,17 @@ public class Map {
         }
     }
 
-    public RoomType[][] displayTheMapInGUI(Player player) {
+    public ArrayList<Room> displayRoomsToGo(Player player) {
+        ArrayList<Room> availableRoomsAround = this.tabOfRoom[player.getLocation_X()][player.getLocation_Y()].getAvailableRoomsAround();
+        ArrayList<Room> roomsToGo = new ArrayList<Room>();
 
-        RoomType [][]roomType = new RoomType[tabOfRoom.length][tabOfRoom.length];
-
-        for (int i = 0; i < tabOfRoom.length; i++) {
-            for (int j = 0; j < tabOfRoom[0].length; j++) {
-                int[] tab = {player.getLocation_X(), player.getLocation_Y()};
-
-                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
-                    roomType[i][j] = RoomType.withPlayer;
-
-                } else if(tabOfRoom[i][j].isVisited()) {
-                    roomType[i][j] = RoomType.visited;
-
-                } else if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()])) {
-                    roomType[i][j] = RoomType.available;
-
-                } else{
-                    roomType[i][j] = RoomType.empty;
-                }
+        for (int i = 0; i < availableRoomsAround.size(); i++) {
+            if (availableRoomsAround.get(i).isVisited()){
+            } else {
+                roomsToGo.add(availableRoomsAround.get(i)) ;
             }
-
         }
-    return roomType;}
+        return roomsToGo;
+    }
 }
 //======================================================================================================================
-
