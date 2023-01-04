@@ -74,7 +74,7 @@ public class Map {
         this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent(new Exit());
 
         // losowanie ślepego zaułku nr1
-        roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        roomTemp = RandRoomOnEdge_Exit(this.tabOfRoom,FindRoomByNum(exitNum,this.tabOfRoom));
         int blindEnd1_Num = roomTemp.getNumRoom();
         // jeśli się powtarza, to losowanie jesczsze raz
         while (blindEnd1_Num == exitNum) {
@@ -84,7 +84,7 @@ public class Map {
         FindRoomByNum(blindEnd1_Num,this.tabOfRoom).setEvent(new Up());
 
         // losowanie ślepego zaułku nr2
-        roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        roomTemp = RandRoomOnEdge_Exit(this.tabOfRoom,FindRoomByNum(exitNum,this.tabOfRoom));
         int blindEnd2_Num = roomTemp.getNumRoom();
         // jeśli się powtarza, to losowanie jesczsze raz
         while (blindEnd2_Num == exitNum || blindEnd2_Num == blindEnd1_Num) {
@@ -214,16 +214,16 @@ public class Map {
 
         // (możliwość techniczna) drukowanie tablicy możliwych pokoi do przejsia
         // + oznacza pokój możliwy do odwiedzenia
-//        for (int i = 0; i < this.tabOfRoom.length; i++) {
-//            for (int j = 0; j < this.tabOfRoom[0].length; j++) {
-//                if (toExit.contains(this.tabOfRoom[i][j].getNumRoom())) {
-//                    System.out.print(this.tabOfRoom[i][j].getNumRoom() + "+\t\t");
-//                } else {
-//                    System.out.print(this.tabOfRoom[i][j].getNumRoom() + "\t\t");
-//                }
-//            }
-//            System.out.println();
-//        }
+        for (int i = 0; i < this.tabOfRoom.length; i++) {
+            for (int j = 0; j < this.tabOfRoom[0].length; j++) {
+                if (toExit.contains(this.tabOfRoom[i][j].getNumRoom())) {
+                    System.out.print(this.tabOfRoom[i][j].getNumRoom() + "+\t\t");
+                } else {
+                    System.out.print(this.tabOfRoom[i][j].getNumRoom() + "\t\t");
+                }
+            }
+            System.out.println();
+        }
 
 
         // przypisanie ścieżek do pokoi. Najpierw robimy tablice obiektów pokoi zamiast ich numerów
@@ -296,8 +296,7 @@ public class Map {
         int exitRow=exit.getRowRoom();
         int exitCol=exit.getColRoom();
 
-        if(exitRow==0)
-        if (random.nextBoolean()) {
+        if(exitRow!=0){
             row = 0;
             col = random.nextInt(TabOfRoom.length);
         } else {
