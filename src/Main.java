@@ -17,7 +17,7 @@ public class Main {
                 System.out.println("2. Wczytaj zapisaną gre\t\t");
                 System.out.println("3. Zapisz grę\t\t");
                 System.out.println("4. Wyjdź\t\t");
-                switch (Game.askForChoice()){
+                switch (Game.askForChoice(4)){
                     case 1:
                         g1 = new Game();
                         break;

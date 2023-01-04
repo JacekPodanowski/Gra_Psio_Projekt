@@ -99,4 +99,6 @@ public class Player extends Character {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+
 }

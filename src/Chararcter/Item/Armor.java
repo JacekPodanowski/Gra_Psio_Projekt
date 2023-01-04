@@ -18,6 +18,17 @@ public class Armor extends Item{
     public void useItem() {
         //isUsed=true; moze to do playera bo jak wyrzucic akutalny przedmiot stąd
 
+    }
 
+    public int getStrengthProtection() {
+        return StrengthProtection;
+    }
+
+    public int getMagicProtection() {
+        return MagicProtection;
+    }
+
+    public int getAgilityProtection() {
+        return AgilityProtection;
     }
 }
