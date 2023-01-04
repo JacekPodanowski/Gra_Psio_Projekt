@@ -13,16 +13,10 @@ public class Enemy extends Character{
     public Enemy() {
         super();
         Random r = new Random();
-        switch(r.nextInt(4)){
-            case 1:
-                this.profession = new Warrior();
-                break;
-            case 2:
-                this.profession = new Mage();
-                break;
-            case 3:
-                this.profession = new Archer();
-                break;
+        switch (r.nextInt(1,3)) {
+            case 1 -> this.profession = new Warrior();
+            case 2 -> this.profession = new Mage();
+            case 3 -> this.profession = new Archer();
         }
         this.profession.attributesInitiation(this);
     }
@@ -33,8 +27,7 @@ public class Enemy extends Character{
     }
     @Override
     public void attack(Character character, int skillNumber) {
-        Random r = new Random();
-        this.abilities[r.nextInt(4)].use(this, character);
+        character.setHealth(character.getHealth() - this.abilities[skillNumber].use(this, character));
     }
 
     @Override

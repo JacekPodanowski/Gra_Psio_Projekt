@@ -27,26 +27,26 @@ public class Skill {
             case 'S':
                 resist = character.getArmor().getStrengthProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getStrength());
-                if (this.bonus != 0)
-                    this.turnSetter(player);
+                if (this.bonus == 0)
+                    this.turnSetter(player, character);
                 break;
 
             case 'I':
                 resist = character.getArmor().getMagicProtection();
                 if (this.bonus == 0) {
                     reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
-                    this.turnSetter(player);
+                    this.turnSetter(player, character);
                 } else {
                     player.setHealth(player.getHealth() + this.bonus * 10);
-                    this.turnSetter(player);
+                    this.turnSetter(player, character);
                 }
                 break;
 
             case 'A':
                 resist = character.getArmor().getAgilityProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
-                if (this.bonus != 0)
-                    this.turnSetter(player);
+                if (this.bonus == 0)
+                    this.turnSetter(player, character);
                 break;
         }
             //==================================REZISTY==============================================
@@ -58,7 +58,7 @@ public class Skill {
 
         Random r = new Random();
         if(r.nextInt(100) > accuracy) {
-            System.out.println("Nie trafiasz");
+            System.out.print(", atak nie trafia");
             dmg = 0;
         }
         return dmg;
@@ -72,8 +72,11 @@ public class Skill {
             reqDmgMultiplier = 1 + (req - attribute) / 10.0;
         return reqDmgMultiplier;
     }
-    public void turnSetter(Character player){
-        player.setPlayerTurn(!player.isPlayerTurn());
+    public void turnSetter(Character character, Character character1){
+        if(character instanceof Player)
+            character.setPlayerTurn(!character.isPlayerTurn());
+        else
+            character1.setPlayerTurn(!character1.isPlayerTurn());
     }
 
     @Override

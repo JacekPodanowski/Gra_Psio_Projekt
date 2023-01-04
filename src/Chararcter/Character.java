@@ -18,10 +18,12 @@ public abstract class Character {
     protected Item[] inventory;
     protected Skill[] abilities;
     protected Profession profession;
-    private boolean playerTurn;
+    private boolean playerTurn = true;
 
 
     public Character() {
+        this.armor = new Armor("Klata", 0, "żadna", 0, 0, 0);
+        this.weapon = new Weapon();
         this.inventory = null;
         this.gold = 0;
         this.level = 1;
