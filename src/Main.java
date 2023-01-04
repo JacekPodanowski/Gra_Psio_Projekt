@@ -36,6 +36,7 @@ public class Main {
                         saveWindow.setVisible(true);
 
                         break;
+
                     case 4:
                         System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
                         System.exit(0);
