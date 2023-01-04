@@ -1,7 +1,9 @@
 package Game;
 import Chararcter.Player;
+import Game.Event.Down;
 import Game.Event.Entrance;
 import Game.Event.Exit;
+import Game.Event.Up;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -20,12 +22,6 @@ public class Map {
     public Map(Player player,int size) {
         tabOfRoom = new Room[size][size];
         toExitRooms = new ArrayList<Room>();
-        generateMap(player);
-    }
-
-    public Map(int row, int col, Player player){
-        tabOfRoom = new Room[row][col];
-//        toExitRooms = new ArrayList<Room>();
         generateMap(player);
     }
     //==================================================================================================================
@@ -85,6 +81,7 @@ public class Map {
             roomTemp = RandRoomOnEdge(this.tabOfRoom);
             blindEnd1_Num = roomTemp.getNumRoom();
         }
+        FindRoomByNum(blindEnd1_Num,this.tabOfRoom).setEvent(new Up());
 
         // losowanie ślepego zaułku nr2
         roomTemp = RandRoomOnEdge(this.tabOfRoom);
@@ -94,6 +91,7 @@ public class Map {
             roomTemp = RandRoomOnEdge(this.tabOfRoom);
             blindEnd2_Num = roomTemp.getNumRoom();
         }
+        FindRoomByNum(blindEnd2_Num,this.tabOfRoom).setEvent(new Down());
 
 
         // Adjacency list dla przechowywania połączeń między numerami pokojów
@@ -169,6 +167,7 @@ public class Map {
         // tu szukamy najkrótszej ścieżki z pokoju ślepego zaułku do ścieżki toExit.
         // Dla łatwiejszego zrozumienia kodu nie wyrzucam powielanie na zewnątrz w oddzielną funkcję (Dla ślepego zaułka 1 i 2)
         source = blindEnd1_Num;
+
 
         ArrayList<Integer> toBlind1 = new ArrayList<>();
         for (int i = 1; i < toExit.size()-1; i++) {
@@ -278,6 +277,26 @@ public class Map {
         int row;
         int col;
 
+        if (random.nextBoolean()) {
+            row = 0;
+            col = random.nextInt(TabOfRoom.length);
+        } else {
+            row = random.nextInt(TabOfRoom.length);
+            col = TabOfRoom.length-1;
+        }
+
+        return TabOfRoom[row][col];
+    }
+
+    public static Room RandRoomOnEdge_Exit(Room [][] TabOfRoom,Room exit) {
+        Random random = new Random();
+        int row;
+        int col;
+
+        int exitRow=exit.getRowRoom();
+        int exitCol=exit.getColRoom();
+
+        if(exitRow==0)
         if (random.nextBoolean()) {
             row = 0;
             col = random.nextInt(TabOfRoom.length);
