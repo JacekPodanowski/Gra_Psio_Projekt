@@ -37,7 +37,9 @@ public class Skill {
                     reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
                     this.turnSetter(player, character);
                 } else {
+                    double health = player.getHealth();
                     player.setHealth(player.getHealth() + this.bonus * 10);
+                    System.out.print(", uleczono o " + (player.getHealth() - health));
                     this.turnSetter(player, character);
                 }
                 break;
