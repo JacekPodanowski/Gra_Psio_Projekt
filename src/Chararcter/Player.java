@@ -1,9 +1,10 @@
 package Chararcter;
 
 import Chararcter.Item.*;
-import Chararcter.Profession.Profession;
+import Chararcter.Profession.Archer;
+import Chararcter.Profession.Mage;
+import Chararcter.Profession.Warrior;
 import Game.Game;
-import Game.Map;
 
 public class Player extends Character {
 
@@ -11,23 +12,26 @@ public class Player extends Character {
     private int location_X;
     private long exp;
     private boolean alive = true;
-    private boolean playerTurn;
-    //private ability Abilities[];
-
 
     public Player(int size) {
         super();
         location_Y=0;
         location_X=size-1;
-        System.out.println("Wybierz profesje : ");
-        System.out.println("1- Pracownik fizyczny ");
-        //System.out.println("2- mag ognia (spawacz) ");
-        //System.out.println("3- jakis dzikus inny ");
-        Game.askForChoice(1);
-    }
-
-    public Player(int health, int strength, int agility, int intelligence, int gold, int level) {
-        super(health, strength, agility, intelligence, gold, level);
+        this.exp = 0;
+        System.out.println("Wybierz profesję: ");
+        System.out.println("1. Wojownik\t\t 2. Mag\t\t 3. Łucznik");
+        switch(Game.askForChoice(3)){
+            case 1:
+                this.profession = new Warrior();
+                break;
+            case 2:
+                this.profession = new Mage();
+                break;
+            case 3:
+                this.profession = new Archer();
+                break;
+        }
+        this.profession.attributesInitiation(this);
     }
 
     @Override
@@ -40,11 +44,11 @@ public class Player extends Character {
 
     @Override
     public void attack(Character character, int skillNumber) {
-
+        character.setHealth(getHealth() - abilities[skillNumber].use(this, character));
         //umiejetnosc[skillNumber].use(this.weapon.calculatedmg());
         //character.setHealth(getHealth() - umiejetnosc.use[skillNumber](this.weapon.calculatedmg);
     }
-    
+
     public void pickUpItem(Item item){
         boolean succes= false;
         for (int i = 0; i < inventory.length; i++) {
@@ -93,11 +97,10 @@ public class Player extends Character {
         this.alive = alive;
     }
 
-    public boolean isPlayerTurn() {
-        return playerTurn;
-    }
 
-    public void setPlayerTurn(boolean playerTurn) {
-        this.playerTurn = playerTurn;
+    @Override
+    public void setStrength(int strength){
+        this.strength = strength;
+        this.health = strength * 20;
     }
 }

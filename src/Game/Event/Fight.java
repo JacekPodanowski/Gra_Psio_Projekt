@@ -54,20 +54,19 @@ public class Fight implements Event{
                 System.out.println("Wybierz umiejętność, którą chcesz go zaatakować: \n" +
                         "1. Umiejętność 1\t\t2. Umiejętność 2\t\t3. Umiejętność 3\t\t 4. Umiejętność 4");
                 int wybor = Game.askForChoice();
+                double enemyHealth = this.enemy.getHealth();
                 System.out.print("Użyłeś umięjętności " + wybor);
                 player.attack(enemy, wybor);
-                System.out.println(" i zadałeś " + "x" + " obrażeń.");
+                System.out.println(" i zadałeś " + (this.enemy.getHealth() - enemyHealth) + " obrażeń.");
                 //===== DO TESTOW ======
-                if(wybor == 1)
-                    player.setHealth(0);
-                if(wybor == 2)
-                    this.enemy.setHealth(0);
+//                if(wybor == 1)
+//                    player.setHealth(0);
+//                if(wybor == 2)
+//                    this.enemy.setHealth(0);
                 //uzywa umiejetnosci zaleznie od returna metody wyzej
-                player.setPlayerTurn(false);
             }
             else {
                 enemy.attack(player, generate.nextInt(1, 5));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
-                player.setPlayerTurn(true);
                 System.out.println("Przeciwnik atakuje cię i zadaje " + "x" + " obrażeń!\n");
             }
         }

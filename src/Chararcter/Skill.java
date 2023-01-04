@@ -17,7 +17,7 @@ public class Skill {
         this.bonus = bonus;
     }
 
-    public double Use(Player player, Enemy enemy){
+    public double use(Character player, Character character){
 
         double dmg;
         int resist = 0;
@@ -25,14 +25,14 @@ public class Skill {
 
         switch (player.getWeapon().getType()) {
             case 'S':
-                resist = enemy.getArmor().getStrengthProtection();
+                resist = character.getArmor().getStrengthProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getStrength());
                 if (this.bonus != 0)
                     this.turnSetter(player);
                 break;
 
             case 'I':
-                resist = enemy.getArmor().getMagicProtection();
+                resist = character.getArmor().getMagicProtection();
                 if (this.bonus == 0) {
                     reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
                     this.turnSetter(player);
@@ -43,7 +43,7 @@ public class Skill {
                 break;
 
             case 'A':
-                resist = enemy.getArmor().getAgilityProtection();
+                resist = character.getArmor().getAgilityProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
                 if (this.bonus != 0)
                     this.turnSetter(player);
@@ -63,7 +63,7 @@ public class Skill {
         }
         return dmg;
     }
-    public double reqDmgMultiplier(Player player, int attribute){
+    public double reqDmgMultiplier(Character player, int attribute){
         double reqDmgMultiplier = 1;
         int req = player.getWeapon().getRequirement();
         if (attribute < req) {
@@ -72,11 +72,8 @@ public class Skill {
             reqDmgMultiplier = 1 + (req - attribute) / 10.0;
         return reqDmgMultiplier;
     }
-    public void turnSetter(Player player){
-        if(player.isPlayerTurn())
-            player.setPlayerTurn(false);
-        else
-            player.setPlayerTurn(true);
+    public void turnSetter(Character player){
+        player.setPlayerTurn(!player.isPlayerTurn());
     }
 
     @Override
