@@ -1,7 +1,6 @@
 package Game;
 
 import Chararcter.Player;
-import Game.Event.EmptyRoom;
 import Observable.Subject;
 import Observers.Observer;
 import Observers.PlayerOnMapPosition;
@@ -12,7 +11,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game implements Serializable, Subject{
+public class Game implements Serializable, Subject, Observer{
     //============================================ ATRYBUTY KLASY ======================================================
     private int day;
     private Map map;
@@ -21,6 +20,7 @@ public class Game implements Serializable, Subject{
     private int startX;
     private int mapSize =5;// rozmiar mapy
     private ArrayList<Observer> observers = new ArrayList<Observer>();
+
 
     //==================================================================================================================
 
@@ -138,28 +138,34 @@ public class Game implements Serializable, Subject{
         this.map = null; //POWINNO LOSOWAĆ NOWĄ MAPĘ
         this.day = 0;
     }
-    public void saveGame(String nazwaSave){
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(nazwaSave));
-            writer.write("day" + '\t' + this.day);
-            writer.newLine();
-            writer.write("map" + '\t'); // POWINNO ZAPISAĆ CAŁĄ MAPĘ, JESZCZE NIE WIEM JAK, RACZEJ PRZEZ ZAPISANIE POSZCZEGÓLNYCH ELEMENTÓW MAPY, KAŻDĄ PO NEW LINE
-            //+Zapis postaci
-            writer.close();
-        }catch(IOException e){
-            System.out.println("Failed to save the progress." + e.getMessage());
+    public void saveGame(String filePath){
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));) {
+            outputStream.writeObject(this);
+        }catch (FileNotFoundException e){
+            System.out.println("Nie znalezione Pliku");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Coś się schrzaniło podczas zapisu" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-    public void loadGame(String nazwaSave){
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(nazwaSave));
-            this.day = Integer.parseInt(reader.readLine().split("\t")[1]);
-            //this.mapa.costam = reader.read(); - ma wczytac dane mapy zapisane wczesniej w saveGame
-            reader.close();
-        }catch(IOException e){
-            System.out.println("Nie udało się wczytać gry." + e.getMessage());
+
+    public static Game loadGame(String filePath){
+
+        Game game = null;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath))){
+            game = (Game) inputStream.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("Nie odnaleziono pliku");
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            System.out.println("Błąd podczas zapisu" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Podana klasa jest niepoprawna");
+            throw new RuntimeException(e);
         }
-    }
+        return game;}
+
     public static int askForChoice(){
         int choice;
         while(true) {
@@ -207,5 +213,11 @@ public class Game implements Serializable, Subject{
         for(int i = 0; i < observers.size(); i++)
             observers.get(i).update(this);
     }
+
+    @Override
+    public void update(Game game) {
+
+    }
+
     //==================================================================================================================
 }

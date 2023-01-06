@@ -1,9 +1,7 @@
 package Chararcter;
 
 import Chararcter.Item.*;
-import Chararcter.Profession.Profession;
 import Game.Game;
-import Game.Map;
 
 public class Player extends Character {
 

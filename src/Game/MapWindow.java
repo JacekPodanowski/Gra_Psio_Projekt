@@ -2,11 +2,8 @@
 
     import Map.Window.Interface.*;
 
-    import javax.imageio.ImageIO;
     import javax.swing.*;
     import java.awt.*;
-    import java.io.File;
-    import java.io.IOException;
 
     public class MapWindow extends JDialog {
 
