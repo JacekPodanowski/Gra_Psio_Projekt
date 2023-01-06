@@ -1,4 +1,8 @@
+package View;
+
 import Game.Game;
+import Game.SaveLoadHelper;
+import SaveLoadStrategy.ISaveLoadStrategy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +18,16 @@ public class SaveLoadWindow extends JDialog {
     List<JButton> slots;
     ISaveLoadStrategy strategy;
     Game game;
+
+    boolean finishedSucceslyffly;
+
     public SaveLoadWindow(Game g, ISaveLoadStrategy strategy) {
 
         this.game = g;
         this.strategy = strategy;
         helper = new SaveLoadHelper();
         strategy.setSaver(helper);
+        finishedSucceslyffly = false;
 
         this.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         this.setSize(200, 300);
@@ -40,6 +48,7 @@ public class SaveLoadWindow extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     game = strategy.actionAfterClick(slots.indexOf(e.getSource()),game);
                     setVisible(false);
+                    finishedSucceslyffly = true;
                 }
             });
         }
@@ -47,5 +56,9 @@ public class SaveLoadWindow extends JDialog {
 
     public Game getGame() {
         return game;
+    }
+
+    public boolean isFinishedSucceslyffly() {
+        return finishedSucceslyffly;
     }
 }

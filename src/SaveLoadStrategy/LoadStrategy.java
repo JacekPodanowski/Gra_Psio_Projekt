@@ -1,8 +1,11 @@
+package SaveLoadStrategy;
+
 import Game.Game;
+import Game.SaveLoadHelper;
 
 import javax.swing.*;
 
-public class LoadStrategy implements ISaveLoadStrategy{
+public class LoadStrategy implements ISaveLoadStrategy {
 
     private SaveLoadHelper helper;
 
