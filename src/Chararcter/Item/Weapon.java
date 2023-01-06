@@ -55,5 +55,19 @@ public class Weapon extends Item{
                 '}';
     }
 
+    public boolean isUsed() {
+        return isUsed;
+    }
 
+    public char getType() {
+        return type;
+    }
+
+    public int getRequirement() {
+        return requirement;
+    }
+
+    public int getBasicDMG() {
+        return basicDMG;
+    }
 }
