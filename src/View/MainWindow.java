@@ -32,7 +32,7 @@ public class MainWindow extends JDialog implements Observer, Subject {
 
     public MainWindow() {
 
-        this.setSize(100, 100);
+        this.setSize(1280, 720);
 
         JPanel mainPanel = new JPanel();
         GridLayout mainGridLayout =  new GridLayout(1,2);

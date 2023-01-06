@@ -467,5 +467,32 @@ public class Map {
         }
         return roomsToGo;
     }
+
+    public RoomType[][] displayTheMapInGUI(Player player) {
+
+        RoomType [][]roomType = new RoomType[tabOfRoom.length][tabOfRoom.length];
+
+        for (int i = 0; i < tabOfRoom.length; i++) {
+            for (int j = 0; j < tabOfRoom[0].length; j++) {
+                int[] tab = {player.getLocation_X(), player.getLocation_Y()};
+
+                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
+                    roomType[i][j] = RoomType.withPlayer;
+
+                } else if(tabOfRoom[i][j].isVisited()) {
+                    roomType[i][j] = RoomType.visited;
+
+                } else if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()])) {
+                    roomType[i][j] = RoomType.available;
+
+                } else{
+                    roomType[i][j] = RoomType.empty;
+                }
+            }
+
+        }
+        return roomType;
+    }
+
 }
 //======================================================================================================================
