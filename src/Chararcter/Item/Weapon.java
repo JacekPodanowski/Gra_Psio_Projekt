@@ -1,7 +1,5 @@
 package Chararcter.Item;
 
-import java.util.Random;
-
 public class Weapon extends Item{
 
     protected boolean isUsed=false;
@@ -28,34 +26,26 @@ public class Weapon extends Item{
         this.basicDMG = basicDMG;
     }
 
-    public Weapon(String name, int value, char type, int requirement, int basicDMG) {
-        super(name, value);
-        this.type = type;
-        this.value = (int) (value*qualityTAb.get(quality));
-        if(qualityTAb.get(quality)>1){
-            this.requirement= (int) (requirement+qualityTAb.get(quality)*2);
-        }else if(qualityTAb.get(quality)==1) {
-            this.requirement=requirement;
-        }
-        else {
-            this.requirement= (int) (requirement*qualityTAb.get(quality));
-        }
-
-        this.basicDMG = (int) (basicDMG*qualityTAb.get(quality))+1;
-    }
+//    public Weapon(String name, int value, char type, int requirement, int basicDMG) {
+//        super(name, value);
+//        this.type = type;
+//        this.value = (int) (value* qualityTab.get(quality));
+//        if(qualityTab.get(quality)>1){
+//            this.requirement= (int) (requirement+ qualityTab.get(quality)*2);
+//        }else if(qualityTab.get(quality)==1) {
+//            this.requirement=requirement;
+//        }
+//        else {
+//            this.requirement= (int) (requirement* qualityTab.get(quality));
+//        }
+//
+//        this.basicDMG = (int) (basicDMG* qualityTab.get(quality))+1;
+//    }
 
 
     @Override
     public String toString() {
-        return "Weapon{" +
-                "isUsed=" + isUsed +
-                ", type=" + type +
-                ", requirement=" + requirement +
-                ", basicDMG=" + basicDMG +
-                ", name='" + name + '\'' +
-                ", value=" + value +
-                ", quality='" + quality + '\'' +
-                '}';
+        return quality+" "+name;
     }
 
     public boolean isUsed() {
@@ -73,4 +63,5 @@ public class Weapon extends Item{
     public int getBasicDMG() {
         return basicDMG;
     }
+
 }

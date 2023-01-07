@@ -9,17 +9,6 @@ import View.SaveLoadWindow;
 public class Main {
     public static void main (String[] args){
 
-        Weapon w = new Weapon("mlot",5,'S',20,2);
-        Weapon w1 = new Weapon("mlot",5,'S',20,2);
-        Weapon w2 = new Weapon("mlot",5,'S',20,2);
-        Weapon w3 = new Weapon("mlot",5,'S',20,2);
-        Weapon w4 = new Weapon("mlot",5,'S',20,2);
-        System.out.println(w.toString());
-        System.out.println(w1.toString());
-        System.out.println(w2.toString());
-        System.out.println(w3.toString());
-        System.out.println(w4.toString());
-
 
         //Tworzę sobie uchyt
         Game g1 = null;

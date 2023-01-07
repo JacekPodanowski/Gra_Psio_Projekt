@@ -1,15 +1,13 @@
 package Game;
 
+import Chararcter.Item.*;
 import Chararcter.Player;
 import Observable.Subject;
 import Observers.Observer;
 import Observers.PlayerOnMapPosition;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game implements Serializable, Subject, Observer{
     //============================================ ATRYBUTY KLASY ======================================================
@@ -20,6 +18,12 @@ public class Game implements Serializable, Subject, Observer{
     private int startX;
     private int mapSize =5;// rozmiar mapy
     private ArrayList<Observer> observers = new ArrayList<Observer>();
+
+    public ArrayList<Item> basicItems;
+    public ArrayList<Weapon> basicWepons=new ArrayList<>();
+    public ArrayList<Armor> basicArmors=new ArrayList<>();
+    public ArrayList<Potion> basicPotions=new ArrayList<>();
+    public ArrayList<Item> allItems=new ArrayList<>();
 
 
     //==================================================================================================================
@@ -115,6 +119,7 @@ public class Game implements Serializable, Subject, Observer{
 
     //============================================= METODY KLASY =======================================================
     public void startGame(){
+        generateItems();
         System.out.println("Aby wejść do kostki wpisz 1");
         int wybor = askForChoice();
         if(wybor == 1)
@@ -221,5 +226,50 @@ public class Game implements Serializable, Subject, Observer{
 
     }
 
+    public void generateItems(){
+        java.util.Map qualityTab =makeQualityTab();
+
+        //Bron Archer
+        Weapon weapon0 =new Weapon("Proca", 5,"Zwykły", 'A', 8, 5);
+        basicWepons.add(weapon0);
+
+        Weapon weapon1 =new Weapon("Kusza Bojowa", 10, "rzadki", 'A', 15, 8);
+        Weapon weapon2 =new Weapon("Długi Łuk", 12, "rzadki", 'A', 15, 8);
+        Weapon weapon3 =new Weapon("Harpun", 30, "legendarny", 'A', 20, 13);
+        Weapon weapon4 =new Weapon("Rakietnica", 25, "legendarny", 'A', 20, 13);
+
+        //Bron Mage
+        Weapon weapon5 =new Weapon("Kule", 5, "pospolity", 'I', 8, 5);
+        Weapon weapon6 =new Weapon("Różdżka losu", 10, "rzadki", 'I', 15, 8);
+        Weapon weapon7 =new Weapon("Kostur kryształowy", 12, "rzadki", 'I', 15, 8);
+        Weapon weapon8 =new Weapon("Korzeń zła", 30, "legendarny", 'I', 20, 13);
+        Weapon weapon9 =new Weapon("Palec mrozu", 25, "legendarny", 'I', 20, 13);
+
+        //Bron Warrior
+        Weapon weapon10 =new Weapon("Miecz zabawka", 5, "pospolity", 'S', 8, 5);
+        Weapon weapon11 =new Weapon("Tasak", 10, "rzadki", 'S', 15, 8);
+        Weapon weapon12 =new Weapon("Sztylet srebrny", 12, "rzadki", 'S', 15, 8);
+        Weapon weapon13 =new Weapon("Długi miecz", 30, "legendarny", 'S', 20, 13);
+        Weapon weapon14 =new Weapon("Palec mrozu", 25, "legendarny", 'S', 20, 13);
+
+        for (int i = 0; i < basicWepons.size(); i++) {
+            for (int j = 0; j < 8; j++) {
+                allItems.add(new Weapon(basicWepons.get(i).getName(), basicWepons.get(i).getValue(), (String) qualityTab.keySet().toArray()[j],basicWepons.get(i).getType(),basicWepons.get(i).getRequirement(),basicWepons.get(i).getBasicDMG()));
+            }
+        }
+        //System.out.println(allItems);
+    }
+    public java.util.Map makeQualityTab(){
+        java.util.Map<String, Double> qualityTab = new TreeMap<>();
+        qualityTab.put("Zdewastowany",0.25);
+        qualityTab.put("Lichy",0.5);
+        qualityTab.put("Stary",0.75);
+        qualityTab.put("Zwykły",1.0);
+        qualityTab.put("Solidny",1.25);
+        qualityTab.put("Dorodny",1.5);
+        qualityTab.put("Perfekcyjny",1.75);
+        qualityTab.put("Mityczny",2.0);
+        return qualityTab;
+    }
     //==================================================================================================================
 }

@@ -69,9 +69,9 @@ public class Skill {
         double reqDmgMultiplier = 1;
         int req = player.getWeapon().getRequirement();
         if (attribute < req) {
-            reqDmgMultiplier = 1 - (req - attribute) / 10.0;
+            reqDmgMultiplier = 1 - (req - attribute) / 100.0;
         } else
-            reqDmgMultiplier = 1 + (req - attribute) / 10.0;
+            reqDmgMultiplier = 1 + (attribute - req) / 100.0;
         return reqDmgMultiplier;
     }
     public void turnSetter(Character character, Character character1){
