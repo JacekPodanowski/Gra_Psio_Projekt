@@ -26,7 +26,7 @@ public class Up implements Event {
                     for(int i = 0; i < player.getInventory().length; i++)
                         System.out.println(player.getInventory()[i].toString());
                     int itemNumber = Game.askForChoice();
-                    player.getInventory()[itemNumber].useItem();
+                    //player.getInventory()[itemNumber].useItem();
                     System.out.println("Użyto przedmiotu " + player.getInventory()[itemNumber].toString());
                     break;
                 default:

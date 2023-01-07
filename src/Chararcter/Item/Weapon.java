@@ -28,22 +28,6 @@ public class Weapon extends Item{
     }
 
     @Override
-    public void useItem() {
-
-    }
-
-    public double calculatedmg(){
-        //podstawowy atak postaci, liczy damage
-        double damage = basicDMG;
-        switch(this.type) {
-            case 'S': //sila
-               // damage = basicDMG *
-
-        }
-        return damage;
-    }
-
-    @Override
     public String toString() { //jak sie znajdzie bron to sie odpali'n to
         return "Weapon{" +
                 "type='" + type + '\'' +

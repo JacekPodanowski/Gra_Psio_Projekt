@@ -18,6 +18,7 @@ public class Player extends Character {
         location_Y=0;
         location_X=size-1;
         this.exp = 0;
+        this.getInventory()[0]=new Potion("Woda",0,"Zwykła",10);
         System.out.println("Wybierz profesję: ");
         System.out.println("1. Wojownik\t\t 2. Mag\t\t 3. Łucznik");
         switch(Game.askForChoice(3)){
@@ -62,6 +63,53 @@ public class Player extends Character {
             System.out.println("Ekwipunek pelny");
         }
     }
+
+    public void displayInventoryAndUse() {
+        System.out.println("W ekipunku masz: ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null) {
+                System.out.println(i+1 + ". " + inventory[i].toString());
+            }
+            else {
+                System.out.println(i+1 +". -----");
+            }
+        }
+        System.out.println("6. Wyjdź\n");
+        System.out.println("Czego chcesz użyć ?");
+
+        try {
+            while (true){
+                int choice = Game.askForChoice(6)-1;
+                if(inventory[choice]!=null){
+
+                    System.out.println("Użyłeś " + inventory[choice].toString());
+
+                    if(inventory[choice] instanceof Potion){
+                        health=health+((Potion) inventory[choice]).getHealing();
+                        System.out.println("Mikstura uleczeła cie o : "+ ((Potion) inventory[choice]).getHealing());
+                        inventory[choice]=null;
+                    }
+                    if(inventory[choice] instanceof Weapon){
+                        Weapon temp = weapon;
+                        weapon= (Weapon) inventory[choice];
+                        inventory[choice]=temp;
+                        System.out.println("Wyposazyłes "+weapon.toString());
+                    }
+                    if(inventory[choice] instanceof Armor){
+                        Armor temp = armor;
+                        armor= (Armor) inventory[choice];
+                        inventory[choice]=temp;
+                        System.out.println("Wyposazyłes "+armor.toString());
+                    }
+                    System.out.println();
+                    break;
+                }else {
+                    System.out.println("Wybierz właściwy numer");
+                }
+            }
+        }catch (IndexOutOfBoundsException e){}
+    }
+
 
 
 //===========================================================SETERY I GETERY=====================================================================================

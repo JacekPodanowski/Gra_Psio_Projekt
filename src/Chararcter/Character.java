@@ -24,7 +24,7 @@ public abstract class Character {
     public Character() {
         this.armor = new Armor("Klata", 0, "żadna", 0, 0, 0);
         this.weapon = new Weapon();
-        this.inventory = null;
+        this.inventory = new Item[5];
         this.gold = 0;
         this.level = 1;
         addBasicAttacks();

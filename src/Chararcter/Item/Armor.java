@@ -14,12 +14,6 @@ public class Armor extends Item{
         AgilityProtection = agilityProtection;
     }
 
-    @Override
-    public void useItem() {
-        //isUsed=true; moze to do playera bo jak wyrzucic akutalny przedmiot stąd
-
-    }
-
     public int getStrengthProtection() {
         return StrengthProtection;
     }

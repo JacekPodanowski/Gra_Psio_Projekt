@@ -36,5 +36,8 @@ public abstract class Item {
         this.quality = quality;
     }
 
-    public abstract void useItem();
+    @Override
+    public String toString() {
+        return quality +" " + name;
+    }
 }
