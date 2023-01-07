@@ -1,5 +1,7 @@
 package Chararcter.Item;
 
+import java.util.Random;
+
 public class Weapon extends Item{
 
     protected boolean isUsed=false;
@@ -24,13 +26,30 @@ public class Weapon extends Item{
         this.type = type;
         this.requirement = requirement;
         this.basicDMG = basicDMG;
-
     }
 
+    public Weapon(String name, int value, char type, int requirement, int basicDMG) {
+        super(name, value);
+        this.type = type;
+        this.value = (int) (value*qualityTAb.get(quality));
+        if(qualityTAb.get(quality)>1){
+            this.requirement= (int) (requirement+qualityTAb.get(quality)*2);
+        }else if(qualityTAb.get(quality)==1) {
+            this.requirement=requirement;
+        }
+        else {
+            this.requirement= (int) (requirement*qualityTAb.get(quality));
+        }
+
+        this.basicDMG = (int) (basicDMG*qualityTAb.get(quality))+1;
+    }
+
+
     @Override
-    public String toString() { //jak sie znajdzie bron to sie odpali'n to
+    public String toString() {
         return "Weapon{" +
-                "type='" + type + '\'' +
+                "isUsed=" + isUsed +
+                ", type=" + type +
                 ", requirement=" + requirement +
                 ", basicDMG=" + basicDMG +
                 ", name='" + name + '\'' +
