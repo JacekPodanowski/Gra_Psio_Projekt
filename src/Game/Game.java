@@ -231,8 +231,6 @@ public class Game implements Serializable, Subject, Observer{
 
         //Bron Archer
         Weapon weapon0 =new Weapon("Proca", 5,"Zwykły", 'A', 8, 5);
-        basicWepons.add(weapon0);
-
         Weapon weapon1 =new Weapon("Kusza Bojowa", 10, "rzadki", 'A', 15, 8);
         Weapon weapon2 =new Weapon("Długi Łuk", 12, "rzadki", 'A', 15, 8);
         Weapon weapon3 =new Weapon("Harpun", 30, "legendarny", 'A', 20, 13);
@@ -252,11 +250,72 @@ public class Game implements Serializable, Subject, Observer{
         Weapon weapon13 =new Weapon("Długi miecz", 30, "legendarny", 'S', 20, 13);
         Weapon weapon14 =new Weapon("Palec mrozu", 25, "legendarny", 'S', 20, 13);
 
+        basicWepons.add(weapon0);
+        basicWepons.add(weapon1);
+        basicWepons.add(weapon2);
+        basicWepons.add(weapon3);
+        basicWepons.add(weapon4);
+        basicWepons.add(weapon5);
+        basicWepons.add(weapon6);
+        basicWepons.add(weapon7);
+        basicWepons.add(weapon8);
+        basicWepons.add(weapon9);
+        basicWepons.add(weapon10);
+        basicWepons.add(weapon11);
+        basicWepons.add(weapon12);
+        basicWepons.add(weapon13);
+        basicWepons.add(weapon14);
+
         for (int i = 0; i < basicWepons.size(); i++) {
             for (int j = 0; j < 8; j++) {
                 allItems.add(new Weapon(basicWepons.get(i).getName(), basicWepons.get(i).getValue(), (String) qualityTab.keySet().toArray()[j],basicWepons.get(i).getType(),basicWepons.get(i).getRequirement(),basicWepons.get(i).getBasicDMG()));
             }
         }
+
+        //Armor na Archer
+        Armor armor0 =new Armor("Płaszcz", 5,"Zwykły",5, 5, 10);
+        Armor armor1 =new Armor("Narzuta", 7,"Zwykły",3, 6, 9);
+        Armor armor2 =new Armor("Jesionka", 10,"Zwykły",6, 9, 12);
+        Armor armor3 =new Armor("Kurtka", 6,"Zwykły",2, 8, 9);
+        Armor armor4 =new Armor("Szmata", 11,"Zwykły",1, 2, 15);
+
+        //Armor na Mage
+        Armor armor5 =new Armor("Peleryna", 5,"Zwykły",5, 10, 5);
+        Armor armor6 =new Armor("Kapa", 7,"Zwykły",3, 9, 6);
+        Armor armor7 =new Armor("Szata", 10,"Zwykły",6, 12, 9);
+        Armor armor8 =new Armor("Alba", 6,"Zwykły",2, 9, 8);
+        Armor armor9 =new Armor("Szlafrok", 11,"Zwykły",1, 15, 2);
+
+        //Armor na Warrior
+        Armor armor10 =new Armor("Kosz", 5,"Zwykły",10, 5, 5);
+        Armor armor11 =new Armor("Bęben", 7,"Zwykły",9, 3, 6);
+        Armor armor12 =new Armor("Pancerz", 10,"Zwykły",12, 9, 6);
+        Armor armor13 =new Armor("Skorupa", 6,"Zwykły",9, 2, 8);
+        Armor armor14 =new Armor("Kostium", 11,"Zwykły",15, 2, 1);
+
+        basicArmors.add(armor0);
+        basicArmors.add(armor1);
+        basicArmors.add(armor2);
+        basicArmors.add(armor3);
+        basicArmors.add(armor4);
+        basicArmors.add(armor5);
+        basicArmors.add(armor6);
+        basicArmors.add(armor7);
+        basicArmors.add(armor8);
+        basicArmors.add(armor9);
+        basicArmors.add(armor10);
+        basicArmors.add(armor11);
+        basicArmors.add(armor12);
+        basicArmors.add(armor13);
+        basicArmors.add(armor14);
+
+        for (int i = 0; i < basicArmors.size(); i++) {
+            for (int j = 0; j < 8; j++) {
+                allItems.add(new Armor(basicArmors.get(i).getName(),basicArmors.get(i).getValue(),(String) qualityTab.keySet().toArray()[j],basicArmors.get(i).getStrengthProtection(),basicArmors.get(i).getMagicProtection(),basicArmors.get(i).getAgilityProtection()));
+            }
+        }
+
+
         //System.out.println(allItems);
     }
     public java.util.Map makeQualityTab(){

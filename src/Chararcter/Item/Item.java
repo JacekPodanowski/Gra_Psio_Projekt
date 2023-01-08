@@ -19,13 +19,13 @@ public abstract class Item {
         this.quality = quality;
     }
 
-//    public Item(String name, int value) {//losuje sie jakosc
-//        setQualityTab();
-//        Random r = new Random();
-//        this.name = name;
-//        this.value = value;
-//        this.quality= (String) qualityTab.keySet().toArray()[r.nextInt(8)];
-//    }
+    public Item(String name, int value) {//losuje sie jakosc
+        setQualityTab();
+        Random r = new Random();
+        this.name = name;
+        this.value = value;
+        this.quality= (String) qualityTab.keySet().toArray()[r.nextInt(8)];
+    }
 
     public String getName() {
         return name;
