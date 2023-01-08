@@ -6,6 +6,7 @@ import Game.Event.Exit;
 import Game.Event.Up;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -74,7 +75,8 @@ public class Map {
         this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent(new Exit());
 
         // losowanie ślepego zaułku nr1
-        roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        // jeśli wyjście jest na górnej granicy, to zaułki są na prawej. W przeciwnym przypadku podobnie
+        roomTemp = RandRoomOnEdge(this.tabOfRoom, FindRoomByNum(exitNum, this.tabOfRoom));
         int blindEnd1_Num = roomTemp.getNumRoom();
         // jeśli się powtarza, to losowanie jesczsze raz
         while (blindEnd1_Num == exitNum) {
@@ -84,7 +86,7 @@ public class Map {
         FindRoomByNum(blindEnd1_Num,this.tabOfRoom).setEvent(new Up());
 
         // losowanie ślepego zaułku nr2
-        roomTemp = RandRoomOnEdge(this.tabOfRoom);
+        roomTemp = RandRoomOnEdge(this.tabOfRoom, FindRoomByNum(exitNum, this.tabOfRoom));
         int blindEnd2_Num = roomTemp.getNumRoom();
         // jeśli się powtarza, to losowanie jesczsze raz
         while (blindEnd2_Num == exitNum || blindEnd2_Num == blindEnd1_Num) {
@@ -159,18 +161,21 @@ public class Map {
         // wywołanie metody "findshortestdistance" i przepisanie wynikowej ścieżki z LinkedList to ArrayList
         ArrayList<Integer> toExit = new ArrayList<>();
         toExit.addAll(findShortestDistance(adj, source, destination, numRoom));
+        Collections.reverse(toExit);
 
         // skasowanie ścieżek przejścia z pokoju wyjściowego dla tego, żeby zaułki się generowały nie przez exit
         adj.get(exitNum).clear();
 
 
-        // tu szukamy najkrótszej ścieżki z pokoju ślepego zaułku do ścieżki toExit.
+
+        // tu szukamy najkrótszej ścieżki z pokoju ślepego zaułku do pierwszych czterech pokoi z toExit.
         // Dla łatwiejszego zrozumienia kodu nie wyrzucam powielanie na zewnątrz w oddzielną funkcję (Dla ślepego zaułka 1 i 2)
+
         source = blindEnd1_Num;
 
 
         ArrayList<Integer> toBlind1 = new ArrayList<>();
-        for (int i = 1; i < toExit.size()-1; i++) {
+        for (int i = 0; i < 5; i++) {
             destination = toExit.get(i);
 
             LinkedList<Integer> pathRoom = findShortestDistance(adj, source, destination, numRoom);
@@ -186,7 +191,7 @@ public class Map {
         source = blindEnd2_Num;
 
         ArrayList<Integer> toBlind2 = new ArrayList<>();
-        for (int i = 1; i < toExit.size()-1; i++) {
+        for (int i = 0; i < 5; i++) {
             destination = toExit.get(i);
 
             LinkedList<Integer> pathRoom = findShortestDistance(adj, source, destination, numRoom);
@@ -288,25 +293,25 @@ public class Map {
         return TabOfRoom[row][col];
     }
 
-//    public static Room RandRoomOnEdge_Exit(Room [][] TabOfRoom,Room exit) {
-//        Random random = new Random();
-//        int row;
-//        int col;
-//
-//        int exitRow=exit.getRowRoom();
-//        int exitCol=exit.getColRoom();
-//
-//        if(exitRow==0)
-//        if (random.nextBoolean()) {
-//            row = 0;
-//            col = random.nextInt(TabOfRoom.length);
-//        } else {
-//            row = random.nextInt(TabOfRoom.length);
-//            col = TabOfRoom.length-1;
-//        }
-//
-//        return TabOfRoom[row][col];
-//    }
+    // metoda dla ślepych zaułków, do generowania na innej stronie, niż wyjście
+    public static Room RandRoomOnEdge(Room [][] TabOfRoom,Room exit) {
+        Random random = new Random();
+        int row;
+        int col;
+
+        int exitRow=exit.getRowRoom();
+        int exitCol=exit.getColRoom();
+
+        if(exitRow != 0) {
+            row = 0;
+            col = random.nextInt(TabOfRoom.length);
+        } else {
+            row = random.nextInt(TabOfRoom.length);
+            col = TabOfRoom.length-1;
+        }
+
+        return TabOfRoom[row][col];
+    }
 
     // metoda wyszukania pokoju wedlug numera pokoju
     public static Room FindRoomByNum(int numR, Room [][] TabOfRoom) {
@@ -346,10 +351,9 @@ public class Map {
         // LinkedList to store path
         LinkedList<Integer> path = new LinkedList<Integer>();
 
-        if (BFS(adj, source, destination, v, pred, dist) == false) {
-            System.out.println("Given source and destination" +
-                    "are not connected");
-            return path;
+        boolean check = BFS(adj, source, destination, v, pred, dist);
+        while (check == false) {
+            check = BFS(adj, source, destination, v, pred, dist);
         }
 
         // wypisanie ścieżki
@@ -405,19 +409,43 @@ public class Map {
         queue.add(src);
 
         // bfs Algorithm
-        while (!queue.isEmpty()) {
-            int u = queue.remove();
-            for (int i = 0; i < adj.get(u).size(); i++) {
-                if (visited[adj.get(u).get(i)] == false) {
-                    visited[adj.get(u).get(i)] = true;
-                    dist[adj.get(u).get(i)] = dist[u] + 1;
-                    pred[adj.get(u).get(i)] = u;
-                    queue.add(adj.get(u).get(i));
+        Random random = new Random();
+        boolean isReverseLoop = random.nextBoolean();
 
-                    // stopping condition (when we find
-                    // our destination)
-                    if (adj.get(u).get(i) == dest)
-                        return true;
+        if (isReverseLoop) {
+            while (!queue.isEmpty()) {
+                int u = queue.remove();
+
+                for (int i = 0; i < adj.get(u).size(); i++) {
+                    if (visited[adj.get(u).get(i)] == false) {
+                        visited[adj.get(u).get(i)] = true;
+                        dist[adj.get(u).get(i)] = dist[u] + 1;
+                        pred[adj.get(u).get(i)] = u;
+                        queue.add(adj.get(u).get(i));
+
+                        // stopping condition (when we find
+                        // our destination)
+                        if (adj.get(u).get(i) == dest)
+                            return true;
+                    }
+                }
+            }
+        } else {
+            while (!queue.isEmpty()) {
+                int u = queue.remove();
+
+                for (int i = adj.get(u).size()-1; i > -1; i--) {
+                    if (visited[adj.get(u).get(i)] == false) {
+                        visited[adj.get(u).get(i)] = true;
+                        dist[adj.get(u).get(i)] = dist[u] + 1;
+                        pred[adj.get(u).get(i)] = u;
+                        queue.add(adj.get(u).get(i));
+
+                        // stopping condition (when we find
+                        // our destination)
+                        if (adj.get(u).get(i) == dest)
+                            return true;
+                    }
                 }
             }
         }
