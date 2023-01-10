@@ -20,10 +20,7 @@ public class Main {
         } else {
 
         }
-
-        int choice = 0;
-
-            while(choice!=4){
+            while(true){
                 System.out.println("Witaj w grze: Proba Ucieczki Z Kostki");
                 System.out.print("1. Rozpocznij nową gre\t\t");
                 System.out.print("2. Wczytaj zapisaną gre\t\t");
@@ -53,7 +50,8 @@ public class Main {
                         System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
                         System.exit(0);
                         break;
-                }}
+                }
+            }
 
         /*/
         Player P1 = new Player(100,1,10,1,0,1);
