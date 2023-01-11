@@ -6,53 +6,41 @@ public class Weapon extends Item{
     protected char type; // S = siła, I = inteligencja, A - zręczność
     protected int requirement;
     protected int basicDMG;
-    //protected String use;
 
-
-    //protected String luck; to powinno iść do walki
 
     public Weapon(){
-        super("Ręce", 0, "pospolity");
+        super("Dłoń", 0, "Twoja");
         isUsed = true;
         type = 'S';
         requirement = 0;
         basicDMG = 5;
     }
 
+//    public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG) {
+//        super(name, value, quality);
+//        this.type = type;
+//        this.requirement = requirement;
+//        this.basicDMG = basicDMG;
+//    }
+
     public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG) {
-        super(name, value, quality);
+        super(name, value,quality);
         this.type = type;
-        this.requirement = requirement;
-        this.basicDMG = basicDMG;
-
-    }
-
-    @Override
-    public void useItem() {
-
-    }
-
-    public double calculatedmg(){
-        //podstawowy atak postaci, liczy damage
-        double damage = basicDMG;
-        switch(this.type) {
-            case 'S': //sila
-               // damage = basicDMG *
-
+        this.value = (int) (value* qualityTab.get(quality));
+        if(qualityTab.get(quality)>1){
+            this.requirement= (int) (requirement + qualityTab.get(quality)*requirement/5);
+        }else if(qualityTab.get(quality)==1) {
+            this.requirement=requirement;
         }
-        return damage;
+        else {
+            this.requirement= (int) (requirement* qualityTab.get(quality));
+        }
+
+        this.basicDMG = (int) (basicDMG* qualityTab.get(quality))+1;
     }
 
-    @Override
-    public String toString() { //jak sie znajdzie bron to sie odpali'n to
-        return "Weapon{" +
-                "type='" + type + '\'' +
-                ", requirement=" + requirement +
-                ", basicDMG=" + basicDMG +
-                ", name='" + name + '\'' +
-                ", value=" + value +
-                ", quality='" + quality + '\'' +
-                '}';
+    public void showStats() {
+        System.out.println(super.toString()+" Wartość : "+value+" dmg : "+basicDMG +" wymaganie : "+ requirement);
     }
 
     public boolean isUsed() {
@@ -70,4 +58,5 @@ public class Weapon extends Item{
     public int getBasicDMG() {
         return basicDMG;
     }
+
 }

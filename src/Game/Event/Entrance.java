@@ -17,7 +17,7 @@ public class Entrance implements Event{
                     System.out.println("Niepewny co czeka cię za nimi otwierasz je i przez nie przechodzisz.");
                     break;
                 case 2:
-                    player.displayInventory();
+                    player.displayInventoryAndUse();
                     break;
                 default:
                     System.out.println("Niepoprawna opcja!");

@@ -63,6 +63,7 @@ public class MainWindow extends JFrame implements Subject {
         mainPanel.add(upPanel);
         mainPanel.add(downPanel);
 
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -81,7 +82,7 @@ public class MainWindow extends JFrame implements Subject {
 
                 } else if (playerSelection == JOptionPane.NO_OPTION) {
                     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
+                    
                 } else setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         });

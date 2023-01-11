@@ -7,10 +7,10 @@ import Chararcter.Skill;
 public class Archer implements Profession{
     @Override
     public void attributesInitiation(Character character) {
-        character.setAgility(6);
-        character.setIntelligence(5);
-        character.setStrength(4);
-        character.setWeapon(new Weapon("Prosty łuk", 6, "pospolity", 'A', 8, 5));
+        character.setAgility(50);
+        character.setIntelligence(30);
+        character.setStrength(35);
+        character.setWeapon(new Weapon("Prosty łuk", 1, "Zwykły", 'A', 40, 5));
         this.specialAbility(character);
     }
 
