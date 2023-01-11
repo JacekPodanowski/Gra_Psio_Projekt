@@ -126,7 +126,7 @@ public class Game implements Serializable, Subject, Observer{
                     System.out.print((i+1)+" - ");
                     System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
                 }
-                System.out.println("Gdzie chesz iść ? ");
+                System.out.println("Gdzie chesz iść? ");
                 int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
                 int x = player.getLocation_X();
                 player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
@@ -173,8 +173,9 @@ public class Game implements Serializable, Subject, Observer{
         while(true) {
             Scanner input = new Scanner(System.in);
             try {
-                if ((choice = input.nextInt()) >= 1 && choice <= 4)
+                if ((choice = input.nextInt()) >= 1 && choice <= 4) {
                     break;
+                }
                 else
                     System.out.println("Niepoprawny wybór! Wybierz spośród 1-4.");
             }catch(InputMismatchException eeee){
@@ -189,8 +190,9 @@ public class Game implements Serializable, Subject, Observer{
         while(true) {
             Scanner input = new Scanner(System.in);
             try {
-                if ((choice = input.nextInt()) >= 1 && choice <= limit)
+                if ((choice = input.nextInt()) >= 1 && choice <= limit) {
                     break;
+                }
                 else
                     System.out.println("Niepoprawny wybór! Wybierz spośród 1 - " + limit);
             }catch(InputMismatchException eeee){

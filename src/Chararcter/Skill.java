@@ -1,19 +1,90 @@
 package Chararcter;
 
-import Chararcter.Item.Weapon;
+import java.util.Random;
 
 public class Skill {
 
-    private int bonus;
+
     private String name;
-    private int damageMultiPlayer;
+    private double damageMultiplier;
     private int accuracy;
-    private char type;
+    private int bonus;
 
-    //public
+    public Skill(String name, double damageMultiplier, int accuracy, int bonus) {
+        this.name = name;
+        this.damageMultiplier = damageMultiplier;
+        this.accuracy = accuracy;
+        this.bonus = bonus;
+    }
 
-    //public int Use(Player player, Enemy enemy){
+    public double use(Character player, Character character){
 
-    //}
+        double dmg;
+        int resist = 0;
+        double reqDmgMultiplier = 1;
 
+        switch (player.getWeapon().getType()) {
+            case 'S':
+                resist = character.getArmor().getStrengthProtection();
+                reqDmgMultiplier = this.reqDmgMultiplier(player, player.getStrength());
+                if (this.bonus == 0)
+                    this.turnSetter(player, character);
+                break;
+
+            case 'I':
+                resist = character.getArmor().getMagicProtection();
+                if (this.bonus == 0) {
+                    reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
+                    this.turnSetter(player, character);
+                } else {
+                    double health = player.getHealth();
+                    player.setHealth(player.getHealth() + this.bonus * 10);
+                    System.out.print(", uleczono o " + (player.getHealth() - health));
+                    this.turnSetter(player, character);
+                }
+                break;
+
+            case 'A':
+                resist = character.getArmor().getAgilityProtection();
+                reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
+                if (this.bonus == 0)
+                    this.turnSetter(player, character);
+                break;
+        }
+            //==================================REZISTY==============================================
+
+        int Basicdmg = player.getWeapon().getBasicDMG();
+        dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;
+        dmg = dmg * (1 - (double)(resist * 5) / 100);
+
+
+        Random r = new Random();
+        if(r.nextInt(100) > accuracy) {
+            System.out.print(", atak nie trafia");
+            dmg = 0;
+        }
+        return dmg;
+    }
+    public double reqDmgMultiplier(Character player, int attribute){
+        double reqDmgMultiplier = 1;
+        int req = player.getWeapon().getRequirement();
+        if (attribute < req) {
+            reqDmgMultiplier = 1 - (req - attribute) / 10.0;
+        } else
+            reqDmgMultiplier = 1 + (req - attribute) / 10.0;
+        return reqDmgMultiplier;
+    }
+    public void turnSetter(Character character, Character character1){
+        if(character instanceof Player)
+            character.setPlayerTurn(!character.isPlayerTurn());
+        else
+            character1.setPlayerTurn(!character1.isPlayerTurn());
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
+
+

@@ -9,12 +9,13 @@ public class Main {
     public static void main (String[] args){
 
         //Tworzę sobie uchyt
-        Game g1 = null;
+        Game g1 = new Game();
 
-        MainWindow mainWindow = new MainWindow();
+        MainWindow mainWindow = new MainWindow(g1);
         mainWindow.setModal(true);
         mainWindow.setAlwaysOnTop(true);
         mainWindow.setVisible(true);
+
 
 
         int choice = 0;
@@ -50,6 +51,7 @@ public class Main {
                         System.exit(0);
                         break;
                 }}
+
 
         /*/
         Player P1 = new Player(100,1,10,1,0,1);
