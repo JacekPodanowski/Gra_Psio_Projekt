@@ -21,12 +21,13 @@ public class Game implements Serializable, Subject{
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private MainWindow mainWindow;
 
+    private String text;
+    private int choice;
     public ArrayList<Item> basicItems;
     public ArrayList<Weapon> basicWepons=new ArrayList<>();
     public ArrayList<Armor> basicArmors=new ArrayList<>();
     public ArrayList<Potion> basicPotions=new ArrayList<>();
     public ArrayList<Item> allItems=new ArrayList<>();
-
 
     //==================================================================================================================
 
@@ -38,9 +39,7 @@ public class Game implements Serializable, Subject{
         player = new Player(mapSize);
         map = new Map(this.player,mapSize);
         map.displayMapFloor(1);
-        this.registerObserver(new PlayerOnMapPosition());
         System.out.println("\nRozpocząłeś nową grę!\n\n");
-        //this.startGame();
     }
     public Game(int day, Player player,Map map){
         this.day = day;
@@ -115,14 +114,32 @@ public class Game implements Serializable, Subject{
     public void setObservers(ArrayList<Observer> observers) {
         this.observers = observers;
     }
+
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     //==================================================================================================================
 
 
 
     //============================================= METODY KLASY =======================================================
     public void startGame(){
+       
+        notifyObservers();
         generateItems();
-        System.out.println("Aby wejść do kostki wpisz 1");
+        text = "Aby wejść do kostki wpisz 1.";
         int wybor = askForChoice();
         if(wybor == 1)
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
@@ -206,13 +223,13 @@ public class Game implements Serializable, Subject{
         }
         return choice;
     }
-
+/*   NIE DZIAŁA
     public int askForChoiceTextField(){
         while(!mainWindow.isAnswer()){}
         String anwser = mainWindow.gAnswerChar()+"";
         return Integer.parseInt(anwser);
     }
-
+*/
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);

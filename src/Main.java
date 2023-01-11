@@ -1,10 +1,12 @@
+
+import Observers.PlayerOnMapPosition;
+
 import Chararcter.Item.Armor;
 import Chararcter.Item.Weapon;
 import Game.*;
 import SaveLoadStrategy.LoadStrategy;
 import SaveLoadStrategy.SaveStrategy;
 import View.MainWindow;
-import View.SaveLoadWindow;
 
 
 public class Main {
@@ -14,7 +16,9 @@ public class Main {
         //Tworzę sobie uchyt
         Game g1 = null;
 
-        new MainWindow().setVisible(true);
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.setVisible(true);
+        new PlayerOnMapPosition(mainWindow.getGame(), mainWindow);
 
         int choice = 0;
 
