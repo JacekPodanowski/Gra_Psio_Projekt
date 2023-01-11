@@ -30,8 +30,8 @@ public class MainWindow extends JDialog implements Observer, Subject {
     boolean ifNewGame = false;
     Game game;
 
-    public MainWindow() {
-
+    public MainWindow(Game game) {
+        this.game = game;
         this.setSize(100, 100);
 
         JPanel mainPanel = new JPanel();
@@ -101,7 +101,6 @@ public class MainWindow extends JDialog implements Observer, Subject {
         }
 
         Map map = game.getMap();
-        RoomType[][] roomsType = map.displayTheMapInGUI(game.getPlayer());
 
 
         GridLayout gridLayout = new GridLayout(map.getTabOfRoom().length, map.getTabOfRoom().length);
@@ -109,17 +108,13 @@ public class MainWindow extends JDialog implements Observer, Subject {
 
         for (int i = 0; i < map.getTabOfRoom().length; i++) {
             for (int j = 0; j < map.getTabOfRoom().length; j++) {
-                switch (roomsType[i][j]) {
+                switch (game.getMap().getRoomTypes()[i][j]) {
                     case empty:
                         strategy = new ButtonEmpty();
                         strategy.createButton(rooms[i][j]);
                         break;
                     case visited:
                         strategy = new ButtonVisited();
-                        strategy.createButton(rooms[i][j]);
-                        break;
-                    case available:
-                        strategy = new ButtonAvaiable();
                         strategy.createButton(rooms[i][j]);
                         break;
                     case withPlayer:
@@ -131,6 +126,11 @@ public class MainWindow extends JDialog implements Observer, Subject {
                         strategy.createButton(rooms[i][j]);
                         break;
                 }
+                if(map.getTabOfRoom()[i][j].isAvailable()) {
+                    rooms[j][j].setEnabled(true);
+                }
+                else
+                    rooms[i][j].setEnabled(false);
                 gamePanel.add(rooms[i][j]);
             }
         }

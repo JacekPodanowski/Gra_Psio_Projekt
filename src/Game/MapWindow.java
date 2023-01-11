@@ -11,7 +11,7 @@
         Map map;
         IMapWindowStrategy strategy;
 
-        public MapWindow(RoomType[][] roomsType){
+        public MapWindow(Map map){
 
             this.setSize(100, 100);
 
@@ -22,7 +22,7 @@
 
             for(int i = 0; i< map.getTabOfRoom().length; i++){
                 for(int j = 0; j< map.getTabOfRoom().length; j++){
-                    switch(roomsType[i][j]){
+                    switch(map.getRoomTypes()[i][j]){
                         case empty:
                             strategy = new ButtonEmpty();
                             strategy.createButton(rooms[i][j]);
@@ -31,23 +31,21 @@
                             strategy = new ButtonVisited();
                             strategy.createButton(rooms[i][j]);
                             break;
-                        case available:
-                            strategy = new ButtonAvaiable();
-                            strategy.createButton(rooms[i][j]);
-                            break;
                         case withPlayer:
                             strategy = new ButtonWithPlayer();
                             strategy.createButton(rooms[i][j]);
-                        break;
-                    case hidden:
-                        strategy = new ButtonHidden();
-                        strategy.createButton(rooms[i][j]);
-                        break;
+                            break;
+                        case hidden:
+                            strategy = new ButtonHidden();
+                            strategy.createButton(rooms[i][j]);
+                            break;
+                    }
+                    if(map.getTabOfRoom()[i][j].isAvailable()) {
+                        rooms[j][j].setEnabled(true);
+                    }
+                    mainPanel.add(rooms[i][j]);
+                }
             }
-            mainPanel.add(rooms[i][j]);
-        }
-
-        }
         }
 
 }
