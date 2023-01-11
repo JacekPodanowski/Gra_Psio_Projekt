@@ -9,13 +9,13 @@ public class ButtonEmpty implements IMapWindowStrategy {
 
 
     @Override
-    public JButton createButton(JButton room) {
-        room = new JButton();
-        try {
-            room.setIcon(new ImageIcon(ImageIO.read(new File("empty.png"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public JButton createButton() {
+        JButton room = new JButton();
+//        try {
+//            room.setIcon(new ImageIcon(ImageIO.read(new File("empty.png"))));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return room;
     }

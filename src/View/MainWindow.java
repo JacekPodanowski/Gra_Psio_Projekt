@@ -3,7 +3,6 @@ package View;
 
 import Game.Game;
 import Game.Map;
-import Game.RoomType;
 import Map.Window.Interface.*;
 import Observable.Subject;
 import Observers.Observer;
@@ -34,6 +33,10 @@ public class MainWindow extends JDialog implements Observer, Subject{
     JTextField answerField;
     boolean answer;
     char answerChar;
+    private JPanel mapPanel;
+    private JPanel upPanel;
+    private JPanel downPanel;
+    private JPanel mainPanel;
 
 
     
@@ -42,18 +45,19 @@ public class MainWindow extends JDialog implements Observer, Subject{
         this.setSize(400, 400);
 
 
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,1));
         createMenuPanel();
 
-        JPanel upPanel = new JPanel();
+        upPanel = new JPanel();
         upPanel.setLayout(new GridLayout(1, 2));
         upPanel.add(new JButton("Okno danego pokoju"));
-        upPanel.add(createGamePanel());
+        upPanel.add(createMapPanel());
 
-        JPanel downPanel = new JPanel();
+        downPanel = new JPanel();
         downPanel.setLayout(new FlowLayout());
-        downPanel.add(createTextFieldPanel());
+        mapPanel = createTextFieldPanel();
+        downPanel.add(mapPanel);
 
         mainPanel.add(upPanel);
         mainPanel.add(downPanel);
@@ -84,51 +88,43 @@ public class MainWindow extends JDialog implements Observer, Subject{
         answer = false;
 
         setContentPane(mainPanel);
-        this.setModal(true);
         this.setAlwaysOnTop(true);
     }
 
-    private JPanel createGamePanel()
+    private JPanel createMapPanel()
     {
-        JPanel gamePanel = new JPanel();
+        JPanel mapPanel = new JPanel();
         if(game == null) {
-            return gamePanel;
+            return mapPanel;
         }
-
-        Map map = game.getMap();
-
-
-        gamePanel.setLayout(new GridLayout(map.getTabOfRoom().length, map.getTabOfRoom().length));
-
-        for (int i = 0; i < map.getTabOfRoom().length; i++) {
-            for (int j = 0; j < map.getTabOfRoom().length; j++) {
+        rooms = new JButton[game.getMap().getTabOfRoom().length][game.getMap().getTabOfRoom()[0].length];
+        mapPanel.setLayout(new GridLayout(game.getMap().getTabOfRoom().length, game.getMap().getTabOfRoom().length));
+        for (int i = 0; i < game.getMap().getTabOfRoom().length; i++) {
+            for (int j = 0; j < game.getMap().getTabOfRoom()[0].length; j++) {
                 switch (game.getMap().getRoomTypes()[i][j]) {
                     case empty:
                         strategy = new ButtonEmpty();
-                        gamePanel.add(strategy.createButton(rooms[i][j]));
+                        rooms[i][j] = strategy.createButton();
                         break;
                     case visited:
                         strategy = new ButtonVisited();
-                        gamePanel.add(strategy.createButton(rooms[i][j]));
+                        rooms[i][j] = strategy.createButton();
                         break;
                     case withPlayer:
                         strategy = new ButtonWithPlayer();
-                        gamePanel.add(strategy.createButton(rooms[i][j]));
+                        rooms[i][j] = strategy.createButton();
                         break;
                     case hidden:
                         strategy = new ButtonHidden();
-                        gamePanel.add(strategy.createButton(rooms[i][j]));
+                        rooms[i][j] = strategy.createButton();
                         break;
                 }
-                if(map.getTabOfRoom()[i][j].isAvailable()) {
-                    rooms[j][j].setEnabled(true);
-                }
-                else
-                    rooms[i][j].setEnabled(false);
-                gamePanel.add(rooms[i][j]);
+                mapPanel.add(rooms[i][j]);
+                rooms[i][j].setEnabled(game.getMap().getTabOfRoom()[i][j].isAvailable());
+                mapPanel.add(rooms[i][j]);
             }
         }
-        return gamePanel;
+        return mapPanel;
     }
 
     private void createMenuPanel(){
@@ -159,6 +155,10 @@ public class MainWindow extends JDialog implements Observer, Subject{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game = new Game();
+                game.notifyObservers();
+                upPanel.remove(mapPanel);
+                mapPanel = createMapPanel();
+                upPanel.add(mapPanel);
             }
         });
         jMenu.add(jMenuItemNewGame);

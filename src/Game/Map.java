@@ -24,6 +24,7 @@ public class Map {
         tabOfRoom = new Room[size][size];
         toExitRooms = new ArrayList<Room>();
         generateMap(player);
+        this.setRoomTypes(1, player);
     }
     //==================================================================================================================
 
@@ -489,6 +490,7 @@ public class Map {
         }
     }
     public void setRoomTypes(int floor, Player player) {
+        roomTypes = new RoomType[this.getTabOfRoom().length][this.getTabOfRoom()[0].length];
         for (int i = 0; i < tabOfRoom.length; i++) {
             for (int j = 0; j < tabOfRoom[0].length; j++) {
                 if(i == player.getLocation_X() && j == player.getLocation_Y()) {

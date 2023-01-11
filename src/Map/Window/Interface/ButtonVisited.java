@@ -7,14 +7,14 @@ import java.io.IOException;
 
 public class ButtonVisited implements IMapWindowStrategy{
     @Override
-    public JButton createButton(JButton room) {
-        room = new JButton();
+    public JButton createButton() {
+        JButton room = new JButton();
 
-        try {
-            room.setIcon(new ImageIcon(ImageIO.read(new File("visited.png"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            room.setIcon(new ImageIcon(ImageIO.read(new File("visited.png"))));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return room;
     }

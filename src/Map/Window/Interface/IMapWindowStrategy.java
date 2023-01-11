@@ -4,5 +4,5 @@ import javax.swing.*;
 
 public interface IMapWindowStrategy {
 
-    JButton createButton(JButton room);
+    JButton createButton();
 }
