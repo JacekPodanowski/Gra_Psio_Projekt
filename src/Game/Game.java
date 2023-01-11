@@ -229,11 +229,6 @@ public class Game implements Serializable, Subject{
             observers.get(i).update(this);
     }
 
-    @Override
-    public void update(Game game) {
-
-    }
-
     public void generateItems(){
         java.util.Map qualityTab =makeQualityTab();
 
