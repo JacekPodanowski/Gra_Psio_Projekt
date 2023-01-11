@@ -471,7 +471,7 @@ public class Map {
         }
     }
     public void displayCurrentMapFloor_GUI(int floor, Player player) {
-        System.out.println("Mapa piętra: " + floor);
+        System.out.println("Mapa piętra: " + floor);    
         for (int i = 0; i < tabOfRoom.length; i++) {
             for (int j = 0; j < tabOfRoom[0].length; j++) {
 //              int[] tab = {player.getLocation_X(), player.getLocation_Y()};
