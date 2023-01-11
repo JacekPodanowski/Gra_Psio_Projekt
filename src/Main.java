@@ -9,12 +9,9 @@ public class Main {
     public static void main (String[] args){
 
         //Tworzę sobie uchyt
-        Game g1 = new Game();
+        Game g1 = null;
 
-        MainWindow mainWindow = new MainWindow(g1);
-        mainWindow.setModal(true);
-        mainWindow.setAlwaysOnTop(true);
-        mainWindow.setVisible(true);
+        new MainWindow().setVisible(true);
 
 
 

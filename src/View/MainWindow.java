@@ -38,8 +38,7 @@ public class MainWindow extends JDialog implements Observer, Subject{
 
     
 
-    public MainWindow(Game game) {
-        this.game = game;
+    public MainWindow() {
         this.setSize(400, 400);
 
 
@@ -85,6 +84,8 @@ public class MainWindow extends JDialog implements Observer, Subject{
         answer = false;
 
         setContentPane(mainPanel);
+        this.setModal(true);
+        this.setAlwaysOnTop(true);
     }
 
     private JPanel createGamePanel()
@@ -97,27 +98,26 @@ public class MainWindow extends JDialog implements Observer, Subject{
         Map map = game.getMap();
 
 
-        GridLayout gridLayout = new GridLayout(map.getTabOfRoom().length, map.getTabOfRoom().length);
-        gamePanel.setLayout(gridLayout);
+        gamePanel.setLayout(new GridLayout(map.getTabOfRoom().length, map.getTabOfRoom().length));
 
         for (int i = 0; i < map.getTabOfRoom().length; i++) {
             for (int j = 0; j < map.getTabOfRoom().length; j++) {
                 switch (game.getMap().getRoomTypes()[i][j]) {
                     case empty:
                         strategy = new ButtonEmpty();
-                        strategy.createButton(rooms[i][j]);
+                        gamePanel.add(strategy.createButton(rooms[i][j]));
                         break;
                     case visited:
                         strategy = new ButtonVisited();
-                        strategy.createButton(rooms[i][j]);
+                        gamePanel.add(strategy.createButton(rooms[i][j]));
                         break;
                     case withPlayer:
                         strategy = new ButtonWithPlayer();
-                        strategy.createButton(rooms[i][j]);
+                        gamePanel.add(strategy.createButton(rooms[i][j]));
                         break;
                     case hidden:
                         strategy = new ButtonHidden();
-                        strategy.createButton(rooms[i][j]);
+                        gamePanel.add(strategy.createButton(rooms[i][j]));
                         break;
                 }
                 if(map.getTabOfRoom()[i][j].isAvailable()) {
