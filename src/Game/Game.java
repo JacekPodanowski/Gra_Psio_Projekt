@@ -216,16 +216,13 @@ public class Game implements Serializable, Subject{
         }
         return choice;
     }
-
-    public char askForChoiceTextField(){
-        char answer = '0';
-        while(answer != '0') {
-
-            answer = mainWindow.getAnswerChar();
-        }
-        return answer;
+/*   NIE DZIAŁA
+    public int askForChoiceTextField(){
+        while(!mainWindow.isAnswer()){}
+        String anwser = mainWindow.gAnswerChar()+"";
+        return Integer.parseInt(anwser);
     }
-
+*/
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);
