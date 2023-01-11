@@ -23,10 +23,9 @@ public class EmptyRoom implements Event {
                     break;
                 case 3:
                     System.out.println("Jakiego przedmiotu chcesz użyć?");
-                    for(int i = 0; i < player.getInventory().length; i++)
-                        System.out.println(player.getInventory()[i].toString());
+                    player.displayInventoryAndUse();
                     int itemNumber = Game.askForChoice();
-                    player.getInventory()[itemNumber].useItem();
+                    //player.getInventory()[itemNumber].useItem();
                     System.out.println("Użyto przedmiotu " + player.getInventory()[itemNumber].toString());
                     break;
                 default:
