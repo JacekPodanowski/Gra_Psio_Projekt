@@ -13,6 +13,7 @@ import java.util.Random;
 public class Map {
     //================================================= ATRYBUTY KLASY =================================================
     private Room[][] tabOfRoom;  // tablica z pokojow 5x5 (na razie)
+    private RoomType[][] roomTypes;
     private ArrayList<Room> toExitRooms;
 
     //==================================================================================================================
@@ -24,6 +25,7 @@ public class Map {
         tabOfRoom = new Room[size][size];
         toExitRooms = new ArrayList<Room>();
         generateMap(player);
+        this.setRoomTypes(1, player);
     }
     //==================================================================================================================
 
@@ -38,6 +40,21 @@ public class Map {
         this.tabOfRoom = tabOfRoom;
     }
 
+    public RoomType[][] getRoomTypes() {
+        return roomTypes;
+    }
+
+    public void setRoomTypes(RoomType[][] roomTypes) {
+        this.roomTypes = roomTypes;
+    }
+
+    public ArrayList<Room> getToExitRooms() {
+        return toExitRooms;
+    }
+
+    public void setToExitRooms(ArrayList<Room> toExitRooms) {
+        this.toExitRooms = toExitRooms;
+    }
     //==================================================================================================================
 
 
@@ -482,6 +499,42 @@ public class Map {
             System.out.println();
         }
     }
+    public void displayCurrentMapFloor_GUI(int floor, Player player) {
+        System.out.println("Mapa piętra: " + floor);    
+        for (int i = 0; i < tabOfRoom.length; i++) {
+            for (int j = 0; j < tabOfRoom[0].length; j++) {
+//              int[] tab = {player.getLocation_X(), player.getLocation_Y()};
+                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
+                    System.out.printf("%-6s", "[ x ]");
+                } else if(tabOfRoom[i][j].isVisited()) {
+                    System.out.printf("%-6s", "[   ]");
+                } else if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()])) {
+                    System.out.printf("%-6s", "[ ? ]");
+                } else{
+                    System.out.printf("%-6s", "");
+                }
+            }
+            System.out.println();
+        }
+    }
+    public void setRoomTypes(int floor, Player player) {
+        roomTypes = new RoomType[this.getTabOfRoom().length][this.getTabOfRoom()[0].length];
+        for (int i = 0; i < tabOfRoom.length; i++) {
+            for (int j = 0; j < tabOfRoom[0].length; j++) {
+                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
+                    roomTypes[i][j] = RoomType.withPlayer;
+                } else if(tabOfRoom[i][j].isVisited()) {
+                    roomTypes[i][j] = RoomType.visited;
+                } else{
+                    roomTypes[i][j] = RoomType.hidden;
+                }
+                if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()]))
+                    tabOfRoom[i][j].setAvailable(true);
+                else
+                    tabOfRoom[j][j].setAvailable(false);
+            }
+        }
+    }
 
     public ArrayList<Room> displayRoomsToGo(Player player) {
         ArrayList<Room> availableRoomsAround = this.tabOfRoom[player.getLocation_X()][player.getLocation_Y()].getAvailableRoomsAround();
@@ -495,7 +548,7 @@ public class Map {
         }
         return roomsToGo;
     }
-
+    
     public RoomType[][] displayTheMapInGUI(Player player) {
 
         RoomType [][]roomType = new RoomType[tabOfRoom.length][tabOfRoom.length];
@@ -522,5 +575,13 @@ public class Map {
         return roomType;
     }
 
+    public Room getPlayerLocation(Player player){
+        return tabOfRoom[player.getLocation_X()][player.getLocation_Y()];
+    }
+    
+    public void setPlayerLocation(Player player, Room room){
+        player.setLocation_X(room.getColRoom());
+        player.setLocation_Y(room.getRowRoom());
+    }
 }
 //======================================================================================================================

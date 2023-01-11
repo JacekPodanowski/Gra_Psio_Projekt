@@ -18,6 +18,7 @@ public class Room {
     private int difficulty;  // + lub - od lewela gracza
     private Event event;
     private int numRoom;
+    private boolean isAvailable;
 
     //==================================================================================================================
 
@@ -98,6 +99,12 @@ public class Room {
 
     public void setAvailableRoomsAround(ArrayList<Room> availableRoomsAround) {
         this.availableRoomsAround = availableRoomsAround;
+    }
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
     //==================================================================================================================
 
