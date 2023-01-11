@@ -520,5 +520,12 @@ public class Map {
         }
         return roomsToGo;
     }
+    public Room getPlayerLocation(Player player){
+        return tabOfRoom[player.getLocation_X()][player.getLocation_Y()];
+    }
+    public void setPlayerLocation(Player player, Room room){
+        player.setLocation_X(room.getColRoom());
+        player.setLocation_Y(room.getRowRoom());
+    }
 }
 //======================================================================================================================

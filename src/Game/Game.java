@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game implements Serializable, Subject, Observer{
+public class Game implements Serializable, Subject{
     //============================================ ATRYBUTY KLASY ======================================================
     private int day;
     private Map map;
@@ -223,11 +223,5 @@ public class Game implements Serializable, Subject, Observer{
         for(int i = 0; i < observers.size(); i++)
             observers.get(i).update(this);
     }
-
-    @Override
-    public void update(Game game) {
-
-    }
-
     //==================================================================================================================
 }

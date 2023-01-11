@@ -2,6 +2,7 @@ package View;
 
 
 import Game.*;
+import Game.Event.*;
 import Map.Window.Interface.*;
 import Observable.Subject;
 import Observers.Observer;
@@ -19,11 +20,7 @@ import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements Observer, Subject{
     JButton[][] rooms;
-    JButton saveButton;
-    JButton loadButton;
-    JButton startGameButton;
     IMapWindowStrategy strategy;
-    ISaveLoadStrategy saveLoadStrategy;
     ArrayList<Observer> observers = new ArrayList<Observer>();
     Game game;
     JTextArea display;
@@ -34,6 +31,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
     private JPanel upPanel;
     private JPanel downPanel;
     private JPanel mainPanel;
+    private JPanel gamePanel;
 
 
     
@@ -49,15 +47,18 @@ public class MainWindow extends JFrame implements Observer, Subject{
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,1));
-        mainPanel.setPreferredSize(new Dimension(900, 800));
+        mainPanel.setPreferredSize(d);
         createMenuPanel();
 
         upPanel = new JPanel();
         upPanel.setLayout(new GridLayout(1, 2));
-        upPanel.add(new JButton("Okno danego pokoju"));
+        gamePanel = new JPanel();
+        upPanel.add(gamePanel);
+        gamePanel.setPreferredSize(new Dimension(450, 400));
         upPanel.add(createMapPanel());
 
         downPanel = new JPanel();
+        downPanel.setPreferredSize(new Dimension(450, 300));
         downPanel.setLayout(new FlowLayout());
         mapPanel = createTextFieldPanel();
         downPanel.add(mapPanel);
@@ -96,6 +97,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
     private JPanel createMapPanel()
     {
         JPanel mapPanel = new JPanel();
+        mapPanel.setPreferredSize(new Dimension(450, 400));
         if(game == null) {
             return mapPanel;
         }
@@ -106,19 +108,19 @@ public class MainWindow extends JFrame implements Observer, Subject{
                 switch (game.getMap().getRoomTypes()[i][j]) {
                     case empty:
                         strategy = new ButtonEmpty();
-                        rooms[i][j] = strategy.createButton();
+                        rooms[i][j] = strategy.createButton(game, i, j);
                         break;
                     case visited:
                         strategy = new ButtonVisited();
-                        rooms[i][j] = strategy.createButton();
+                        rooms[i][j] = strategy.createButton(game, i, j);
                         break;
                     case withPlayer:
                         strategy = new ButtonWithPlayer();
-                        rooms[i][j] = strategy.createButton();
+                        rooms[i][j] = strategy.createButton(game, i, j);
                         break;
                     case hidden:
                         strategy = new ButtonHidden();
-                        rooms[i][j] = strategy.createButton();
+                        rooms[i][j] = strategy.createButton(game, i, j);
                         break;
                 }
                 mapPanel.add(rooms[i][j]);
@@ -161,6 +163,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
                 upPanel.remove(mapPanel);
                 mapPanel = createMapPanel();
                 upPanel.add(mapPanel);
+                upPanel.revalidate();
             }
         });
         jMenu.add(jMenuItemNewGame);
@@ -265,7 +268,20 @@ public class MainWindow extends JFrame implements Observer, Subject{
         pack();
         return panel;
     }
+    private JPanel gamePanel(){
+        if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance){
 
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
+
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit){
+
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
+
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
+
+        }
+        return gamePanel;
+    }
 
 
     @Override
