@@ -1,14 +1,11 @@
 package View;
 
 
-import Game.Game;
-import Game.Map;
+import Game.*;
 import Map.Window.Interface.*;
 import Observable.Subject;
 import Observers.Observer;
-import SaveLoadStrategy.ISaveLoadStrategy;
-import SaveLoadStrategy.LoadStrategy;
-import SaveLoadStrategy.SaveStrategy;
+import SaveLoadStrategy.*;
 
 
 
@@ -20,7 +17,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class MainWindow extends JDialog implements Observer, Subject{
+public class MainWindow extends JFrame implements Observer, Subject{
     JButton[][] rooms;
     JButton saveButton;
     JButton loadButton;
@@ -42,11 +39,17 @@ public class MainWindow extends JDialog implements Observer, Subject{
     
 
     public MainWindow() {
-        this.setSize(400, 400);
-
+        Dimension d = new Dimension(900, 700);
+        this.setSize(d);
+        this.setPreferredSize(d);
+        this.setLocation(centerLocation(Toolkit.getDefaultToolkit().getScreenSize().width,
+                Toolkit.getDefaultToolkit().getScreenSize().height,
+                this.getWidth(),
+                this.getHeight()));
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,1));
+        mainPanel.setPreferredSize(new Dimension(900, 800));
         createMenuPanel();
 
         upPanel = new JPanel();
@@ -88,7 +91,6 @@ public class MainWindow extends JDialog implements Observer, Subject{
         answer = false;
 
         setContentPane(mainPanel);
-        this.setAlwaysOnTop(true);
     }
 
     private JPanel createMapPanel()
@@ -306,5 +308,8 @@ public class MainWindow extends JDialog implements Observer, Subject{
     public void println(String text){
         String text2 = display.getText() + text+ "\n";
         display.setText(text2);
+    }
+    public Point centerLocation(int parentWidth, int parentHeight, int width, int height){
+        return new Point((parentWidth - width) / 2, (parentHeight - height) / 2);
     }
 }
