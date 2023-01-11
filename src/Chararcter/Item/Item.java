@@ -51,10 +51,13 @@ public abstract class Item {
         this.quality = quality;
     }
 
-    @Override
     public String toString() {
-        return quality +" " + name;
+        if(name.charAt(name.length()-1)=='a'){
+            return quality.substring(0,quality.length()-1).concat("a ")+name;
+        }
+        return quality+" "+name;
     }
+
     public void setQualityTab(){
         qualityTab.put("Zdewastowany",0.25);
         qualityTab.put("Lichy",0.5);

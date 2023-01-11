@@ -230,25 +230,25 @@ public class Game implements Serializable, Subject, Observer{
         java.util.Map qualityTab =makeQualityTab();
 
         //Bron Archer
-        Weapon weapon0 =new Weapon("Proca", 5,"Zwykły", 'A', 8, 5);
-        Weapon weapon1 =new Weapon("Kusza Bojowa", 10, "rzadki", 'A', 15, 8);
-        Weapon weapon2 =new Weapon("Długi Łuk", 12, "rzadki", 'A', 15, 8);
-        Weapon weapon3 =new Weapon("Harpun", 30, "legendarny", 'A', 20, 13);
-        Weapon weapon4 =new Weapon("Rakietnica", 25, "legendarny", 'A', 20, 13);
+        Weapon weapon0 =new Weapon("Proca", 3,"Zwykły", 'A', 20, 6);
+        Weapon weapon1 =new Weapon("Łuk", 5, "Zwykły", 'A', 30, 8);
+        Weapon weapon2 =new Weapon("Długi Łuk", 7, "Zwykły", 'A', 35, 11);
+        Weapon weapon3 =new Weapon("Harpun", 9, "Zwykły", 'A', 40, 13);
+        Weapon weapon4 =new Weapon("Ciężka Kusza", 12, "Zwykły", 'A', 50, 20);
 
         //Bron Mage
-        Weapon weapon5 =new Weapon("Kule", 5, "pospolity", 'I', 8, 5);
-        Weapon weapon6 =new Weapon("Różdżka losu", 10, "rzadki", 'I', 15, 8);
-        Weapon weapon7 =new Weapon("Kostur kryształowy", 12, "rzadki", 'I', 15, 8);
-        Weapon weapon8 =new Weapon("Korzeń zła", 30, "legendarny", 'I', 20, 13);
-        Weapon weapon9 =new Weapon("Palec mrozu", 25, "legendarny", 'I', 20, 13);
+        Weapon weapon5 =new Weapon("Szklana Kula", 3, "Zwykły", 'I', 20, 5);
+        Weapon weapon6 =new Weapon("Różdżka losu", 5, "Zwykły", 'I', 30, 8);
+        Weapon weapon7 =new Weapon("Kryształowy Kostur", 10, "Zwykły", 'I', 35, 11);
+        Weapon weapon8 =new Weapon("Korzeń Zła", 12, "Zwykły", 'I', 40, 13);
+        Weapon weapon9 =new Weapon("Laska Św.Teresy", 20, "Zwykły", 'I', 65, 25);
 
         //Bron Warrior
-        Weapon weapon10 =new Weapon("Miecz zabawka", 5, "pospolity", 'S', 8, 5);
-        Weapon weapon11 =new Weapon("Tasak", 10, "rzadki", 'S', 15, 8);
-        Weapon weapon12 =new Weapon("Sztylet srebrny", 12, "rzadki", 'S', 15, 8);
-        Weapon weapon13 =new Weapon("Długi miecz", 30, "legendarny", 'S', 20, 13);
-        Weapon weapon14 =new Weapon("Palec mrozu", 25, "legendarny", 'S', 20, 13);
+        Weapon weapon10 =new Weapon("Miecz Treningowy", 3, "Zwykły", 'S', 20, 4);
+        Weapon weapon11 =new Weapon("Tasak", 5, "Zwykły", 'S', 30, 8);
+        Weapon weapon12 =new Weapon("Siekiera", 10, "Zwykły", 'S', 35, 10);
+        Weapon weapon13 =new Weapon("Długi Miecz", 15, "Zwykły", 'S', 45, 16);
+        Weapon weapon14 =new Weapon("Spartańska Dzida", 25, "Zwykły", 'S', 55, 23);
 
         basicWepons.add(weapon0);
         basicWepons.add(weapon1);
@@ -273,25 +273,25 @@ public class Game implements Serializable, Subject, Observer{
         }
 
         //Armor na Archer
-        Armor armor0 =new Armor("Płaszcz", 5,"Zwykły",5, 5, 10);
-        Armor armor1 =new Armor("Narzuta", 7,"Zwykły",3, 6, 9);
-        Armor armor2 =new Armor("Jesionka", 10,"Zwykły",6, 9, 12);
-        Armor armor3 =new Armor("Kurtka", 6,"Zwykły",2, 8, 9);
-        Armor armor4 =new Armor("Szmata", 11,"Zwykły",1, 2, 15);
+        Armor armor0 =new Armor("Szmata", 1,"Zwykły",10, 0, 5);
+        Armor armor1 =new Armor("Narzuta", 3,"Zwykły",3, 6, 9);
+        Armor armor2 =new Armor("Jesionka", 5,"Zwykły",6, 9, 12);
+        Armor armor3 =new Armor("Kurtka", 10,"Zwykły",2, 8, 9);
+        Armor armor4 =new Armor("Mundur Zwiadowcy", 20,"Zwykły",25, 20, 50);
 
         //Armor na Mage
-        Armor armor5 =new Armor("Peleryna", 5,"Zwykły",5, 10, 5);
-        Armor armor6 =new Armor("Kapa", 7,"Zwykły",3, 9, 6);
-        Armor armor7 =new Armor("Szata", 10,"Zwykły",6, 12, 9);
-        Armor armor8 =new Armor("Alba", 6,"Zwykły",2, 9, 8);
-        Armor armor9 =new Armor("Szlafrok", 11,"Zwykły",1, 15, 2);
+        Armor armor5 =new Armor("Peleryna", 5,"Zwykły",10, 20, 10);
+        Armor armor6 =new Armor("Tunika", 3,"Zwykły",15, 15, 15);
+        Armor armor7 =new Armor("Przeszywalnica", 6,"Zwykły",25, 20, 25);
+        Armor armor8 =new Armor("Magiczny Koc", 10,"Zwykły",10, 50, 25);
+        Armor armor9 =new Armor("Naładowana Sutanna", 20,"Zwykły",20, 80, 30);
 
         //Armor na Warrior
-        Armor armor10 =new Armor("Kosz", 5,"Zwykły",10, 5, 5);
-        Armor armor11 =new Armor("Bęben", 7,"Zwykły",9, 3, 6);
-        Armor armor12 =new Armor("Pancerz", 10,"Zwykły",12, 9, 6);
-        Armor armor13 =new Armor("Skorupa", 6,"Zwykły",9, 2, 8);
-        Armor armor14 =new Armor("Kostium", 11,"Zwykły",15, 2, 1);
+        Armor armor10 =new Armor("Beczka", 1,"Zwykły",30, 0, 5);
+        Armor armor11 =new Armor("Skórzana Szata", 7,"Zwykły",30, 10, 20);
+        Armor armor12 =new Armor("Żółwia skorupa", 10,"Zwykły",85, 10, 10);
+        Armor armor13 =new Armor("Kolczuga", 15,"Zwykły",40, 10, 20);
+        Armor armor14 =new Armor("Rycerska Zbroja", 25,"Zwykły",60, 20, 30);
 
         basicArmors.add(armor0);
         basicArmors.add(armor1);

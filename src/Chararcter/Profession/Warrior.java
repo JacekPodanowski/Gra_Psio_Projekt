@@ -10,7 +10,7 @@ public class Warrior implements Profession{
         character.setAgility(35);
         character.setIntelligence(15);
         character.setStrength(60);
-        character.setWeapon(new Weapon("Kij", 1, "Zwykły", 'S', 20, 5));
+        character.setWeapon(new Weapon("Pałka", 1, "Zwykły", 'S', 20, 5));
         this.specialAbility(character);
     }
 

@@ -1,5 +1,7 @@
 package Chararcter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Skill {
@@ -17,7 +19,7 @@ public class Skill {
         this.bonus = bonus;
     }
 
-    public double use(Character player, Character character){
+    public int use(Character player, Character character){
 
         double dmg;
         int resist = 0;
@@ -55,7 +57,7 @@ public class Skill {
 
         int Basicdmg = player.getWeapon().getBasicDMG();
         dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;
-        dmg = dmg * (1 - (double)(resist * 5) / 100);
+        dmg = dmg * (1 -resist/100.0);
 
 
         Random r = new Random();
@@ -63,15 +65,18 @@ public class Skill {
             System.out.print(", atak nie trafia");
             dmg = 0;
         }
-        return dmg;
+
+        return (int) dmg;
     }
     public double reqDmgMultiplier(Character player, int attribute){
         double reqDmgMultiplier = 1;
         int req = player.getWeapon().getRequirement();
         if (attribute < req) {
-            reqDmgMultiplier = 1 - (req - attribute) / 100.0;
-        } else
-            reqDmgMultiplier = 1 + (attribute - req) / 100.0;
+            reqDmgMultiplier = 1 - ((req - attribute) *2)/100.0;
+        }
+        else {
+            reqDmgMultiplier = 1 + (attribute - req)/200.0;
+        }
         return reqDmgMultiplier;
     }
     public void turnSetter(Character character, Character character1){
@@ -85,6 +90,7 @@ public class Skill {
     public String toString() {
         return name;
     }
+
 }
 
 
