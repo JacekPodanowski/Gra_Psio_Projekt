@@ -4,6 +4,7 @@ import Chararcter.Player;
 import Observable.Subject;
 import Observers.Observer;
 import Observers.PlayerOnMapPosition;
+import View.MainWindow;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Game implements Serializable, Subject, Observer{
     private int startX;
     private int mapSize =5;// rozmiar mapy
     private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private MainWindow mainWindow;
 
 
     //==================================================================================================================
@@ -34,7 +36,7 @@ public class Game implements Serializable, Subject, Observer{
         map.displayMapFloor(1);
         this.registerObserver(new PlayerOnMapPosition());
         System.out.println("\nRozpocząłeś nową grę!\n\n");
-        this.startGame();
+        //this.startGame();
     }
     public Game(int day, Player player,Map map){
         this.day = day;
@@ -196,6 +198,12 @@ public class Game implements Serializable, Subject, Observer{
             }
         }
         return choice;
+    }
+
+    public int askForChoiceTextField(){
+        while(!mainWindow.isAnswer()){}
+        String anwser = mainWindow.gAnswerChar()+"";
+        return Integer.parseInt(anwser);
     }
 
     @Override

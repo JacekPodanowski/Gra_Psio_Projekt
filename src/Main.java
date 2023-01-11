@@ -15,11 +15,7 @@ public class Main {
         mainWindow.setModal(true);
         mainWindow.setAlwaysOnTop(true);
         mainWindow.setVisible(true);
-        if (mainWindow.ifNewGame()){
-            g1 = mainWindow.getGame();
-        } else {
 
-        }
 
         int choice = 0;
 
