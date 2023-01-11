@@ -3,9 +3,9 @@ package View;
 
 import Game.*;
 import Game.Event.*;
-import Map.Window.Interface.*;
 import Observable.Subject;
 import Observers.Observer;
+import Observers.PlayerOnMapPosition;
 import SaveLoadStrategy.*;
 
 
@@ -18,9 +18,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class MainWindow extends JFrame implements Observer, Subject{
+public class MainWindow extends JFrame implements Subject {
     JButton[][] rooms;
-    IMapWindowStrategy strategy;
     ArrayList<Observer> observers = new ArrayList<Observer>();
     Game game;
     JTextArea display;
@@ -34,8 +33,6 @@ public class MainWindow extends JFrame implements Observer, Subject{
     private JPanel gamePanel;
 
 
-    
-
     public MainWindow() {
         Dimension d = new Dimension(900, 700);
         this.setSize(d);
@@ -46,7 +43,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
                 this.getHeight()));
 
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(2,1));
+        mainPanel.setLayout(new GridLayout(2, 1));
         mainPanel.setPreferredSize(d);
         createMenuPanel();
 
@@ -72,13 +69,13 @@ public class MainWindow extends JFrame implements Observer, Subject{
 
                 int playerSelection = JOptionPane.showConfirmDialog(MainWindow.this, "Czy chcesz zapisać grę?", "Potwierdż zamknięcie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                if (playerSelection == JOptionPane.YES_NO_OPTION){
+                if (playerSelection == JOptionPane.YES_NO_OPTION) {
                     SaveLoadWindow saveWindow = new SaveLoadWindow(game, new SaveStrategy());
                     saveWindow.setModal(true);
                     saveWindow.setAlwaysOnTop(true);
                     saveWindow.setVisible(true);
 
-                    if(saveWindow.isFinishedSucceslyffly()){
+                    if (saveWindow.isFinishedSucceslyffly()) {
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                     } else setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
@@ -94,11 +91,10 @@ public class MainWindow extends JFrame implements Observer, Subject{
         setContentPane(mainPanel);
     }
 
-    private JPanel createMapPanel()
-    {
+    private JPanel createMapPanel() {
         JPanel mapPanel = new JPanel();
         mapPanel.setPreferredSize(new Dimension(450, 400));
-        if(game == null) {
+        if (game == null) {
             return mapPanel;
         }
         rooms = new JButton[game.getMap().getTabOfRoom().length][game.getMap().getTabOfRoom()[0].length];
@@ -107,20 +103,16 @@ public class MainWindow extends JFrame implements Observer, Subject{
             for (int j = 0; j < game.getMap().getTabOfRoom()[0].length; j++) {
                 switch (game.getMap().getRoomTypes()[i][j]) {
                     case empty:
-                        strategy = new ButtonEmpty();
-                        rooms[i][j] = strategy.createButton(game, i, j);
+                        rooms[i][j] = createButton(i, j);
                         break;
                     case visited:
-                        strategy = new ButtonVisited();
-                        rooms[i][j] = strategy.createButton(game, i, j);
+                        rooms[i][j] = createButton(i, j);
                         break;
                     case withPlayer:
-                        strategy = new ButtonWithPlayer();
-                        rooms[i][j] = strategy.createButton(game, i, j);
+                        rooms[i][j] = createButton(i, j);
                         break;
                     case hidden:
-                        strategy = new ButtonHidden();
-                        rooms[i][j] = strategy.createButton(game, i, j);
+                        rooms[i][j] = createButton(i, j);
                         break;
                 }
                 mapPanel.add(rooms[i][j]);
@@ -131,7 +123,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
         return mapPanel;
     }
 
-    private void createMenuPanel(){
+    private void createMenuPanel() {
         JMenu jMenu = new JMenu();
         jMenu.setText("Opcje Gry");
 
@@ -144,7 +136,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
                 loadWindow.setModal(true);
                 loadWindow.setAlwaysOnTop(true);
                 loadWindow.setVisible(true);
-                if(loadWindow.isFinishedSucceslyffly()) {
+                if (loadWindow.isFinishedSucceslyffly()) {
                     game = loadWindow.getGame();
                 } else {
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -159,7 +151,8 @@ public class MainWindow extends JFrame implements Observer, Subject{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game = new Game();
-                game.notifyObservers();
+                notifyObservers();
+                game.startGame();
                 upPanel.remove(mapPanel);
                 mapPanel = createMapPanel();
                 upPanel.add(mapPanel);
@@ -177,7 +170,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
                 saveWindow.setModal(true);
                 saveWindow.setAlwaysOnTop(true);
                 saveWindow.setVisible(true);
-                if(saveWindow.isFinishedSucceslyffly()) {
+                if (saveWindow.isFinishedSucceslyffly()) {
                     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 } else {
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -192,7 +185,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
 
     }
 
-    private JPanel createTextFieldPanel(){
+    private JPanel createTextFieldPanel() {
 
         JPanel panel = new JPanel();
         JScrollPane jScrollPane1 = new JScrollPane();
@@ -202,19 +195,15 @@ public class MainWindow extends JFrame implements Observer, Subject{
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(answerField.getText().length()==1)
-                {
+                if (answerField.getText().length() == 1) {
                     answerChar = answerField.getText().charAt(0);
                     answerField.setText("");
                     answer = true;
-                }
-                else
-                {
+                } else {
                     answer = false;
                 }
             }
         });
-
 
 
         display.setColumns(20);
@@ -223,7 +212,7 @@ public class MainWindow extends JFrame implements Observer, Subject{
         jScrollPane1.setViewportView(display);
 
         answerField.setText("");
-        answerField.setSize(50,20);
+        answerField.setSize(50, 20);
 
         okButton.setText("OK");
 
@@ -268,40 +257,62 @@ public class MainWindow extends JFrame implements Observer, Subject{
         pack();
         return panel;
     }
-    private JPanel gamePanel(){
-        if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance){
+
+    private JPanel gamePanel() {
+        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
 
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
 
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit){
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
 
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
+            for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
 
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
 
         }
         return gamePanel;
     }
-
-
-    @Override
-    public void update(Game game) {
-
+    public JButton createButton(int i, int j) {
+        JButton room = new JButton();
+//        try {
+//            room.setIcon(new ImageIcon(ImageIO.read(new File("empty.png"))));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        room.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.getMap().setPlayerLocation(game.getPlayer(), game.getMap().getTabOfRoom()[i][j]);
+                game.notifyObservers();
+            }
+        });
+        return room;
     }
 
     @Override
     public void registerObserver(Observer observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
+        for(int i = 0; i < observers.size(); i++) {
+                observers.get(i).update(this);
+        }
+    }
 
+    public ArrayList<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(ArrayList<Observer> observers) {
+        this.observers = observers;
     }
 
     public void setGame(Game game) {
@@ -310,6 +321,14 @@ public class MainWindow extends JFrame implements Observer, Subject{
 
     public Game getGame() {
         return game;
+    }
+
+    public char getAnswerChar() {
+        return answerChar;
+    }
+
+    public void setAnswerChar(char answerChar) {
+        this.answerChar = answerChar;
     }
 
     public boolean isAnswer() {
@@ -321,11 +340,11 @@ public class MainWindow extends JFrame implements Observer, Subject{
         return answerChar;
     }
 
-    public void println(String text){
-        String text2 = display.getText() + text+ "\n";
+    public void println(String text) {
+        String text2 = display.getText() + text + "\n";
         display.setText(text2);
     }
     public Point centerLocation(int parentWidth, int parentHeight, int width, int height){
-        return new Point((parentWidth - width) / 2, (parentHeight - height) / 2);
+        return new Point((parentWidth -width) /2,(parentHeight -height)/2);
     }
 }

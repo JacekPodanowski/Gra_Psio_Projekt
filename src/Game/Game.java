@@ -22,7 +22,8 @@ public class Game implements Serializable, Subject{
     private int mapSize =5;// rozmiar mapy
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private MainWindow mainWindow;
-
+    private String text;
+    private int choice;
 
     //==================================================================================================================
 
@@ -34,9 +35,7 @@ public class Game implements Serializable, Subject{
         player = new Player(mapSize);
         map = new Map(this.player,mapSize);
         map.displayMapFloor(1);
-        this.registerObserver(new PlayerOnMapPosition());
         System.out.println("\nRozpocząłeś nową grę!\n\n");
-        //this.startGame();
     }
     public Game(int day, Player player,Map map){
         this.day = day;
@@ -111,29 +110,45 @@ public class Game implements Serializable, Subject{
     public void setObservers(ArrayList<Observer> observers) {
         this.observers = observers;
     }
+
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     //==================================================================================================================
 
 
 
     //============================================= METODY KLASY =======================================================
     public void startGame(){
-        System.out.println("Aby wejść do kostki wpisz 1");
-        int wybor = askForChoice();
-        if(wybor == 1)
-            while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                this.notifyObservers();
-                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
-                    System.out.print((i+1)+" - ");
-                    System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
-                }
-                System.out.println("Gdzie chesz iść? ");
-                int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
-                int x = player.getLocation_X();
-                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
-                player.setLocation_Y(this.map.getTabOfRoom()[x][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
-            }
-        System.out.print("Nie zyjesz");
-        System.exit(5);
+        text = "Aby wejść do kostki wpisz 1.";
+        notifyObservers();
+//        if(wybor == 1)
+//            while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
+//                this.notifyObservers();
+//                for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
+//                    System.out.print((i+1)+" - ");
+//                    System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
+//                }
+//                System.out.println("Gdzie chesz iść? ");
+//                int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
+//                int x = player.getLocation_X();
+//                player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice-1)[0]);
+//                player.setLocation_Y(this.map.getTabOfRoom()[x][player.getLocation_Y()].getPathSet().get(choice-1)[1]);
+//            }
+//        System.out.print("Nie zyjesz");
+//        System.exit(5);
     }
 
     public void restartGame(){
@@ -202,10 +217,13 @@ public class Game implements Serializable, Subject{
         return choice;
     }
 
-    public int askForChoiceTextField(){
-        while(!mainWindow.isAnswer()){}
-        String anwser = mainWindow.gAnswerChar()+"";
-        return Integer.parseInt(anwser);
+    public char askForChoiceTextField(){
+        char answer = '0';
+        while(answer != '0') {
+
+            answer = mainWindow.getAnswerChar();
+        }
+        return answer;
     }
 
     @Override

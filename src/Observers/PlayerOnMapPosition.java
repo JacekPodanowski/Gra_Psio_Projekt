@@ -1,18 +1,41 @@
 package Observers;
 
 import Game.Game;
+import View.MainWindow;
 
 public class PlayerOnMapPosition implements Observer{
+    private MainWindow mainWindow;
     private Game game;
+    public PlayerOnMapPosition(Game game, MainWindow mainWindow){
+        if(game != null) {
+            this.game = game;
+            this.game.getObservers().add(this);
+            this.game.setMainWindow(mainWindow);
+        }
+        this.mainWindow = mainWindow;
+        this.mainWindow.getObservers().add(this);
+    }
 
     @Override
     public void update(Game game) {
         this.game = game;
-        displayCurrentMap();
+        if(this.game.getObservers().size() == 0) {
+            this.game.getObservers().add(this);
+            this.game.setMainWindow(this.mainWindow);
+        }
+        else {
+            this.mainWindow = this.game.getMainWindow();
+            print();
+        }
     }
 
-    public void displayCurrentMap(){
-        this.game.getMap().displayCurrentMapFloor(1, this.game.getPlayer());
+    @Override
+    public void update(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        update(mainWindow.getGame());
     }
 
+    public void print(){
+        mainWindow.println(game.getText());
+    }
 }
