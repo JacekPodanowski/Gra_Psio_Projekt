@@ -1,5 +1,6 @@
 
 import BackEnd.Game.Game;
+import GUI.View.SaveLoadWindow;
 import Observers.PlayerOnMapPosition;
 
 import GUI.SaveLoadStrategy.LoadStrategy;

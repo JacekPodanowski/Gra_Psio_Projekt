@@ -51,7 +51,7 @@ public class MainWindow extends JFrame implements Subject {
         gamePanel = new JPanel();
         upPanel.add(gamePanel);
         gamePanel.setPreferredSize(new Dimension(450, 400));
-        upPanel.add(createMapPanel());
+
 
         downPanel = new JPanel();
         downPanel.setPreferredSize(new Dimension(450, 300));
@@ -91,37 +91,7 @@ public class MainWindow extends JFrame implements Subject {
         setContentPane(mainPanel);
     }
 
-    private JPanel createMapPanel() {
-        JPanel mapPanel = new JPanel();
-        mapPanel.setPreferredSize(new Dimension(450, 400));
-        if (game == null) {
-            return mapPanel;
-        }
-        rooms = new JButton[game.getMap().getTabOfRoom().length][game.getMap().getTabOfRoom()[0].length];
-        mapPanel.setLayout(new GridLayout(game.getMap().getTabOfRoom().length, game.getMap().getTabOfRoom().length));
-        for (int i = 0; i < game.getMap().getTabOfRoom().length; i++) {
-            for (int j = 0; j < game.getMap().getTabOfRoom()[0].length; j++) {
-                switch (game.getMap().getRoomTypes()[i][j]) {
-                    case empty:
-                        rooms[i][j] = createButton(i, j);
-                        break;
-                    case visited:
-                        rooms[i][j] = createButton(i, j);
-                        break;
-                    case withPlayer:
-                        rooms[i][j] = createButton(i, j);
-                        break;
-                    case hidden:
-                        rooms[i][j] = createButton(i, j);
-                        break;
-                }
-                mapPanel.add(rooms[i][j]);
-                rooms[i][j].setEnabled(game.getMap().getTabOfRoom()[i][j].isAvailable());
-                mapPanel.add(rooms[i][j]);
-            }
-        }
-        return mapPanel;
-    }
+
 
     private void createMenuPanel() {
         JMenu jMenu = new JMenu();
@@ -154,7 +124,7 @@ public class MainWindow extends JFrame implements Subject {
                 notifyObservers();
                 game.startGame();
                 upPanel.remove(mapPanel);
-                mapPanel = createMapPanel();
+                //mapPanel = createMapPanel();
                 upPanel.add(mapPanel);
                 upPanel.revalidate();
             }
@@ -273,22 +243,7 @@ public class MainWindow extends JFrame implements Subject {
         }
         return gamePanel;
     }
-    public JButton createButton(int i, int j) {
-        JButton room = new JButton();
-//        try {
-//            room.setIcon(new ImageIcon(ImageIO.read(new File("empty.png"))));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-        room.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.getMap().setPlayerLocation(game.getPlayer(), game.getMap().getTabOfRoom()[i][j]);
-                game.notifyObservers();
-            }
-        });
-        return room;
-    }
+
 
     @Override
     public void registerObserver(Observer observer) {
