@@ -1,10 +1,12 @@
 package GUI.Panels;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GamePanel extends JPanel {
     public GamePanel(){
-        /*gamePanel.setPreferredSize(new Dimension(450, 400));
+        this.setPreferredSize(new Dimension(450, 400));
+        /*
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
 
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {

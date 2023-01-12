@@ -5,7 +5,6 @@ import BackEnd.Game.Event.EmptyRoom;
 import BackEnd.Game.Event.Event;
 import BackEnd.Game.Event.Fight;
 import BackEnd.Game.Event.Loot;
-import BackEnd.Game.Game.Event.*;
 
 import java.util.ArrayList;
 import java.util.Random;

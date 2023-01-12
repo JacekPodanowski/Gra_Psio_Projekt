@@ -3,7 +3,6 @@ package BackEnd.Chararcter;
 import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Weapon;
-import BackEnd.Game.Chararcter.Item.*;
 import BackEnd.Chararcter.Profession.Profession;
 
 public abstract class Character {
@@ -94,7 +93,13 @@ public abstract class Character {
         this.level = level;
     }
 
+    public Profession getProfession() {
+        return profession;
+    }
 
+    public void setProfession(Profession profession) {
+        this.profession = profession;
+    }
 
     public Item[] getInventory() {
         return inventory;

@@ -16,28 +16,26 @@ public class MapPanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
-    public MapPanel() {
+    public MapPanel(Game game) {
+        this.game = game;
         this.setPreferredSize(new Dimension(450, 400));
-        rooms = new JButton[game.getMap().getTabOfRoom().length][game.getMap().getTabOfRoom()[0].length];
-        this.setLayout(new GridLayout(game.getMap().getTabOfRoom().length, game.getMap().getTabOfRoom().length));
-        for (int i = 0; i < game.getMap().getTabOfRoom().length; i++) {
-            for (int j = 0; j < game.getMap().getTabOfRoom()[0].length; j++) {
-                switch (game.getMap().getRoomTypes()[i][j]) {
-                    case empty:
-                        rooms[i][j] = createButton(i, j);
-                        break;
-                    case visited:
-                        rooms[i][j] = createButton(i, j);
-                        break;
+        rooms = new JButton[this.game.getMap().getTabOfRoom().length][this.game.getMap().getTabOfRoom()[0].length];
+        this.setLayout(new GridLayout(this.game.getMap().getTabOfRoom().length, this.game.getMap().getTabOfRoom().length));
+        for (int i = 0; i < this.game.getMap().getTabOfRoom().length; i++) {
+            for (int j = 0; j < this.game.getMap().getTabOfRoom()[0].length; j++) {
+                rooms[i][j] = createButton(i, j);
+                switch (this.game.getMap().getRoomTypes()[i][j]) {
                     case withPlayer:
-                        rooms[i][j] = createButton(i, j);
+                        rooms[i][j].setText("Znajdujesz się tutaj");
                         break;
-                    case hidden:
-                        rooms[i][j] = createButton(i, j);
+                    case hidden, empty:
+                        rooms[i][j].setVisible(false);
                         break;
                 }
                 this.add(rooms[i][j]);
-                rooms[i][j].setEnabled(game.getMap().getTabOfRoom()[i][j].isAvailable());
+                rooms[i][j].setEnabled(this.game.getMap().getTabOfRoom()[i][j].isAvailable());
+                if(this.game.getMap().getTabOfRoom()[i][j].isAvailable())
+                    rooms[i][j].setText("?");
                 this.add(rooms[i][j]);
             }
         }

@@ -1,7 +1,6 @@
 package GUI.View;
 
 
-import BackEnd.Game.Event.*;
 import BackEnd.Game.Game;
 import GUI.Panels.MainPanel;
 import GUI.SaveLoadStrategy.LoadStrategy;
@@ -54,8 +53,8 @@ public class MainWindow extends JFrame implements Subject {
                 } else setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         });
-
-        setContentPane(new MainPanel());
+        game = new Game();
+        setContentPane(new MainPanel(game));
     }
 
 

@@ -4,10 +4,12 @@ import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Potion;
 import BackEnd.Chararcter.Item.Weapon;
-import BackEnd.Game.Chararcter.Item.*;
+import BackEnd.*;
 import BackEnd.Game.Game;
+import Observable.Subject;
+import Observers.Observer;
 
-public class Player extends Character {
+public class Player extends Character implements Subject {
 
     private int location_Y;
     private int location_X;
@@ -20,20 +22,7 @@ public class Player extends Character {
         location_X=size-1;
         this.exp = 0;
         this.getInventory()[0]=new Potion("Woda",0,"Zwykła",10);
-        System.out.println("Wybierz profesję: ");
-        System.out.println("1. Wojownik\t\t 2. Mag\t\t 3. Łucznik");
-//        switch(BackEnd.Game.askForChoice(3)){
-//            case 1:
-//                this.profession = new Warrior();
-//                break;
-//            case 2:
-//                this.profession = new Mage();
-//                break;
-//            case 3:
-//                this.profession = new Archer();
-//                break;
-//        }
-//        this.profession.attributesInitiation(this);
+
     }
 
     @Override
@@ -151,5 +140,20 @@ public class Player extends Character {
     public void setStrength(int strength){
         this.strength = strength;
         this.health = strength * 20;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
     }
 }
