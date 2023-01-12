@@ -32,21 +32,6 @@ public class Main {
                     case 1:
                         g1 = new Game();
                         break;
-                    case 2:
-                        SaveLoadWindow loadWindow = new SaveLoadWindow(g1, new LoadStrategy());
-                        loadWindow.setModal(true);
-                        loadWindow.setAlwaysOnTop(true);
-                        loadWindow.setVisible(true);
-
-                        g1 =loadWindow.getGame();
-                        break;
-                    case 3:
-                        SaveLoadWindow saveWindow = new SaveLoadWindow(g1, new SaveStrategy());
-                        saveWindow.setModal(true);
-                        saveWindow.setAlwaysOnTop(true);
-                        saveWindow.setVisible(true);
-
-                        break;
 
                     case 4:
                         System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
