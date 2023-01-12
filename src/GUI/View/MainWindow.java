@@ -3,6 +3,7 @@ package GUI.View;
 
 import BackEnd.Game.Event.*;
 import BackEnd.Game.Game;
+import GUI.Panels.MainPanel;
 import GUI.SaveLoadStrategy.LoadStrategy;
 import GUI.SaveLoadStrategy.SaveStrategy;
 import Observable.Subject;
@@ -18,19 +19,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements Subject {
-    JButton[][] rooms;
     ArrayList<Observer> observers = new ArrayList<Observer>();
     Game game;
-    JTextArea display;
-    JTextField answerField;
-    boolean answer;
-    char answerChar;
-    private JPanel mapPanel;
-    private JPanel upPanel;
-    private JPanel downPanel;
-    private JPanel mainPanel;
-    private JPanel gamePanel;
-
 
     public MainWindow() {
         Dimension d = new Dimension(900, 700);
@@ -40,28 +30,7 @@ public class MainWindow extends JFrame implements Subject {
                 Toolkit.getDefaultToolkit().getScreenSize().height,
                 this.getWidth(),
                 this.getHeight()));
-
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(2, 1));
-        mainPanel.setPreferredSize(d);
         createMenuPanel();
-
-        upPanel = new JPanel();
-        upPanel.setLayout(new GridLayout(1, 2));
-        gamePanel = new JPanel();
-        upPanel.add(gamePanel);
-        gamePanel.setPreferredSize(new Dimension(450, 400));
-
-
-        downPanel = new JPanel();
-        downPanel.setPreferredSize(new Dimension(450, 300));
-        downPanel.setLayout(new FlowLayout());
-        mapPanel = createTextFieldPanel();
-        downPanel.add(mapPanel);
-
-        mainPanel.add(upPanel);
-        mainPanel.add(downPanel);
-
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -86,9 +55,7 @@ public class MainWindow extends JFrame implements Subject {
             }
         });
 
-        answer = false;
-
-        setContentPane(mainPanel);
+        setContentPane(new MainPanel());
     }
 
 
@@ -123,10 +90,10 @@ public class MainWindow extends JFrame implements Subject {
                 game = new Game();
                 notifyObservers();
                 game.startGame();
-                upPanel.remove(mapPanel);
+                //upPanel.remove(mapPanel);
                 //mapPanel = createMapPanel();
-                upPanel.add(mapPanel);
-                upPanel.revalidate();
+                //upPanel.add(mapPanel);
+                //upPanel.revalidate();
             }
         });
         jMenu.add(jMenuItemNewGame);
@@ -153,95 +120,6 @@ public class MainWindow extends JFrame implements Subject {
         jMenuBar.add(jMenu);
         setJMenuBar(jMenuBar);
 
-    }
-
-    private JPanel createTextFieldPanel() {
-
-        JPanel panel = new JPanel();
-        JScrollPane jScrollPane1 = new JScrollPane();
-        display = new JTextArea();
-        answerField = new JTextField(2);
-        JButton okButton = new JButton();
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (answerField.getText().length() == 1) {
-                    answerChar = answerField.getText().charAt(0);
-                    answerField.setText("");
-                    answer = true;
-                } else {
-                    answer = false;
-                }
-            }
-        });
-
-
-        display.setColumns(20);
-        display.setRows(5);
-        display.setEditable(false);
-        jScrollPane1.setViewportView(display);
-
-        answerField.setText("");
-        answerField.setSize(50, 20);
-
-        okButton.setText("OK");
-
-        GroupLayout panelLayout = new GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1)
-                                        .addGroup(panelLayout.createSequentialGroup()
-                                                .addComponent(answerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(okButton)
-                                                .addGap(0, 242, Short.MAX_VALUE)))
-                                .addContainerGap())
-        );
-        panelLayout.setVerticalGroup(
-                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(answerField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(okButton))
-                                .addContainerGap())
-        );
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
-        return panel;
-    }
-
-    private JPanel gamePanel() {
-        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
-
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
-
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
-
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
-            for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
-
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
-
-        }
-        return gamePanel;
     }
 
 
@@ -276,28 +154,6 @@ public class MainWindow extends JFrame implements Subject {
 
     public Game getGame() {
         return game;
-    }
-
-    public char getAnswerChar() {
-        return answerChar;
-    }
-
-    public void setAnswerChar(char answerChar) {
-        this.answerChar = answerChar;
-    }
-
-    public boolean isAnswer() {
-        return answer;
-    }
-
-    public char gAnswerChar() {
-        answer = false;
-        return answerChar;
-    }
-
-    public void println(String text) {
-        String text2 = display.getText() + text + "\n";
-        display.setText(text2);
     }
     public Point centerLocation(int parentWidth, int parentHeight, int width, int height){
         return new Point((parentWidth -width) /2,(parentHeight -height)/2);
