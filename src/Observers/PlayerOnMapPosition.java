@@ -1,7 +1,7 @@
 package Observers;
 
-import Game.Game;
-import View.MainWindow;
+import BackEnd.Game.Game;
+import GUI.View.MainWindow;
 
 public class PlayerOnMapPosition implements Observer{
     private MainWindow mainWindow;

@@ -1,12 +1,10 @@
 
+import BackEnd.Game.Game;
 import Observers.PlayerOnMapPosition;
 
-import Chararcter.Item.Armor;
-import Chararcter.Item.Weapon;
-import Game.*;
-import SaveLoadStrategy.LoadStrategy;
-import SaveLoadStrategy.SaveStrategy;
-import View.MainWindow;
+import GUI.SaveLoadStrategy.LoadStrategy;
+import GUI.SaveLoadStrategy.SaveStrategy;
+import GUI.View.MainWindow;
 
 
 public class Main {
