@@ -16,12 +16,21 @@ public class Weapon extends Item{
         basicDMG = 5;
     }
 
-//    public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG) {
-//        super(name, value, quality);
-//        this.type = type;
-//        this.requirement = requirement;
-//        this.basicDMG = basicDMG;
-//    }
+    public Weapon(String name, int value, char type, int requirement, int basicDMG) {
+        super(name, value);
+        this.type = type;
+        this.value = (int) (value* qualityTab.get(quality));
+        if(qualityTab.get(quality)>1){
+            this.requirement= (int) (requirement + qualityTab.get(quality)*requirement/5);
+        }else if(qualityTab.get(quality)==1) {
+            this.requirement=requirement;
+        }
+        else {
+            this.requirement= (int) (requirement* qualityTab.get(quality));
+        }
+
+        this.basicDMG = (int) (basicDMG* qualityTab.get(quality))+1;
+    }
 
     public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG) {
         super(name, value,quality);

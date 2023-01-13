@@ -14,12 +14,13 @@ public class Armor extends Item{
         AgilityProtection = 0;
     }
 
-//    public Armor(String name, int value, String quality, int strengthProtection, int magicProtection, int agilityProtection) {
-//        super(name, value, quality);
-//        StrengthProtection = strengthProtection;
-//        MagicProtection = magicProtection;
-//        AgilityProtection = agilityProtection;
-//    }
+    public Armor(String name, int value, int strengthProtection, int magicProtection, int agilityProtection) {
+        super(name, value);
+        this.value = (int) (value* qualityTab.get(quality));
+        this.StrengthProtection = (int) (strengthProtection* qualityTab.get(quality));
+        this.MagicProtection = (int) (magicProtection* qualityTab.get(quality));
+        this.AgilityProtection = (int) (agilityProtection *qualityTab.get(quality));
+    }
 
     public Armor(String name, int value,String quality, int strengthProtection, int magicProtection, int agilityProtection) {
         super(name, value,quality);

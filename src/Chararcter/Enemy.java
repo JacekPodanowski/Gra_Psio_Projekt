@@ -33,6 +33,6 @@ public class Enemy extends Character{
     @Override
     public void setStrength(int strength) {
         this.strength = strength;
-        this.health = strength * 18;
+        this.health = 75;
     }
 }

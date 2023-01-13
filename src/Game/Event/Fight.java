@@ -1,6 +1,9 @@
 package Game.Event;
 
 import Chararcter.*;
+import Chararcter.Item.Armor;
+import Chararcter.Item.Potion;
+import Chararcter.Item.Weapon;
 import Game.*;
 import Observable.Subject;
 import Observers.Observer;
@@ -40,8 +43,16 @@ public class Fight implements Event {
 
 
     //================================================== KONSTRUKTORY ==================================================
-    public Fight(){
+    public Fight() {
         enemy = new Enemy();
+        enemy.setWeapon((Weapon) Game.generateItem('W'));
+        enemy.setArmor((Armor) Game.generateItem('A'));
+        enemy.getInventory()[0] = enemy.getWeapon();
+        enemy.getInventory()[1] = enemy.getArmor();
+        Random R = new Random();
+        if (R.nextBoolean()) {
+            enemy.getInventory()[2]=Game.generateItem('P');
+        }
     }
     //==================================================================================================================
 
@@ -66,12 +77,17 @@ public class Fight implements Event {
                 System.out.print("Użyłeś umiejętności " + player.getAbilities()[wybor - 1].toString());
                 player.attack(enemy, wybor - 1);
                 System.out.println(", zadałeś " + (int)(health - this.enemy.getHealth()) + " obrażeń.\n");
+                System.out.println("Twoje życie : "+player.getHealth());
+                System.out.println("Życie przeciwnika : "+this.enemy.getHealth());
+
             }
             else {
                 health = player.getHealth();
                 System.out.print("Przeciwnik atakuje ");
                 enemy.attack(player, generate.nextInt(0, 4));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
                 System.out.println(", zadaje " + (int)(health - player.getHealth()) + " obrażeń!\n");
+                System.out.println("Twoje życie : "+player.getHealth());
+                System.out.println("Życie przeciwnika : "+this.enemy.getHealth());
             }
             System.out.println();
         }

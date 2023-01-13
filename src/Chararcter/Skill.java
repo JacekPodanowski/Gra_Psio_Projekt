@@ -53,7 +53,7 @@ public class Skill {
                     this.turnSetter(player, character);
                 break;
         }
-            //==================================REZISTY==============================================
+        //==================================REZISTY==============================================
 
         int Basicdmg = player.getWeapon().getBasicDMG();
         dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;

@@ -18,7 +18,9 @@ public class Player extends Character {
         location_Y=0;
         location_X=size-1;
         this.exp = 0;
-        this.getInventory()[0]=new Potion("Woda",0,"Zwykła",10);
+        this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
+        this.getInventory()[1]=Game.generateItem('W');
+
         System.out.println("Wybierz profesję: ");
         System.out.println("1. Wojownik\t\t 2. Mag\t\t 3. Łucznik");
         switch(Game.askForChoice(3)){
@@ -51,17 +53,31 @@ public class Player extends Character {
     }
 
     public void pickUpItem(Item item){
+
         boolean succes= false;
         for (int i = 0; i < inventory.length; i++) {
             if(inventory[i]==null){
                 inventory[i]=item;
-                System.out.println("Podniesiono " + "nazwa przedmiotu "+ "na " + i + "miejsce w eq");
-                succes = true;
+                System.out.println("Podniesiono " + item.toString());
+                return;
             }
         }
-        if(!succes){
-            System.out.println("Ekwipunek pelny");
+
+        System.out.println("Brak miejsca w ekwipunku ! ");
+        System.out.println("Wybierz co wymienić : ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null) {
+                System.out.println(i+1 + ". " + inventory[i].toString());
+            }
+            else {
+                System.out.println(i+1 +". -----");
+            }
         }
+        System.out.println("\n6. Zostaw Przedmiot\n");
+
+        int choice = Game.askForChoice(6)-1;
+        System.out.println("Wymieniono "+ inventory[choice].toString()+ " na "+ item.toString());
+        inventory[choice]=item;
     }
 
     public void displayInventoryAndUse() {
@@ -81,28 +97,29 @@ public class Player extends Character {
             while (true){
                 int choice = Game.askForChoice(6)-1;
                 if(inventory[choice]!=null){
-
-                    System.out.println("Użyłeś " + inventory[choice].toString());
-
+                    
                     if(inventory[choice] instanceof Potion){
                         health=health+((Potion) inventory[choice]).getHealing();
+                        System.out.println("Użyłeś " + inventory[choice].toString());
                         System.out.println("Mikstura uleczeła cie o : "+ ((Potion) inventory[choice]).getHealing());
                         inventory[choice]=null;
+                        break;
                     }
                     if(inventory[choice] instanceof Weapon){
                         Weapon temp = weapon;
                         weapon= (Weapon) inventory[choice];
                         inventory[choice]=temp;
                         System.out.println("Wyposazyłes "+weapon.toString());
+                        break;
                     }
                     if(inventory[choice] instanceof Armor){
                         Armor temp = armor;
                         armor= (Armor) inventory[choice];
                         inventory[choice]=temp;
                         System.out.println("Wyposazyłes "+armor.toString());
+                        break;
                     }
-                    System.out.println();
-                    break;
+
                 }else {
                     System.out.println("Wybierz właściwy numer");
                 }
@@ -112,7 +129,7 @@ public class Player extends Character {
 
 
 
-//===========================================================SETERY I GETERY=====================================================================================
+    //===========================================================SETERY I GETERY=====================================================================================
     public int getLocation_Y() {
         return location_Y;
     }
@@ -149,6 +166,6 @@ public class Player extends Character {
     @Override
     public void setStrength(int strength){
         this.strength = strength;
-        this.health = strength * 20;
+        this.health = 100+ strength * 0.5;
     }
 }
