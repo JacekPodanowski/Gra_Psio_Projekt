@@ -2,6 +2,7 @@ package Observers;
 
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Game;
+import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.Panels.MainPanel;
 import GUI.Panels.StartGamePanel;
 import GUI.Panels.WindowStates;
@@ -9,7 +10,7 @@ import GUI.View.MainWindow;
 
 
 public class GUIRefresher implements Observer{
-    private MainWindow mainWindow;
+    private final MainWindow mainWindow;
     private Game game;
     public GUIRefresher(MainWindow mainWindow){
         this.mainWindow = mainWindow;
@@ -22,26 +23,24 @@ public class GUIRefresher implements Observer{
         mainWindow.getMainPanel().removeAll();
         mainWindow.getMainPanel().revalidate();
         mainWindow.getMainPanel().repaint();
-        mainWindow.add(new MainPanel(this.game, WindowStates.GAMESTART));
+        if(game.getPlayer().getProfession() == null) {
+            mainWindow.add(new MainPanel(this.game, WindowStates.GAMESTART));
+        }
+        else
+            mainWindow.add(new MainPanel(this.game, WindowStates.GAME));
         mainWindow.getMainPanel().revalidate();
         mainWindow.getMainPanel().repaint();
     }
 
     @Override
-    public void update(Player player) {
-        mainWindow.getGame().setPlayer(player);
-        update(mainWindow);
-    }
-
-    @Override
-    public void update(Game game) {
-        mainWindow.setGame(game);
-        update(mainWindow);
-    }
-
-    @Override
     public void update(StartGamePanel startGamePanel) {
         this.game = startGamePanel.getGame();
+        update(mainWindow);
+    }
+
+    @Override
+    public void update(ProfessionChoosePanel professionChoosePanel) {
+        this.game = professionChoosePanel.getGame();
         update(mainWindow);
     }
 }

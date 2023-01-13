@@ -10,13 +10,12 @@ import Observers.Observer;
 
 import java.util.ArrayList;
 
-public class Player extends Character implements Subject {
+public class Player extends Character {
 
     private int location_Y;
     private int location_X;
     private long exp;
     private boolean alive = true;
-    private ArrayList<Observer> observers = new ArrayList<>();
 
     public Player(int size) {
         super();
@@ -141,21 +140,5 @@ public class Player extends Character implements Subject {
     public void setStrength(int strength){
         this.strength = strength;
         this.health = strength * 20;
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for(int i = 0; i < observers.size(); i++)
-            observers.get(i).update(this);
     }
 }

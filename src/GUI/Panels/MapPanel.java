@@ -51,7 +51,7 @@ public class MapPanel extends JPanel implements Subject {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.getMap().setPlayerLocation(game.getPlayer(), game.getMap().getTabOfRoom()[i][j]);
-                game.notifyObservers();
+                //game.notifyObservers();
             }
         });
         return room;

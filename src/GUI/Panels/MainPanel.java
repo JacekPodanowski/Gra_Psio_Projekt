@@ -54,8 +54,10 @@ public class MainPanel extends JPanel {
                 this.add(new ProfessionChoosePanel(game));
                 break;
             case GAME:
-                this.add(new TopPanel(game));
-                this.add(new BottomPanel(game));
+                topPanel = new TopPanel(game);
+                bottomPanel = new BottomPanel(game);
+                this.add(topPanel);
+                this.add(bottomPanel);
                 break;
             case ENDGAME:
                 break;

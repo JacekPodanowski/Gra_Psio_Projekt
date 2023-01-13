@@ -4,19 +4,25 @@ import BackEnd.Chararcter.Profession.Archer;
 import BackEnd.Chararcter.Profession.Mage;
 import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Game;
+import Observable.Subject;
+import Observers.Observer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class ProfessionChoosePanel extends JPanel {
+public class ProfessionChoosePanel extends JPanel implements Subject {
     private JButton warrior;
     private JButton mage;
     private JButton archer;
+    private Game game;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
 
     public ProfessionChoosePanel(Game game){
+        this.game = game;
         this.setLayout(new GridLayout(1, 3));
         initiateWarrior(game);
         initiateMage(game);
@@ -33,6 +39,7 @@ public class ProfessionChoosePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 game.getPlayer().setProfession(new Warrior());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
+                notifyObservers();
             }
         });
     }
@@ -44,6 +51,7 @@ public class ProfessionChoosePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 game.getPlayer().setProfession(new Mage());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
+                notifyObservers();
             }
         });
     }
@@ -55,7 +63,32 @@ public class ProfessionChoosePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 game.getPlayer().setProfession(new Archer());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
+                notifyObservers();
             }
         });
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(int i = 0; i < observers.size(); i++)
+            observers.get(i).update(this);
     }
 }

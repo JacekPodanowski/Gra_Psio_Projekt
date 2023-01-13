@@ -12,7 +12,7 @@ import GUI.View.MainWindow;
 import java.io.*;
 import java.util.*;
 
-public class Game implements Serializable, Subject{
+public class Game implements Serializable {
     //============================================ ATRYBUTY KLASY ======================================================
     private int day;
     private Map map;
@@ -139,13 +139,13 @@ public class Game implements Serializable, Subject{
     //============================================= METODY KLASY =======================================================
     public void startGame(){
        
-        notifyObservers();
+        //notifyObservers();
         generateItems();
         text = "Aby wejść do kostki wpisz 1.";
         int wybor = askForChoice();
         if(wybor == 1)
             while(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                this.notifyObservers();
+                //this.notifyObservers();
                 for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
                     System.out.print((i+1)+" - ");
                     System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
@@ -232,21 +232,6 @@ public class Game implements Serializable, Subject{
         return Integer.parseInt(anwser);
     }
 */
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for(int i = 0; i < observers.size(); i++)
-            observers.get(i).update(this);
-    }
 
     public void generateItems(){
         java.util.Map qualityTab =makeQualityTab();
