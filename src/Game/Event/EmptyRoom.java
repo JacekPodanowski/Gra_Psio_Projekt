@@ -18,12 +18,12 @@ public class EmptyRoom implements Event {
         int wybor;
         do{
             if(rested==false) {
-                System.out.print("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Użyj przedmiotu.");
-                System.out.println("\t3. Odpocznij.");
-                wybor = Game.askForChoice(3);
+                System.out.print("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Użyj przedmiotu.\t3. Zobacz swoje statystyki.");
+                System.out.println("\t4. Odpocznij.");
+                wybor = Game.askForChoice(4);
             }else {
-                System.out.println("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Użyj przedmiotu.");
-                wybor = Game.askForChoice(2);
+                System.out.println("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Użyj przedmiotu.\t3. Zobacz swoje statystyki.");
+                wybor = Game.askForChoice(3);
             }
 
             switch(wybor) {
@@ -35,6 +35,9 @@ public class EmptyRoom implements Event {
                     player.displayInventoryAndUse();
                     break;
                 case 3:
+                    player.showStats();
+                    break;
+                case 4:
                     System.out.println("Wyczerpany padasz na ziemie.... \n");
                     rested=true;
 
@@ -50,7 +53,8 @@ public class EmptyRoom implements Event {
                             break;
                         case 2 :
                             player.setHealth(player.getHealth()-15);
-                            System.out.println("Budzą cie 3 szybkie lecz bolesne ciosy kijem lecz pokój wydaje się pusty");
+                            System.out.println("Budzą cie 3 szybkie lecz bolesne ciosy kijem ale pokój wydaje się być pusty");
+                            System.out.printf("|Zycie zmiejszone o 15 punktów|");
                             break;
                         case 3 :
                             System.out.println("Wstajesz i ruszasz dalej");

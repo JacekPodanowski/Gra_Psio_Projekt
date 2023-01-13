@@ -15,9 +15,12 @@ public class Player extends Character {
 
     public Player(int size) {
         super();
+        setLevel(1);
         location_Y=0;
         location_X=size-1;
         this.exp = 0;
+        armor=new Armor();
+        weapon=new Weapon();
         this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
         this.getInventory()[1]=Game.generateItem('W');
 
@@ -81,13 +84,17 @@ public class Player extends Character {
     }
 
     public void displayInventoryAndUse() {
+        System.out.println("Aktualnie używasz : ");
+        System.out.println("Broń - "+weapon.toString());
+        System.out.println("Zbroja - "+armor.toString());
+        System.out.println();
         System.out.println("W ekipunku masz: ");
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i] != null) {
                 System.out.println(i+1 + ". " + inventory[i].toString());
             }
             else {
-                System.out.println(i+1 +". -----");
+                System.out.println(i+1 +". -----------");
             }
         }
         System.out.println("6. Wyjdź\n");
@@ -97,7 +104,7 @@ public class Player extends Character {
             while (true){
                 int choice = Game.askForChoice(6)-1;
                 if(inventory[choice]!=null){
-                    
+
                     if(inventory[choice] instanceof Potion){
                         health=health+((Potion) inventory[choice]).getHealing();
                         System.out.println("Użyłeś " + inventory[choice].toString());
@@ -108,14 +115,23 @@ public class Player extends Character {
                     if(inventory[choice] instanceof Weapon){
                         Weapon temp = weapon;
                         weapon= (Weapon) inventory[choice];
-                        inventory[choice]=temp;
+
+                        if(!temp.getName().equals("Dłoń")) {
+                            inventory[choice] = temp;
+                        }else{
+                            inventory[choice] = null;
+                        }
                         System.out.println("Wyposazyłes "+weapon.toString());
                         break;
                     }
                     if(inventory[choice] instanceof Armor){
                         Armor temp = armor;
                         armor= (Armor) inventory[choice];
-                        inventory[choice]=temp;
+                        if(!temp.getName().equals("Nic")) {
+                            inventory[choice] = temp;
+                        }else{
+                            inventory[choice] = null;
+                        }
                         System.out.println("Wyposazyłes "+armor.toString());
                         break;
                     }
@@ -125,6 +141,15 @@ public class Player extends Character {
                 }
             }
         }catch (IndexOutOfBoundsException e){}
+    }
+
+    public void showStats(){
+        System.out.println("Twój poziom : "+level);
+        System.out.println("Twoje życie : "+health);
+        System.out.println("Twoja siła  : "+strength);
+        System.out.println("Twoja inteligencja  : "+intelligence);
+        System.out.println("Twoja zwinnosc  : "+agility);
+        System.out.println("Twoje złoto  : "+gold);
     }
 
 

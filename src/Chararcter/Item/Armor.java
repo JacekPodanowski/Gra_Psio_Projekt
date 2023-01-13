@@ -30,8 +30,8 @@ public class Armor extends Item{
         this.AgilityProtection = (int) (agilityProtection *qualityTab.get(quality));
     }
 
-    public void showStats() {
-        System.out.println(super.toString()+" Wartość : "+value+" Strength resist "+StrengthProtection+ " Magic resist: "+MagicProtection+" Agility resist : "+AgilityProtection);
+    public String toString() {
+        return super.toString()+"\tOchrona przed : "+"Siła-"+StrengthProtection+ " Magia-"+MagicProtection+" Zręcznosc-"+AgilityProtection;
     }
 
     public int getStrengthProtection() {

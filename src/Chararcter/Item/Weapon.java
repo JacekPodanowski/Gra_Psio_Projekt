@@ -48,8 +48,8 @@ public class Weapon extends Item{
         this.basicDMG = (int) (basicDMG* qualityTab.get(quality))+1;
     }
 
-    public void showStats() {
-        System.out.println(super.toString()+" Wartość : "+value+" dmg : "+basicDMG +" wymaganie : "+ requirement);
+    public String toString() {
+        return super.toString()+"\tDmg-"+basicDMG+ " typ-"+type +" wymaganie-"+ requirement;
     }
 
     public boolean isUsed() {

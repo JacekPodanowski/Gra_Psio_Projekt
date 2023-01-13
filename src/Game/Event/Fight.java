@@ -60,6 +60,10 @@ public class Fight implements Event {
 
     //============================================= METODY KLASY =======================================================
     public Event event(Player player){
+        if(player.getLevel()<=3){
+            enemy = new Enemy();
+            enemy.getInventory()[0]=Game.generateItem('P');
+        }
         System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
@@ -92,7 +96,30 @@ public class Fight implements Event {
             System.out.println();
         }
         if(player.getHealth() > 0){
-            System.out.println("Wygrywasz!");
+            System.out.println("Wygrywasz!\n");
+            System.out.println("Ta walka wiele cie nauczyła\nCo chciałbyś rozwinąć ?");
+            player.setLevel(player.getLevel()+1);
+            System.out.println("1.Siła");
+            System.out.println("2.Inteligencja");
+            System.out.println("3.Zwinność");
+            int choice = Game.askForChoice(3);
+            switch (choice){
+                case 1:
+                    player.setStrength(player.getStrength()+5);
+                    System.out.println("Teraz będziesz silniejszy");
+                    break;
+                case 2:
+                    player.setIntelligence(player.getIntelligence()+5);
+                    System.out.println("Teraz będziesz mądzrejszy");
+                    break;
+                case 3:
+                    player.setAgility(player.getAgility()+5);
+                    System.out.println("Teraz będziesz szybszy");
+                    break;
+            }
+            System.out.println();
+            System.out.println("Przy ciele znajdujesz "+enemy.getWeapon().getValue()+" złotych monet jak i pare przedmiotów: ");
+            player.setGold(player.getGold()+enemy.getWeapon().getValue());
             if(enemy.getInventory() != null)
                 return new Loot(enemy.getInventory());
             return new EmptyRoom();
