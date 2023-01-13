@@ -18,8 +18,9 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements Subject {
-    ArrayList<Observer> observers = new ArrayList<Observer>();
-    Game game;
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private Game game;
+    private MainPanel mainPanel;
 
     public MainWindow() {
         Dimension d = new Dimension(900, 700);
@@ -54,7 +55,7 @@ public class MainWindow extends JFrame implements Subject {
             }
         });
         game = new Game();
-        setContentPane(new MainPanel(game));
+        setContentPane(mainPanel);
     }
 
 
@@ -156,5 +157,13 @@ public class MainWindow extends JFrame implements Subject {
     }
     public Point centerLocation(int parentWidth, int parentHeight, int width, int height){
         return new Point((parentWidth -width) /2,(parentHeight -height)/2);
+    }
+
+    public MainPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public void setMainPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
     }
 }

@@ -2,6 +2,7 @@
 import BackEnd.Game.Game;
 
 import GUI.View.MainWindow;
+import Observers.GUIRefresher;
 
 
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
 
         MainWindow mainWindow = new MainWindow();
         mainWindow.setVisible(true);
-        //new PlayerOnMapPosition(mainWindow.getGame(), mainWindow);
+        new GUIRefresher(mainWindow);
 
 //        int choice = 0;
 //
