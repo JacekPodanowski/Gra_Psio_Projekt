@@ -5,7 +5,6 @@ import BackEnd.Game.Game;
 import GUI.Panels.MainPanel;
 import GUI.SaveLoadStrategy.LoadStrategy;
 import GUI.SaveLoadStrategy.SaveStrategy;
-import Observable.Subject;
 import Observers.Observer;
 
 
@@ -15,10 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
-public class MainWindow extends JFrame implements Subject {
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+public class MainWindow extends JFrame {
+    private Observer observer;
     private Game game;
     private MainPanel mainPanel;
 
@@ -54,8 +52,7 @@ public class MainWindow extends JFrame implements Subject {
                 } else setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         });
-        game = new Game();
-        setContentPane(mainPanel);
+        setContentPane(new MainPanel(game, observer));
     }
 
 
@@ -87,13 +84,7 @@ public class MainWindow extends JFrame implements Subject {
         jMenuItemNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game = new Game();
-                notifyObservers();
-                game.startGame();
-                //upPanel.remove(mapPanel);
-                //mapPanel = createMapPanel();
-                //upPanel.add(mapPanel);
-                //upPanel.revalidate();
+                game = new Game(observer);
             }
         });
         jMenu.add(jMenuItemNewGame);
@@ -119,33 +110,14 @@ public class MainWindow extends JFrame implements Subject {
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         setJMenuBar(jMenuBar);
-
     }
 
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
+    public Observer getObserver() {
+        return observer;
     }
 
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for(int i = 0; i < observers.size(); i++) {
-                observers.get(i).update(this);
-        }
-    }
-
-    public ArrayList<Observer> getObservers() {
-        return observers;
-    }
-
-    public void setObservers(ArrayList<Observer> observers) {
-        this.observers = observers;
+    public void setObserver(Observer observer) {
+        this.observer = observer;
     }
 
     public void setGame(Game game) {
@@ -155,8 +127,11 @@ public class MainWindow extends JFrame implements Subject {
     public Game getGame() {
         return game;
     }
-    public Point centerLocation(int parentWidth, int parentHeight, int width, int height){
+    public static Point centerLocation(int parentWidth, int parentHeight, int width, int height){
         return new Point((parentWidth -width) /2,(parentHeight -height)/2);
+    }
+    public static Point centerLocation(Component parent, Component object){
+        return new Point((parent.getWidth() - object.getWidth()) / 2,(parent.getHeight() - object.getHeight()) / 2);
     }
 
     public MainPanel getMainPanel() {

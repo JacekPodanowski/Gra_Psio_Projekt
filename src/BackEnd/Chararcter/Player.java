@@ -4,10 +4,11 @@ import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Potion;
 import BackEnd.Chararcter.Item.Weapon;
-import BackEnd.*;
 import BackEnd.Game.Game;
 import Observable.Subject;
 import Observers.Observer;
+
+import java.util.ArrayList;
 
 public class Player extends Character implements Subject {
 
@@ -15,14 +16,16 @@ public class Player extends Character implements Subject {
     private int location_X;
     private long exp;
     private boolean alive = true;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
-    public Player(int size) {
+    public Player(int size, Observer observer) {
         super();
         location_Y=0;
         location_X=size-1;
         this.exp = 0;
         this.getInventory()[0]=new Potion("Woda",0,"Zwykła",10);
-
+        this.observers.add(observer);
+        notifyObservers();
     }
 
     @Override
@@ -144,16 +147,17 @@ public class Player extends Character implements Subject {
 
     @Override
     public void registerObserver(Observer observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-
+        for(int i = 0; i < observers.size(); i++)
+            observers.get(i).update(this);
     }
 }

@@ -36,9 +36,9 @@ public class Game implements Serializable, Subject{
 
 
     //============================================= KONSTRUKTORY =======================================================
-    public Game(){
+    public Game(Observer observer){
         this.day = 0;
-        player = new Player(mapSize);
+        player = new Player(mapSize, observer);
         map = new Map(this.player,mapSize);
         map.displayMapFloor(1);
         System.out.println("\nRozpocząłeś nową grę!\n\n");
