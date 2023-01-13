@@ -44,15 +44,15 @@ public class Fight implements Event {
 
     //================================================== KONSTRUKTORY ==================================================
     public Fight() {
-        enemy = new Enemy();
-        enemy.setWeapon((Weapon) Game.generateItem('W'));
-        enemy.setArmor((Armor) Game.generateItem('A'));
-        enemy.getInventory()[0] = enemy.getWeapon();
-        enemy.getInventory()[1] = enemy.getArmor();
-        Random R = new Random();
-        if (R.nextBoolean()) {
-            enemy.getInventory()[2]=Game.generateItem('P');
-        }
+//        enemy = new Enemy();
+//        enemy.setWeapon((Weapon) Game.generateItem('W'));
+//        enemy.setArmor((Armor) Game.generateItem('A'));
+//        enemy.getInventory()[0] = enemy.getWeapon();
+//        enemy.getInventory()[1] = enemy.getArmor();
+//        Random R = new Random();
+//        if (R.nextBoolean()) {
+//            enemy.getInventory()[2]=Game.generateItem('P');
+//        }
     }
     //==================================================================================================================
 
@@ -60,10 +60,14 @@ public class Fight implements Event {
 
     //============================================= METODY KLASY =======================================================
     public Event event(Player player){
-        if(player.getLevel()<=3){
-            enemy = new Enemy();
-            enemy.getInventory()[0]=Game.generateItem('P');
-        }
+
+//        if(player.getLevel()<=3){
+//            enemy = new Enemy();
+//            enemy.getInventory()[0]=Game.generateItem('P');
+//        }
+
+        //enemy = new Enemy(player.getLevel());
+
         System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
@@ -97,7 +101,7 @@ public class Fight implements Event {
         }
         if(player.getHealth() > 0){
             System.out.println("Wygrywasz!\n");
-            System.out.println("Ta walka wiele cie nauczyła\nCo chciałbyś rozwinąć ?");
+            System.out.println("Ta walka wiele cie nauczyła\nCo chciałbyś rozwinąć ?\n");
             player.setLevel(player.getLevel()+1);
             System.out.println("1.Siła");
             System.out.println("2.Inteligencja");
