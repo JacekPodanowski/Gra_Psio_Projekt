@@ -3,24 +3,28 @@ package Observers;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Game;
 import GUI.Panels.MainPanel;
+import GUI.Panels.StartGamePanel;
 import GUI.Panels.WindowStates;
 import GUI.View.MainWindow;
 
 
 public class GUIRefresher implements Observer{
     private MainWindow mainWindow;
+    private Game game;
     public GUIRefresher(MainWindow mainWindow){
         this.mainWindow = mainWindow;
-        this.mainWindow.setObserver(this);
+        this.game = mainWindow.getGame();
+        this.mainWindow.getMainPanel().getStartGamePanel().registerObserver(this);
     }
 
     @Override
     public void update(MainWindow mainWindow) {
-        if(mainWindow.getGame().getPlayer().getProfession() == null) {
-            mainWindow.getMainPanel().setState(WindowStates.GAMESTART);
-            mainWindow.setMainPanel(new MainPanel(mainWindow.getGame(), this));
-            mainWindow.getMainPanel().revalidate();
-        }
+        mainWindow.getMainPanel().removeAll();
+        mainWindow.getMainPanel().revalidate();
+        mainWindow.getMainPanel().repaint();
+        mainWindow.add(new MainPanel(this.game, WindowStates.GAMESTART));
+        mainWindow.getMainPanel().revalidate();
+        mainWindow.getMainPanel().repaint();
     }
 
     @Override
@@ -32,6 +36,12 @@ public class GUIRefresher implements Observer{
     @Override
     public void update(Game game) {
         mainWindow.setGame(game);
+        update(mainWindow);
+    }
+
+    @Override
+    public void update(StartGamePanel startGamePanel) {
+        this.game = startGamePanel.getGame();
         update(mainWindow);
     }
 }

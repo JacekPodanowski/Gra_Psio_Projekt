@@ -18,14 +18,12 @@ public class Player extends Character implements Subject {
     private boolean alive = true;
     private ArrayList<Observer> observers = new ArrayList<>();
 
-    public Player(int size, Observer observer) {
+    public Player(int size) {
         super();
         location_Y=0;
         location_X=size-1;
         this.exp = 0;
         this.getInventory()[0]=new Potion("Woda",0,"Zwykła",10);
-        this.observers.add(observer);
-        notifyObservers();
     }
 
     @Override

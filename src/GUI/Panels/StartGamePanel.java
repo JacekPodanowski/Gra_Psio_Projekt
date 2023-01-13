@@ -5,24 +5,33 @@ import BackEnd.Game.Game;
 import GUI.SaveLoadStrategy.LoadStrategy;
 import GUI.View.MainWindow;
 import GUI.View.SaveLoadWindow;
+import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class StartGamePanel extends JPanel {
+public class StartGamePanel extends JPanel implements Subject {
     private Game game;
-    private Observer observer;
+    private boolean czyNowaGra = false;
+    private boolean czyWczytanaGra = false;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
-    public StartGamePanel(Game game, Observer observer){
+    public StartGamePanel(Game game){
         this.game = game;
-        this.observer = observer;
+
+        //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
+
+        //Layout
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        //Dodaje komponenty
         this.add(newGameButton(this));
         this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(loadGameButton(this));
@@ -40,7 +49,8 @@ public class StartGamePanel extends JPanel {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game = new Game(observer);
+                game = new Game();
+                notifyObservers();
             }});
         return newGameButton;
     }
@@ -63,10 +73,51 @@ public class StartGamePanel extends JPanel {
                     game = loadWindow.getGame();
                     loadWindow.setVisible(false);
                     loadWindow.setEnabled(false);
+                    czyWczytanaGra = true;
                 } else {
                     //CO MA ZROBIC? nie wiem jak to będzie ziom
                 }
             }});
         return loadGameButton;
+    }
+
+    public boolean isCzyNowaGra() {
+        return czyNowaGra;
+    }
+
+    public void setCzyNowaGra(boolean czyNowaGra) {
+        this.czyNowaGra = czyNowaGra;
+    }
+
+    public boolean isCzyWczytanaGra() {
+        return czyWczytanaGra;
+    }
+
+    public void setCzyWczytanaGra(boolean czyWczytanaGra) {
+        this.czyWczytanaGra = czyWczytanaGra;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(int i = 0; i < observers.size(); i++)
+            observers.get(i).update(this);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

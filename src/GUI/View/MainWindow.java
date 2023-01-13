@@ -3,8 +3,10 @@ package GUI.View;
 
 import BackEnd.Game.Game;
 import GUI.Panels.MainPanel;
+import GUI.Panels.WindowStates;
 import GUI.SaveLoadStrategy.LoadStrategy;
 import GUI.SaveLoadStrategy.SaveStrategy;
+import Observers.GUIRefresher;
 import Observers.Observer;
 
 
@@ -52,7 +54,9 @@ public class MainWindow extends JFrame {
                 } else setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         });
-        setContentPane(new MainPanel(game, observer));
+        mainPanel = new MainPanel(game, WindowStates.STARTMENU);
+        setContentPane(mainPanel);
+        setVisible(true);
     }
 
 
@@ -84,7 +88,8 @@ public class MainWindow extends JFrame {
         jMenuItemNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game = new Game(observer);
+                game = new Game();
+
             }
         });
         jMenu.add(jMenuItemNewGame);

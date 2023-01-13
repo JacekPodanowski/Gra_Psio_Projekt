@@ -11,10 +11,7 @@ public class Main {
 
         //Tworzę sobie uchyt
         Game g1 = null;
-
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.setVisible(true);
-        new GUIRefresher(mainWindow);
+        new GUIRefresher(new MainWindow());
 
 //        int choice = 0;
 //

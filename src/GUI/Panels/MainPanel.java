@@ -9,13 +9,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
     private JPanel topPanel;
     private JPanel bottomPanel;
-    private WindowStates state = WindowStates.STARTMENU;
+    private WindowStates state;
     private Game game;
-    public MainPanel(Game game, Observer observer){
+    private StartGamePanel startGamePanel;
+    public MainPanel(Game game, WindowStates state){
+        this.state = state;
         this.game = game;
         this.setPreferredSize(new Dimension(900, 700));
         this.setLayout(new GridLayout(2, 1));
@@ -25,7 +28,24 @@ public class MainPanel extends JPanel {
                 this.add(Box.createRigidArea(new Dimension(0, 50)));
                 this.add(createTitleLabel("Witaj w grze: \"Ucieczka z kostki\"", 30));
                 this.add(Box.createRigidArea(new Dimension(0, 50)));
-                this.add(new StartGamePanel(game, observer));
+                startGamePanel = new StartGamePanel(game);
+                this.add(startGamePanel);
+//                Thread t1 = new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        while(true){
+//                            if(startGamePanel.isCzyNowaGra()){
+//                                state = WindowStates.GAMESTART;
+//                                break;
+//                            }
+//                            if(startGamePanel.isCzyWczytanaGra()){
+//                                state = WindowStates.GAME;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                });
+//                t1.start();
                 break;
             case GAMESTART:
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -73,5 +93,13 @@ public class MainPanel extends JPanel {
 
     public void setState(WindowStates state) {
         this.state = state;
+    }
+
+    public StartGamePanel getStartGamePanel() {
+        return startGamePanel;
+    }
+
+    public void setStartGamePanel(StartGamePanel startGamePanel) {
+        this.startGamePanel = startGamePanel;
     }
 }
