@@ -83,6 +83,7 @@ public class Map {
         // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setVisited(true);
 
         // losujemy wyjście i dwa zaułki na górnej lub na prawej granice mapy
         // losowanie wyjścia
