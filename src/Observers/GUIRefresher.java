@@ -18,29 +18,21 @@ public class GUIRefresher implements Observer{
         this.mainWindow.getMainPanel().getStartGamePanel().registerObserver(this);
     }
 
-    @Override
-    public void update(MainWindow mainWindow) {
+    public void refresh(MainWindow mainWindow) {
         mainWindow.getMainPanel().removeAll();
-        mainWindow.getMainPanel().revalidate();
-        mainWindow.getMainPanel().repaint();
+        mainWindow.remove(mainWindow.getMainPanel());
         if(game.getPlayer().getProfession() == null) {
             mainWindow.add(new MainPanel(this.game, WindowStates.GAMESTART));
         }
-        else
+        else {
             mainWindow.add(new MainPanel(this.game, WindowStates.GAME));
+        }
         mainWindow.getMainPanel().revalidate();
         mainWindow.getMainPanel().repaint();
     }
-
     @Override
-    public void update(StartGamePanel startGamePanel) {
-        this.game = startGamePanel.getGame();
-        update(mainWindow);
-    }
-
-    @Override
-    public void update(ProfessionChoosePanel professionChoosePanel) {
-        this.game = professionChoosePanel.getGame();
-        update(mainWindow);
+    public void update(Game game) {
+        this.game = game;
+        refresh(mainWindow);
     }
 }

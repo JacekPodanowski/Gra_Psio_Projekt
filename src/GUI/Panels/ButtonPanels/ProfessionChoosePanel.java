@@ -39,6 +39,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 game.getPlayer().setProfession(new Warrior());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
+                System.out.println(game.getPlayer().getProfession());
                 notifyObservers();
             }
         });
@@ -89,6 +90,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
     @Override
     public void notifyObservers() {
         for(int i = 0; i < observers.size(); i++)
-            observers.get(i).update(this);
+            observers.get(i).update(this.getGame());
     }
 }

@@ -110,7 +110,7 @@ public class StartGamePanel extends JPanel implements Subject {
     @Override
     public void notifyObservers() {
         for(int i = 0; i < observers.size(); i++)
-            observers.get(i).update(this);
+            observers.get(i).update(this.getGame());
     }
 
     public Game getGame() {
