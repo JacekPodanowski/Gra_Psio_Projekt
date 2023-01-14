@@ -35,7 +35,7 @@ public class BottomPanel extends JPanel implements Subject {
             exitPanel = new ExitPanel();
             this.add(exitPanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
-            fightPanel = new FightPanel();
+            fightPanel = new FightPanel(game);
             this.add(fightPanel);
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
 
