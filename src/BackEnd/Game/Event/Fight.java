@@ -3,17 +3,24 @@ package BackEnd.Game.Event;
 import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Game;
+import GUI.Panels.IConsolePanel;
 import Observers.Observer;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Fight implements Event {
 
+
+
+
+
+
     //================================================= ATRYBUTY KLASY =================================================
     private String name = "Walka";
     private Enemy enemy;
-    private ArrayList<Observer> observers = new ArrayList<>();
+    IConsolePanel consolePanel;
     //==================================================================================================================
 
 
@@ -43,13 +50,40 @@ public class Fight implements Event {
     public Fight(){
         enemy = new Enemy();
     }
-    //==================================================================================================================
 
+    public void setConsolePanel(IConsolePanel consolePanel) {
+        this.consolePanel = consolePanel;
+    }
+
+    //==================================================================================================================
+/*
+    public void attach(IFightObserver observer)
+    {
+        observers.add(observer);
+    }
+
+    public void detach(IFightObserver observer)
+    {
+        observers.remove(observer);
+    }
+  */
 
 
     //============================================= METODY KLASY =======================================================
+
+
+
+    public void rozpocznijWalke()
+    {
+
+    }
+
     public Event event(Player player){
-        System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
+        consolePanel.setMessage("Spotkałeś na swojej drodze przeciwnika!");
+
+
+        /*
+          System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
             player.setPlayerTurn(false);
@@ -81,9 +115,13 @@ public class Fight implements Event {
                 return new Loot(enemy.getInventory());
             return new EmptyRoom();
         }
+
+         */
         return null;
     }
     public String toString() {return name;}
 
+    }
+
     //==================================================================================================================
-}
+
