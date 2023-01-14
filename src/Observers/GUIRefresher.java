@@ -1,10 +1,7 @@
 package Observers;
 
-import BackEnd.Chararcter.Player;
 import BackEnd.Game.Game;
-import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.Panels.MainPanel;
-import GUI.Panels.StartGamePanel;
 import GUI.Panels.WindowStates;
 import GUI.View.MainWindow;
 
@@ -28,11 +25,15 @@ public class GUIRefresher implements Observer{
             mainWindow.getMainPanel().getProfessionChoosePanel().registerObserver(this);
         }
         else {
-            mainWindow.getMainPanel().getProfessionChoosePanel().removeObserver(this);
+            this.game.getMap().setRoomTypes(1, this.game.getPlayer());
             mainWindow.setMainPanel(new MainPanel(this.game, WindowStates.GAME));
             mainWindow.add(mainWindow.getMainPanel());
-            mainWindow.getMainPanel().getBottomPanel().registerObserver(this);
-            //mainWindow.getMainPanel().getTopPanel().registerObserver(this);
+            if(mainWindow.getMainPanel().getBottomPanel().getObservers().size() == 0)
+                mainWindow.getMainPanel().getBottomPanel().registerObserver(this);
+            if(mainWindow.getMainPanel().getTopPanel().getMapPanel().getObservers().size() == 0)
+                mainWindow.getMainPanel().getTopPanel().getMapPanel().registerObserver(this);
+            if(mainWindow.getMainPanel().getTopPanel().getGamePanel().getObservers().size() == 0)
+                mainWindow.getMainPanel().getTopPanel().getGamePanel().registerObserver(this);
         }
         mainWindow.getMainPanel().revalidate();
         mainWindow.getMainPanel().repaint();

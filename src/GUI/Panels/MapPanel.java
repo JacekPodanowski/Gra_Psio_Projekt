@@ -1,6 +1,7 @@
 package GUI.Panels;
 
 import BackEnd.Game.Game;
+import BackEnd.Game.RoomType;
 import Observable.Subject;
 import Observers.Observer;
 
@@ -24,17 +25,21 @@ public class MapPanel extends JPanel implements Subject {
         for (int i = 0; i < this.game.getMap().getTabOfRoom().length; i++) {
             for (int j = 0; j < this.game.getMap().getTabOfRoom()[0].length; j++) {
                 rooms[i][j] = createButton(i, j);
-                switch (this.game.getMap().getRoomTypes()[i][j]) {
-                    case withPlayer:
-                        rooms[i][j].setText("Znajdujesz się tutaj");
-                        break;
-                    case hidden, empty:
-                        rooms[i][j].setVisible(false);
-                        break;
+                if (this.game.getMap().getRoomTypes()[i][j] == RoomType.withPlayer) {
+                    rooms[i][j].setText("Znajdujesz się tutaj");
+                    rooms[i][j].setFont(new Font("jakis font", Font.BOLD | Font.ITALIC, 5));
+                } else {
+                    rooms[i][j].setVisible(false);
                 }
                 this.add(rooms[i][j]);
-                rooms[i][j].setEnabled(this.game.getMap().getTabOfRoom()[i][j].isAvailable());
-                if(this.game.getMap().getTabOfRoom()[i][j].isAvailable())
+                if(this.game.getMap().getTabOfRoom()[i][j].isAvailable()) {
+                    rooms[i][j].setEnabled(true);
+                    rooms[i][j].setVisible(true);
+                }
+                else {
+                    rooms[i][j].setEnabled(false);
+                }
+                if(this.game.getMap().getTabOfRoom()[i][j].isAvailable() && !this.game.getMap().getTabOfRoom()[i][j].isVisited())
                     rooms[i][j].setText("?");
                 this.add(rooms[i][j]);
             }
@@ -51,7 +56,7 @@ public class MapPanel extends JPanel implements Subject {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.getMap().setPlayerLocation(game.getPlayer(), game.getMap().getTabOfRoom()[i][j]);
-                //game.notifyObservers();
+                notifyObservers();
             }
         });
         return room;
@@ -70,7 +75,11 @@ public class MapPanel extends JPanel implements Subject {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < observers.size(); i++) {
-            //observers.get(i).update();
+            observers.get(i).update(this.game);
         }
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
     }
 }

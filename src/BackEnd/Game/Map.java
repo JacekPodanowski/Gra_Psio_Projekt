@@ -525,13 +525,15 @@ public class Map {
                     roomTypes[i][j] = RoomType.withPlayer;
                 } else if(tabOfRoom[i][j].isVisited()) {
                     roomTypes[i][j] = RoomType.visited;
-                } else{
+                } else if(!this.toExitRooms.contains(this.tabOfRoom[i][j])){
                     roomTypes[i][j] = RoomType.hidden;
-                }
+                } else
+                    roomTypes[i][j] = RoomType.available;
                 if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()]))
                     tabOfRoom[i][j].setAvailable(true);
-                else
-                    tabOfRoom[j][j].setAvailable(false);
+                else {
+                    tabOfRoom[i][j].setAvailable(false);
+                }
             }
         }
     }
@@ -554,8 +556,8 @@ public class Map {
     }
     
     public void setPlayerLocation(Player player, Room room){
-        player.setLocation_X(room.getColRoom());
-        player.setLocation_Y(room.getRowRoom());
+        player.setLocation_X(room.getRowRoom());
+        player.setLocation_Y(room.getColRoom());
     }
 }
 //======================================================================================================================
