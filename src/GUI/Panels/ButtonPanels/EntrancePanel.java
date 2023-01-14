@@ -1,4 +1,9 @@
 package GUI.Panels.ButtonPanels;
 
-public class EntrancePanel {
+import javax.swing.*;
+
+public class EntrancePanel extends JPanel {
+    public EntrancePanel(){
+
+    }
 }

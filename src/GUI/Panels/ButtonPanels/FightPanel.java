@@ -1,4 +1,6 @@
 package GUI.Panels.ButtonPanels;
 
-public class FightPanel {
+import javax.swing.*;
+
+public class FightPanel extends JPanel {
 }

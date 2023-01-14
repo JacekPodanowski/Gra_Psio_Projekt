@@ -1,4 +1,6 @@
 package GUI.Panels.ButtonPanels;
 
-public class EmptyRoomPanel {
+import javax.swing.*;
+
+public class EmptyRoomPanel extends JPanel {
 }

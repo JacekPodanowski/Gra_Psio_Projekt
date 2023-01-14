@@ -2,5 +2,5 @@ package GUI.Panels.ButtonPanels;
 
 import javax.swing.*;
 
-public class LootPanel extends JPanel {
+public class ExitPanel extends JPanel {
 }

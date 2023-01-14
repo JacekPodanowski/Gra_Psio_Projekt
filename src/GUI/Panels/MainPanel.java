@@ -12,11 +12,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
-    private JPanel topPanel;
-    private JPanel bottomPanel;
+    private TopPanel topPanel;
+    private BottomPanel bottomPanel;
     private WindowStates state;
     private Game game;
     private StartGamePanel startGamePanel;
+    private ProfessionChoosePanel professionChoosePanel;
     public MainPanel(Game game, WindowStates state){
         this.state = state;
         this.game = game;
@@ -51,7 +52,8 @@ public class MainPanel extends JPanel {
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
                 this.add(new Label("Aby rozpocząc grę, wybierz swoją profesję: ", Label.CENTER));
                 this.add(Box.createRigidArea(new Dimension(0, 100)));
-                this.add(new ProfessionChoosePanel(game));
+                professionChoosePanel = new ProfessionChoosePanel(game);
+                this.add(professionChoosePanel);
                 break;
             case GAME:
                 topPanel = new TopPanel(game);
@@ -73,20 +75,36 @@ public class MainPanel extends JPanel {
     }
 
 
-    public JPanel getTopPanel() {
+    public TopPanel getTopPanel() {
         return topPanel;
     }
 
-    public void setTopPanel(JPanel topPanel) {
+    public void setTopPanel(TopPanel topPanel) {
         this.topPanel = topPanel;
     }
 
-    public JPanel getBottomPanel() {
+    public BottomPanel getBottomPanel() {
         return bottomPanel;
     }
 
-    public void setBottomPanel(JPanel bottomPanel) {
+    public void setBottomPanel(BottomPanel bottomPanel) {
         this.bottomPanel = bottomPanel;
+    }
+
+    public ProfessionChoosePanel getProfessionChoosePanel() {
+        return professionChoosePanel;
+    }
+
+    public void setProfessionChoosePanel(ProfessionChoosePanel professionChoosePanel) {
+        this.professionChoosePanel = professionChoosePanel;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public WindowStates getState() {
