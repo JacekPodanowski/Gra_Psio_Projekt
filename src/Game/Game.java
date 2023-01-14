@@ -224,25 +224,25 @@ public class Game implements Serializable, Subject {
         java.util.Map qualityTab = makeQualityTab();
 
         //Bron Archer
-        Weapon weapon0 = new Weapon("Proca", 3, "Zwykły", 'A', 20, 6);
-        Weapon weapon1 = new Weapon("Łuk", 5, "Zwykły", 'A', 30, 8);
-        Weapon weapon2 = new Weapon("Długi Łuk", 7, "Zwykły", 'A', 35, 11);
-        Weapon weapon3 = new Weapon("Harpun", 9, "Zwykły", 'A', 40, 13);
-        Weapon weapon4 = new Weapon("Ciężka Kusza", 12, "Zwykły", 'A', 50, 20);
+        Weapon weapon0 = new Weapon("Proca", 3, "Zwykły", 'A', 20, 6,1);
+        Weapon weapon1 = new Weapon("Łuk", 5, "Zwykły", 'A', 30, 8,2);
+        Weapon weapon2 = new Weapon("Długi Łuk", 7, "Zwykły", 'A', 35, 11,3);
+        Weapon weapon3 = new Weapon("Harpun", 9, "Zwykły", 'A', 40, 13,4);
+        Weapon weapon4 = new Weapon("Ciężka Kusza", 12, "Zwykły", 'A', 50, 20,5);
 
         //Bron Mage
-        Weapon weapon5 = new Weapon("Szklana Kula", 3, "Zwykły", 'I', 20, 5);
-        Weapon weapon6 = new Weapon("Różdżka losu", 5, "Zwykły", 'I', 30, 8);
-        Weapon weapon7 = new Weapon("Kryształowy Kostur", 10, "Zwykły", 'I', 35, 11);
-        Weapon weapon8 = new Weapon("Korzeń Zła", 12, "Zwykły", 'I', 40, 13);
-        Weapon weapon9 = new Weapon("Kij Św.Teresy", 20, "Zwykły", 'I', 65, 25);
+        Weapon weapon5 = new Weapon("Szklana Kula", 3, "Zwykły", 'I', 20, 5,1);
+        Weapon weapon6 = new Weapon("Różdżka losu", 5, "Zwykły", 'I', 30, 8,2);
+        Weapon weapon7 = new Weapon("Kryształowy Kostur", 10, "Zwykły", 'I', 35, 11,3);
+        Weapon weapon8 = new Weapon("Korzeń Zła", 12, "Zwykły", 'I', 40, 13,4);
+        Weapon weapon9 = new Weapon("Kij Św.Teresy", 20, "Zwykły", 'I', 65, 25,5);
 
         //Bron Warrior
-        Weapon weapon10 = new Weapon("Miecz Treningowy", 3, "Zwykły", 'S', 20, 4);
-        Weapon weapon11 = new Weapon("Tasak", 5, "Zwykły", 'S', 30, 8);
-        Weapon weapon12 = new Weapon("Siekiera", 10, "Zwykły", 'S', 35, 10);
-        Weapon weapon13 = new Weapon("Długi Miecz", 15, "Zwykły", 'S', 45, 16);
-        Weapon weapon14 = new Weapon("Spartańska Dzida", 25, "Zwykły", 'S', 55, 23);
+        Weapon weapon10 = new Weapon("Miecz Treningowy", 3, "Zwykły", 'S', 20, 4,1);
+        Weapon weapon11 = new Weapon("Tasak", 5, "Zwykły", 'S', 30, 8,2);
+        Weapon weapon12 = new Weapon("Siekiera", 10, "Zwykły", 'S', 35, 10,3);
+        Weapon weapon13 = new Weapon("Długi Miecz", 15, "Zwykły", 'S', 45, 16,4);
+        Weapon weapon14 = new Weapon("Spartańska Dzida", 25, "Zwykły", 'S', 55, 23,5);
 
         basicWepons.add(weapon0);
         basicWepons.add(weapon1);
@@ -267,25 +267,25 @@ public class Game implements Serializable, Subject {
 //        }
 
         //Armor na Archer
-        Armor armor0 = new Armor("Szmata", 1, "Zwykły", 10, 0, 5);
-        Armor armor1 = new Armor("Narzuta", 3, "Zwykły", 3, 6, 9);
-        Armor armor2 = new Armor("Jesionka", 5, "Zwykły", 6, 9, 12);
-        Armor armor3 = new Armor("Kurtka", 10, "Zwykły", 2, 8, 9);
-        Armor armor4 = new Armor("Mundur Zwiadowcy", 20, "Zwykły", 25, 20, 50);
+        Armor armor0 = new Armor("Szmata", 1, "Zwykły", 10, 0, 5,1);
+        Armor armor1 = new Armor("Narzuta", 3, "Zwykły", 3, 6, 9,2);
+        Armor armor2 = new Armor("Jesionka", 5, "Zwykły", 6, 9, 12,3);
+        Armor armor3 = new Armor("Kurtka", 10, "Zwykły", 2, 8, 9,4);
+        Armor armor4 = new Armor("Mundur Zwiadowcy", 20, "Zwykły", 25, 20, 50,5);
 
         //Armor na Mage
-        Armor armor5 = new Armor("Peleryna", 5, "Zwykły", 10, 20, 10);
-        Armor armor6 = new Armor("Tunika", 3, "Zwykły", 15, 15, 15);
-        Armor armor7 = new Armor("Przeszywalnica", 6, "Zwykły", 25, 20, 25);
-        Armor armor8 = new Armor("Magiczny Koc", 10, "Zwykły", 10, 50, 25);
-        Armor armor9 = new Armor("Naładowana Sutanna", 20, "Zwykły", 20, 80, 30);
+        Armor armor5 = new Armor("Peleryna", 5, "Zwykły", 10, 20, 10,1);
+        Armor armor6 = new Armor("Tunika", 3, "Zwykły", 15, 15, 15,2);
+        Armor armor7 = new Armor("Przeszywalnica", 6, "Zwykły", 25, 20, 25,3);
+        Armor armor8 = new Armor("Magiczny Koc", 10, "Zwykły", 10, 50, 25,4);
+        Armor armor9 = new Armor("Naładowana Sutanna", 20, "Zwykły", 20, 80, 30,5);
 
         //Armor na Warrior
-        Armor armor10 = new Armor("Beczka", 1, "Zwykły", 30, 0, 5);
-        Armor armor11 = new Armor("Skórzana Szata", 7, "Zwykły", 30, 10, 20);
-        Armor armor12 = new Armor("Żółwia skorupa", 10, "Zwykły", 85, 10, 10);
-        Armor armor13 = new Armor("Kolczuga", 15, "Zwykły", 40, 10, 20);
-        Armor armor14 = new Armor("Rycerska Zbroja", 25, "Zwykły", 60, 20, 30);
+        Armor armor10 = new Armor("Beczka", 1, "Zwykły", 30, 0, 5,1);
+        Armor armor11 = new Armor("Skórzana Szata", 7, "Zwykły", 30, 10, 20,2);
+        Armor armor12 = new Armor("Żółwia skorupa", 10, "Zwykły", 85, 10, 10,3);
+        Armor armor13 = new Armor("Kolczuga", 15, "Zwykły", 40, 10, 20,4);
+        Armor armor14 = new Armor("Rycerska Zbroja", 25, "Zwykły", 60, 20, 30,5);
 
         basicArmors.add(armor0);
         basicArmors.add(armor1);
@@ -343,11 +343,11 @@ public class Game implements Serializable, Subject {
         switch (R.nextInt(3)) {
             case 0:
                 Weapon B= basicWepons.get(R.nextInt(basicWepons.size()));
-                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG());
+                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
                 return W;
             case 1:
                 Armor B1= basicArmors.get(R.nextInt(basicArmors.size()));
-                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection());
+                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
                 return A;
             case 2:
                 Potion B2= basicPotions.get(R.nextInt(basicPotions.size()));
@@ -364,11 +364,11 @@ public class Game implements Serializable, Subject {
         switch (choice) {
             case 'W':
                 Weapon B= basicWepons.get(R.nextInt(basicWepons.size()));
-                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG());
+                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
                 return W;
             case 'A':
                 Armor B1= basicArmors.get(R.nextInt(basicArmors.size()));
-                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection());
+                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
                 return A;
             case 'P':
                 Potion B2= basicPotions.get(R.nextInt(basicPotions.size()));

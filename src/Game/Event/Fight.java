@@ -43,6 +43,16 @@ public class Fight implements Event {
 
 
     //================================================== KONSTRUKTORY ==================================================
+//    public Fight() {
+////        enemy = new Enemy();
+////        enemy.setWeapon((Weapon) Game.generateItem('W'));
+////        enemy.setArmor((Armor) Game.generateItem('A'));
+////        enemy.getInventory()[0] = enemy.getWeapon();
+////        enemy.getInventory()[1] = enemy.getArmor();
+////        Random R = new Random();
+////        if (R.nextBoolean()) {
+////            enemy.getInventory()[2]=Game.generateItem('P');
+////        }
     public Fight() {
 //        enemy = new Enemy();
 //        enemy.setWeapon((Weapon) Game.generateItem('W'));
@@ -61,10 +71,23 @@ public class Fight implements Event {
     //============================================= METODY KLASY =======================================================
     public Event event(Player player){
 
-//        if(player.getLevel()<=3){
-//            enemy = new Enemy();
-//            enemy.getInventory()[0]=Game.generateItem('P');
-//        }
+        Random R =new Random();
+        if(player.getLevel()<=3){
+            enemy = new Enemy();
+            enemy.setWeapon((Weapon) Game.generateItem('W'));
+            enemy.setArmor((Armor) Game.generateItem('A'));
+            enemy.getInventory()[0] = enemy.getWeapon();
+            enemy.getInventory()[1] = enemy.getArmor();
+                    if (R.nextBoolean()) {
+                    enemy.getInventory()[2]=Game.generateItem('P');
+                    }
+        }else{
+            enemy= new Enemy();
+
+
+        }
+
+
 
         //enemy = new Enemy(player.getLevel());
 

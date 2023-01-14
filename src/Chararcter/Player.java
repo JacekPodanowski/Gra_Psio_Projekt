@@ -171,6 +171,8 @@ public class Player extends Character {
         this.location_X = location_X;
     }
 
+
+
     public long getExp() {
         return exp;
     }
