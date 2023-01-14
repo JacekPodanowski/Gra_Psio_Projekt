@@ -20,6 +20,7 @@ public class BottomPanel extends JPanel implements Subject {
     private ExitPanel exitPanel;
     private Game game;
     private ArrayList<Observer> observers = new ArrayList<>();
+
     public BottomPanel(Game game){
         this.game = game;
         this.setPreferredSize(new Dimension(900, 300));
@@ -35,7 +36,8 @@ public class BottomPanel extends JPanel implements Subject {
             exitPanel = new ExitPanel();
             this.add(exitPanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
-            fightPanel = new FightPanel();
+
+            fightPanel = new FightPanel(game);
             this.add(fightPanel);
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
 
@@ -46,26 +48,9 @@ public class BottomPanel extends JPanel implements Subject {
         
         fightPanel = new FightPanel(game);//tu ma byc Game game
         this.add(fightPanel);
-//        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
-//            entrancePanel = new EntrancePanel();
-//            this.add(entrancePanel);
-//        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
-//            emptyRoomPanel = new EmptyRoomPanel();
-//            this.add(emptyRoomPanel);
-//        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
-//            exitPanel = new ExitPanel();
-//            this.add(exitPanel);
-//        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
-//            fightPanel = new FightPanel();
-//            this.add(fightPanel);
-//            for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
-//
-//        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
-//            lootPanel = new LootPanel();//tu ma byc Game game
-//            this.add(lootPanel);
-//        }
-
     }
+
+
 
     public Game getGame() {
         return game;
