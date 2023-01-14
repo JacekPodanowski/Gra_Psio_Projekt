@@ -41,6 +41,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
                 System.out.println(game.getPlayer().getProfession());
                 notifyObservers();
+                removeObserver(observers.get(0));
             }
         });
     }
@@ -53,6 +54,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.getPlayer().setProfession(new Mage());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
                 notifyObservers();
+                removeObserver(observers.get(0));
             }
         });
     }
@@ -65,6 +67,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.getPlayer().setProfession(new Archer());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
                 notifyObservers();
+                removeObserver(observers.get(0));
             }
         });
     }
@@ -75,6 +78,14 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(ArrayList<Observer> observers) {
+        this.observers = observers;
     }
 
     @Override

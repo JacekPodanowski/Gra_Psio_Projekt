@@ -1,9 +1,14 @@
 package GUI.Panels;
 
+import Observable.Subject;
+import Observers.Observer;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Subject {
+    private ArrayList<Observer> observers = new ArrayList<>();
     public GamePanel(){
         this.setPreferredSize(new Dimension(450, 400));
         /*
@@ -21,5 +26,24 @@ public class GamePanel extends JPanel {
         }
         return gamePanel;
          */
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
     }
 }
