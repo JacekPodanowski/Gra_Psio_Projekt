@@ -16,7 +16,10 @@ public class Exit implements Event{
                 case 1:
                     System.out.println("Niepewny co czeka wchodzisz w magiczna dziure.");
                     System.out.println("\n  GRATULACJE ");
-                    System.out.println("Udało ci się uciec z kostki ");
+                    System.out.println("Udało ci się uciec z kostki \n");
+                    System.out.println("Twoje statystyki : \n");
+                    player.showStats();
+                    System.out.println("Zabici wrogowie : " +player.getLevel());
                     System.exit(420);
                     break;
             }

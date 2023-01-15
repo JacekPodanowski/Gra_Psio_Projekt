@@ -11,6 +11,7 @@ public class Room {
     private boolean enter;
     private boolean exit;
     private boolean visited;
+    private boolean rested=false;
     private int rowRoom;
     private int colRoom;
     private ArrayList<int[]> pathSet; //arraylista przechowujaca wspolrzedne pokojow do ktorych mozna pojsc z danego pokoju
@@ -99,6 +100,15 @@ public class Room {
     public void setAvailableRoomsAround(ArrayList<Room> availableRoomsAround) {
         this.availableRoomsAround = availableRoomsAround;
     }
+
+    public boolean isRested() {
+        return rested;
+    }
+
+    public void setRested(boolean rested) {
+        this.rested = rested;
+    }
+
     //==================================================================================================================
 
 

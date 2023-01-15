@@ -53,7 +53,7 @@ public class Skill {
                     this.turnSetter(player, character);
                 break;
         }
-            //==================================REZISTY==============================================
+        //==================================REZISTY==============================================
 
         int Basicdmg = player.getWeapon().getBasicDMG();
         dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;
@@ -61,7 +61,7 @@ public class Skill {
 
 
         Random r = new Random();
-        if(r.nextInt(100) > accuracy) {
+        if(r.nextInt(110) > accuracy) {
             System.out.print(", atak nie trafia");
             dmg = 0;
         }
