@@ -71,25 +71,7 @@ public class Fight implements Event {
     //============================================= METODY KLASY =======================================================
     public Event event(Player player){
 
-        Random R =new Random();
-        if(player.getLevel()<=3){
-            enemy = new Enemy();
-            enemy.setWeapon((Weapon) Game.generateItem('W'));
-            enemy.setArmor((Armor) Game.generateItem('A'));
-            enemy.getInventory()[0] = enemy.getWeapon();
-            enemy.getInventory()[1] = enemy.getArmor();
-                    if (R.nextBoolean()) {
-                    enemy.getInventory()[2]=Game.generateItem('P');
-                    }
-        }else{
-            enemy= new Enemy();
-
-
-        }
-
-
-
-        //enemy = new Enemy(player.getLevel());
+        enemy = new Enemy(player.getLevel());
 
         System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
@@ -145,10 +127,12 @@ public class Fight implements Event {
                     break;
             }
             System.out.println();
-            System.out.println("Przy ciele znajdujesz "+enemy.getWeapon().getValue()+" złotych monet jak i pare przedmiotów: ");
+            System.out.print("Przy ciele znajdujesz "+enemy.getWeapon().getValue()+" złotych monet");
             player.setGold(player.getGold()+enemy.getWeapon().getValue());
-            if(enemy.getInventory() != null)
+            if(enemy.getInventory() != null) {
+                System.out.println(" jak i pare przedmitów: ");
                 return new Loot(enemy.getInventory());
+            }
             return new EmptyRoom();
         }
         return null;

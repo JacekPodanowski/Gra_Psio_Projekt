@@ -25,7 +25,7 @@ public class Enemy extends Character{
 //        this.profession.attributesInitiation(this);
 //    }
 
-    public Enemy() {
+    public Enemy(int lvl) {
         super();
         Random r = new Random();
         switch (r.nextInt(1,3)) {
@@ -35,25 +35,36 @@ public class Enemy extends Character{
         }
         this.profession.attributesInitiation(this);
 
-        switch (r.nextInt(1,5)) {
+        switch (r.nextInt(lvl)) {
+            case 0:
+                break;
             case 1 :
-                //weapon=Game.generateItem('W',1);
-                //armor=Game.generateItem('A',1);
+                weapon= (Weapon) Game.generateItem('W',1);
+                armor= (Armor) Game.generateItem('A',1);
+                break;
             case 2:
-                //weapon=Game.generateItem('W',2);
-                //armor=Game.generateItem('A',2);
+                weapon= (Weapon) Game.generateItem('W',2);
+                armor= (Armor) Game.generateItem('A',2);
+                break;
             case 3:
-                //weapon=Game.generateItem('W',3);
-                //armor=Game.generateItem('A',3);
+                weapon= (Weapon) Game.generateItem('W',3);
+                armor= (Armor) Game.generateItem('A',3);
+                break;
             case 4:
-                //weapon=Game.generateItem('W',4);
-                //armor=Game.generateItem('A',4);
+                weapon= (Weapon) Game.generateItem('W',4);
+                armor= (Armor) Game.generateItem('A',4);
+                break;
             case 5:
-                //weapon=Game.generateItem('W',5);
-                //armor=Game.generateItem('A',5);
+                weapon= (Weapon) Game.generateItem('W',5);
+                armor= (Armor) Game.generateItem('A',5);
+                break;
         }
-
-        
+        if(!weapon.getName().equals("Dłoń"))
+            inventory[0]=weapon;
+        if(!armor.getName().equals("Nic"))
+            inventory[1]=armor;
+        if(r.nextBoolean())
+            inventory[3]=Game.generateItem('P');
     }
 
 

@@ -378,5 +378,31 @@ public class Game implements Serializable, Subject {
         return new Weapon();
     }
 
+    public  static Item generateItem(char choice,int lvl) {
+        generateItems();
+        Random R = new Random();
+        switch (choice) {
+            case 'W':
+                Weapon B= basicWepons.get(R.nextInt(basicWepons.size()));
+                while (B.getLvl()>lvl){
+                    B= basicWepons.get(R.nextInt(basicWepons.size()));
+                }
+                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
+                return W;
+            case 'A':
+                Armor B1= basicArmors.get(R.nextInt(basicArmors.size()));
+                while (B1.getLvl()>lvl){
+                    B1= basicArmors.get(R.nextInt(basicArmors.size()));
+                }
+                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
+                return A;
+            case 'P':
+                Potion B2= basicPotions.get(R.nextInt(basicPotions.size()));
+                Potion P = new Potion(B2.getName(), B2.getValue(),B2.getHealing());
+                return P;
+        }
+        return new Weapon();
+    }
+
     //==================================================================================================================
 }
