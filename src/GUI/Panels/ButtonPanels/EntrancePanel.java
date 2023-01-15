@@ -32,19 +32,4 @@ public class EntrancePanel extends JPanel {
         panelText.add(entranceText);
         panelHint.add(entranceHint);
     }
-
-    private JButton roomChooseButton(int[] path){
-        JButton roomChooseButton = new JButton("" + path[0] + ", " + path[1]);
-        Dimension d = new Dimension(100, 40);
-        roomChooseButton.setMinimumSize(d);
-        roomChooseButton.setMaximumSize(d);
-        roomChooseButton.setPreferredSize(d);
-        roomChooseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        return roomChooseButton;
-    }
 }
