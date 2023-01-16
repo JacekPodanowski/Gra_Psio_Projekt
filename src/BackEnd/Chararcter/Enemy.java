@@ -1,8 +1,11 @@
 package BackEnd.Chararcter;
 
+import BackEnd.Chararcter.Item.Armor;
+import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Chararcter.Profession.Archer;
 import BackEnd.Chararcter.Profession.Mage;
+import BackEnd.Game.Game;
 
 
 import java.util.Random;
@@ -61,7 +64,7 @@ public class Enemy extends Character{
         if(!armor.getName().equals("Nic"))
             inventory[1]=armor;
         if(r.nextBoolean())
-            inventory[3]=Game.generateItem('P');
+            inventory[3]= Game.generateItem('P');
     }
 
 
@@ -72,6 +75,7 @@ public class Enemy extends Character{
     @Override
     public void attack(Character character, int skillNumber) {
         character.setHealth(character.getHealth() - this.abilities[skillNumber].use(this, character));
+        setPlayerTurn(true);
     }
 
     @Override

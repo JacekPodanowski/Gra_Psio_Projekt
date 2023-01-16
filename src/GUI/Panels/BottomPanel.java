@@ -5,6 +5,7 @@ import BackEnd.Game.Event.*;
 import BackEnd.Game.Event.Event;
 import GUI.Panels.ButtonPanels.*;
 import Observable.Subject;
+import Observers.FightObserver;
 import Observers.Observer;
 
 import javax.swing.*;
@@ -37,6 +38,7 @@ public class BottomPanel extends JPanel implements Subject {
             this.add(exitPanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
             fightPanel = new FightPanel(game);
+            new FightObserver(this);
             this.add(fightPanel);
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
@@ -71,5 +73,9 @@ public class BottomPanel extends JPanel implements Subject {
 
     public ArrayList<Observer> getObservers() {
         return observers;
+    }
+
+    public FightPanel getFightPanel() {
+        return fightPanel;
     }
 }

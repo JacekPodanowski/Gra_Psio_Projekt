@@ -64,11 +64,23 @@ public class Fight implements Event {
 
         enemy = new Enemy(player.getLevel());
 
-        Random generate = new Random();
-        if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
-            player.setPlayerTurn(false);
+        if(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
+            if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
+                player.setPlayerTurn(false);
+            if(player.isPlayerTurn()){
+                double health;
+
+            }
+        }
+        else {
+            if(this.enemy.getHealth() > 0){
+                //lose
+            }
+            else{
+                //win
+            }
+        }
         while(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
-            double health;
             if(player.isPlayerTurn()){
                 System.out.println("Wybierz umiejętność, którą chcesz go zaatakować: \n" +
                         "1. " + player.getAbilities()[0].toString() + "\t\t" +
@@ -76,21 +88,16 @@ public class Fight implements Event {
                         "3. " + player.getAbilities()[2].toString() + "\t\t" +
                         "4. " + player.getAbilities()[3].toString());
 
-                health = this.enemy.getHealth();
-                consolePanel.setMessage("Użyłeś umiejętności " + player.getAbilities()[choice - 1].toString());
-                player.attack(enemy, choice - 1);
-                System.out.println(", zadałeś " + (int)(health - this.enemy.getHealth()) + " obrażeń.\n");
-                System.out.println("Twoje życie : "+player.getHealth());
-                System.out.println("Życie przeciwnika : "+this.enemy.getHealth());
+//                health = this.enemy.getHealth();
+//                consolePanel.setMessage("Użyłeś umiejętności " + player.getAbilities()[choice - 1].toString());
+//                player.attack(enemy, choice - 1);
+//                System.out.println(", zadałeś " + (int)(health - this.enemy.getHealth()) + " obrażeń.\n");
+//                System.out.println("Twoje życie : "+player.getHealth());
+//                System.out.println("Życie przeciwnika : "+this.enemy.getHealth());
 
             }
             else {
-                health = player.getHealth();
-                System.out.print("Przeciwnik atakuje ");
-                enemy.attack(player, generate.nextInt(0, 4));//dana umiejetnosc ma zakres od liczb losowych i tutaj można ja wywolac
-                System.out.println(", zadaje " + (int)(health - player.getHealth()) + " obrażeń!\n");
-                System.out.println("Twoje życie : "+player.getHealth());
-                System.out.println("Życie przeciwnika : "+this.enemy.getHealth());
+
             }
             System.out.println();
         }
@@ -120,7 +127,7 @@ public class Fight implements Event {
             System.out.print("Przy ciele znajdujesz "+enemy.getWeapon().getValue()+" złotych monet");
             player.setGold(player.getGold()+enemy.getWeapon().getValue());
             if(enemy.getInventory() != null) {
-                System.out.println(" jak i pare przedmitów: ");
+                System.out.println(" oraz pare przedmitów: ");
                 return new Loot(enemy.getInventory());
             }
             return new EmptyRoom();
@@ -129,7 +136,27 @@ public class Fight implements Event {
 
         return null;
     }
+
+    @Override
+    public Event event(Player player) {
+        return null;
+    }
+
     public String toString() {return name;}
+
+    public Enemy generateEnemy(Player player){
+        return new Enemy(player.getLevel());
+    }
+    private void enemyAttack(Player player, double health){
+        Random generate = new Random();
+        health = player.getHealth();
+        consolePanel.setMessage("Przeciwnik atakuje ");
+        enemy.attack(player, generate.nextInt(0, 4));
+        consolePanel.setMessage(", zadaje " + (int)(health - player.getHealth()) + " obrażeń!");
+        consolePanel.newLine();
+        consolePanel.setMessage("Twoje życie : "+player.getHealth());
+        consolePanel.setMessage("Życie przeciwnika : "+this.enemy.getHealth());
+    }
 
 
     }

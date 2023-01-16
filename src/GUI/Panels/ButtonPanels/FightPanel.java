@@ -16,6 +16,14 @@ public class FightPanel extends JPanel implements Subject {
 
     private Game game;
     private ConsolePanel consolePanel;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea2;
+    private int abilityChoice;
 
     // cos tu powinno byc
 
@@ -27,7 +35,6 @@ public class FightPanel extends JPanel implements Subject {
     public FightPanel(Game game){
         this.game=game;
         this.add(new NewJPanel());
-
     }
 
     public class NewJPanel extends javax.swing.JPanel {
@@ -114,13 +121,7 @@ public class FightPanel extends JPanel implements Subject {
 
 
         // Variables declaration - do not modify
-        private javax.swing.JButton jButton5;
-        private javax.swing.JButton jButton6;
-        private javax.swing.JButton jButton7;
-        private javax.swing.JButton jButton8;
-        private javax.swing.JPanel jPanel2;
-        private javax.swing.JScrollPane jScrollPane2;
-        private javax.swing.JTextArea jTextArea2;
+
         // End of variables declaration
     }
 
@@ -131,7 +132,9 @@ public class FightPanel extends JPanel implements Subject {
         skill_1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 1);
+                game.getPlayer().attack(((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent()).getEnemy(), 0);
+                abilityChoice = 0;
+                notifyObservers();
             }});
         return skill_1;
     }
@@ -143,7 +146,9 @@ public class FightPanel extends JPanel implements Subject {
         skill_2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 2);
+                game.getPlayer().attack(((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent()).getEnemy(), 1);
+                abilityChoice = 1;
+                notifyObservers();
             }});
         return skill_2;
     }
@@ -155,7 +160,9 @@ public class FightPanel extends JPanel implements Subject {
         skill_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 3);
+                game.getPlayer().attack(((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent()).getEnemy(), 2);
+                abilityChoice = 2;
+                notifyObservers();
             }});
         return skill_3;
     }
@@ -167,7 +174,9 @@ public class FightPanel extends JPanel implements Subject {
         skill_4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 4);
+                game.getPlayer().attack(((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent()).getEnemy(), 3);
+                abilityChoice = 3;
+                notifyObservers();
             }});
         return skill_4;
     }
@@ -186,5 +195,29 @@ public class FightPanel extends JPanel implements Subject {
 
     public Game getGame() {
         return game;
+    }
+
+    public ConsolePanel getConsolePanel() {
+        return consolePanel;
+    }
+
+    public JButton getjButton5() {
+        return jButton5;
+    }
+
+    public JButton getjButton6() {
+        return jButton6;
+    }
+
+    public JButton getjButton7() {
+        return jButton7;
+    }
+
+    public JButton getjButton8() {
+        return jButton8;
+    }
+
+    public int getAbilityChoice() {
+        return abilityChoice;
     }
 }

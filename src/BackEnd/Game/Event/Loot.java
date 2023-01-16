@@ -26,6 +26,11 @@ public class Loot implements Event{
     }
 
     @Override
+    public Event event(Player player, int choice) {
+        return null;
+    }
+
+    @Override
     public Event event(Player player) {
         System.out.println("\nNatrafiasz na skarb!");
         if (this.lootTab != null) {

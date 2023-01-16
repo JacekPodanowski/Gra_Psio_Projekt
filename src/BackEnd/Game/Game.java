@@ -145,7 +145,7 @@ public class Game implements Serializable {
         int wybor = askForChoice();
         if (wybor == 1)
             while (this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                this.notifyObservers();
+                //this.notifyObservers();
                 if (wybor == 1)
                     while (this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
                         //this.notifyObservers();

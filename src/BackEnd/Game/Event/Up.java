@@ -7,6 +7,11 @@ public class Up implements Event {
     private String name = "GÓRA";
 
     @Override
+    public Event event(Player player, int choice) {
+        return null;
+    }
+
+    @Override
     public Event event(Player player) {
         System.out.println("\n\nTu kiedys bedziesz mogl pojsc w gore ale teraz nie.");
         int wybor;

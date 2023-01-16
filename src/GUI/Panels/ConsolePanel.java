@@ -17,7 +17,12 @@ public class ConsolePanel extends JTextArea implements IConsolePanel {
 
     @Override
     public void setMessage(String message) {
-        this.setText(this.getText()+"\n"+message);
+        this.setText(this.getText() + message);
+    }
+
+    @Override
+    public void newLine() {
+        this.setText(this.getText() + '\n');
     }
 
     public JTextArea getConsole() {
