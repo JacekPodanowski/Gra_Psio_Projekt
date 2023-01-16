@@ -1,6 +1,7 @@
 package GUI.Panels.ButtonPanels;
 
 import BackEnd.Game.Game;
+import GUI.View.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,24 +20,16 @@ public class EntrancePanel extends JPanel {
 
         JLabel entranceText = new JLabel("Budzisz się w dziwnym, pustym sześciennym pokoju. Nie jesteś pewien co się wydarzyło, jedyne co widzisz to drzwi w ścianie.");
         JLabel entranceHint = new JLabel("Na mapie wybierz pokój, do którego chcesz przejść.");
+        JPanel panelText = new JPanel();
+        JPanel panelHint = new JPanel();
+        panelText.setLayout(new BoxLayout(panelText, BoxLayout.LINE_AXIS));
+        panelHint.setLayout(new BoxLayout(panelHint, BoxLayout.LINE_AXIS));
+        this.add(Box.createRigidArea(new Dimension(0, 120)));
+        this.add(panelText);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
-        this.add(entranceText);
-        this.add(entranceHint);
+        this.add(panelHint);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
-    }
-
-    private JButton roomChooseButton(int[] path){
-        JButton roomChooseButton = new JButton("" + path[0] + ", " + path[1]);
-        Dimension d = new Dimension(100, 40);
-        roomChooseButton.setMinimumSize(d);
-        roomChooseButton.setMaximumSize(d);
-        roomChooseButton.setPreferredSize(d);
-        roomChooseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        return roomChooseButton;
+        panelText.add(entranceText);
+        panelHint.add(entranceHint);
     }
 }

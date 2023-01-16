@@ -28,19 +28,21 @@ public class MapPanel extends JPanel implements Subject {
                 if (this.game.getMap().getRoomTypes()[i][j] == RoomType.withPlayer) {
                     rooms[i][j].setText("Znajdujesz się tutaj");
                     rooms[i][j].setFont(new Font("jakis font", Font.BOLD | Font.ITALIC, 5));
-                } else {
-                    rooms[i][j].setVisible(false);
                 }
-                this.add(rooms[i][j]);
                 if(this.game.getMap().getTabOfRoom()[i][j].isAvailable()) {
-                    rooms[i][j].setEnabled(true);
                     rooms[i][j].setVisible(true);
-                }
-                else {
-                    rooms[i][j].setEnabled(false);
-                }
-                if(this.game.getMap().getTabOfRoom()[i][j].isAvailable() && !this.game.getMap().getTabOfRoom()[i][j].isVisited())
-                    rooms[i][j].setText("?");
+                    rooms[i][j].setEnabled(true);
+                    if (!this.game.getMap().getTabOfRoom()[i][j].isVisited())
+                        rooms[i][j].setText("?");
+                } else
+                    if(this.game.getMap().getTabOfRoom()[i][j].isVisited()) {
+                        rooms[i][j].setVisible(true);
+                        rooms[i][j].setEnabled(false);
+                    }
+                    else {
+                        rooms[i][j].setEnabled(false);
+                        rooms[i][j].setVisible(false);
+                    }
                 this.add(rooms[i][j]);
             }
         }
@@ -56,6 +58,7 @@ public class MapPanel extends JPanel implements Subject {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.getMap().setPlayerLocation(game.getPlayer(), game.getMap().getTabOfRoom()[i][j]);
+                game.getMap().getPlayerLocation(game.getPlayer()).setVisited(true);
                 notifyObservers();
             }
         });

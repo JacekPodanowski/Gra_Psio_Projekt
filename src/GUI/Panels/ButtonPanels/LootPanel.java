@@ -82,7 +82,7 @@ public class LootPanel extends JPanel implements Subject {
 
     @Override
     public void removeObserver(Observer observer) {observers.remove(observer);}
-
+    
     @Override
     public void notifyObservers() {
         for(int i = 0; i < observers.size(); i++)
