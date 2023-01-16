@@ -42,6 +42,10 @@ public class Fight implements Event {
         this.enemy = enemy;
     }
 
+    public void setConsolePanel(IConsolePanel consolePanel) {
+        this.consolePanel = consolePanel;
+    }
+
     //==================================================================================================================
 
 
@@ -49,28 +53,14 @@ public class Fight implements Event {
     //================================================== KONSTRUKTORY ==================================================
     public Fight(){
         enemy = new Enemy();
+        consolePanel.setMessage("Spotkałeś na swojej drodze przeciwnika!");
     }
-
-    public void setConsolePanel(IConsolePanel consolePanel) {
-        this.consolePanel = consolePanel;
-    }
-
 
     //============================================= METODY KLASY =======================================================
 
 
+    public Event event(Player player, int choice){
 
-    public void rozpocznijWalke()
-    {
-
-    }
-
-    public Event event(Player player){
-        consolePanel.setMessage("Spotkałeś na swojej drodze przeciwnika!");
-
-
-        /*
-          System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
             player.setPlayerTurn(false);
@@ -82,10 +72,10 @@ public class Fight implements Event {
                         "2. " + player.getAbilities()[1].toString() + "\t\t" +
                         "3. " + player.getAbilities()[2].toString() + "\t\t" +
                         "4. " + player.getAbilities()[3].toString());
-                int wybor = Game.askForChoice();
+
                 health = this.enemy.getHealth();
-                System.out.print("Użyłeś umiejętności " + player.getAbilities()[wybor - 1].toString());
-                player.attack(enemy, wybor - 1);
+                consolePanel.setMessage("Użyłeś umiejętności " + player.getAbilities()[choice - 1].toString());
+                player.attack(enemy, choice - 1);
                 System.out.println(", zadałeś " + (int)(health - this.enemy.getHealth()) + " obrażeń.\n");
             }
             else {
@@ -103,7 +93,7 @@ public class Fight implements Event {
             return new EmptyRoom();
         }
 
-         */
+
         return null;
     }
     public String toString() {return name;}

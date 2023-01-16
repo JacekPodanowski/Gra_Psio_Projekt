@@ -4,5 +4,7 @@ import BackEnd.Chararcter.Player;
 
 public interface Event {
 
-    Event event(Player player);
+    Event event(Player player, int choice);
+
+
 }

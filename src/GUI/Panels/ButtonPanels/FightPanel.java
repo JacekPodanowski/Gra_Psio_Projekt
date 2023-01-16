@@ -126,48 +126,48 @@ public class FightPanel extends JPanel implements Subject {
 
     private JButton skill_1(){
         JButton skill_1 = new JButton();
-        skill_1.setText("Umiejętność 1");
+        skill_1.setText(game.getPlayer().getAbilities()[0].toString());
         skill_1.setFont(new Font("ButtonFont", Font.BOLD, 20));
         skill_1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 1);
             }});
         return skill_1;
     }
 
     private JButton skill_2(){
         JButton skill_2 = new JButton();
-        skill_2.setText("Umiejętność 2");
+        skill_2.setText(game.getPlayer().getAbilities()[1].toString());
         skill_2.setFont(new Font("ButtonFont", Font.BOLD, 20));
         skill_2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 2);
             }});
         return skill_2;
     }
 
     private JButton skill_3(){
         JButton skill_3 = new JButton();
-        skill_3.setText("Umiejętność 3");
+        skill_3.setText(game.getPlayer().getAbilities()[2].toString());
         skill_3.setFont(new Font("ButtonFont", Font.BOLD, 20));
         skill_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 3);
             }});
         return skill_3;
     }
 
     private JButton skill_4(){
         JButton skill_4 = new JButton();
-        skill_4.setText("Umiejętność 4");
+        skill_4.setText(game.getPlayer().getAbilities()[3].toString());
         skill_4.setFont(new Font("ButtonFont", Font.BOLD, 20));
         skill_4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                game.getMap().getPlayerLocation(game.getPlayer()).getEvent().event(game.getPlayer(), 4);
             }});
         return skill_4;
     }
