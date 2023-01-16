@@ -21,8 +21,6 @@ public class LootPanel extends JPanel implements Subject {
 
     private Loot loot;
 
-
-
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
@@ -45,12 +43,13 @@ public class LootPanel extends JPanel implements Subject {
 
     private JButton bierzLootButton(Component parent){
         JButton bierzLootButton = new JButton();
-        bierzLootButton.setMinimumSize(new Dimension(700, 50));
-        bierzLootButton.setPreferredSize(new Dimension(700, 50));
-        bierzLootButton.setMaximumSize(new Dimension(700, 50));
+        bierzLootButton.setMinimumSize(new Dimension(300, 50));
+        bierzLootButton.setPreferredSize(new Dimension(300, 50));
+        bierzLootButton.setMaximumSize(new Dimension(300, 50));
         bierzLootButton.setLocation(MainWindow.centerLocation(parent,bierzLootButton));
         bierzLootButton.setText("Weź przedmiot");
         bierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        
         bierzLootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,9 +61,11 @@ public class LootPanel extends JPanel implements Subject {
 
     private JButton nieBierzLootButton(Component parent){
         JButton nieBierzLootButton = new JButton();
-        nieBierzLootButton.setMinimumSize(new Dimension(700, 50));
-        nieBierzLootButton.setPreferredSize(new Dimension(700, 50));
-        nieBierzLootButton.setMaximumSize(new Dimension(700, 50));
+
+        nieBierzLootButton.setMinimumSize(new Dimension(300, 50));
+        nieBierzLootButton.setPreferredSize(new Dimension(300, 50));
+        nieBierzLootButton.setMaximumSize(new Dimension(300, 50));
+
         nieBierzLootButton.setLocation(MainWindow.centerLocation(parent,nieBierzLootButton));
         nieBierzLootButton.setText("Zostaw przedmiot");
         nieBierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
@@ -75,6 +76,15 @@ public class LootPanel extends JPanel implements Subject {
                 notifyObservers();
             }});
         return nieBierzLootButton;
+    }
+
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     @Override
