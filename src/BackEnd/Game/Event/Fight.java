@@ -54,7 +54,6 @@ public class Fight implements Event {
     //================================================== KONSTRUKTORY ==================================================
     public Fight(){
         enemy = new Enemy(1);
-        consolePanel.setMessage("Spotkałeś na swojej drodze przeciwnika!");
     }
 
     //============================================= METODY KLASY =======================================================

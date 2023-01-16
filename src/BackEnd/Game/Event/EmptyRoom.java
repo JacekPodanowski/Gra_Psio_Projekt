@@ -13,6 +13,11 @@ public class EmptyRoom implements Event {
     private String name = "Pusty";
 
     @Override
+    public Event event(Player player, int choice) {
+        return null;
+    }
+
+    @Override
     public Event event(Player player) {
         boolean rested=false;
         System.out.println("\n\nZnalazłeś się w pustym pokoju, masz chwilę dla siebie.");

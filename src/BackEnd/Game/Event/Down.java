@@ -7,6 +7,11 @@ public class Down implements Event {
     private String name = "DÓŁ";
 
     @Override
+    public Event event(Player player, int choice) {
+        return null;
+    }
+
+    @Override
     public Event event(Player player) {
         System.out.println("\n\nTu kiedys bedziesz mogl pojsc w dol ale teraz nie.");
         int wybor;

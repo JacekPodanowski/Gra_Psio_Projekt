@@ -15,25 +15,19 @@ import java.util.ArrayList;
 public class FightPanel extends JPanel implements Subject {
 
     private Game game;
-    private ConsolePanel consolePanel;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
+    private ConsolePanel consolePanel;
     private int abilityChoice;
-
-    // cos tu powinno byc
-
-
-
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
     public FightPanel(Game game){
-        this.game=game;
+        this.game = game;
         this.add(new NewJPanel());
     }
 
@@ -57,15 +51,15 @@ public class FightPanel extends JPanel implements Subject {
 
             jPanel2 = new javax.swing.JPanel();
             jScrollPane2 = new javax.swing.JScrollPane();
-            jTextArea2 = new ConsolePanel((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent());
+            consolePanel = new ConsolePanel((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent());
             jButton5 = skill_1();
             jButton6 = skill_2();
             jButton7 = skill_3();
             jButton8 = skill_4();
 
-            jTextArea2.setColumns(20);
-            jTextArea2.setRows(5);
-            jScrollPane2.setViewportView(jTextArea2);
+            consolePanel.setColumns(20);
+            consolePanel.setRows(5);
+            jScrollPane2.setViewportView(consolePanel);
 
 
             javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

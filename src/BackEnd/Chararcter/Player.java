@@ -31,21 +31,6 @@ public class Player extends Character {
         weapon=new Weapon();
         this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
         this.getInventory()[1]=Game.generateItem('W');
-
-        System.out.println("Wybierz profesję: ");
-        System.out.println("1. Wojownik\t\t 2. Mag\t\t 3. Łucznik");
-        switch(Game.askForChoice(3)){
-            case 1:
-                this.profession = new Warrior();
-                break;
-            case 2:
-                this.profession = new Mage();
-                break;
-            case 3:
-                this.profession = new Archer();
-                break;
-        }
-        this.profession.attributesInitiation(this);
     }
 
     @Override

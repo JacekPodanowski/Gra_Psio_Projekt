@@ -5,6 +5,12 @@ import BackEnd.Game.Game;
 
 public class Entrance implements Event{
     private String name = "WEJŚCIE";
+
+    @Override
+    public Event event(Player player, int choice) {
+        return null;
+    }
+
     @Override
     public Event event(Player player) {
         System.out.println("Budzisz się w dziwnym, pustym sześciennym pokoju. Nie jesteś pewien co się wydarzyło, jedyne co widzisz to drzwi w ścianie.");

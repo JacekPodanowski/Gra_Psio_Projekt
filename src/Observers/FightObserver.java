@@ -7,6 +7,8 @@ import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.FightPanel;
 
+import java.util.Random;
+
 public class FightObserver implements Observer{
     private FightPanel fightPanel;
     private BottomPanel bottomPanel;
@@ -25,32 +27,32 @@ public class FightObserver implements Observer{
     }
     public void refresh(){
         if(player.getHealth() > 0 && enemy.getHealth() > 0){
-            if(player.isPlayerTurn()) {
-                fightPanel.getConsolePanel().newLine();
-                fightPanel.getConsolePanel().setMessage("Przeciwnik atakuje i zadaje " + enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
-                fightPanel.getConsolePanel().newLine();
-                fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
-                fightPanel.getConsolePanel().newLine();
-                fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+            fightPanel.getConsolePanel().setMessage("Atakujesz i zadajesz " + player.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
+            fightPanel.getConsolePanel().newLine();
+            fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
+            fightPanel.getConsolePanel().newLine();
+            fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+            fightPanel.getConsolePanel().newLine();
 
-                fightPanel.getjButton5().setEnabled(true);
-                fightPanel.getjButton6().setEnabled(true);
-                fightPanel.getjButton7().setEnabled(true);
-                fightPanel.getjButton8().setEnabled(true);
-            }
-            else {
-                fightPanel.getConsolePanel().newLine();
-                fightPanel.getConsolePanel().setMessage("Atakujesz i zadajesz " + player.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
-                fightPanel.getConsolePanel().newLine();
-                fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
-                fightPanel.getConsolePanel().newLine();
-                fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+            fightPanel.getjButton5().setEnabled(false);
+            fightPanel.getjButton6().setEnabled(false);
+            fightPanel.getjButton7().setEnabled(false);
+            fightPanel.getjButton8().setEnabled(false);
 
-                fightPanel.getjButton5().setEnabled(false);
-                fightPanel.getjButton6().setEnabled(false);
-                fightPanel.getjButton7().setEnabled(false);
-                fightPanel.getjButton8().setEnabled(false);
-            }
+            Random generate = new Random();
+            enemy.attack(player, generate.nextInt(0, 4));
+
+            fightPanel.getConsolePanel().setMessage("Przeciwnik atakuje i zadaje " + enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
+            fightPanel.getConsolePanel().newLine();
+            fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
+            fightPanel.getConsolePanel().newLine();
+            fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+            fightPanel.getConsolePanel().newLine();
+
+            fightPanel.getjButton5().setEnabled(true);
+            fightPanel.getjButton6().setEnabled(true);
+            fightPanel.getjButton7().setEnabled(true);
+            fightPanel.getjButton8().setEnabled(true);
         }
         else {
             if(player.getHealth() > 0){
