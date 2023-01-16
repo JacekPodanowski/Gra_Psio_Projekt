@@ -13,6 +13,43 @@ public class Main {
         Game g1 = null;
         new GUIRefresher(new MainWindow());
 
+
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.setVisible(true);
+        new PlayerOnMapPosition(mainWindow.getGame(), mainWindow);
+
+        int choice = 0;
+
+            while(choice!=4){
+                System.out.println("Witaj w grze: Proba Ucieczki Z Kostki");
+                System.out.println("1. Rozpocznij nową gre\t\t");
+                System.out.println("2. Wczytaj zapisaną gre\t\t");
+                System.out.println("3. Zapisz grę\t\t");
+                System.out.println("4. Wyjdź\t\t");
+                switch (Game.askForChoice()){
+                    case 1:
+                        g1 = new Game();
+                        break;
+
+                    case 4:
+                        System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
+                        System.exit(0);
+                        break;
+                }}
+
+
+        /*/
+        Player P1 = new Player(100,1,10,1,0,1);
+
+        Fight w = new Fight();
+        w.event(P1);
+
+        Weapon mlotek = new Weapon("Mlotek",1,"Budowlany","S",2,1,70);
+        //cel jest taki żeby dać graczpwi mlotek
+        /*/
+
+
+
 //        int choice = 0;
 //
 //            while(choice!=4){
@@ -62,5 +99,6 @@ public class Main {
 //                        System.exit(0);
 //                        break;
 //                }}
+
     }
 }
