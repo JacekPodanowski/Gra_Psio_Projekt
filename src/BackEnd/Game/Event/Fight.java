@@ -53,7 +53,7 @@ public class Fight implements Event {
 
     //================================================== KONSTRUKTORY ==================================================
     public Fight(){
-        enemy = new Enemy();
+        enemy = new Enemy(1);
         consolePanel.setMessage("Spotkałeś na swojej drodze przeciwnika!");
     }
 
@@ -61,8 +61,6 @@ public class Fight implements Event {
 
 
     public Event event(Player player, int choice){
-
-    public Event event(Player player){
 
         enemy = new Enemy(player.getLevel());
 

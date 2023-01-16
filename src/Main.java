@@ -46,21 +46,21 @@ public class Main {
 //                        System.exit(0);
 //                        break;
 //                }}
-
-                        g1 =loadWindow.getGame();
-                        break;
-                    case 3:
-                        SaveLoadWindow saveWindow = new SaveLoadWindow(g1, new SaveStrategy());
-                        saveWindow.setModal(true);
-                        saveWindow.setAlwaysOnTop(true);
-                        saveWindow.setVisible(true);
-
-                        break;
-
-                    case 4:
-                        System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
-                        System.exit(0);
-                        break;
-                }}
+//
+//                        g1 =loadWindow.getGame();
+//                        break;
+//                    case 3:
+//                        SaveLoadWindow saveWindow = new SaveLoadWindow(g1, new SaveStrategy());
+//                        saveWindow.setModal(true);
+//                        saveWindow.setAlwaysOnTop(true);
+//                        saveWindow.setVisible(true);
+//
+//                        break;
+//
+//                    case 4:
+//                        System.out.println("Masz 3 opcje, wybierz lepiej nastepnym razem");
+//                        System.exit(0);
+//                        break;
+//                }}
     }
 }
