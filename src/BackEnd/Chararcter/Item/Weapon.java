@@ -7,6 +7,8 @@ public class Weapon extends Item{
     protected int requirement;
     protected int basicDMG;
 
+    protected int lvl;
+
 
     public Weapon(){
         super("Dłoń", 0, "Twoja");
@@ -14,18 +16,13 @@ public class Weapon extends Item{
         type = 'S';
         requirement = 0;
         basicDMG = 5;
+        lvl = 1;
     }
 
-//    public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG) {
-//        super(name, value, quality);
-//        this.type = type;
-//        this.requirement = requirement;
-//        this.basicDMG = basicDMG;
-//    }
-
-    public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG) {
-        super(name, value,quality);
+    public Weapon(String name, int value, char type, int requirement,int basicDMG,int lvl) {
+        super(name, value);
         this.type = type;
+        this.lvl = lvl;
         this.value = (int) (value* qualityTab.get(quality));
         if(qualityTab.get(quality)>1){
             this.requirement= (int) (requirement + qualityTab.get(quality)*requirement/5);
@@ -39,9 +36,25 @@ public class Weapon extends Item{
         this.basicDMG = (int) (basicDMG* qualityTab.get(quality))+1;
     }
 
-    public void showStats() {
-        System.out.println(super.toString()+" Wartość : "+value+" dmg : "+basicDMG +" wymaganie : "+ requirement);
+    public Weapon(String name, int value, String quality, char type, int requirement, int basicDMG,int lvl) {
+        super(name, value,quality);
+        this.type = type;
+        this.lvl = lvl;
+        this.value = (int) (value* qualityTab.get(quality));
+        if(qualityTab.get(quality)>1){
+            this.requirement= (int) (requirement + qualityTab.get(quality)*requirement/5);
+        }else if(qualityTab.get(quality)==1) {
+            this.requirement=requirement;
+        }
+        else {
+            this.requirement= (int) (requirement* qualityTab.get(quality));
+        }
+
+        this.basicDMG = (int) (basicDMG* qualityTab.get(quality))+1;
     }
+
+    public String toString() {
+        return super.toString()+"\tDmg-"+basicDMG+ " typ-"+type +" wymaganie-"+ requirement+" lvl-"+lvl;}
 
     public boolean isUsed() {
         return isUsed;
@@ -59,4 +72,5 @@ public class Weapon extends Item{
         return basicDMG;
     }
 
+    public int getLvl() { return lvl;}
 }

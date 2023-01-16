@@ -10,7 +10,7 @@ public class Archer implements Profession{
         character.setAgility(50);
         character.setIntelligence(30);
         character.setStrength(35);
-        character.setWeapon(new Weapon("Prosty łuk", 1, "Zwykły", 'A', 40, 5));
+        character.setWeapon(new Weapon("Prosty łuk", 1, "Zwykły", 'A',30, 5, 0));
         this.specialAbility(character);
     }
 

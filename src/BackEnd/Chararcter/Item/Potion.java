@@ -8,6 +8,12 @@ public class Potion extends Item {
         this.healing = healing;
     }
 
+    public Potion(String name, int value, int healing) {
+        super(name, value);
+        this.value= (int) (value*qualityTab.get(quality));
+        this.healing = (int) (healing*qualityTab.get(quality));
+    }
+
     public int getHealing() {
         return healing;
     }

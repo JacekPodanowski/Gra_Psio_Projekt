@@ -13,7 +13,7 @@ public class Mage implements Profession{
         character.setAgility(35);
         character.setIntelligence(60);
         character.setStrength(20);
-        character.setWeapon(new Weapon("Magiczny kij", 1, "Zwykły", 'I', 50, 5));
+        character.setWeapon(new Weapon("Magiczny kij", 1,"Zwykły",'I',  30, 5, 0));
         this.specialAbility(character);
     }
 

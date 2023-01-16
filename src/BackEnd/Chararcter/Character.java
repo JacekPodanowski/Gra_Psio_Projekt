@@ -7,6 +7,7 @@ import BackEnd.Chararcter.Profession.Profession;
 
 public abstract class Character {
     protected double health;
+    public double maxHealth=150.0;
     protected int strength;
     protected int intelligence;
     protected int agility;
@@ -43,6 +44,11 @@ public abstract class Character {
         abilities[0] = new Skill("Precyzyjny atak",0.5,90,0);
         abilities[1] = new Skill("Zwykły atak",1,75,0);
         abilities[2] = new Skill("Potężny atak",2,50,0);
+    }
+
+    public void healMissingHealth(int procent){
+        double diff = maxHealth-health;
+        health = health+diff*procent/100;
     }
 
 
