@@ -6,6 +6,7 @@ import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Game;
 import GUI.View.MainWindow;
 import Observable.Subject;
+import Observers.GUIRefresher;
 import Observers.Observer;
 
 import javax.swing.*;
@@ -19,7 +20,6 @@ public class LootPanel extends JPanel implements Subject {
     private Game game;
 
     private Loot loot;
-
 
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -49,6 +49,7 @@ public class LootPanel extends JPanel implements Subject {
         bierzLootButton.setLocation(MainWindow.centerLocation(parent,bierzLootButton));
         bierzLootButton.setText("Weź przedmiot");
         bierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        
         bierzLootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,9 +61,11 @@ public class LootPanel extends JPanel implements Subject {
 
     private JButton nieBierzLootButton(Component parent){
         JButton nieBierzLootButton = new JButton();
+
         nieBierzLootButton.setMinimumSize(new Dimension(300, 50));
         nieBierzLootButton.setPreferredSize(new Dimension(300, 50));
         nieBierzLootButton.setMaximumSize(new Dimension(300, 50));
+
         nieBierzLootButton.setLocation(MainWindow.centerLocation(parent,nieBierzLootButton));
         nieBierzLootButton.setText("Zostaw przedmiot");
         nieBierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
@@ -74,6 +77,7 @@ public class LootPanel extends JPanel implements Subject {
             }});
         return nieBierzLootButton;
     }
+
 
     public Game getGame() {
         return game;
@@ -88,10 +92,14 @@ public class LootPanel extends JPanel implements Subject {
 
     @Override
     public void removeObserver(Observer observer) {observers.remove(observer);}
-
+    
     @Override
     public void notifyObservers() {
         for(int i = 0; i < observers.size(); i++)
             observers.get(i).update(this.getGame());
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

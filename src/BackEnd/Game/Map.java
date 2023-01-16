@@ -83,6 +83,7 @@ public class Map {
         // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setVisited(true);
 
         // losujemy wyjście i dwa zaułki na górnej lub na prawej granice mapy
         // losowanie wyjścia
@@ -525,13 +526,15 @@ public class Map {
                     roomTypes[i][j] = RoomType.withPlayer;
                 } else if(tabOfRoom[i][j].isVisited()) {
                     roomTypes[i][j] = RoomType.visited;
-                } else{
+                } else if(!this.toExitRooms.contains(this.tabOfRoom[i][j])){
                     roomTypes[i][j] = RoomType.hidden;
-                }
+                } else
+                    roomTypes[i][j] = RoomType.available;
                 if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()]))
                     tabOfRoom[i][j].setAvailable(true);
-                else
-                    tabOfRoom[j][j].setAvailable(false);
+                else {
+                    tabOfRoom[i][j].setAvailable(false);
+                }
             }
         }
     }
@@ -554,8 +557,8 @@ public class Map {
     }
     
     public void setPlayerLocation(Player player, Room room){
-        player.setLocation_X(room.getColRoom());
-        player.setLocation_Y(room.getRowRoom());
+        player.setLocation_X(room.getRowRoom());
+        player.setLocation_Y(room.getColRoom());
     }
 }
 //======================================================================================================================

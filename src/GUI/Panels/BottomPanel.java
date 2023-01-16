@@ -27,7 +27,7 @@ public class BottomPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 300));
         this.setLayout(new FlowLayout());
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
-            entrancePanel = new EntrancePanel();
+            entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
             emptyRoomPanel = new EmptyRoomPanel();
@@ -36,10 +36,9 @@ public class BottomPanel extends JPanel implements Subject {
             exitPanel = new ExitPanel();
             this.add(exitPanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
-            fightPanel = new FightPanel();
+            fightPanel = new FightPanel(game);
             this.add(fightPanel);
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
-
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
             lootPanel = new LootPanel(game);
             this.add(lootPanel);
@@ -68,5 +67,9 @@ public class BottomPanel extends JPanel implements Subject {
     public void notifyObservers() {
         for(int i = 0; i < observers.size(); i++)
             observers.get(i).update(this.getGame());
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
     }
 }
