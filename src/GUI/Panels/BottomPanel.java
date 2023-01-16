@@ -10,13 +10,13 @@ import Observers.Observer;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class BottomPanel extends JPanel implements Subject {
     private EmptyRoomPanel emptyRoomPanel;
     private EntrancePanel entrancePanel;
     private FightPanel fightPanel;
     private LootPanel lootPanel;
+    private ProfessionChoosePanel professionChoosePanel;
     private ExitPanel exitPanel;
     private Game game;
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -25,6 +25,7 @@ public class BottomPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 300));
         this.setMinimumSize(new Dimension(900, 300));
         this.setPreferredSize(new Dimension(900, 300));
+        this.setLayout(new FlowLayout());
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
             entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
@@ -39,7 +40,7 @@ public class BottomPanel extends JPanel implements Subject {
             this.add(fightPanel);
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
-            lootPanel = new LootPanel();
+            lootPanel = new LootPanel(game);
             this.add(lootPanel);
         }
     }

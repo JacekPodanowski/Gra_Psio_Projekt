@@ -3,17 +3,24 @@ package BackEnd.Game.Event;
 import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Game;
+import GUI.Panels.IConsolePanel;
 import Observers.Observer;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Fight implements Event {
 
+
+
+
+
+
     //================================================= ATRYBUTY KLASY =================================================
     private String name = "Walka";
     private Enemy enemy;
-    private ArrayList<Observer> observers = new ArrayList<>();
+    IConsolePanel consolePanel;
     //==================================================================================================================
 
 
@@ -35,6 +42,10 @@ public class Fight implements Event {
         this.enemy = enemy;
     }
 
+    public void setConsolePanel(IConsolePanel consolePanel) {
+        this.consolePanel = consolePanel;
+    }
+
     //==================================================================================================================
 
 
@@ -42,14 +53,14 @@ public class Fight implements Event {
     //================================================== KONSTRUKTORY ==================================================
     public Fight(){
         enemy = new Enemy();
+        consolePanel.setMessage("Spotkałeś na swojej drodze przeciwnika!");
     }
-    //==================================================================================================================
-
-
 
     //============================================= METODY KLASY =======================================================
-    public Event event(Player player){
-        System.out.println("\n\nSpotkałeś na swojej drodze przeciwnika!");
+
+
+    public Event event(Player player, int choice){
+
         Random generate = new Random();
         if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
             player.setPlayerTurn(false);
@@ -61,10 +72,10 @@ public class Fight implements Event {
                         "2. " + player.getAbilities()[1].toString() + "\t\t" +
                         "3. " + player.getAbilities()[2].toString() + "\t\t" +
                         "4. " + player.getAbilities()[3].toString());
-                int wybor = Game.askForChoice();
+
                 health = this.enemy.getHealth();
-                System.out.print("Użyłeś umiejętności " + player.getAbilities()[wybor - 1].toString());
-                player.attack(enemy, wybor - 1);
+                consolePanel.setMessage("Użyłeś umiejętności " + player.getAbilities()[choice - 1].toString());
+                player.attack(enemy, choice - 1);
                 System.out.println(", zadałeś " + (int)(health - this.enemy.getHealth()) + " obrażeń.\n");
             }
             else {
@@ -81,9 +92,14 @@ public class Fight implements Event {
                 return new Loot(enemy.getInventory());
             return new EmptyRoom();
         }
+
+
         return null;
     }
     public String toString() {return name;}
 
+
+    }
+
     //==================================================================================================================
-}
+
