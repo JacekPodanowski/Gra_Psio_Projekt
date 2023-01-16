@@ -101,8 +101,8 @@ public class Fight implements Event {
             System.out.println("1.Siła");
             System.out.println("2.Inteligencja");
             System.out.println("3.Zwinność");
-            int choice = Game.askForChoice(3);
-            switch (choice){
+            int lvlchoice = Game.askForChoice(3);
+            switch (lvlchoice){
                 case 1:
                     player.setStrength(player.getStrength()+5);
                     System.out.println("Teraz będziesz silniejszy");
