@@ -1,5 +1,6 @@
 import Chararcter.Item.Armor;
 import Chararcter.Item.Weapon;
+import Chararcter.Player;
 import Game.*;
 import SaveLoadStrategy.LoadStrategy;
 import SaveLoadStrategy.SaveStrategy;
@@ -9,8 +10,7 @@ import View.SaveLoadWindow;
 
 public class Main {
     public static void main (String[] args){
-
-
+        
         //Tworzę sobie uchyt
         Game g1 = null;
 

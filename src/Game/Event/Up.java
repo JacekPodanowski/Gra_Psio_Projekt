@@ -1,39 +1,44 @@
 package Game.Event;
 
+import Chararcter.Item.Armor;
+import Chararcter.Item.Item;
+import Chararcter.Item.Weapon;
 import Chararcter.Player;
 import Game.Game;
+
+import java.util.Random;
 
 public class Up implements Event {
     private String name = "GÓRA";
 
     @Override
     public Event event(Player player) {
-        System.out.println("\n\nTu kiedys bedziesz mogl pojsc w gore ale teraz nie.");
+        System.out.println("\n\nZnalazłeś wejście na wyższy poziom. Co chcesz zrobić?");
         int wybor;
         do{
-            System.out.println("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Odpocznij.\t 3. Użyj przedmiotu.");
-            wybor = Game.askForChoice();
+            System.out.print("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Użyj przedmiotu.\t3. Zobacz swoje statystyki.");
+            System.out.println("\t4. Wejdź na wyższe piętro.");
+            wybor = Game.askForChoice(4);
+
             switch(wybor) {
                 case 1:
-                    //nic
-                    break;
+                    return null;
                 case 2:
-                    System.out.println("Odpoczywasz.");
-                    //trzeba zdefiniować odpoczynek
+                    System.out.println("Jakiego przedmiotu chcesz użyć?");
+                    player.displayInventoryAndUse();
                     break;
                 case 3:
-                    System.out.println("Jakiego przedmiotu chcesz użyć?");
-                    for(int i = 0; i < player.getInventory().length; i++)
-                        System.out.println(player.getInventory()[i].toString());
-                    int itemNumber = Game.askForChoice();
-                    //player.getInventory()[itemNumber].useItem();
-                    System.out.println("Użyto przedmiotu " + player.getInventory()[itemNumber].toString());
+                    player.showStats();
+                    break;
+                case 4:
+                    System.out.println("Dostałeś się na piętro: "+player.getLocation_H()+1);
+                    System.out.println("\n");
                     break;
                 default:
                     System.out.println("Niepoprawna opcja!");
                     break;
             }
-        }while (wybor != 1);
+        }while (wybor != 4);
         return null;
     }
     public String toString() {return name;}

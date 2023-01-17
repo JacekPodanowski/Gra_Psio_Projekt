@@ -10,12 +10,14 @@ public class Player extends Character {
 
     private int location_Y;
     private int location_X;
+    private int location_H;
     private long exp;
     private boolean alive = true;
 
     public Player(int size) {
         super();
         setLevel(1);
+        location_H =1;
         location_Y=0;
         location_X=size-1;
         this.exp = 0;
@@ -157,6 +159,14 @@ public class Player extends Character {
     //===========================================================SETERY I GETERY=====================================================================================
     public int getLocation_Y() {
         return location_Y;
+    }
+
+    public int getLocation_H() {
+        return location_H;
+    }
+
+    public void setLocation_H(int location_H) {
+        this.location_H = location_H;
     }
 
     public void setLocation_Y(int location_Y) {

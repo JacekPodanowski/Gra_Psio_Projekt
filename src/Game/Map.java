@@ -13,7 +13,15 @@ import java.util.Random;
 public class Map {
     //================================================= ATRYBUTY KLASY =================================================
     private Room[][] tabOfRoom;  // tablica z pokojow 5x5 (na razie)
+    private ArrayList<Room[][]> bigMap=new ArrayList<>();
     private ArrayList<Room> toExitRooms;
+
+    private ArrayList<int[]> Ups=new ArrayList<>();
+    private ArrayList<int[]> Downs=new ArrayList<>();
+    private boolean p1UP=false;
+    private boolean p0UP=false;
+    private boolean p2Down=false;
+    private boolean p1Down=false;
 
     //==================================================================================================================
 
@@ -23,7 +31,8 @@ public class Map {
     public Map(Player player,int size) {
         tabOfRoom = new Room[size][size];
         toExitRooms = new ArrayList<Room>();
-        generateMap(player);
+        generateMap(player,1,false);
+        generateBigMap(player,size);
     }
     //==================================================================================================================
 
@@ -38,12 +47,49 @@ public class Map {
         this.tabOfRoom = tabOfRoom;
     }
 
+    public ArrayList<int[]> getUps() {
+        return Ups;
+    }
+
+    public void setUps(ArrayList<int[]> ups) {
+        Ups = ups;
+    }
+
+    public ArrayList<int[]> getDowns() {
+        return Downs;
+    }
+
+    public void setDowns(ArrayList<int[]> downs) {
+        Downs = downs;
+    }
     //==================================================================================================================
 
 
 
     //============================================= METODY KLASY =======================================================
-    public void generateMap(Player player) {
+    public void generateBigMap(Player player,int size) {
+        Random r =new Random();
+        boolean E0=r.nextBoolean();
+        boolean E2=!E0;
+
+        tabOfRoom = new Room[size][size];
+        toExitRooms = new ArrayList<Room>();//nwm
+        generateMap(player,0,E0);
+        this.bigMap.add(this.tabOfRoom);
+        this.tabOfRoom=new Room[size][size];
+        toExitRooms = new ArrayList<Room>();
+
+        generateMap(player,1,false);
+        this.bigMap.add(this.tabOfRoom);
+        this.tabOfRoom=new Room[size][size];
+        toExitRooms = new ArrayList<Room>();
+
+        generateMap(player,2,E2);
+        this.bigMap.add(this.tabOfRoom);
+
+    }
+
+    public void generateMap(Player player,int level,boolean isExit) {
         Random random = new Random();
 
         // przypisanie pokojow do tablicy mapy
@@ -63,16 +109,20 @@ public class Map {
             }
         }
 
-        // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
-        this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
-        this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
-
+        if(level==1) {
+            // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
+            this.tabOfRoom[this.tabOfRoom.length - 1][0].setEnter(true);
+            this.tabOfRoom[this.tabOfRoom.length - 1][0].setEvent(new Entrance());
+        }
         // losujemy wyjście i dwa zaułki na górnej lub na prawej granice mapy
         // losowanie wyjścia
         Room roomTemp = RandRoomOnEdge(this.tabOfRoom);
         int exitNum = roomTemp.getNumRoom();
-        this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setExit(true);
-        this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent(new Exit());
+
+        if(isExit) {
+            this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setExit(true);
+            this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent(new Exit());
+        }
 
         // losowanie ślepego zaułku nr1
         // jeśli wyjście jest na górnej granicy, to zaułki są na prawej. W przeciwnym przypadku podobnie
@@ -83,7 +133,19 @@ public class Map {
             roomTemp = RandRoomOnEdge(this.tabOfRoom);
             blindEnd1_Num = roomTemp.getNumRoom();
         }
-        FindRoomByNum(blindEnd1_Num,this.tabOfRoom).setEvent(new Up());
+        if(level==0 && p0UP==false) {
+            FindRoomByNum(blindEnd1_Num, this.tabOfRoom).setEvent(new Up());
+            int[] wsp = {level, FindRoomByNum(blindEnd1_Num, this.tabOfRoom).getRowRoom(), FindRoomByNum(blindEnd1_Num, this.tabOfRoom).getColRoom()};
+            Ups.add(wsp);
+            p0UP=true;
+        }
+        if(level==1 && p1UP==false) {
+            FindRoomByNum(blindEnd1_Num, this.tabOfRoom).setEvent(new Up());
+            int[] wsp = {level, FindRoomByNum(blindEnd1_Num, this.tabOfRoom).getRowRoom(), FindRoomByNum(blindEnd1_Num, this.tabOfRoom).getColRoom()};
+            Ups.add(wsp);
+            p1UP=true;
+        }
+
 
         // losowanie ślepego zaułku nr2
         roomTemp = RandRoomOnEdge(this.tabOfRoom, FindRoomByNum(exitNum, this.tabOfRoom));
@@ -93,7 +155,18 @@ public class Map {
             roomTemp = RandRoomOnEdge(this.tabOfRoom);
             blindEnd2_Num = roomTemp.getNumRoom();
         }
-        FindRoomByNum(blindEnd2_Num,this.tabOfRoom).setEvent(new Down());
+        if(level==2 && p2Down==false) {
+            FindRoomByNum(blindEnd2_Num, this.tabOfRoom).setEvent(new Down());
+            int[] wsp = {level, FindRoomByNum(blindEnd2_Num, this.tabOfRoom).getRowRoom(), FindRoomByNum(blindEnd2_Num, this.tabOfRoom).getColRoom()};
+            Downs.add(wsp);
+            p2Down=true;
+        }
+        if(level==1 && p1Down==false) {
+            FindRoomByNum(blindEnd2_Num, this.tabOfRoom).setEvent(new Down());
+            int[] wsp = {level, FindRoomByNum(blindEnd2_Num, this.tabOfRoom).getRowRoom(), FindRoomByNum(blindEnd2_Num, this.tabOfRoom).getColRoom()};
+            Downs.add(wsp);
+            p1Down=true;
+        }
 
 
         // Adjacency list dla przechowywania połączeń między numerami pokojów
@@ -457,9 +530,10 @@ public class Map {
 
     public void displayMapFloor(int floor) {
         System.out.println("Mapa piętra: " + floor);
-        for (int i = 0; i < tabOfRoom.length; i++) {
-            for (int j = 0; j < tabOfRoom[0].length; j++) {
-                System.out.printf("%-14s", "[" + i + "," + j + "]" + tabOfRoom[i][j].getEvent().toString());
+        Room[][] mapa=bigMap.get(floor);
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[0].length; j++) {
+                System.out.printf("%-14s", "[" + i + "," + j + "]" + mapa[i][j].getEvent().toString());
             }
             System.out.println();
         }

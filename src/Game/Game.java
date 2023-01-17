@@ -34,7 +34,18 @@ public class Game implements Serializable, Subject {
         this.day = 0;
         player = new Player(mapSize);
         map = new Map(this.player, mapSize);
+        map.displayMapFloor(0);
         map.displayMapFloor(1);
+        map.displayMapFloor(2);
+        System.out.println("Gory : ");
+        for (int i = 0; i < map.getUps().size(); i++) {
+            System.out.println(Arrays.toString(map.getUps().get(i)));
+        }
+        System.out.println("Doły : ");
+        for (int i = 0; i < map.getUps().size(); i++) {
+            System.out.println(Arrays.toString(map.getDowns().get(i)));
+        }
+
         this.registerObserver(new PlayerOnMapPosition());
         System.out.println("\nRozpocząłeś nową grę!\n\n");
         this.startGame();

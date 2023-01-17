@@ -133,7 +133,7 @@ public class Room {
     public boolean eventLoop(Player player){
         do
             this.event = this.event.event(player);
-        while(event != null);
+        while(event != null );
         this.visited = true;
         this.event = new EmptyRoom();
         if(!(player.getHealth() > 0)) {
