@@ -22,6 +22,7 @@ public class Game implements Serializable {
     private int mapSize = 5;// rozmiar mapy
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private MainWindow mainWindow;
+    private boolean userWantToAddItem;
 
     private String text;
     private int choice;
@@ -30,6 +31,7 @@ public class Game implements Serializable {
     public static ArrayList<Armor> basicArmors = new ArrayList<>();
     public static ArrayList<Potion> basicPotions = new ArrayList<>();
     public static ArrayList<Item> allItems = new ArrayList<>();
+
 
     //==================================================================================================================
 
@@ -54,6 +56,16 @@ public class Game implements Serializable {
 
 
     //========================================= SETTERY I GETTERY ======================================================
+
+
+    public boolean isUserWantToAddItem() {
+        return userWantToAddItem;
+    }
+
+    public void setUserWantToAddItem(boolean userWantToAddItem) {
+        this.userWantToAddItem = userWantToAddItem;
+    }
+
     public int getDay() {
         return day;
     }

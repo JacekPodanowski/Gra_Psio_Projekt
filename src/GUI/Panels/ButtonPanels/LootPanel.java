@@ -21,6 +21,9 @@ public class LootPanel extends JPanel implements Subject {
 
     private Loot loot;
 
+    private JButton bierzLootButton;
+    private JButton nieBierzLootButton;
+
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
@@ -36,9 +39,13 @@ public class LootPanel extends JPanel implements Subject {
         this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
         //Dodaje komponenty
-        this.add(bierzLootButton(this));
+
+        bierzLootButton = bierzLootButton(this);
+        this.add(bierzLootButton);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
-        this.add(nieBierzLootButton(this));
+        nieBierzLootButton = nieBierzLootButton(this);
+        this.add(nieBierzLootButton);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
     }
 
     private JButton bierzLootButton(Component parent){
@@ -53,7 +60,8 @@ public class LootPanel extends JPanel implements Subject {
         bierzLootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game = new Game();
+                setLootButtonDisabled();
+                game.setUserWantToAddItem(true);
                 notifyObservers();
             }});
         return bierzLootButton;
@@ -72,7 +80,8 @@ public class LootPanel extends JPanel implements Subject {
         nieBierzLootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game = new Game();
+                setLootButtonDisabled();
+                game.setUserWantToAddItem(false);
                 notifyObservers();
             }});
         return nieBierzLootButton;
@@ -96,5 +105,17 @@ public class LootPanel extends JPanel implements Subject {
 
     public Game getGame() {
         return game;
+    }
+
+    public void setLootButtonDisabled(){
+
+        bierzLootButton.setEnabled(false);
+        nieBierzLootButton.setEnabled(false);
+    }
+
+    public void setLootButtonActive(){
+
+        bierzLootButton.setEnabled(true);
+        nieBierzLootButton.setEnabled(true);
     }
 }

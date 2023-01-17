@@ -127,7 +127,7 @@ public class Fight implements Event {
             player.setGold(player.getGold()+enemy.getWeapon().getValue());
             if(enemy.getInventory() != null) {
                 System.out.println(" oraz pare przedmitów: ");
-                return new Loot(enemy.getInventory());
+               // return new Loot(enemy.getInventory());
             }
             return new EmptyRoom();
         }
