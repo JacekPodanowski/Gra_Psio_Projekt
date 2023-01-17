@@ -31,7 +31,7 @@ public class Map {
     public Map(Player player,int size) {
         tabOfRoom = new Room[size][size];
         toExitRooms = new ArrayList<Room>();
-        generateMap(player,1,false);
+        //generateMap(player,1,false);
         generateBigMap(player,size);
     }
     //==================================================================================================================
@@ -136,7 +136,7 @@ public class Map {
         if(level==0 && p0UP==false) {
             FindRoomByNum(blindEnd1_Num, this.tabOfRoom).setEvent(new Up());
             int[] wsp = {level, FindRoomByNum(blindEnd1_Num, this.tabOfRoom).getRowRoom(), FindRoomByNum(blindEnd1_Num, this.tabOfRoom).getColRoom()};
-            Ups.add(wsp);
+            Ups.add(wsp);  // wsp to współżędne
             p0UP=true;
         }
         if(level==1 && p1UP==false) {

@@ -13,11 +13,12 @@ public class Up implements Event {
 
     @Override
     public Event event(Player player) {
-        System.out.println("\n\nZnalazłeś wejście na wyższy poziom. Co chcesz zrobić?");
+        System.out.println("\n\nZnalazłeś portal na wyższy poziom." +
+                "Na ścianie wyryto ++. Co chcesz zrobić?");
         int wybor;
         do{
             System.out.print("Co chcesz zrobić?\n 1. Przejdź do następnego pokoju.\t 2. Użyj przedmiotu.\t3. Zobacz swoje statystyki.");
-            System.out.println("\t4. Wejdź na wyższe piętro.");
+            System.out.println("\t4. Wejdź do portalu.");
             wybor = Game.askForChoice(4);
 
             switch(wybor) {
