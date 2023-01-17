@@ -1,12 +1,16 @@
 package GUI.Panels.ButtonPanels;
 
+import BackEnd.Game.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EmptyRoomPanel extends JPanel {
-    public EmptyRoomPanel(){
+    private Game game;
+    public EmptyRoomPanel(Game game){
+        this.game = game;
         Dimension d = new Dimension(900, 300);
         this.setMinimumSize(d);
         this.setMaximumSize(d);

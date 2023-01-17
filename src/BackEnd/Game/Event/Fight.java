@@ -21,7 +21,6 @@ public class Fight implements Event {
     //================================================= ATRYBUTY KLASY =================================================
     private String name = "Walka";
     private Enemy enemy;
-    IConsolePanel consolePanel;
     //==================================================================================================================
 
 
@@ -42,11 +41,6 @@ public class Fight implements Event {
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
-
-    public void setConsolePanel(IConsolePanel consolePanel) {
-        this.consolePanel = consolePanel;
-    }
-
     //==================================================================================================================
 
 
@@ -146,17 +140,6 @@ public class Fight implements Event {
     public Enemy generateEnemy(Player player){
         return new Enemy(player.getLevel());
     }
-    private void enemyAttack(Player player, double health){
-        Random generate = new Random();
-        health = player.getHealth();
-        consolePanel.setMessage("Przeciwnik atakuje ");
-        enemy.attack(player, generate.nextInt(0, 4));
-        consolePanel.setMessage(", zadaje " + (int)(health - player.getHealth()) + " obrażeń!");
-        consolePanel.newLine();
-        consolePanel.setMessage("Twoje życie : "+player.getHealth());
-        consolePanel.setMessage("Życie przeciwnika : "+this.enemy.getHealth());
-    }
-
 
     }
 

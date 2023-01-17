@@ -51,7 +51,7 @@ public class FightPanel extends JPanel implements Subject {
 
             jPanel2 = new javax.swing.JPanel();
             jScrollPane2 = new javax.swing.JScrollPane();
-            consolePanel = new ConsolePanel((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent());
+            consolePanel = new ConsolePanel();
             jButton5 = skill_1();
             jButton6 = skill_2();
             jButton7 = skill_3();

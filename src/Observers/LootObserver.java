@@ -4,6 +4,7 @@ import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
+import GUI.Panels.ButtonPanels.EmptyRoomPanel;
 import GUI.Panels.ButtonPanels.LootPanel;
 
 public class LootObserver implements Observer{
@@ -14,8 +15,8 @@ public class LootObserver implements Observer{
     private Loot loot;
     private BottomPanel bottomPanel;
 
-    public LootObserver(LootPanel lootPanel, BottomPanel bottomPanel){
-        this.lootPanel = lootPanel;
+    public LootObserver(BottomPanel bottomPanel){
+        this.lootPanel = bottomPanel.getLootPanel();
         this.bottomPanel = bottomPanel;
         this.bottomPanel.registerObserver(this);
     }
@@ -23,7 +24,6 @@ public class LootObserver implements Observer{
 
     @Override
     public void update(Game game) {
-
         this.game = game;
         this.player = game.getPlayer();
         this.loot = (Loot) game.getMap().getPlayerLocation(game.getPlayer()).getEvent();
@@ -31,14 +31,22 @@ public class LootObserver implements Observer{
     }
 
     public void refresh(){
-        if (loot.countItems() >0){
+        if (loot.countItems() > 0){
             if (game.isUserWantToAddItem()){
                 player.pickUpItem(loot.getItem());
-                lootPanel.setLootButtonActive();
             }
+            else {
+                loot.getItem();
+            }
+            lootPanel.setLootButtonActive();
         }
         else {
-            //pojawia się możliwość przejścia do innego pokoju
+            bottomPanel.removeAll();
+            bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
+            //bottomPanel.getEmptyRoomPanel().registerObserver(new LootObserver(bottomPanel));
+            bottomPanel.add(bottomPanel.getEmptyRoomPanel());
+            bottomPanel.revalidate();
+            bottomPanel.repaint();
         }
     }
 }

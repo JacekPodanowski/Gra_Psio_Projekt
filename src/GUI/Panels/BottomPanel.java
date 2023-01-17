@@ -6,6 +6,7 @@ import BackEnd.Game.Event.Event;
 import GUI.Panels.ButtonPanels.*;
 import Observable.Subject;
 import Observers.FightObserver;
+import Observers.LootObserver;
 import Observers.Observer;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class BottomPanel extends JPanel implements Subject {
             entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
-            emptyRoomPanel = new EmptyRoomPanel();
+            emptyRoomPanel = new EmptyRoomPanel(game);
             this.add(emptyRoomPanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
             exitPanel = new ExitPanel();
@@ -44,6 +45,7 @@ public class BottomPanel extends JPanel implements Subject {
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
             lootPanel = new LootPanel(game);
+            lootPanel.registerObserver(new LootObserver(this));
             this.add(lootPanel);
         }
     }
@@ -94,5 +96,13 @@ public class BottomPanel extends JPanel implements Subject {
 
     public void setLootPanel(LootPanel lootPanel) {
         this.lootPanel = lootPanel;
+    }
+
+    public EmptyRoomPanel getEmptyRoomPanel() {
+        return emptyRoomPanel;
+    }
+
+    public void setEmptyRoomPanel(EmptyRoomPanel emptyRoomPanel) {
+        this.emptyRoomPanel = emptyRoomPanel;
     }
 }

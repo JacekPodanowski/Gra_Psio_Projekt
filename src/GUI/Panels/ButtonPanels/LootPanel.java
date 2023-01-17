@@ -18,12 +18,8 @@ import java.util.ArrayList;
 public class LootPanel extends JPanel implements Subject {
 
     private Game game;
-
-    private Loot loot;
-
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
-
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
@@ -36,16 +32,21 @@ public class LootPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 500));
 
         //Layout
-        this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
 
         //Dodaje komponenty
 
-        bierzLootButton = bierzLootButton(this);
-        this.add(bierzLootButton);
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
-        nieBierzLootButton = nieBierzLootButton(this);
-        this.add(nieBierzLootButton);
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        bierzLootButton = bierzLootButton(buttonPanel);
+        buttonPanel.add(bierzLootButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        nieBierzLootButton = nieBierzLootButton(buttonPanel);
+        buttonPanel.add(nieBierzLootButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        this.add(new JLabel("cos tam"));
+        this.add(buttonPanel);
     }
 
     private JButton bierzLootButton(Component parent){
@@ -108,13 +109,11 @@ public class LootPanel extends JPanel implements Subject {
     }
 
     public void setLootButtonDisabled(){
-
         bierzLootButton.setEnabled(false);
         nieBierzLootButton.setEnabled(false);
     }
 
     public void setLootButtonActive(){
-
         bierzLootButton.setEnabled(true);
         nieBierzLootButton.setEnabled(true);
     }

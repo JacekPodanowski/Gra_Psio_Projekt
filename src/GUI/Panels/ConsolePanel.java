@@ -7,10 +7,7 @@ import java.awt.*;
 
 public class ConsolePanel extends JTextArea implements IConsolePanel {
 
-    private Fight figth;
-    public ConsolePanel(Fight figth){
-        this.figth = figth;
-        figth.setConsolePanel(this);
+    public ConsolePanel(){
         this.setEditable(false);
         this.setVisible(true);
     }
@@ -27,9 +24,5 @@ public class ConsolePanel extends JTextArea implements IConsolePanel {
 
     public JTextArea getConsole() {
         return this;
-    }
-
-    public Fight figth() {
-        return figth;
     }
 }

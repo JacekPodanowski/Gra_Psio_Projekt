@@ -13,15 +13,16 @@ public class Loot implements Event{
     private String name = "Loot";
     private List<Item> lootTab;
     public Loot(List<Item> lootTab){
-
-        this.lootTab.addAll((lootTab));
+        this.lootTab = lootTab;
     }
+
     public Loot(){
         Random R = new Random();
         this.lootTab = new ArrayList<>();
-        if(R.nextBoolean()) {
+        if (R.nextBoolean()) {
+            this.lootTab.add(Game.generateItem());//moga byc 2 czasem
+        } else {
             this.lootTab.add(Game.generateItem());
-        }else{
             this.lootTab.add(Game.generateItem());
         }
     }
