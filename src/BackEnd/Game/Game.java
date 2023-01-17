@@ -5,7 +5,6 @@ import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Potion;
 import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Player;
-import Observable.Subject;
 import Observers.Observer;
 import GUI.View.MainWindow;
 
@@ -23,14 +22,12 @@ public class Game implements Serializable {
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private MainWindow mainWindow;
     private boolean userWantToAddItem;
-
     private String text;
-    private int choice;
-    public ArrayList<Item> basicItems;
+    public ArrayList<Item> basicItems; //?
     public static ArrayList<Weapon> basicWepons = new ArrayList<>();
     public static ArrayList<Armor> basicArmors = new ArrayList<>();
     public static ArrayList<Potion> basicPotions = new ArrayList<>();
-    public static ArrayList<Item> allItems = new ArrayList<>();
+    public static ArrayList<Item> allItems = new ArrayList<>(); //?
 
 
     //==================================================================================================================
@@ -65,117 +62,25 @@ public class Game implements Serializable {
     public void setUserWantToAddItem(boolean userWantToAddItem) {
         this.userWantToAddItem = userWantToAddItem;
     }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public Map getMapa() {
-        return map;
-    }
-
-    public void setMapa(Map mapa) {
-        this.map = mapa;
-    }
-
     public Map getMap() {
         return map;
     }
-
-    public void setMap(Map map) {
-        this.map = map;
-    }
-
     public Player getPlayer() {
         return player;
     }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-    public int getStartY() {
-        return startY;
-    }
-
-    public void setStartY(int startY) {
-        this.startY = startY;
-    }
-
-    public int getStartX() {
-        return startX;
-    }
-
-    public void setStartX(int startX) {
-        this.startX = startX;
-    }
-
-    public int getMapSize() {
-        return mapSize;
-    }
-
-    public void setMapSize(int mapSize) {
-        this.mapSize = mapSize;
-    }
-
     public ArrayList<Observer> getObservers() {
         return observers;
     }
-
     public void setObservers(ArrayList<Observer> observers) {
         this.observers = observers;
     }
-
-    public MainWindow getMainWindow() {
-        return mainWindow;
-    }
-
-    public void setMainWindow(MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
-    }
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     //==================================================================================================================
 
 
     //============================================= METODY KLASY =======================================================
-    public void startGame() {
-
-        //notifyObservers();
-        generateItems();
-        text = "Aby wejść do kostki wpisz 1.";
-        int wybor = askForChoice();
-        if (wybor == 1)
-            while (this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                //this.notifyObservers();
-                if (wybor == 1)
-                    while (this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].eventLoop(player)) {
-                        //this.notifyObservers();
-                        for (int i = 0; i < this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size(); i++) {
-                            System.out.print((i + 1) + " - ");
-                            System.out.println(Arrays.toString(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(i)));
-                        }
-                        System.out.println("Gdzie chesz iść? ");
-                        int choice = Game.askForChoice(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().size());
-                        int x = player.getLocation_X();
-                        player.setLocation_X(this.map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].getPathSet().get(choice - 1)[0]);
-                        player.setLocation_Y(this.map.getTabOfRoom()[x][player.getLocation_Y()].getPathSet().get(choice - 1)[1]);
-                    }
-                System.out.print("Nie zyjesz");
-                System.exit(5);
-            }
-    }
-
     public void restartGame() {
         this.map = null; //POWINNO LOSOWAĆ NOWĄ MAPĘ
         this.day = 0;
@@ -241,13 +146,6 @@ public class Game implements Serializable {
         }
         return choice;
     }
-/*   NIE DZIAŁA
-    public int askForChoiceTextField(){
-        while(!mainWindow.isAnswer()){}
-        String anwser = mainWindow.gAnswerChar()+"";
-        return Integer.parseInt(anwser);
-    }
-*/
 
     public static void generateItems(){
         java.util.Map qualityTab =makeQualityTab();
@@ -372,16 +270,13 @@ public class Game implements Serializable {
         switch (R.nextInt(3)) {
             case 0:
                 Weapon B= basicWepons.get(R.nextInt(basicWepons.size()));
-                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
-                return W;
+                return new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
             case 1:
                 Armor B1= basicArmors.get(R.nextInt(basicArmors.size()));
-                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
-                return A;
+                return new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
             case 2:
                 Potion B2= basicPotions.get(R.nextInt(basicPotions.size()));
-                Potion P = new Potion(B2.getName(), B2.getValue(),B2.getHealing());
-                return P;
+                return new Potion(B2.getName(), B2.getValue(),B2.getHealing());
         }
         return new Weapon();
     }
@@ -393,16 +288,13 @@ public class Game implements Serializable {
         switch (choice) {
             case 'W':
                 Weapon B= basicWepons.get(R.nextInt(basicWepons.size()));
-                Weapon W = new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
-                return W;
+                return new Weapon(B.getName(), B.getValue(),B.getType(),B.getRequirement(),B.getBasicDMG(),B.getLvl());
             case 'A':
                 Armor B1= basicArmors.get(R.nextInt(basicArmors.size()));
-                Armor A = new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
-                return A;
+                return new Armor(B1.getName(), B1.getValue(),B1.getStrengthProtection(), B1.getMagicProtection(), B1.getAgilityProtection(),B1.getLvl());
             case 'P':
                 Potion B2= basicPotions.get(R.nextInt(basicPotions.size()));
-                Potion P = new Potion(B2.getName(), B2.getValue(),B2.getHealing());
-                return P;
+                return new Potion(B2.getName(), B2.getValue(),B2.getHealing());
         }
         return new Weapon();
     }

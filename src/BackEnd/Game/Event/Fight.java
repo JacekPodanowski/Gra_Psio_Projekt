@@ -136,11 +136,6 @@ public class Fight implements Event {
     }
 
     public String toString() {return name;}
-
-    public Enemy generateEnemy(Player player){
-        return new Enemy(player.getLevel());
-    }
-
     }
 
     //==================================================================================================================
