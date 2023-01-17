@@ -20,6 +20,7 @@ public class BottomPanel extends JPanel implements Subject {
     private ProfessionChoosePanel professionChoosePanel;
     private ExitPanel exitPanel;
     private Game game;
+    private LvlUpPanel lvlUpPanel;
     private ArrayList<Observer> observers = new ArrayList<>();
     public BottomPanel(Game game){
         this.game = game;
@@ -77,5 +78,21 @@ public class BottomPanel extends JPanel implements Subject {
 
     public FightPanel getFightPanel() {
         return fightPanel;
+    }
+
+    public LvlUpPanel getLvlUpPanel() {
+        return lvlUpPanel;
+    }
+
+    public void setLvlUpPanel(LvlUpPanel lvlUpPanel) {
+        this.lvlUpPanel = lvlUpPanel;
+    }
+
+    public LootPanel getLootPanel() {
+        return lootPanel;
+    }
+
+    public void setLootPanel(LootPanel lootPanel) {
+        this.lootPanel = lootPanel;
     }
 }

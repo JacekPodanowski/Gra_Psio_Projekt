@@ -6,6 +6,7 @@ import BackEnd.Game.Event.Fight;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.FightPanel;
+import GUI.Panels.ButtonPanels.LvlUpPanel;
 
 import java.util.Random;
 
@@ -14,13 +15,16 @@ public class FightObserver implements Observer{
     private BottomPanel bottomPanel;
     private Player player;
     private Enemy enemy;
+    private Game game;
     public FightObserver(BottomPanel bottomPanel){
+        this.bottomPanel = bottomPanel;
         player = bottomPanel.getGame().getPlayer();
         fightPanel = bottomPanel.getFightPanel();
         fightPanel.registerObserver(this);
     }
     @Override
     public void update(Game game) {
+        this.game = game;
         player = game.getPlayer();
         enemy = ((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent()).getEnemy();
         refresh();
@@ -56,10 +60,17 @@ public class FightObserver implements Observer{
         }
         else {
             if(player.getHealth() > 0){
-                //win
+                bottomPanel.removeAll();
+                bottomPanel.setLvlUpPanel(new LvlUpPanel(game));
+                bottomPanel.add(bottomPanel.getLvlUpPanel());
+                bottomPanel.getLvlUpPanel().registerObserver(new LvlUpObserver(bottomPanel));
+                bottomPanel.revalidate();
+                bottomPanel.repaint();
             }
             else {
-                //lose
+                bottomPanel.removeAll();
+                bottomPanel.revalidate();
+                bottomPanel.repaint();
             }
         }
     }
