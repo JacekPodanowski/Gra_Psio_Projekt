@@ -21,6 +21,7 @@ public class LootPanel extends JPanel implements Subject {
     private Loot loot;
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
+    private JLabel itemName;
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
@@ -49,11 +50,12 @@ public class LootPanel extends JPanel implements Subject {
 
         this.add(Box.createRigidArea(new Dimension(0, 100)));
 
-        this.add(setTitle());
+        this.add(buttonPanel);
         this.add(Box.createRigidArea(new Dimension(0, 25)));
+        itemName = setTitle();
+        this.add(itemName);
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         buttonPanel.setBorder(blackLine);
-        this.add(buttonPanel);
     }
 
     public JLabel setTitle(){
@@ -75,6 +77,7 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(true);
+                game.getPlayer().pickUpItem(loot.getItem());
                 notifyObservers();
             }});
         return bierzLootButton;
@@ -95,6 +98,7 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(false);
+                loot.getItem();
                 notifyObservers();
             }});
         return nieBierzLootButton;
@@ -128,5 +132,13 @@ public class LootPanel extends JPanel implements Subject {
     public void setLootButtonActive(){
         bierzLootButton.setEnabled(true);
         nieBierzLootButton.setEnabled(true);
+    }
+
+    public JLabel getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(JLabel itemName) {
+        this.itemName = itemName;
     }
 }

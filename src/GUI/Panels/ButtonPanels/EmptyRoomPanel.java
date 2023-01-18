@@ -19,6 +19,7 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         this.setMinimumSize(d);
         this.setMaximumSize(d);
         this.setPreferredSize(d);
+        this.add(restButton());
     }
     public JButton restButton(){
         JButton restButton = setBasicButton("Odpocznij");

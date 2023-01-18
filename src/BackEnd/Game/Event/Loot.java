@@ -19,7 +19,7 @@ public class Loot implements Event{
     public Loot(){
         Random R = new Random();
         this.lootTab = new ArrayList<>();
-        if (R.nextBoolean()) {
+        if (false) {
             this.lootTab.add(Game.generateItem());//moga byc 2 czasem
         } else {
             this.lootTab.add(Game.generateItem());

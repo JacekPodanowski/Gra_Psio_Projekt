@@ -1,5 +1,6 @@
 package Observers;
 
+import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.LootPanel;
@@ -21,6 +22,7 @@ public class LvlUpObserver implements Observer{
 
     public void refresh(){
         bottomPanel.removeAll();
+        game.getMap().getPlayerLocation(game.getPlayer()).setEvent(new Loot());
         bottomPanel.setLootPanel(new LootPanel(game));
         bottomPanel.getLootPanel().registerObserver(new LootObserver(bottomPanel));
         bottomPanel.add(bottomPanel.getLootPanel());
