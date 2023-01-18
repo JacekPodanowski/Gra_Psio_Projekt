@@ -2,10 +2,7 @@ package BackEnd.Game;
 
 import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Player;
-import BackEnd.Game.Event.EmptyRoom;
-import BackEnd.Game.Event.Event;
-import BackEnd.Game.Event.Fight;
-import BackEnd.Game.Event.Loot;
+import BackEnd.Game.Event.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,6 +20,7 @@ public class Room {
     private Event event;
     private int numRoom;
     private boolean available;
+    private RoomEvent event1;
 
     //==================================================================================================================
 
@@ -70,6 +68,14 @@ public class Room {
     }
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public RoomEvent getEvent1() {
+        return event1;
+    }
+
+    public void setEvent1(RoomEvent event1) {
+        this.event1 = event1;
     }
     //==================================================================================================================
 

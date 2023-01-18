@@ -1,5 +1,6 @@
 package GUI.Panels.ButtonPanels;
 
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import Observable.Subject;
 import Observers.Observer;
@@ -20,6 +21,8 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         this.setMaximumSize(d);
         this.setPreferredSize(d);
         this.add(restButton());
+        this.add(useItemButton());
+        this.add(statsDisplayButton());
     }
     public JButton restButton(){
         JButton restButton = setBasicButton("Odpocznij");
@@ -36,7 +39,8 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         useItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().displayInventoryAndUse();
+                game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.INVENTORY);
+                notifyObservers();
             }
         });
         return useItemButton;

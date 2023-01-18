@@ -5,6 +5,7 @@ import BackEnd.Game.Event.*;
 import BackEnd.Game.Event.Event;
 import GUI.Panels.ButtonPanels.*;
 import Observable.Subject;
+import Observers.EmptyRoomObserver;
 import Observers.FightObserver;
 import Observers.LootObserver;
 import Observers.Observer;
@@ -23,6 +24,8 @@ public class BottomPanel extends JPanel implements Subject {
     private ExitPanel exitPanel;
     private Game game;
     private LvlUpPanel lvlUpPanel;
+    private InventoryPanel inventoryPanel;
+    private RestPanel restPanel;
     private ArrayList<Observer> observers = new ArrayList<>();
     public BottomPanel(Game game){
         this.game = game;
@@ -37,6 +40,7 @@ public class BottomPanel extends JPanel implements Subject {
             this.add(entrancePanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
             emptyRoomPanel = new EmptyRoomPanel(game);
+            emptyRoomPanel.registerObserver(new EmptyRoomObserver(this));
             this.add(emptyRoomPanel);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
             exitPanel = new ExitPanel();
@@ -107,5 +111,21 @@ public class BottomPanel extends JPanel implements Subject {
 
     public void setEmptyRoomPanel(EmptyRoomPanel emptyRoomPanel) {
         this.emptyRoomPanel = emptyRoomPanel;
+    }
+
+    public InventoryPanel getInventoryPanel() {
+        return inventoryPanel;
+    }
+
+    public void setInventoryPanel(InventoryPanel inventoryPanel) {
+        this.inventoryPanel = inventoryPanel;
+    }
+
+    public RestPanel getRestPanel() {
+        return restPanel;
+    }
+
+    public void setRestPanel(RestPanel restPanel) {
+        this.restPanel = restPanel;
     }
 }

@@ -77,6 +77,32 @@ public class Player extends Character {
         inventory[choice]=item;
     }
 
+    public void useItem(int choice){
+        if (inventory[choice] instanceof Potion) {
+            health = health + ((Potion) inventory[choice]).getHealing();
+            inventory[choice] = null;
+        }
+        if (inventory[choice] instanceof Weapon) {
+            Weapon temp = weapon;
+            weapon = (Weapon) inventory[choice];
+
+            if (!temp.getName().equals("Dłoń")) {
+                inventory[choice] = temp;
+            } else {
+                inventory[choice] = null;
+            }
+        }
+        if (inventory[choice] instanceof Armor) {
+            Armor temp = armor;
+            armor = (Armor) inventory[choice];
+            if (!temp.getName().equals("Nic")) {
+                inventory[choice] = temp;
+            } else {
+                inventory[choice] = null;
+            }
+        }
+    }
+
     public void displayInventoryAndUse() {
         System.out.println("Aktualnie używasz : ");
         System.out.println("Broń - "+weapon.toString());
