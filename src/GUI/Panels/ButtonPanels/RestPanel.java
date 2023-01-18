@@ -13,13 +13,11 @@ import java.util.Random;
 public class RestPanel extends JPanel implements Subject {
 
     private Game game;
-    private Player player;
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public RestPanel(Game game){
         this.game = game;
-        this.player = game.getPlayer();
-
+        this.add(generateLabel());
     }
 
     public JPanel generateLabel(){

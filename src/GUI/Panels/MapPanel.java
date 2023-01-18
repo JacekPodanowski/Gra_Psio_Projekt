@@ -1,5 +1,6 @@
 package GUI.Panels;
 
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import BackEnd.Game.RoomType;
 import Observable.Subject;
@@ -37,18 +38,19 @@ public class MapPanel extends JPanel implements Subject {
                     rooms[i][j].setEnabled(true);
                     if (!this.game.getMap().getTabOfRoom()[i][j].isVisited())
                         rooms[i][j].setText("?");
-                } else
-                    if(this.game.getMap().getTabOfRoom()[i][j].isVisited()) {
+                } else {
+                    if (this.game.getMap().getTabOfRoom()[i][j].isVisited()) {
                         rooms[i][j].setVisible(true);
                         rooms[i][j].setEnabled(false);
-                    }
-                    else {
+                    } else {
                         rooms[i][j].setEnabled(false);
                         rooms[i][j].setVisible(false);
                     }
+                }
                 this.add(rooms[i][j]);
             }
         }
+            this.setEnabled(true);
     }
     public JButton createButton(int i, int j) {
         JButton room = new JButton();

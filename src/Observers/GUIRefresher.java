@@ -2,6 +2,7 @@ package Observers;
 
 import BackEnd.Game.Game;
 import GUI.Panels.MainPanel;
+import GUI.Panels.MapPanel;
 import GUI.Panels.WindowStates;
 import GUI.View.MainWindow;
 
@@ -40,7 +41,13 @@ public class GUIRefresher implements Observer{
     }
     @Override
     public void update(Game game) {
+        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1()) {
+            mapRefresh(game);
+        }
         this.game = game;
         refresh();
+    }
+    public void mapRefresh(Game game){
+        mainWindow.getMainPanel().getTopPanel().setMapPanel(new MapPanel(game));
     }
 }

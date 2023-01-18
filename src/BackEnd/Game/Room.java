@@ -73,7 +73,6 @@ public class Room {
     public RoomEvent getEvent1() {
         return event1;
     }
-
     public void setEvent1(RoomEvent event1) {
         this.event1 = event1;
     }
@@ -102,12 +101,15 @@ public class Room {
         switch(generate.nextInt(4)){
             case 0, 3:
                 this.event = new Fight();
+                this.setEvent1(RoomEvent.FIGHT);
                 break;
             case 1:
                 this.event = new Loot();
+                this.setEvent1(RoomEvent.LOOT);
                 break;
             case 2:
                 this.event = new EmptyRoom();
+                this.setEvent1(RoomEvent.EMPTYROOM);
                 break;
             default:
                 System.out.println("Błąd przy losowaniu eventu!");
