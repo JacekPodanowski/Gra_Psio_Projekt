@@ -1,14 +1,18 @@
 package GUI.Panels.ButtonPanels;
 
 import BackEnd.Game.Game;
+import Observable.Subject;
+import Observers.Observer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class EmptyRoomPanel extends JPanel {
+public class EmptyRoomPanel extends JPanel implements Subject {
     private Game game;
+    private ArrayList<Observer> observers = new ArrayList<>();
     public EmptyRoomPanel(Game game){
         this.game = game;
         Dimension d = new Dimension(900, 300);
@@ -16,22 +20,12 @@ public class EmptyRoomPanel extends JPanel {
         this.setMaximumSize(d);
         this.setPreferredSize(d);
     }
-    public JButton nextRoomButton(){
-        JButton nextRoomButton = setBasicButton("Przejdź do następnego pokoju");
-        nextRoomButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        return nextRoomButton;
-    }
     public JButton restButton(){
         JButton restButton = setBasicButton("Odpocznij");
         restButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                notifyObservers();
             }
         });
         return restButton;
@@ -41,11 +35,24 @@ public class EmptyRoomPanel extends JPanel {
         useItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                game.getPlayer().displayInventoryAndUse();
             }
         });
         return useItemButton;
     }
+
+    public JButton statsDisplayButton(){
+        JButton useItemButton = setBasicButton("Wyświetl statystyki");
+        useItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.getPlayer().showStats();
+                notifyObservers();
+            }
+        });
+        return useItemButton;
+    }
+
     private JButton setBasicButton(String title){
         JButton button = new JButton(title);
         button.setFont(new Font("czcionka", Font.BOLD|Font.ITALIC, 10));
@@ -54,5 +61,21 @@ public class EmptyRoomPanel extends JPanel {
         button.setMaximumSize(d);
         button.setPreferredSize(d);
         return button;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(int i = 0 ; i < observers.size(); i++)
+            observers.get(i).update(game);
     }
 }
