@@ -36,7 +36,7 @@ public class Armor extends Item{
     }
 
     public String toString() {
-        return super.toString()+"\tOchrona przed : "+"Siła-"+StrengthProtection+ " Magia-"+MagicProtection+" Zręcznosc-"+AgilityProtection;
+        return super.toString()+" Ochrony: "+"Siła: "+StrengthProtection+ " Magia: "+MagicProtection+" Zręcznosc: "+AgilityProtection;
     }
 
     public int getStrengthProtection() {

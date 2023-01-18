@@ -54,7 +54,7 @@ public class Weapon extends Item{
     }
 
     public String toString() {
-        return super.toString()+"\tDmg-"+basicDMG+ " typ-"+type +" wymaganie-"+ requirement+" lvl-"+lvl;}
+        return super.toString()+" Dmg: "+basicDMG+ " typ: "+type +" wymaganie: "+ requirement;}
 
     public boolean isUsed() {
         return isUsed;

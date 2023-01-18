@@ -17,4 +17,9 @@ public class Potion extends Item {
     public int getHealing() {
         return healing;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +" +"+healing+"HP";
+    }
 }
