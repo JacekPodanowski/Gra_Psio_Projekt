@@ -4,8 +4,6 @@ import BackEnd.Game.Game;
 import GUI.View.MainWindow;
 import Observers.GUIRefresher;
 
-import java.util.ArrayList;
-
 
 public class Main {
     public static void main (String[] args){

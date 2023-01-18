@@ -3,13 +3,6 @@ package BackEnd.Game.Event;
 import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Game;
-import GUI.Panels.IConsolePanel;
-import Observable.Subject;
-import Observers.Observer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Fight implements Event {
 

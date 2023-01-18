@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class ConsolePanel extends JTextArea implements IConsolePanel {
+public class ConsolePanel extends JTextArea {
 
     public ConsolePanel(){
         this.setEditable(false);
@@ -14,17 +14,12 @@ public class ConsolePanel extends JTextArea implements IConsolePanel {
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
     }
-
-    @Override
     public void setMessage(String message) {
         this.setText(this.getText() + message);
     }
-
-    @Override
     public void newLine() {
         this.setText(this.getText() + '\n');
     }
-
     public JTextArea getConsole() {
         return this;
     }
