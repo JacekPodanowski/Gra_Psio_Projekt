@@ -92,7 +92,7 @@ public class Player extends Character {
             }
         }
         System.out.println("6. Wyjdź\n");
-        System.out.println("Czego chcesz użyć ?");
+        System.out.println("Czego chcesz użyć?");
 
         try {
             while (true){

@@ -6,7 +6,6 @@ import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Game;
 import GUI.View.MainWindow;
 import Observable.Subject;
-import Observers.GUIRefresher;
 import Observers.Observer;
 
 import javax.swing.*;
@@ -50,17 +49,17 @@ public class LootPanel extends JPanel implements Subject {
 
         this.add(Box.createRigidArea(new Dimension(0, 100)));
 
-        this.add(setTheTitle());
+        this.add(setTitle());
         this.add(Box.createRigidArea(new Dimension(0, 25)));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         buttonPanel.setBorder(blackLine);
         this.add(buttonPanel);
     }
 
-    public JLabel setTheTitle(){
-
-        JLabel entranceText = new JLabel("Dotarłeś co dziwnego pustego pokoju z przedmiotem " +loot.getLootTab().get(0).toString()+"\n"+"Zdecyduj czy jest Ci potrzebny");
-    return entranceText;}
+    public JLabel setTitle(){
+        JLabel entranceText = new JLabel("Dotarłeś do dziwnego pustego pokoju z przedmiotem " +loot.getLootTab().get(0).toString()+"\n"+" Zdecyduj czy jest Ci potrzebny");
+        return entranceText;
+    }
 
     private JButton bierzLootButton(Component parent){
         JButton bierzLootButton = new JButton();
