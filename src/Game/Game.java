@@ -245,7 +245,7 @@ public class Game implements Serializable, Subject {
         Weapon weapon5 = new Weapon("Szklana Kula", 3, "Zwykły", 'I', 20, 5,1);
         Weapon weapon6 = new Weapon("Różdżka losu", 5, "Zwykły", 'I', 30, 8,2);
         Weapon weapon7 = new Weapon("Kryształowy Kostur", 10, "Zwykły", 'I', 35, 11,3);
-        Weapon weapon8 = new Weapon("Korzeń Zła", 12, "Zwykły", 'I', 40, 13,4);
+        Weapon weapon8 = new Weapon("Zły Korzeń", 12, "Zwykły", 'I', 40, 13,4);
         Weapon weapon9 = new Weapon("Kij Św.Teresy", 20, "Zwykły", 'I', 65, 25,5);
 
         //Bron Warrior
