@@ -32,6 +32,7 @@ public class LootObserver implements Observer{
 
     public void refresh(){
         if (loot.countItems() > 0){
+            lootPanel.setTheTitle();
             if (game.isUserWantToAddItem()){
                 player.pickUpItem(loot.getItem());
             }
