@@ -89,6 +89,7 @@ public class InventoryPanel extends JPanel implements Subject {
         });
         return button;
     }
+
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);

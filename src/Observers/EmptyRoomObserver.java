@@ -5,6 +5,7 @@ import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
 import GUI.Panels.ButtonPanels.InventoryPanel;
+import GUI.Panels.ButtonPanels.RestPanel;
 
 public class EmptyRoomObserver implements Observer{
     private Game game;
@@ -34,7 +35,11 @@ public class EmptyRoomObserver implements Observer{
                 bottomPanel.repaint();
             }
             case REST -> {
-
+                bottomPanel.setRestPanel((new RestPanel(game)));
+                bottomPanel.getRestPanel().registerObserver(new RestObserver(bottomPanel));
+                bottomPanel.add(bottomPanel.getRestPanel());
+                bottomPanel.revalidate();
+                bottomPanel.repaint();
             }
         }
     }

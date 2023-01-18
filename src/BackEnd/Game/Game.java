@@ -8,6 +8,7 @@ import BackEnd.Chararcter.Player;
 import Observers.Observer;
 import GUI.View.MainWindow;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -324,6 +325,37 @@ public class Game implements Serializable {
         }
         return new Weapon();
     }
+
+    public int generateRestEvent(){
+
+        int anwser;
+        Random random = new Random();
+        anwser = random.nextInt(6);
+        switch (anwser){
+            case 0 :
+                player.healMissingHealth(5);
+                break;
+            case 1 :
+                player.healMissingHealth(10);
+                break;
+            case 2 :
+                player.setHealth(player.getHealth()-15);
+                break;
+            case 3 :
+                break;
+            case 4 :
+                player.setInventory(new Item[5]);
+                player.healMissingHealth(10);
+                break;
+            case 5 :
+                player.setWeapon(null);
+                player.setArmor(null);
+                break;
+        }
+
+    return anwser;}
+
+
 
     //==================================================================================================================
 }
