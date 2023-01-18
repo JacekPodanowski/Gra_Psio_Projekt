@@ -163,7 +163,7 @@ public class Player extends Character {
         }catch (IndexOutOfBoundsException e){}
     }
 
-    public void showStats(){
+    public void showStats() {
         System.out.println("Twój poziom : "+level);
         System.out.println("Twoje życie : "+health);
         System.out.println("Twoja siła  : "+strength);
