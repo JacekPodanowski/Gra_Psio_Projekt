@@ -55,6 +55,10 @@ public class Loot implements Event{
     @Override
     public String toString() {return name;}
 
+    public List<Item> getLootTab() {
+        return lootTab;
+    }
+
     public int countItems(){
         return this.lootTab.size();
     }

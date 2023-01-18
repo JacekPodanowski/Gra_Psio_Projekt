@@ -3,6 +3,7 @@ package GUI.Panels;
 import BackEnd.Game.Game;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class TopPanel extends JPanel {
@@ -17,6 +18,8 @@ public class TopPanel extends JPanel {
         mapPanel = new MapPanel(game);
         this.add(gamePanel);
         this.add(mapPanel);
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
     }
 
     public MapPanel getMapPanel() {

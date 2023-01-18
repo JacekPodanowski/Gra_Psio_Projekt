@@ -10,6 +10,7 @@ import Observers.GUIRefresher;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class LootPanel extends JPanel implements Subject {
 
     private Game game;
+    private Loot loot;
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -25,6 +27,7 @@ public class LootPanel extends JPanel implements Subject {
 
     public LootPanel(Game game){
         this.game=game;
+        this.loot = (Loot) game.getMap().getPlayerLocation(game.getPlayer()).getEvent();
 
         //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
@@ -40,14 +43,24 @@ public class LootPanel extends JPanel implements Subject {
 
         bierzLootButton = bierzLootButton(buttonPanel);
         buttonPanel.add(bierzLootButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         nieBierzLootButton = nieBierzLootButton(buttonPanel);
         buttonPanel.add(nieBierzLootButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        this.add(new JLabel("cos tam"));
+        this.add(Box.createRigidArea(new Dimension(0, 100)));
+
+        this.add(setTheTitle());
+        this.add(Box.createRigidArea(new Dimension(0, 25)));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        buttonPanel.setBorder(blackLine);
         this.add(buttonPanel);
     }
+
+    public JLabel setTheTitle(){
+
+        JLabel entranceText = new JLabel("Dotarłeś co dziwnego pustego pokoju z przedmiotem " +loot.getLootTab().get(0).toString()+"\n"+"Zdecyduj czy jest Ci potrzebny");
+    return entranceText;}
 
     private JButton bierzLootButton(Component parent){
         JButton bierzLootButton = new JButton();

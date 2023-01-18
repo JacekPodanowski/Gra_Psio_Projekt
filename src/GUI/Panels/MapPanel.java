@@ -6,6 +6,7 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,8 @@ public class MapPanel extends JPanel implements Subject {
     public MapPanel(Game game) {
         this.game = game;
         this.setPreferredSize(new Dimension(450, 400));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
         rooms = new JButton[this.game.getMap().getTabOfRoom().length][this.game.getMap().getTabOfRoom()[0].length];
         this.setLayout(new GridLayout(this.game.getMap().getTabOfRoom().length, this.game.getMap().getTabOfRoom().length));
         for (int i = 0; i < this.game.getMap().getTabOfRoom().length; i++) {

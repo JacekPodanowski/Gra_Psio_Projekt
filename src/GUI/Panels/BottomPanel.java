@@ -10,6 +10,7 @@ import Observers.LootObserver;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class BottomPanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 300));
         this.setPreferredSize(new Dimension(900, 300));
         this.setLayout(new FlowLayout());
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
             entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
