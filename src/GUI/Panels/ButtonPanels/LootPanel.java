@@ -49,16 +49,37 @@ public class LootPanel extends JPanel implements Subject {
         buttonPanel.add(nieBierzLootButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        this.add(Box.createRigidArea(new Dimension(200, 100)));
+
+
+        itemName = setTitle();
+
+        JLabel w = new JLabel("Natknałeś sie na bezpański przedmiot :" );
+        w.setFont(new Font("ButtonFont", Font.BOLD, 15));
+        this.add(w);
+        this.add(Box.createRigidArea(new Dimension(1000, 15)));
+
+        this.add(itemName);
+        this.add(Box.createRigidArea(new Dimension(1000, 1)));
+        this.add(staty());
+        this.add(Box.createRigidArea(new Dimension(1000, 25)));
+
+        JLabel z=new JLabel("DECYDUJ" );
+        z.setFont(new Font("ButtonFont", Font.BOLD, 20));
+        this.add(z);
+        this.add(Box.createRigidArea(new Dimension(1000, 1)));
 
         this.add(buttonPanel);
-        this.add(Box.createRigidArea(new Dimension(200, 25)));
-        itemName = setTitle();
-        this.add(itemName);
     }
 
     public JLabel setTitle(){
-        JLabel entranceText = new JLabel("Dotarłeś do dziwnego pustego pokoju z przedmiotem " +loot.getLootTab().get(0).toString()+"\n"+" Zdecyduj czy jest Ci potrzebny");
+        JLabel entranceText = new JLabel( loot.getLootTab().get(0).shortName());
+        entranceText.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        return entranceText;
+    }
+
+    public JLabel staty(){
+        JLabel entranceText = new JLabel( loot.getLootTab().get(0).stats());
+        entranceText.setFont(new Font("ButtonFont", Font.BOLD, 25));
         return entranceText;
     }
 
