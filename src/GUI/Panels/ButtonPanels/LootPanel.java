@@ -35,9 +35,9 @@ public class LootPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 500));
 
         //Layout
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(new FlowLayout());
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+        buttonPanel.setLayout(new FlowLayout());
         buttonPanel.setSize(700,50);
 
         //Dodaje komponenty
@@ -55,8 +55,6 @@ public class LootPanel extends JPanel implements Subject {
         this.add(Box.createRigidArea(new Dimension(200, 25)));
         itemName = setTitle();
         this.add(itemName);
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        buttonPanel.setBorder(blackLine);
     }
 
     public JLabel setTitle(){
