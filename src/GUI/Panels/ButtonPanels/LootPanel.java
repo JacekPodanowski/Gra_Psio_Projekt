@@ -38,6 +38,7 @@ public class LootPanel extends JPanel implements Subject {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+        buttonPanel.setSize(700,50);
 
         //Dodaje komponenty
 
@@ -48,10 +49,10 @@ public class LootPanel extends JPanel implements Subject {
         buttonPanel.add(nieBierzLootButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        this.add(Box.createRigidArea(new Dimension(0, 100)));
+        this.add(Box.createRigidArea(new Dimension(200, 100)));
 
         this.add(buttonPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 25)));
+        this.add(Box.createRigidArea(new Dimension(200, 25)));
         itemName = setTitle();
         this.add(itemName);
         Border blackLine = BorderFactory.createLineBorder(Color.black);
@@ -65,9 +66,9 @@ public class LootPanel extends JPanel implements Subject {
 
     private JButton bierzLootButton(Component parent){
         JButton bierzLootButton = new JButton();
-        bierzLootButton.setMinimumSize(new Dimension(300, 50));
-        bierzLootButton.setPreferredSize(new Dimension(300, 50));
-        bierzLootButton.setMaximumSize(new Dimension(300, 50));
+        bierzLootButton.setMinimumSize(new Dimension(350, 50));
+        bierzLootButton.setPreferredSize(new Dimension(350, 50));
+        bierzLootButton.setMaximumSize(new Dimension(350, 50));
         bierzLootButton.setLocation(MainWindow.centerLocation(parent,bierzLootButton));
         bierzLootButton.setText("Weź przedmiot");
         bierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
@@ -86,9 +87,9 @@ public class LootPanel extends JPanel implements Subject {
     private JButton nieBierzLootButton(Component parent){
         JButton nieBierzLootButton = new JButton();
 
-        nieBierzLootButton.setMinimumSize(new Dimension(300, 50));
-        nieBierzLootButton.setPreferredSize(new Dimension(300, 50));
-        nieBierzLootButton.setMaximumSize(new Dimension(300, 50));
+        nieBierzLootButton.setMinimumSize(new Dimension(350, 50));
+        nieBierzLootButton.setPreferredSize(new Dimension(350, 50));
+        nieBierzLootButton.setMaximumSize(new Dimension(350, 50));
 
         nieBierzLootButton.setLocation(MainWindow.centerLocation(parent,nieBierzLootButton));
         nieBierzLootButton.setText("Zostaw przedmiot");
