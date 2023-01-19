@@ -36,22 +36,22 @@ public class BottomPanel extends JPanel implements Subject {
         this.setLayout(new FlowLayout());
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
-        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
+        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
             entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EMPTYROOM) {
             emptyRoomPanel = new EmptyRoomPanel(game);
             emptyRoomPanel.registerObserver(new EmptyRoomObserver(this));
             this.add(emptyRoomPanel);
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT) {
             exitPanel = new ExitPanel();
             this.add(exitPanel);
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.FIGHT) {
             fightPanel = new FightPanel(game);
             new FightObserver(this);
             this.add(fightPanel);
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.LOOT) {
             lootPanel = new LootPanel(game);
             lootPanel.registerObserver(new LootObserver(this));
             this.add(lootPanel);

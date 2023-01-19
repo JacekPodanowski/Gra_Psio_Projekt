@@ -49,9 +49,6 @@ public class MainPanel extends JPanel {
 //                t1.start();
                 break;
             case GAMESTART:
-                this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-                this.add(new Label("Aby rozpocząc grę, wybierz swoją profesję: ", Label.CENTER));
-                this.add(Box.createRigidArea(new Dimension(0, 100)));
                 professionChoosePanel = new ProfessionChoosePanel(game);
                 this.add(professionChoosePanel);
                 break;

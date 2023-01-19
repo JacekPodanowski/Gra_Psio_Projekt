@@ -35,6 +35,7 @@ public class InventoryObserver implements Observer{
             bottomPanel.removeAll();
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
         }
+        bottomPanel.notifyObservers();
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }

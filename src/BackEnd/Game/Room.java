@@ -7,6 +7,7 @@ import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Room {
@@ -23,6 +24,7 @@ public class Room {
     private int numRoom;
     private boolean available;
     private RoomEvent event1;
+    private List<Item> lootTab;
 
     //==================================================================================================================
 
@@ -91,6 +93,9 @@ public class Room {
         visited = false;
         pathSet = new ArrayList<int[]>();
         randomEvent(player);
+        if(this.event1 == RoomEvent.LOOT){
+            generateLoot();
+        }
     }
 
     //==================================================================================================================
@@ -151,6 +156,31 @@ public class Room {
                 break;
         }
         return option;
+    }
+
+    public void generateLoot(){
+        Random R = new Random();
+        this.lootTab = new ArrayList<>();
+        if (R.nextBoolean()) {
+            this.lootTab.add(Game.generateItem());//moga byc 2 czasem
+        } else {
+            this.lootTab.add(Game.generateItem());
+            this.lootTab.add(Game.generateItem());
+        }
+    }
+
+    public List<Item> getLootTab() {
+        return lootTab;
+    }
+
+    public int countItems(){
+        return this.lootTab.size();
+    }
+
+    public Item getItem(){
+        Item item = lootTab.get(0);
+        lootTab.remove(0);
+        return item;
     }
 
     //==================================================================================================================

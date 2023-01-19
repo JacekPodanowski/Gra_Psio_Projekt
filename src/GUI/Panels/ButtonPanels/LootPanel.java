@@ -4,6 +4,7 @@ package GUI.Panels.ButtonPanels;
 
 import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Game;
+import BackEnd.Game.Room;
 import GUI.View.MainWindow;
 import Observable.Subject;
 import Observers.Observer;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 public class LootPanel extends JPanel implements Subject {
 
     private Game game;
-    private Loot loot;
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
     private JLabel itemName;
@@ -26,8 +26,7 @@ public class LootPanel extends JPanel implements Subject {
 
 
     public LootPanel(Game game){
-        this.game=game;
-        this.loot = (Loot) game.getMap().getPlayerLocation(game.getPlayer()).getEvent();
+        this.game = game;
 
         //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
@@ -59,7 +58,7 @@ public class LootPanel extends JPanel implements Subject {
     }
 
     public JLabel setTitle(){
-        JLabel entranceText = new JLabel("Dotarłeś do dziwnego pustego pokoju z przedmiotem " +loot.getLootTab().get(0).toString()+"\n"+" Zdecyduj czy jest Ci potrzebny");
+        JLabel entranceText = new JLabel("Dotarłeś do dziwnego pustego pokoju z przedmiotem " +game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).toString()+"\n"+" Zdecyduj czy jest Ci potrzebny");
         return entranceText;
     }
 
@@ -77,7 +76,7 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(true);
-                game.getPlayer().pickUpItem(loot.getItem());
+                game.getPlayer().pickUpItem(game.getMap().getPlayerLocation(game.getPlayer()).getItem());
                 notifyObservers();
             }});
         return bierzLootButton;
@@ -98,7 +97,7 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(false);
-                loot.getItem();
+                game.getMap().getPlayerLocation(game.getPlayer()).getItem();
                 notifyObservers();
             }});
         return nieBierzLootButton;

@@ -1,6 +1,8 @@
 package Observers;
 
 import BackEnd.Game.Game;
+import BackEnd.Game.Room;
+import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.Panels.MainPanel;
 import GUI.Panels.MapPanel;
 import GUI.Panels.WindowStates;
@@ -19,31 +21,49 @@ public class GUIRefresher implements Observer{
     public void refresh() {
         mainWindow.getMainPanel().removeAll();
         mainWindow.remove(mainWindow.getMainPanel());
-        if(game.getPlayer().getProfession() == null) {
-            mainWindow.getMainPanel().getStartGamePanel().removeObserver(this);
-            mainWindow.setMainPanel(new MainPanel(this.game, WindowStates.GAMESTART));
-            mainWindow.add(mainWindow.getMainPanel());
-            mainWindow.getMainPanel().getProfessionChoosePanel().registerObserver(this);
-        }
-        else {
-            this.game.getMap().setRoomTypes(1, this.game.getPlayer());
-            mainWindow.setMainPanel(new MainPanel(this.game, WindowStates.GAME));
-            mainWindow.add(mainWindow.getMainPanel());
-            if(mainWindow.getMainPanel().getBottomPanel().getObservers().size() == 0)
-                mainWindow.getMainPanel().getBottomPanel().registerObserver(this);
-            if(mainWindow.getMainPanel().getTopPanel().getMapPanel().getObservers().size() == 0)
-                mainWindow.getMainPanel().getTopPanel().getMapPanel().registerObserver(this);
-            if(mainWindow.getMainPanel().getTopPanel().getGamePanel().getObservers().size() == 0)
-                mainWindow.getMainPanel().getTopPanel().getGamePanel().registerObserver(this);
-        }
+        this.game.getMap().setRoomTypes(1, this.game.getPlayer());
+        mainWindow.setMainPanel(new MainPanel(this.game, WindowStates.GAME));
+        mainWindow.add(mainWindow.getMainPanel());
+
+        //Observers register
+        if(mainWindow.getMainPanel().getBottomPanel().getObservers().size() == 0)
+            mainWindow.getMainPanel().getBottomPanel().registerObserver(this);
+        if(mainWindow.getMainPanel().getTopPanel().getMapPanel().getObservers().size() == 0)
+            mainWindow.getMainPanel().getTopPanel().getMapPanel().registerObserver(this);
+        if(mainWindow.getMainPanel().getTopPanel().getGamePanel().getObservers().size() == 0)
+            mainWindow.getMainPanel().getTopPanel().getGamePanel().registerObserver(this);
+
         mainWindow.getMainPanel().revalidate();
         mainWindow.getMainPanel().repaint();
     }
     @Override
     public void update(Game game) {
-
-        this.game = game;
-        refresh();
+        if(this.game == null) {
+            this.game = game;
+            initiate();
+        } else if (this.game.isLocationChanged()) {
+            this.game = game;
+            refresh();
+            this.game.setLocationChanged(false);
+        } else {
+            this.game = game;
+            mapRefresh();
+        }
     }
-
+    public void mapRefresh(){
+        mainWindow.getMainPanel().getTopPanel().removeAll();
+        mainWindow.getMainPanel().getTopPanel().setMapPanel(new MapPanel(game));
+        mainWindow.getMainPanel().getTopPanel().add(mainWindow.getMainPanel().getTopPanel().getMapPanel());
+        mainWindow.getMainPanel().getTopPanel().revalidate();
+        mainWindow.getMainPanel().getTopPanel().repaint();
+    }
+    public void initiate(){
+        mainWindow.getMainPanel().removeAll();
+        mainWindow.getMainPanel().getStartGamePanel().removeObserver(this);
+        mainWindow.getMainPanel().setProfessionChoosePanel(new ProfessionChoosePanel(game));
+        mainWindow.getMainPanel().add(mainWindow.getMainPanel().getProfessionChoosePanel());
+        mainWindow.getMainPanel().getProfessionChoosePanel().registerObserver(this);
+        mainWindow.getMainPanel().revalidate();
+        mainWindow.getMainPanel().repaint();
+    }
 }

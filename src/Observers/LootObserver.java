@@ -13,7 +13,6 @@ public class LootObserver implements Observer{
     private Player player;
     private Game game;
     private LootPanel lootPanel;
-    private Loot loot;
     private BottomPanel bottomPanel;
 
     public LootObserver(BottomPanel bottomPanel){
@@ -27,12 +26,11 @@ public class LootObserver implements Observer{
     public void update(Game game) {
         this.game = game;
         this.player = game.getPlayer();
-        this.loot = (Loot) game.getMap().getPlayerLocation(game.getPlayer()).getEvent();
         refresh();
     }
 
     public void refresh(){
-        if (loot.countItems() > 0){
+        if (game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
             lootPanel.remove(lootPanel.getItemName());
             lootPanel.setItemName(lootPanel.setTitle());
             lootPanel.add(lootPanel.getItemName());
@@ -46,6 +44,8 @@ public class LootObserver implements Observer{
             bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
             bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
+            bottomPanel.getLootPanel().removeObserver(this);
+            bottomPanel.notifyObservers();
             bottomPanel.revalidate();
             bottomPanel.repaint();
         }
