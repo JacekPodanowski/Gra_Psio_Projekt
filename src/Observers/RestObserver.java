@@ -38,6 +38,7 @@ public class RestObserver implements Observer{
             bottomPanel.getRestPanel().removeObserver(this);
             bottomPanel.removeAll();
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
+            bottomPanel.getEmptyRoomPanel().getRestButton().setEnabled(false);
         }
         bottomPanel.revalidate();
         bottomPanel.repaint();

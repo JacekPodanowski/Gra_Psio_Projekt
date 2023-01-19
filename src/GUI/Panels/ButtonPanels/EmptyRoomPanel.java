@@ -13,14 +13,17 @@ import java.util.ArrayList;
 
 public class EmptyRoomPanel extends JPanel implements Subject {
     private Game game;
+    private JButton restButton;
     private ArrayList<Observer> observers = new ArrayList<>();
+
     public EmptyRoomPanel(Game game){
         this.game = game;
         Dimension d = new Dimension(900, 300);
         this.setMinimumSize(d);
         this.setMaximumSize(d);
         this.setPreferredSize(d);
-        this.add(restButton());
+        this.restButton = restButton();
+        this.add(restButton);
         this.add(useItemButton());
         this.add(statsDisplayButton());
     }
@@ -87,4 +90,9 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         for(int i = 0 ; i < observers.size(); i++)
             observers.get(i).update(game);
     }
+
+    public JButton getRestButton(){
+        return restButton;}
+
+
 }
