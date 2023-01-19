@@ -41,6 +41,13 @@ public class EmptyRoomObserver implements Observer{
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }
+            case STATS -> {
+                bottomPanel.setInventoryPanel(new InventoryPanel(game));
+                bottomPanel.getInventoryPanel().registerObserver(new InventoryObserver(bottomPanel));
+                bottomPanel.add(bottomPanel.getInventoryPanel());
+                bottomPanel.revalidate();
+                bottomPanel.repaint();
+            }
         }
     }
 }

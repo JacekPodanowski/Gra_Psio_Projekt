@@ -52,7 +52,7 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         useItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().showStats();
+                game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.STATS);
                 notifyObservers();
             }
         });
