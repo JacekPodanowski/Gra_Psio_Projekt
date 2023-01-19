@@ -45,6 +45,7 @@ public class LvlUpPanel extends JPanel implements Subject {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         game.getPlayer().setAgility(game.getPlayer().getAgility()+5);
+                        game.getMap().getPlayerLocation(game.getPlayer()).generateLoot();
                         notifyObservers();
                     }
                 });
@@ -55,6 +56,7 @@ public class LvlUpPanel extends JPanel implements Subject {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         game.getPlayer().setIntelligence(game.getPlayer().getIntelligence()+5);
+                        game.getMap().getPlayerLocation(game.getPlayer()).generateLoot();
                         notifyObservers();
                     }
                 });
@@ -65,6 +67,7 @@ public class LvlUpPanel extends JPanel implements Subject {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         game.getPlayer().setStrength(game.getPlayer().getStrength()+5);
+                        game.getMap().getPlayerLocation(game.getPlayer()).generateLoot();
                         notifyObservers();
                     }
                 });

@@ -3,6 +3,7 @@ package Observers;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.EmptyRoom;
 import BackEnd.Game.Event.Loot;
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
@@ -18,7 +19,6 @@ public class LootObserver implements Observer{
     public LootObserver(BottomPanel bottomPanel){
         this.lootPanel = bottomPanel.getLootPanel();
         this.bottomPanel = bottomPanel;
-        this.bottomPanel.registerObserver(this);
     }
 
 
@@ -40,7 +40,7 @@ public class LootObserver implements Observer{
         }
         else {
             bottomPanel.removeAll();
-            bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent(new EmptyRoom());
+            bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.EMPTYROOM);
             bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
             bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
