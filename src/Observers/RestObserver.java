@@ -1,9 +1,12 @@
 package Observers;
 
 import BackEnd.Game.Event.EmptyRoom;
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
+import GUI.Panels.ButtonPanels.InventoryPanel;
+import GUI.Panels.ButtonPanels.RestPanel;
 
 public class RestObserver implements Observer{
 
@@ -24,12 +27,20 @@ public class RestObserver implements Observer{
 
     @Override
     public void refresh() {
-        bottomPanel.removeAll();
-        bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent(new EmptyRoom());
-        bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
-        bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
-        bottomPanel.add(bottomPanel.getEmptyRoomPanel());
+        if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.REST) {
+            bottomPanel.getRestPanel().removeObserver(this);
+            bottomPanel.removeAll();
+            bottomPanel.setRestPanel((new RestPanel((game))));
+            bottomPanel.getRestPanel().registerObserver(this);
+            bottomPanel.add(bottomPanel.getRestPanel());
+        }
+        else {
+            bottomPanel.getRestPanel().removeObserver(this);
+            bottomPanel.removeAll();
+            bottomPanel.add(bottomPanel.getEmptyRoomPanel());
+        }
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }
-}
+    }
+
