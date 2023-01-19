@@ -19,6 +19,7 @@ public abstract class Character {
     protected Skill[] abilities;
     protected Profession profession;
     private boolean playerTurn = true;
+    private boolean usedSpecial = false;
 
 
     public Character() {
@@ -150,5 +151,13 @@ public abstract class Character {
     }
     public void setPlayerTurn(boolean playerTurn) {
         this.playerTurn = playerTurn;
+    }
+
+    public boolean getUsedSpecial() {
+        return usedSpecial;
+    }
+
+    public void setUsedSpecial(boolean usedSpecial) {
+        this.usedSpecial = usedSpecial;
     }
 }

@@ -50,6 +50,7 @@ public class Fight implements Event {
 
         enemy = new Enemy(player.getLevel());
 
+
         if(this.enemy.getHealth() > 0 && player.getHealth() > 0) {
             if (this.enemy.getAgility() > player.getAgility())  // kto zaczyna walkę
                 player.setPlayerTurn(false);
