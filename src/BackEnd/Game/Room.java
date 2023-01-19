@@ -78,6 +78,12 @@ public class Room {
     public void setEvent1(RoomEvent event1) {
         this.event1 = event1;
     }
+    public boolean isRested() {
+        return rested;
+    }
+    public void setRested(boolean rested) {
+        this.rested = rested;
+    }
     //==================================================================================================================
 
 

@@ -30,7 +30,7 @@ public class RestObserver implements Observer{
         if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.REST) {
             bottomPanel.getRestPanel().removeObserver(this);
             bottomPanel.removeAll();
-            bottomPanel.setRestPanel(new RestPanel(game));
+            bottomPanel.setRestPanel((new RestPanel(game)));
             bottomPanel.getRestPanel().registerObserver(this);
             bottomPanel.add(bottomPanel.getRestPanel());
         }

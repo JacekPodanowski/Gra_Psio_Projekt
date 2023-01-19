@@ -26,6 +26,9 @@ public class EmptyRoomPanel extends JPanel implements Subject {
     }
     public JButton restButton(){
         JButton restButton = setBasicButton("Odpocznij");
+        if(game.getMap().getTabOfRoom()[game.getPlayer().getLocation_X()][game.getPlayer().getLocation_Y()].isRested()){
+            restButton.setEnabled(false);
+        }
         restButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
