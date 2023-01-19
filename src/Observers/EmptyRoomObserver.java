@@ -6,6 +6,7 @@ import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
 import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.RestPanel;
+import GUI.Panels.ButtonPanels.StatsPanel;
 
 public class EmptyRoomObserver implements Observer{
     private Game game;
@@ -42,9 +43,9 @@ public class EmptyRoomObserver implements Observer{
                 bottomPanel.repaint();
             }
             case STATS -> {
-                bottomPanel.setInventoryPanel(new InventoryPanel(game));
-                bottomPanel.getInventoryPanel().registerObserver(new InventoryObserver(bottomPanel));
-                bottomPanel.add(bottomPanel.getInventoryPanel());
+                bottomPanel.setStatsPanel(new StatsPanel(game));
+                bottomPanel.getStatsPanel().registerObserver(new StatsObserver(bottomPanel));
+                bottomPanel.add(bottomPanel.getStatsPanel());
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }

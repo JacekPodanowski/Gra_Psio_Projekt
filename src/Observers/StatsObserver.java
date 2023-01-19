@@ -4,6 +4,7 @@ import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.InventoryPanel;
+import GUI.Panels.ButtonPanels.StatsPanel;
 
 public class StatsObserver implements Observer{
     private Game game;
@@ -11,7 +12,7 @@ public class StatsObserver implements Observer{
 
     public StatsObserver(BottomPanel bottomPanel){
         this.bottomPanel = bottomPanel;
-        this.bottomPanel.getInventoryPanel().registerObserver(this);
+        this.bottomPanel.getStatsPanel().registerObserver(this);
     }
 
     @Override
@@ -23,14 +24,14 @@ public class StatsObserver implements Observer{
     @Override
     public void refresh() {
         if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.STATS) {
-            bottomPanel.getInventoryPanel().removeObserver(this);
+            bottomPanel.getStatsPanel().removeObserver(this);
             bottomPanel.removeAll();
-            bottomPanel.setInventoryPanel(new InventoryPanel(game));
-            bottomPanel.getInventoryPanel().registerObserver(this);
-            bottomPanel.add(bottomPanel.getInventoryPanel());
+            bottomPanel.setStatsPanel(new StatsPanel(game));
+            bottomPanel.getStatsPanel().registerObserver(this);
+            bottomPanel.add(bottomPanel.getStatsPanel());
         }
         else {
-            bottomPanel.getInventoryPanel().removeObserver(this);
+            bottomPanel.getStatsPanel().removeObserver(this);
             bottomPanel.removeAll();
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
         }

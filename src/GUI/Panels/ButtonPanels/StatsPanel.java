@@ -32,10 +32,19 @@ public class StatsPanel extends JPanel implements Subject {
         equipment.add(Box.createRigidArea(new Dimension(0, 10)));
         equipment.add(new JLabel("Twoja aktualna zbroja: "));
         equipment.add(currentArmor());
-        equipment.add(Box.createRigidArea(new Dimension(0, 120)));
+        equipment.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        equipment.add(currentHealth());
+        equipment.add(Box.createRigidArea(new Dimension(0, 10)));
+        equipment.add(currentStrngth());
+        equipment.add(Box.createRigidArea(new Dimension(0, 10)));
+        equipment.add(currentInteligence());
+        equipment.add(Box.createRigidArea(new Dimension(0, 10)));
+        equipment.add(currentAgility());
+        equipment.add(Box.createRigidArea(new Dimension(0, 10)));
+
         panel.add(equipment);
         panel.add(Box.createRigidArea(new Dimension(20, 0)));
-        panel.add(inventoryPieces());
         this.add(panel);
     }
 
@@ -47,35 +56,21 @@ public class StatsPanel extends JPanel implements Subject {
         JLabel currentArmor = new JLabel(game.getPlayer().getArmor().toString());
         return currentArmor;
     }
-    public JPanel inventoryPieces(){
-        JPanel inventoryPieces = new JPanel();
-        inventoryPieces.setLayout(new BoxLayout(inventoryPieces, BoxLayout.PAGE_AXIS));
-        inventoryPieces.add(new JLabel("Ekwipunek:"));
-        for(int i = 0; i < game.getPlayer().getInventory().length; i++) {
-            if (game.getPlayer().getInventory()[i] == null) {
-                JButton button = new JButton(i + 1 + ". -------------------");
-                button.setEnabled(false);
-                button.setSize(80, 20);
-                inventoryPieces.add(button);
-            }
-            else {
-                final int z = i;
-                JButton button = new JButton(i + 1 + ". " + game.getPlayer().getInventory()[i].toString());
-                button.setEnabled(true);
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        game.getPlayer().useItem(z);
-                        notifyObservers();
-                    }
-                });
-                button.setSize(80, 20);
-                inventoryPieces.add(button);
-            }
-            inventoryPieces.add(Box.createRigidArea(new Dimension(0, 10)));
-        }
-        inventoryPieces.add(Box.createRigidArea(new Dimension(0, 120)));
-        return inventoryPieces;
+    public JLabel currentHealth(){
+        JLabel currentStats = new JLabel("Życie : "+game.getPlayer().getHealth());
+        return currentStats;
+    }
+    public JLabel currentStrngth(){
+        JLabel currentStats = new JLabel("Siła : "+game.getPlayer().getStrength());
+        return currentStats;
+    }
+    public JLabel currentInteligence(){
+        JLabel currentStats = new JLabel("Inteligencja : "+game.getPlayer().getIntelligence());
+        return currentStats;
+    }
+    public JLabel currentAgility(){
+        JLabel currentStats = new JLabel("Zwinność : "+game.getPlayer().getAgility());
+        return currentStats;
     }
 
     public JButton goBack(){
