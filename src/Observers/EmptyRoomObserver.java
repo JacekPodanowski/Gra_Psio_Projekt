@@ -6,6 +6,7 @@ import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
 import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.RestPanel;
+import GUI.Panels.ButtonPanels.StatsPanel;
 
 public class EmptyRoomObserver implements Observer{
     private Game game;
@@ -37,7 +38,14 @@ public class EmptyRoomObserver implements Observer{
             case REST -> {
                 bottomPanel.setRestPanel((new RestPanel(game)));
                 bottomPanel.getRestPanel().registerObserver(new RestObserver(bottomPanel));
-                bottomPanel.add(bottomPanel.getRestPanel());
+                bottomPanel.add(bottomPanel.getRestPanel());//tu sie wywala jakis box layout
+                bottomPanel.revalidate();
+                bottomPanel.repaint();
+            }
+            case STATS -> {
+                bottomPanel.setStatsPanel(new StatsPanel(game));
+                bottomPanel.getStatsPanel().registerObserver(new StatsObserver(bottomPanel));
+                bottomPanel.add(bottomPanel.getStatsPanel());
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }

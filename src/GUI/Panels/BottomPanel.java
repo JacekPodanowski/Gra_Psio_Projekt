@@ -26,6 +26,7 @@ public class BottomPanel extends JPanel implements Subject {
     private LvlUpPanel lvlUpPanel;
     private InventoryPanel inventoryPanel;
     private RestPanel restPanel;
+    private StatsPanel statsPanel;
     private ArrayList<Observer> observers = new ArrayList<>();
     public BottomPanel(Game game){
         this.game = game;
@@ -127,5 +128,13 @@ public class BottomPanel extends JPanel implements Subject {
 
     public void setRestPanel(RestPanel restPanel) {
         this.restPanel = restPanel;
+    }
+
+    public StatsPanel getStatsPanel() {
+        return statsPanel;
+    }
+
+    public void setStatsPanel(StatsPanel statsPanel) {
+        this.statsPanel = statsPanel;
     }
 }

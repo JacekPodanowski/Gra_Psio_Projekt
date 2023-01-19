@@ -1,6 +1,8 @@
 package BackEnd.Game;
 
+import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
+import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.*;
 
@@ -143,8 +145,8 @@ public class Room {
                 System.out.println("Budzą się wypoczęty lecz nigdzie nie możesz znaleść swojej torby");
                 break;
             case 5 :
-                player.setWeapon(null);
-                player.setArmor(null);
+                player.setWeapon(new Weapon());
+                player.setArmor(new Armor());
                 System.out.println("Budzisz się kompletnie nagi a po twoim sprzęcie ani śladu, ciekawe jako to sie stało ?");
                 break;
         }

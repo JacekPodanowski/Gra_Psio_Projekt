@@ -348,8 +348,8 @@ public class Game implements Serializable {
                 player.healMissingHealth(10);
                 break;
             case 5 :
-                player.setWeapon(null);
-                player.setArmor(null);
+                player.setWeapon(new Weapon());
+                player.setArmor(new Armor());
                 break;
         }
 

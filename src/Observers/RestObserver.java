@@ -16,7 +16,7 @@ public class RestObserver implements Observer{
 
     public RestObserver(BottomPanel bottomPanel){
         this.bottomPanel = bottomPanel;
-        this.bottomPanel.getInventoryPanel().registerObserver(this);
+        this.bottomPanel.getRestPanel().registerObserver(this);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class RestObserver implements Observer{
         if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.REST) {
             bottomPanel.getRestPanel().removeObserver(this);
             bottomPanel.removeAll();
-            bottomPanel.setRestPanel((new RestPanel((game))));
+            bottomPanel.setRestPanel(new RestPanel(game));
             bottomPanel.getRestPanel().registerObserver(this);
             bottomPanel.add(bottomPanel.getRestPanel());
         }
@@ -42,5 +42,4 @@ public class RestObserver implements Observer{
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }
-    }
-
+}
