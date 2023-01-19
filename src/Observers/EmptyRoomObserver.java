@@ -37,7 +37,7 @@ public class EmptyRoomObserver implements Observer{
             case REST -> {
                 bottomPanel.setRestPanel((new RestPanel(game)));
                 bottomPanel.getRestPanel().registerObserver(new RestObserver(bottomPanel));
-                bottomPanel.add(bottomPanel.getRestPanel());
+                bottomPanel.add(bottomPanel.getRestPanel());//tu sie wywala jakis box layout
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }
