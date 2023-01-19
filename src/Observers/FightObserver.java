@@ -31,6 +31,9 @@ public class FightObserver implements Observer{
     }
     public void refresh(){
         if(player.getHealth() > 0 && enemy.getHealth() > 0){
+            if(fightPanel.getAbilityChoice()==3)
+                player.setUsedSpecial(true);
+
             fightPanel.getConsolePanel().setMessage("Atakujesz i zadajesz " + player.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
             fightPanel.getConsolePanel().newLine();
             fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
@@ -44,7 +47,7 @@ public class FightObserver implements Observer{
             fightPanel.getjButton8().setEnabled(false);
 
             Random generate = new Random();
-            enemy.attack(player, generate.nextInt(0, 4));
+            enemy.attack(player, generate.nextInt(0, 3));
 
             fightPanel.getConsolePanel().setMessage("Przeciwnik atakuje i zadaje " + enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
             fightPanel.getConsolePanel().newLine();
@@ -56,7 +59,8 @@ public class FightObserver implements Observer{
             fightPanel.getjButton5().setEnabled(true);
             fightPanel.getjButton6().setEnabled(true);
             fightPanel.getjButton7().setEnabled(true);
-            fightPanel.getjButton8().setEnabled(true);
+            if(player.getUsedSpecial()==false)
+                fightPanel.getjButton8().setEnabled(true);
         }
         else {
             if(player.getHealth() > 0){
@@ -66,6 +70,8 @@ public class FightObserver implements Observer{
                 bottomPanel.getLvlUpPanel().registerObserver(new LvlUpObserver(bottomPanel));
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
+                enemy.setUsedSpecial(false);
+                player.setUsedSpecial(false);
             }
             else {
                 bottomPanel.removeAll();
