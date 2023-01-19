@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+
 public class StartGamePanel extends JPanel implements Subject {
     private Game game;
     private boolean czyNowaGra = false;
@@ -71,11 +73,10 @@ public class StartGamePanel extends JPanel implements Subject {
                 loadWindow.setVisible(true);
                 if (loadWindow.isFinishedSucceslyffly()) {
                     game = loadWindow.getGame();
-                    loadWindow.setVisible(false);
-                    loadWindow.setEnabled(false);
                     czyWczytanaGra = true;
+                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                 } else {
-                    //CO MA ZROBIC? nie wiem jak to będzie ziom
+                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                 }
             }});
         return loadGameButton;

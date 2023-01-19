@@ -55,6 +55,19 @@ public abstract class Item {
         if(name.charAt(name.length()-1)=='a'){
             return quality.substring(0,quality.length()-1).concat("a ")+name;
         }
+        if(name.charAt(name.length()-1)=='o'){
+            return quality.substring(0,quality.length()-1).concat("e ")+name;
+        }
+        return quality+" "+name;
+    }
+
+    public String shortName() {
+        if(name.charAt(name.length()-1)=='a'){
+            return quality.substring(0,quality.length()-1).concat("a ")+name;
+        }
+        if(name.charAt(name.length()-1)=='o'){
+            return quality.substring(0,quality.length()-1).concat("e ")+name;
+        }
         return quality+" "+name;
     }
 
@@ -72,4 +85,6 @@ public abstract class Item {
     public Map<String, Double> getQualityTab() {
         return qualityTab;
     }
+
+    public abstract String stats();
 }

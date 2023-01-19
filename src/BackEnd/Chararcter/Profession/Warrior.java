@@ -2,6 +2,7 @@ package BackEnd.Chararcter.Profession;
 
 import BackEnd.Chararcter.Character;
 import BackEnd.Chararcter.Item.Weapon;
+import BackEnd.Chararcter.Player;
 import BackEnd.Chararcter.Skill;
 
 public class Warrior implements Profession{
@@ -16,6 +17,6 @@ public class Warrior implements Profession{
 
     @Override
     public void specialAbility(Character character) {
-        character.setAbility(new Skill("Ogłuszające uderzenie", 1, 60, 1), 3);
+        character.setAbility(new Skill("Ogłuszające uderzenie", 2, 70, 1), 3);
     }
 }

@@ -22,4 +22,7 @@ public class Potion extends Item {
     public String toString() {
         return super.toString() +" +"+healing+"HP";
     }
+    public String stats() {
+        return "Leczenie : " + healing;
+    }
 }

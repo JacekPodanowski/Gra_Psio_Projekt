@@ -334,6 +334,7 @@ public class Game implements Serializable {
 
     public int generateRestEvent(){
 
+        map.getTabOfRoom()[player.getLocation_X()][player.getLocation_Y()].setRested(true);
         int anwser;
         Random random = new Random();
         anwser = random.nextInt(6);

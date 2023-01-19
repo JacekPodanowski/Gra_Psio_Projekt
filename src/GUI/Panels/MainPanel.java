@@ -31,22 +31,6 @@ public class MainPanel extends JPanel {
                 this.add(Box.createRigidArea(new Dimension(0, 50)));
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
-//                Thread t1 = new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        while(true){
-//                            if(startGamePanel.isCzyNowaGra()){
-//                                state = WindowStates.GAMESTART;
-//                                break;
-//                            }
-//                            if(startGamePanel.isCzyWczytanaGra()){
-//                                state = WindowStates.GAME;
-//                                break;
-//                            }
-//                        }
-//                    }
-//                });
-//                t1.start();
                 break;
             case GAMESTART:
                 professionChoosePanel = new ProfessionChoosePanel(game);

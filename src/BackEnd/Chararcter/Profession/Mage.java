@@ -2,6 +2,7 @@ package BackEnd.Chararcter.Profession;
 
 import BackEnd.Chararcter.Character;
 import BackEnd.Chararcter.Item.Weapon;
+import BackEnd.Chararcter.Player;
 import BackEnd.Chararcter.Skill;
 
 public class Mage implements Profession{
