@@ -17,7 +17,6 @@ public class EndGamePanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public EndGamePanel(){
-
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
@@ -26,9 +25,11 @@ public class EndGamePanel extends JPanel implements Subject {
 
         JLabel endText1 = new JLabel("Uratowałeś swoje życie i wyszedłeś z Kostki");
         endText1.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        this.add(endText1);
         this.add(Box.createRigidArea(new Dimension(10, 15)));
         JLabel endText2 = new JLabel("Zdecyduj dalej co chcesz zrobic ze swoim życiem");
         endText2.setFont(new Font("ButtonFont", Font.BOLD, 25));
+        this.add(endText2);
         this.add(Box.createRigidArea(new Dimension(10, 15)));
 
         JPanel panel = new JPanel();
