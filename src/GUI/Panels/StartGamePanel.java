@@ -45,7 +45,8 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setMinimumSize(new Dimension(700, 50));
         newGameButton.setPreferredSize(new Dimension(700, 50));
         newGameButton.setMaximumSize(new Dimension(700, 50));
-        newGameButton.setLocation(MainWindow.centerLocation(parent, newGameButton));
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //newGameButton.setLocation(MainWindow.centerLocation(parent, newGameButton));
         newGameButton.setText("Rozpocznij nową grę");
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
         newGameButton.addActionListener(new ActionListener() {
@@ -61,7 +62,8 @@ public class StartGamePanel extends JPanel implements Subject {
         loadGameButton.setMinimumSize(new Dimension(700, 50));
         loadGameButton.setPreferredSize(new Dimension(700, 50));
         loadGameButton.setMaximumSize(new Dimension(700, 50));
-        loadGameButton.setLocation(MainWindow.centerLocation(parent, loadGameButton));
+        loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //loadGameButton.setLocation(MainWindow.centerLocation(parent, loadGameButton));
         loadGameButton.setText("Wczytaj grę");
         loadGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
         loadGameButton.addActionListener(new ActionListener() {

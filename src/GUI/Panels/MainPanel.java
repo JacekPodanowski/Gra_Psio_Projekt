@@ -53,7 +53,8 @@ public class MainPanel extends JPanel {
         JLabel label = new JLabel(text);
         label.setPreferredSize(new Dimension(900, 100));
         label.setFont(new Font("LabelFont", Font.BOLD|Font.ITALIC, size));
-        label.setHorizontalTextPosition(SwingConstants.CENTER);
+        //label.setHorizontalTextPosition(SwingConstants.CENTER);
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setBackground(Color.BLACK);
         return label;
     }
