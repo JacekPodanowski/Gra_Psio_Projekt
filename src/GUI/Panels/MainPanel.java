@@ -18,6 +18,7 @@ public class MainPanel extends JPanel {
     private Game game;
     private StartGamePanel startGamePanel;
     private ProfessionChoosePanel professionChoosePanel;
+    private EndGamePanel endGamePanel;
     public MainPanel(Game game, WindowStates state){
         this.state = state;
         this.game = game;
@@ -43,6 +44,8 @@ public class MainPanel extends JPanel {
                 this.add(bottomPanel);
                 break;
             case ENDGAME:
+                endGamePanel = new EndGamePanel();
+                this.add(endGamePanel);
                 break;
         }
     }
@@ -102,5 +105,13 @@ public class MainPanel extends JPanel {
 
     public void setStartGamePanel(StartGamePanel startGamePanel) {
         this.startGamePanel = startGamePanel;
+    }
+
+    public EndGamePanel getEndGamePanel() {
+        return endGamePanel;
+    }
+
+    public void setEndGamePanel(EndGamePanel endGamePanel) {
+        this.endGamePanel = endGamePanel;
     }
 }
