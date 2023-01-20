@@ -52,11 +52,12 @@ public class GUIRefresher implements Observer{
         }
     }
     public void mapRefresh(){
-        mainWindow.getMainPanel().getTopPanel().removeAll();
-        mainWindow.getMainPanel().setTopPanel(new TopPanel(game));
-        mainWindow.getMainPanel().add(mainWindow.getMainPanel().getTopPanel());
-        mainWindow.getMainPanel().revalidate();
-        mainWindow.getMainPanel().repaint();
+        mainWindow.getMainPanel().getTopPanel().remove(mainWindow.getMainPanel().getTopPanel().getMapPanel());
+        mainWindow.getMainPanel().getTopPanel().setMapPanel(new MapPanel(game));
+        mainWindow.getMainPanel().getTopPanel().add(mainWindow.getMainPanel().getTopPanel().getMapPanel());
+        mainWindow.getMainPanel().getTopPanel().getMapPanel().registerObserver(this);
+        mainWindow.getMainPanel().getTopPanel().revalidate();
+        mainWindow.getMainPanel().getTopPanel().repaint();
     }
     public void initiate(){
         mainWindow.getMainPanel().removeAll();

@@ -1,5 +1,6 @@
 package BackEnd.Game;
 
+import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Weapon;
@@ -25,6 +26,7 @@ public class Room {
     private boolean available;
     private RoomEvent event1;
     private List<Item> lootTab;
+    private Enemy enemy;
 
     //==================================================================================================================
 
@@ -99,8 +101,10 @@ public class Room {
         visited = false;
         pathSet = new ArrayList<int[]>();
         randomEvent(player);
-        if(this.event1 == RoomEvent.LOOT){
+        if(this.event1 == RoomEvent.LOOT || this.event1 == RoomEvent.FIGHT){
             generateLoot();
+            if(this.event1 == RoomEvent.FIGHT)
+                enemy = new Enemy(player.getLevel());
         }
     }
 
@@ -189,5 +193,8 @@ public class Room {
         return item;
     }
 
+    public Enemy getEnemy() {
+        return enemy;
+    }
     //==================================================================================================================
 }
