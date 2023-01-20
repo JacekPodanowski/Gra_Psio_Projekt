@@ -40,6 +40,7 @@ public class FightObserver implements Observer{
             fightPanel.getConsolePanel().newLine();
             fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
             fightPanel.getConsolePanel().newLine();
+            enemy.setAttackAvoided(false);
 
             fightPanel.getjButton5().setEnabled(false);
             fightPanel.getjButton6().setEnabled(false);
@@ -47,19 +48,15 @@ public class FightObserver implements Observer{
             fightPanel.getjButton8().setEnabled(false);
 
             Random generate = new Random();
-            enemy.attack(player, generate.nextInt(0, 3));
-
-            fightPanel.getConsolePanel().setMessage("Przeciwnik atakuje i zadaje " + enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
-            fightPanel.getConsolePanel().newLine();
-            fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
-            fightPanel.getConsolePanel().newLine();
-            fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
-            fightPanel.getConsolePanel().newLine();
+            int enemyChoice = generate.nextInt(0, 3);
+            enemy.attack(player, enemyChoice);
+            enemyAttack(enemyChoice);
+            enemy.setAttackAvoided(false);
 
             fightPanel.getjButton5().setEnabled(true);
             fightPanel.getjButton6().setEnabled(true);
             fightPanel.getjButton7().setEnabled(true);
-            if(player.getUsedSpecial()==false)
+            if(!player.getUsedSpecial())
                 fightPanel.getjButton8().setEnabled(true);
         }
         else {
@@ -79,5 +76,29 @@ public class FightObserver implements Observer{
                 bottomPanel.repaint();
             }
         }
+    }
+    public void enemyAttack(int enemyChoice){
+        switch(enemyChoice){
+            case 0:
+                fightPanel.getConsolePanel().setMessage("Przeciwnik atakuje i zadaje " + enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
+                fightPanel.getConsolePanel().newLine();
+                fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
+                fightPanel.getConsolePanel().newLine();
+                fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+                fightPanel.getConsolePanel().newLine();
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+        }
+    }
+    public void playerAttack(){
+
     }
 }

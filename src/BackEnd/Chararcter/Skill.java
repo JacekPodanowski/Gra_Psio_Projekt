@@ -60,7 +60,7 @@ public class Skill {
 
         Random r = new Random();
         if(r.nextInt(110) > accuracy) {
-            System.out.print(", atak nie trafia");
+            player.setAttackAvoided(true);
             dmg = 0;
         }
 
