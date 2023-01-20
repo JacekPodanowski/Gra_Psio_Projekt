@@ -146,4 +146,7 @@ public class MainWindow extends JFrame {
     public void setMainPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
     }
+
+
+
 }

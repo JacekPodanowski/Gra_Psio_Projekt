@@ -1,6 +1,5 @@
 package GUI.Panels;
 
-import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Game;
 import GUI.SaveLoadStrategy.LoadStrategy;
 import GUI.View.MainWindow;
@@ -12,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -22,6 +23,10 @@ public class StartGamePanel extends JPanel implements Subject {
     private boolean czyWczytanaGra = false;
     private ArrayList<Observer> observers = new ArrayList<>();
 
+    private ImageIcon pictureNameGame;
+    private JLabel imageLabel;
+    private Panel menuPanel;
+
     public StartGamePanel(Game game){
         this.game = game;
 
@@ -31,12 +36,29 @@ public class StartGamePanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 500));
 
         //Layout
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(new GridLayout(2,1));
 
-        //Dodaje komponenty
-        this.add(newGameButton(this));
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
-        this.add(loadGameButton(this));
+        pictureNameGame = new ImageIcon("images/NameOfGame.png");
+
+
+
+        imageLabel = new JLabel(pictureNameGame);
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setBackground(Color.BLACK);
+
+
+
+
+
+        menuPanel = new Panel();
+        menuPanel.setBackground(Color.BLACK);
+
+        menuPanel.add(newGameButton(this));
+        menuPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        menuPanel.add(loadGameButton(this));
+
+        this.add(imageLabel);
+        this.add(menuPanel);
     }
 
 
@@ -46,7 +68,6 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setPreferredSize(new Dimension(700, 50));
         newGameButton.setMaximumSize(new Dimension(700, 50));
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //newGameButton.setLocation(MainWindow.centerLocation(parent, newGameButton));
         newGameButton.setText("Rozpocznij nową grę");
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
         newGameButton.addActionListener(new ActionListener() {
@@ -82,6 +103,14 @@ public class StartGamePanel extends JPanel implements Subject {
                 }
             }});
         return loadGameButton;
+    }
+
+    BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
+        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics2D = resizedImage.createGraphics();
+        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+        graphics2D.dispose();
+        return resizedImage;
     }
 
     public boolean isCzyNowaGra() {

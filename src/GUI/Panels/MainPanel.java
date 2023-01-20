@@ -3,6 +3,7 @@ package GUI.Panels;
 import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Game;
 import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
+import GUI.View.MainWindow;
 import Observers.Observer;
 
 import javax.swing.*;
@@ -27,9 +28,15 @@ public class MainPanel extends JPanel {
         switch(state) {
             case STARTMENU:
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-                this.add(Box.createRigidArea(new Dimension(0, 50)));
-                this.add(createTitleLabel("Witaj w grze: \"Ucieczka z kostki\"", 30));
-                this.add(Box.createRigidArea(new Dimension(0, 50)));
+                this.add(Box.createRigidArea(new Dimension(0, 0)));
+
+
+
+
+
+
+                //this.add(createTitleLabel("Witaj w grze: \"Ucieczka z kostki\"", 30));
+                this.add(Box.createRigidArea(new Dimension(0, 0)));
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
                 break;
@@ -58,6 +65,10 @@ public class MainPanel extends JPanel {
         label.setBackground(Color.BLACK);
         return label;
     }
+
+
+
+
 
 
     public TopPanel getTopPanel() {
