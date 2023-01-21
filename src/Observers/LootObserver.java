@@ -1,8 +1,6 @@
 package Observers;
 
 import BackEnd.Chararcter.Player;
-import BackEnd.Game.Event.EmptyRoom;
-import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
@@ -31,16 +29,10 @@ public class LootObserver implements Observer{
 
     public void refresh(){
         if (game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
-            lootPanel.remove(lootPanel.getButonpanel());
-            lootPanel.remove(lootPanel.getItemName());
-
+            lootPanel.removeAll();
             lootPanel.setItemName(lootPanel.setTitle());
-            lootPanel.add(lootPanel.getItemName());
-
-            lootPanel.add(lootPanel.getButonpanel());
-
-
-
+            lootPanel.setStaty(lootPanel.staty());
+            lootPanel.add(lootPanel.initiateComponents());
             lootPanel.setLootButtonActive();
             lootPanel.revalidate();
             lootPanel.repaint();
