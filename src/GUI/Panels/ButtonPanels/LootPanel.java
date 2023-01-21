@@ -77,8 +77,8 @@ public class LootPanel extends JPanel implements Subject {
     }
 
     public JLabel staty(){
-        JLabel entranceText = new JLabel(loot.getLootTab().get(0).stats());
-        //JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).stats());
+        //JLabel entranceText = new JLabel(loot.getLootTab().get(0).stats());
+        JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).stats());
         entranceText.setFont(new Font("Veradana",Font.BOLD,25));
         return entranceText;
     }
