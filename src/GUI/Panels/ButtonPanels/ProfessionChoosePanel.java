@@ -48,64 +48,22 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
         Font font = new Font(null, Font.BOLD, 25);
 
-        //textType
-
-        // napis nazwa Wojownik
-        JButton textChar1 = new JButton();
-        textChar1.setContentAreaFilled(false);
-
-        textChar1.setMinimumSize(new Dimension(290,50));
-        textChar1.setMaximumSize(new Dimension(290,50));
-        textChar1.setPreferredSize(new Dimension(290,50));
-
-        textChar1.setText("Wojownik");
-        textChar1.setForeground(Color.getHSBColor(0,1,0.5f));
-        textChar1.setFont(font);
-        textChar1.setFocusable(false);
-        textChar1.setBorderPainted(false);
-
-        // napis nazwa Mag
-        JButton textChar2 = new JButton();
-        textChar2.setContentAreaFilled(false);
-
-        textChar2.setMinimumSize(new Dimension(290,50));
-        textChar2.setMaximumSize(new Dimension(290,50));
-        textChar2.setPreferredSize(new Dimension(290,50));
-
-        textChar2.setText("Mag");
-        textChar2.setForeground(Color.getHSBColor(0,1,0.5f));
-        textChar2.setFont(font);
-        textChar2.setFocusable(false);
-        textChar2.setBorderPainted(false);
-
-
-        // napis nazwa Lucznik
-        JButton textChar3 = new JButton();
-        textChar3.setContentAreaFilled(false);
-
-        textChar3.setMinimumSize(new Dimension(290,50));
-        textChar3.setMaximumSize(new Dimension(290,50));
-        textChar3.setPreferredSize(new Dimension(290,50));
-
-        textChar3.setText("Lucznik");
-        textChar3.setForeground(Color.getHSBColor(0,1,0.5f));
-        textChar3.setFont(font);
-        textChar3.setFocusable(false);
-        textChar3.setBorderPainted(false);
-
         // dodanie komponentow
         textPanel.add(textChooseType);
         textPanel.add(Box.createRigidArea(new Dimension(900,60)));
-        textPanel.add(textChar1);
-        textPanel.add(textChar2);
-        textPanel.add(textChar3);
-        this.add(textPanel);
+        // pola Wojownik, Mag, Lucznik
+        textPanel.add(getTextTypeChar("Wojownik", font));
+        textPanel.add(getTextTypeChar("Mag", font));
+        textPanel.add(getTextTypeChar("Lucznik", font));
 
+        this.add(textPanel);
 
         // przyciski z profesjami
         this.add(Box.createRigidArea(new Dimension(0, 0)));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
+
+        //initiateCharacter(game);
         initiateWarrior(game);
         initiateMage(game);
         initiateArcher(game);
@@ -185,6 +143,23 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
             g2.setPaint(Color.getHSBColor(0,1,0.5f));
             g2.drawString("Aby rozpocząć grę, wybierz swoją profesję", 150,30 );
         }
+    }
+
+    public static JButton getTextTypeChar(String typeChar, Font font){
+        JButton textChar1 = new JButton();
+        textChar1.setContentAreaFilled(false);
+
+        textChar1.setMinimumSize(new Dimension(290,50));
+        textChar1.setMaximumSize(new Dimension(290,50));
+        textChar1.setPreferredSize(new Dimension(290,50));
+
+        textChar1.setText(typeChar);
+        textChar1.setForeground(Color.getHSBColor(0,1,0.5f));
+        textChar1.setFont(font);
+        textChar1.setFocusable(false);
+        textChar1.setBorderPainted(false);
+
+        return textChar1;
     }
 
 //    static class TextWojownik extends JComponent{
