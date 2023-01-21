@@ -80,7 +80,10 @@ public class FightObserver implements Observer{
     public void enemyAttack(int enemyChoice){
         switch(enemyChoice){
             case 0:
-                fightPanel.getConsolePanel().setMessage("Przeciwnik atakuje i zadaje " + enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
+                fightPanel.getConsolePanel().setMessage(
+                        "Przeciwnik atakuje i zadaje " +
+                                enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) +
+                                " obrażeń.");
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();

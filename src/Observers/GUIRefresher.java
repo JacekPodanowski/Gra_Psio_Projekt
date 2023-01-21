@@ -2,11 +2,9 @@ package Observers;
 
 import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
-import BackEnd.Game.Room;
 import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.Panels.MainPanel;
 import GUI.Panels.MapPanel;
-import GUI.Panels.TopPanel;
 import GUI.Panels.WindowStates;
 import GUI.View.MainWindow;
 
