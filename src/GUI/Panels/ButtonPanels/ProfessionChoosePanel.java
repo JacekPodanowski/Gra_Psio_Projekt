@@ -24,7 +24,9 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
     public ProfessionChoosePanel(Game game){
         this.game = game;
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.add(new Label("Aby rozpocząc grę, wybierz swoją profesję: ", Label.CENTER));
+        Label title = new Label("Aby rozpocząc grę, wybierz swoją profesję: ", Label.CENTER);
+        title.setFont(new Font("Verdana", Font.BOLD, 30));
+        this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 100)));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));

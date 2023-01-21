@@ -38,13 +38,9 @@ public class MainPanel extends JPanel {
                 //this.add(new JLabel(new ImageIcon(this.getClass().getResource("/escapethecube.png"))));
                 break;
             case GAMESTART:
-
                 this.setLayout(new GridLayout(1, 1));
-                this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
                 this.setBackground(new Color(11, 128, 26));
-                Label title = new Label("Aby rozpocząc grę, wybierz swoją profesję: ", Label.CENTER);
-                title.setFont(new Font("Veradana", Font.BOLD, 30));
-                this.add(title);
+
                 professionChoosePanel = new ProfessionChoosePanel(game);
                 this.add(professionChoosePanel);
                 break;

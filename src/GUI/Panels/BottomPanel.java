@@ -17,7 +17,6 @@ public class BottomPanel extends JPanel implements Subject {
     private EntrancePanel entrancePanel;
     private FightPanel fightPanel;
     private LootPanel lootPanel;
-    private ProfessionChoosePanel professionChoosePanel;
     private ExitPanel exitPanel;
     private Game game;
     private LvlUpPanel lvlUpPanel;
@@ -25,7 +24,7 @@ public class BottomPanel extends JPanel implements Subject {
     private RestPanel restPanel;
     private StatsPanel statsPanel;
     private ArrayList<Observer> observers = new ArrayList<>();
-    public BottomPanel(Game game){
+    public BottomPanel(Game game) {
         this.game = game;
         this.setPreferredSize(new Dimension(900, 300));
         this.setMinimumSize(new Dimension(900, 300));
@@ -34,8 +33,6 @@ public class BottomPanel extends JPanel implements Subject {
         Border blackLine = BorderFactory.createLineBorder(Color.black);
 
         //this.setBorder(blackLine);
-        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
-        this.setBorder(blackLine);
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
             entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
@@ -51,7 +48,7 @@ public class BottomPanel extends JPanel implements Subject {
             fightPanel = new FightPanel(game);
             new FightObserver(this);
             this.add(fightPanel);
-            for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
+            for (int i = 0; i < game.getPlayer().getAbilities().length; i++) ;
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.LOOT) {
             lootPanel = new LootPanel(game);
             lootPanel.registerObserver(new LootObserver(this));
