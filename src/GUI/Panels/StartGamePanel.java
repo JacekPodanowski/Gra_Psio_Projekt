@@ -14,8 +14,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.awt.Font.TRUETYPE_FONT;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class StartGamePanel extends JPanel implements Subject {
@@ -32,7 +35,14 @@ public class StartGamePanel extends JPanel implements Subject {
         this.setBackground(new Color(11,128,26));
         JLabel headline = new JLabel("Witaj w grze: \"Ucieczka z kostki\"");
         this.add(Box.createRigidArea(new Dimension(100, 200)));
-        headline.setFont(new Font("Times New Roman", Font.ITALIC, 40));
+        //headline.setFont(new Font("Times New Roman", Font.ITALIC, 40));
+        final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();;
+//        try {
+//            ge.registerFont(Font.createFont(TRUETYPE_FONT, new File("MedievalSharp-Regular.ttf")));
+//        } catch (IOException | FontFormatException e) {
+//            //Handle exception
+//        }
+        headline.setFont(new Font(ge.getAvailableFontFamilyNames()[119], Font.PLAIN, 40));
         this.add(headline);
         this.add(Box.createRigidArea(new Dimension(100, 300)));
         //Border border = BorderFactory.createLineBorder(Color.white, 5);
