@@ -72,8 +72,7 @@ public class FightObserver implements Observer{
             }
             else {
                 bottomPanel.removeAll();
-                bottomPanel.revalidate();
-                bottomPanel.repaint();
+                bottomPanel.notifyObservers();
             }
         }
     }
