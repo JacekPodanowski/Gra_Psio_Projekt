@@ -55,7 +55,10 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         textChar1.setMaximumSize(new Dimension(290,50));
         textChar1.setPreferredSize(new Dimension(290,50));
 
-        textChar1.add(new TextWojownik());
+        textChar1.setText("Wojownik");
+        Font font = new Font(null, Font.BOLD, 25);
+        textChar1.setForeground(Color.getHSBColor(0,1,0.5f));
+        textChar1.setFont(font);
         textChar1.setFocusable(false);
         textChar1.setBorderPainted(false);
 
@@ -67,7 +70,9 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         textChar2.setMaximumSize(new Dimension(290,50));
         textChar2.setPreferredSize(new Dimension(290,50));
 
-        textChar2.add(new TextMag());
+        textChar2.setText("Mag");
+        textChar2.setForeground(Color.getHSBColor(0,1,0.5f));
+        textChar2.setFont(font);
         textChar2.setFocusable(false);
         textChar2.setBorderPainted(false);
 
@@ -80,7 +85,9 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         textChar3.setMaximumSize(new Dimension(290,50));
         textChar3.setPreferredSize(new Dimension(290,50));
 
-        textChar3.add(new TextLucznik());
+        textChar3.setText("Lucznik");
+        textChar3.setForeground(Color.getHSBColor(0,1,0.5f));
+        textChar3.setFont(font);
         textChar3.setFocusable(false);
         textChar3.setBorderPainted(false);
 
@@ -178,35 +185,35 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         }
     }
 
-    static class TextWojownik extends JComponent{
-        @Override
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setFont(new Font(null, Font.BOLD, 25));
-            g2.setPaint(Color.getHSBColor(0,1,0.5f));
-            g2.drawString("Wojownik", 70,30 );
-        }
-    }
-
-    static class TextMag extends JComponent{
-        @Override
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setFont(new Font(null, Font.BOLD, 25));
-            g2.setPaint(Color.getHSBColor(0,1,0.5f));
-            g2.drawString("Mag", 100,30 );
-        }
-    }
-
-    static class TextLucznik extends JComponent{
-        @Override
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setFont(new Font(null, Font.BOLD, 25));
-            g2.setPaint(Color.getHSBColor(0,1,0.5f));
-            g2.drawString("Lucznik", 80,30 );
-        }
-    }
+//    static class TextWojownik extends JComponent{
+//        @Override
+//        protected void paintComponent(Graphics g) {
+//            Graphics2D g2 = (Graphics2D) g;
+//            g2.setFont(new Font(null, Font.BOLD, 25));
+//            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+//            g2.drawString("Wojownik", 70,30 );
+//        }
+//    }
+//
+//    static class TextMag extends JComponent{
+//        @Override
+//        protected void paintComponent(Graphics g) {
+//            Graphics2D g2 = (Graphics2D) g;
+//            g2.setFont(new Font(null, Font.BOLD, 25));
+//            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+//            g2.drawString("Mag", 100,30 );
+//        }
+//    }
+//
+//    static class TextLucznik extends JComponent{
+//        @Override
+//        protected void paintComponent(Graphics g) {
+//            Graphics2D g2 = (Graphics2D) g;
+//            g2.setFont(new Font(null, Font.BOLD, 25));
+//            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+//            g2.drawString("Lucznik", 80,30 );
+//        }
+//    }
 
     public Game getGame() {
         return game;
