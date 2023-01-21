@@ -46,6 +46,9 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
         textPanel.add(Box.createRigidArea(new Dimension(900,0)));
 
+        Font font = new Font(null, Font.BOLD, 25);
+
+        //textType
 
         // napis nazwa Wojownik
         JButton textChar1 = new JButton();
@@ -56,7 +59,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         textChar1.setPreferredSize(new Dimension(290,50));
 
         textChar1.setText("Wojownik");
-        Font font = new Font(null, Font.BOLD, 25);
         textChar1.setForeground(Color.getHSBColor(0,1,0.5f));
         textChar1.setFont(font);
         textChar1.setFocusable(false);
