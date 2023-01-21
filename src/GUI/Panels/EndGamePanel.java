@@ -35,10 +35,6 @@ public class EndGamePanel extends JPanel implements Subject {
         panel.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
 
-
-
-
-
     }
 
 

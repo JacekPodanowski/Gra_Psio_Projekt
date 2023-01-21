@@ -20,8 +20,12 @@ public class EntrancePanel extends JPanel {
 
         JLabel entranceText = new JLabel("Budzisz się w dziwnym, pustym sześciennym pokoju. Nie jesteś pewien co się wydarzyło, jedyne co widzisz to drzwi w ścianie.");
         JLabel entranceHint = new JLabel("Na mapie wybierz pokój, do którego chcesz przejść.");
+        entranceText.setFont(new Font("Arial",Font.ITALIC,30));
+        entranceHint.setFont(new Font("Arial",Font.ITALIC,30));
         JPanel panelText = new JPanel();
         JPanel panelHint = new JPanel();
+        panelText.setSize(500, 50);
+        panelHint.setSize(500, 50);
         panelText.setLayout(new BoxLayout(panelText, BoxLayout.LINE_AXIS));
         panelHint.setLayout(new BoxLayout(panelHint, BoxLayout.LINE_AXIS));
         this.add(Box.createRigidArea(new Dimension(0, 120)));

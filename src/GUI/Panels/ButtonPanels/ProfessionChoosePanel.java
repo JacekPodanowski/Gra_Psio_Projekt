@@ -34,6 +34,8 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
     private void initiateWarrior(Game game){
         warrior = new JButton();
         warrior.setText("Wojownik");
+        warrior.setBackground(Color.lightGray);
+        warrior.setFont(new Font("Sans Serif", Font.CENTER_BASELINE, 50));
         warrior.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,6 +50,8 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
     private void initiateMage(Game game){
         mage = new JButton();
         mage.setText("Mag");
+        mage.setBackground(Color.lightGray);
+        mage.setFont(new Font("Sans Serif", Font.CENTER_BASELINE, 50));
         mage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,6 +65,8 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
     private void initiateArcher(Game game){
         archer = new JButton();
         archer.setText("Łucznik");
+        archer.setBackground(Color.lightGray);
+        archer.setFont(new Font("Sans Serif", Font.CENTER_BASELINE, 50));
         archer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
