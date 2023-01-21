@@ -45,9 +45,12 @@ public class GUIRefresher implements Observer{
             this.game = game;
             refresh();
             this.game.setLocationChanged(false);
-        }else if (this.game.isGameFinished()) {
+        } else if (this.game.isGameFinished()) {
             this.game = game;
             startMenu();
+        }else if (game.getPlayer().getHealth()<0) {
+            this.game = game;
+            lostGame();
         } else if (this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT) {
             this.game = game;
             endGame();
@@ -92,6 +95,16 @@ public class GUIRefresher implements Observer{
         mainWindow.getMainPanel().getStartGamePanel().registerObserver(this);
         mainWindow.setGame(null);
         this.game = null;
+        mainWindow.revalidate();
+        mainWindow.repaint();
+    }
+
+    public void lostGame(){
+        mainWindow.getMainPanel().removeAll();
+        mainWindow.remove(mainWindow.getMainPanel());
+        mainWindow.setMainPanel(new MainPanel(game, WindowStates.LOSTGAME));
+        mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.getMainPanel().getLostGamePanel().registerObserver(this);
         mainWindow.revalidate();
         mainWindow.repaint();
     }
