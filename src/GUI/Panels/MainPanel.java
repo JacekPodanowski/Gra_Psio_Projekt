@@ -30,8 +30,6 @@ public class MainPanel extends JPanel {
             case STARTMENU:
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
                 this.add(Box.createRigidArea(new Dimension(0, 100)));
-
-
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
                 break;
