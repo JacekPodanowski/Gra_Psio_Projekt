@@ -2,7 +2,6 @@ package GUI.Panels;
 
 import BackEnd.Game.Game;
 import GUI.SaveLoadStrategy.LoadStrategy;
-import GUI.View.MainWindow;
 import GUI.View.SaveLoadWindow;
 import Observable.Subject;
 import Observers.Observer;
@@ -11,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -24,8 +21,10 @@ public class StartGamePanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
 
     private ImageIcon pictureNameGame;
-    private JLabel imageLabel;
-    private Panel menuPanel;
+    private ImageIcon pictureMenuSymbol;
+    private JLabel titleImageLabel;
+
+    private JLabel menuSymbolLabel;
 
     public StartGamePanel(Game game){
         this.game = game;
@@ -36,29 +35,26 @@ public class StartGamePanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 500));
 
         //Layout
-        this.setLayout(new GridLayout(2,1));
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        pictureNameGame = new ImageIcon("images/NameOfGame.png");
+        pictureNameGame = new ImageIcon("images/NameOfGame2.png");
+        pictureMenuSymbol = new ImageIcon("images/MenuSymbol.png");
 
+        titleImageLabel = new JLabel(pictureNameGame);
+        titleImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuSymbolLabel = new JLabel(pictureMenuSymbol);
+        menuSymbolLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
-        imageLabel = new JLabel(pictureNameGame);
-        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setBackground(Color.BLACK);
 
-
-
-
-
-        menuPanel = new Panel();
-        menuPanel.setBackground(Color.BLACK);
-
-        menuPanel.add(newGameButton(this));
-        menuPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        menuPanel.add(loadGameButton(this));
-
-        this.add(imageLabel);
-        this.add(menuPanel);
+        this.add(titleImageLabel);
+        this.add(Box.createRigidArea(new Dimension(0,50)));
+        this.add(newGameButton(this));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(loadGameButton(this));
+        this.add(Box.createRigidArea(new Dimension(0,70)));
+        this.add(menuSymbolLabel);
+        //this.add(new MyMenuSymbol());
     }
 
 
@@ -67,9 +63,17 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setMinimumSize(new Dimension(700, 50));
         newGameButton.setPreferredSize(new Dimension(700, 50));
         newGameButton.setMaximumSize(new Dimension(700, 50));
+
+        newGameButton.setOpaque(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setBorderPainted(false);
+        newGameButton.setBackground(Color.BLACK);
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        newGameButton.setText("Rozpocznij nową grę");
+
+        newGameButton.add(new MyTextNewGameButton());
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        newGameButton.setFocusable(false);
+
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,9 +88,16 @@ public class StartGamePanel extends JPanel implements Subject {
         loadGameButton.setPreferredSize(new Dimension(700, 50));
         loadGameButton.setMaximumSize(new Dimension(700, 50));
         loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //loadGameButton.setLocation(MainWindow.centerLocation(parent, loadGameButton));
-        loadGameButton.setText("Wczytaj grę");
+
+        loadGameButton.add(new MyTextLoadButton());
         loadGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+
+
+        loadGameButton.setFocusable(false);
+        loadGameButton.setOpaque(false);
+        //loadGameButton.setContentAreaFilled(false);
+        loadGameButton.setBorderPainted(false);
+        loadGameButton.setBackground(Color.BLACK);
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,13 +116,33 @@ public class StartGamePanel extends JPanel implements Subject {
         return loadGameButton;
     }
 
-    BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
-        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = resizedImage.createGraphics();
-        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
-        graphics2D.dispose();
-        return resizedImage;
+    static class MyTextNewGameButton extends JComponent{
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+            g2.drawString("Rozpocznij nową grę", 170,30 );
+        }
     }
+    static class MyTextLoadButton extends JComponent{
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+            g2.drawString("Wczytaj grę", 240,30 );
+        }
+    }
+
+//    static class MyMenuSymbol extends JComponent{
+//        @Override
+//        protected void paintComponent(Graphics g) {
+//            Graphics2D g2 = (Graphics2D) g;
+////            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+//            Image menuSymbol = new ImageIcon("images/MenuSymbol.png").getImage();
+//            g2.drawImage(menuSymbol, 375,0,null);
+//
+//        }
+//    }
 
     public boolean isCzyNowaGra() {
         return czyNowaGra;

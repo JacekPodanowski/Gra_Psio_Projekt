@@ -25,18 +25,13 @@ public class MainPanel extends JPanel {
         this.game = game;
         this.setPreferredSize(new Dimension(900, 700));
         this.setLayout(new GridLayout(2, 1));
+        this.setBackground(Color.BLACK);
         switch(state) {
             case STARTMENU:
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-                this.add(Box.createRigidArea(new Dimension(0, 0)));
+                this.add(Box.createRigidArea(new Dimension(0, 100)));
 
 
-
-
-
-
-                //this.add(createTitleLabel("Witaj w grze: \"Ucieczka z kostki\"", 30));
-                this.add(Box.createRigidArea(new Dimension(0, 0)));
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
                 break;
