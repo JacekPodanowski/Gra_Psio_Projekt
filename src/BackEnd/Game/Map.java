@@ -1,9 +1,6 @@
 package BackEnd.Game;
 import BackEnd.Chararcter.Player;
-import BackEnd.Game.Event.Down;
-import BackEnd.Game.Event.Entrance;
-import BackEnd.Game.Event.Exit;
-import BackEnd.Game.Event.Up;
+import BackEnd.Game.Event.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,7 +79,7 @@ public class Map {
 
         // lewy dolny róg zawsze jest wejściem. Inicjacja wejścia
         this.tabOfRoom[this.tabOfRoom.length-1][0].setEnter(true);
-        this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent(new Entrance());
+        this.tabOfRoom[this.tabOfRoom.length-1][0].setEvent1(RoomEvent.ENTRANCE);
         this.tabOfRoom[this.tabOfRoom.length-1][0].setVisited(true);
 
         // losujemy wyjście i dwa zaułki na górnej lub na prawej granice mapy
@@ -90,7 +87,7 @@ public class Map {
         Room roomTemp = RandRoomOnEdge(this.tabOfRoom);
         int exitNum = roomTemp.getNumRoom();
         this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setExit(true);
-        this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent(new Exit());
+        this.tabOfRoom[roomTemp.getRowRoom()][roomTemp.getColRoom()].setEvent1(RoomEvent.EXIT);
 
         // losowanie ślepego zaułku nr1
         // jeśli wyjście jest na górnej granicy, to zaułki są na prawej. W przeciwnym przypadku podobnie
@@ -482,42 +479,6 @@ public class Map {
             System.out.println();
         }
     }
-    public void displayCurrentMapFloor(int floor, Player player) {
-        System.out.println("Mapa piętra: " + floor);
-        for (int i = 0; i < tabOfRoom.length; i++) {
-            for (int j = 0; j < tabOfRoom[0].length; j++) {
-//              int[] tab = {player.getLocation_X(), player.getLocation_Y()};
-                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
-                    System.out.printf("%-6s", "[ x ]");
-                } else if(tabOfRoom[i][j].isVisited()) {
-                    System.out.printf("%-6s", "[   ]");
-                } else if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()])) {
-                    System.out.printf("%-6s", "[ ? ]");
-                } else{
-                    System.out.printf("%-6s", "");
-                }
-            }
-            System.out.println();
-        }
-    }
-    public void displayCurrentMapFloor_GUI(int floor, Player player) {
-        System.out.println("Mapa piętra: " + floor);    
-        for (int i = 0; i < tabOfRoom.length; i++) {
-            for (int j = 0; j < tabOfRoom[0].length; j++) {
-//              int[] tab = {player.getLocation_X(), player.getLocation_Y()};
-                if(i == player.getLocation_X() && j == player.getLocation_Y()) {
-                    System.out.printf("%-6s", "[ x ]");
-                } else if(tabOfRoom[i][j].isVisited()) {
-                    System.out.printf("%-6s", "[   ]");
-                } else if (this.tabOfRoom[i][j].getAvailableRoomsAround().contains(tabOfRoom[player.getLocation_X()][player.getLocation_Y()])) {
-                    System.out.printf("%-6s", "[ ? ]");
-                } else{
-                    System.out.printf("%-6s", "");
-                }
-            }
-            System.out.println();
-        }
-    }
     public void setRoomTypes(int floor, Player player) {
         roomTypes = new RoomType[this.getTabOfRoom().length][this.getTabOfRoom()[0].length];
         for (int i = 0; i < tabOfRoom.length; i++) {
@@ -537,19 +498,6 @@ public class Map {
                 }
             }
         }
-    }
-
-    public ArrayList<Room> displayRoomsToGo(Player player) {
-        ArrayList<Room> availableRoomsAround = this.tabOfRoom[player.getLocation_X()][player.getLocation_Y()].getAvailableRoomsAround();
-        ArrayList<Room> roomsToGo = new ArrayList<Room>();
-
-        for (int i = 0; i < availableRoomsAround.size(); i++) {
-            if (availableRoomsAround.get(i).isVisited()){
-            } else {
-                roomsToGo.add(availableRoomsAround.get(i)) ;
-            }
-        }
-        return roomsToGo;
     }
 
     public Room getPlayerLocation(Player player){

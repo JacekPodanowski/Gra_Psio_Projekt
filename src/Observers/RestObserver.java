@@ -40,6 +40,7 @@ public class RestObserver implements Observer{
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
             bottomPanel.getEmptyRoomPanel().getRestButton().setEnabled(false);
         }
+        bottomPanel.notifyObservers();
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }

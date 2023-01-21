@@ -4,6 +4,7 @@ package GUI.Panels.ButtonPanels;
 
 import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Game;
+import BackEnd.Game.Room;
 import GUI.View.MainWindow;
 import Observable.Subject;
 import Observers.Observer;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 public class LootPanel extends JPanel implements Subject {
 
     private Game game;
-    private Loot loot;
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
     private JLabel itemName;
@@ -26,8 +26,7 @@ public class LootPanel extends JPanel implements Subject {
 
 
     public LootPanel(Game game){
-        this.game=game;
-        this.loot = (Loot) game.getMap().getPlayerLocation(game.getPlayer()).getEvent();
+        this.game = game;
 
         //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
@@ -72,13 +71,14 @@ public class LootPanel extends JPanel implements Subject {
     }
 
     public JLabel setTitle(){
-        JLabel entranceText = new JLabel( loot.getLootTab().get(0).shortName());
+        JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).shortName());
         entranceText.setFont(new Font("ButtonFont", Font.BOLD, 30));
         return entranceText;
     }
 
     public JLabel staty(){
-        JLabel entranceText = new JLabel( loot.getLootTab().get(0).stats());
+        JLabel entranceText = new JLabel(loot.getLootTab().get(0).stats());
+        //JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).stats());
         entranceText.setFont(new Font("Veradana",Font.BOLD,25));
         return entranceText;
     }
@@ -97,7 +97,7 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(true);
-                game.getPlayer().pickUpItem(loot.getItem());
+                game.getPlayer().pickUpItem(game.getMap().getPlayerLocation(game.getPlayer()).getItem());
                 notifyObservers();
             }});
         return bierzLootButton;
@@ -118,7 +118,7 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(false);
-                loot.getItem();
+                game.getMap().getPlayerLocation(game.getPlayer()).getItem();
                 notifyObservers();
             }});
         return nieBierzLootButton;

@@ -23,13 +23,18 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
     public ProfessionChoosePanel(Game game){
         this.game = game;
-        this.setLayout(new GridLayout(1, 3));
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(new Label("Aby rozpocząc grę, wybierz swoją profesję: ", Label.CENTER));
+        this.add(Box.createRigidArea(new Dimension(0, 100)));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 3));
         initiateWarrior(game);
         initiateMage(game);
         initiateArcher(game);
-        this.add(warrior);
-        this.add(mage);
-        this.add(archer);
+        buttonPanel.add(warrior);
+        buttonPanel.add(mage);
+        buttonPanel.add(archer);
+        this.add(buttonPanel);
     }
     private void initiateWarrior(Game game){
         warrior = new JButton();
@@ -42,6 +47,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.getPlayer().setProfession(new Warrior());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
                 System.out.println(game.getPlayer().getProfession());
+                game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
             }
@@ -57,6 +63,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 game.getPlayer().setProfession(new Mage());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
+                game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
             }
@@ -72,6 +79,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 game.getPlayer().setProfession(new Archer());
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
+                game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
             }

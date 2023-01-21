@@ -26,7 +26,7 @@ public class FightObserver implements Observer{
     public void update(Game game) {
         this.game = game;
         player = game.getPlayer();
-        enemy = ((Fight) game.getMap().getPlayerLocation(game.getPlayer()).getEvent()).getEnemy();
+        enemy = game.getMap().getPlayerLocation(game.getPlayer()).getEnemy();
         refresh();
     }
     public void refresh(){

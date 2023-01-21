@@ -1,5 +1,6 @@
 package BackEnd.Game;
 
+import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Weapon;
@@ -7,6 +8,7 @@ import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Room {
@@ -23,6 +25,8 @@ public class Room {
     private int numRoom;
     private boolean available;
     private RoomEvent event1;
+    private List<Item> lootTab;
+    private Enemy enemy;
 
     //==================================================================================================================
 
@@ -97,6 +101,11 @@ public class Room {
         visited = false;
         pathSet = new ArrayList<int[]>();
         randomEvent(player);
+        if(this.event1 == RoomEvent.LOOT || this.event1 == RoomEvent.FIGHT){
+            generateLoot();
+            if(this.event1 == RoomEvent.FIGHT)
+                enemy = new Enemy(player.getLevel());
+        }
     }
 
     //==================================================================================================================
@@ -125,39 +134,33 @@ public class Room {
         }
     }
 
-    public int randomRest(Player player){
-        Random r = new Random();
-        int option = r.nextInt(6);
-        switch (option){
-            case 0 :
-                player.healMissingHealth(5);
-                System.out.println("Wstajesz czując się nieco lepeij");
-                break;
-            case 1 :
-                player.healMissingHealth(10);
-                System.out.println("Wstajesz czując się znacznie lepeij");
-                break;
-            case 2 :
-                player.setHealth(player.getHealth()-15);
-                System.out.println("Budzą cie 3 szybkie lecz bolesne ciosy kijem ale pokój wydaje się być pusty");
-                System.out.printf("|Zycie zmiejszone o 15 punktów|");
-                break;
-            case 3 :
-                System.out.println("Wstajesz i ruszasz dalej");
-                break;
-            case 4 :
-                player.setInventory(new Item[5]);
-                player.healMissingHealth(10);
-                System.out.println("Budzą się wypoczęty lecz nigdzie nie możesz znaleść swojej torby");
-                break;
-            case 5 :
-                player.setWeapon(new Weapon());
-                player.setArmor(new Armor());
-                System.out.println("Budzisz się kompletnie nagi a po twoim sprzęcie ani śladu, ciekawe jako to sie stało ?");
-                break;
+    public void generateLoot(){
+        Random R = new Random();
+        this.lootTab = new ArrayList<>();
+        if (R.nextBoolean()) {
+            this.lootTab.add(Game.generateItem());//moga byc 2 czasem
+        } else {
+            this.lootTab.add(Game.generateItem());
+            this.lootTab.add(Game.generateItem());
         }
-        return option;
     }
 
+    public List<Item> getLootTab() {
+        return lootTab;
+    }
+
+    public int countItems(){
+        return this.lootTab.size();
+    }
+
+    public Item getItem(){
+        Item item = lootTab.get(0);
+        lootTab.remove(0);
+        return item;
+    }
+
+    public Enemy getEnemy() {
+        return enemy;
+    }
     //==================================================================================================================
 }

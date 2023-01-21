@@ -11,20 +11,13 @@ import java.util.Random;
 public class Loot implements Event{
 
     private String name = "Loot";
-    private List<Item> lootTab;
-    public Loot(List<Item> lootTab){
-        this.lootTab = lootTab;
-    }
+
+//    public Loot(List<Item> lootTab){
+//        this.lootTab = lootTab;
+//    }
 
     public Loot(){
-        Random R = new Random();
-        this.lootTab = new ArrayList<>();
-        if (false) {
-            this.lootTab.add(Game.generateItem());//moga byc 2 czasem
-        } else {
-            this.lootTab.add(Game.generateItem());
-            this.lootTab.add(Game.generateItem());
-        }
+
     }
 
     @Override
@@ -34,38 +27,27 @@ public class Loot implements Event{
 
     @Override
     public Event event(Player player) {
-        System.out.println("\nNatrafiasz na skarb!");
-        if (this.lootTab != null) {
-            for (int i = 0; i < lootTab.size(); i++) {
-                if (this.lootTab.get(i) != null) {
-                    System.out.println("Czy chcesz podnieść " + lootTab.get(i).toString() + "?");
-                    System.out.println("1. Tak" + '\t' + "2. Nie");
-                    int wybor = Game.askForChoice(2);
-                    if (wybor == 1) {
-                        player.pickUpItem(lootTab.get(i));
-                    }
-                }
-            }
-        }
-        return new EmptyRoom();
+//        System.out.println("\nNatrafiasz na skarb!");
+//        if (this.lootTab != null) {
+//            for (int i = 0; i < lootTab.size(); i++) {
+//                if (this.lootTab.get(i) != null) {
+//                    System.out.println("Czy chcesz podnieść " + lootTab.get(i).toString() + "?");
+//                    System.out.println("1. Tak" + '\t' + "2. Nie");
+//                    int wybor = Game.askForChoice(2);
+//                    if (wybor == 1) {
+//                        player.pickUpItem(lootTab.get(i));
+//                    }
+//                }
+//            }
+//        }
+//        return new EmptyRoom();
+        return null;
     }
 
 
 
-    @Override
-    public String toString() {return name;}
+//    @Override
+//    public String toString() {return name;}
+//
 
-    public List<Item> getLootTab() {
-        return lootTab;
-    }
-
-    public int countItems(){
-        return this.lootTab.size();
-    }
-
-    public Item getItem(){
-        Item item = lootTab.get(0);
-        lootTab.remove(0);
-        return item;
-    }
 }

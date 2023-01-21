@@ -48,9 +48,14 @@ public class MapPanel extends JPanel implements Subject {
                     }
                 }
                 this.add(rooms[i][j]);
+                if(this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.EMPTYROOM &&
+                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.DOWN &&
+                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.UP &&
+                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.ENTRANCE &&
+                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.EXIT)
+                    rooms[i][j].setEnabled(false);
             }
         }
-            this.setEnabled(true);
     }
     public JButton createButton(int i, int j) {
         JButton room = new JButton();
@@ -64,6 +69,7 @@ public class MapPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 game.getMap().setPlayerLocation(game.getPlayer(), game.getMap().getTabOfRoom()[i][j]);
                 game.getMap().getPlayerLocation(game.getPlayer()).setVisited(true);
+                game.setLocationChanged(true);
                 notifyObservers();
             }
         });

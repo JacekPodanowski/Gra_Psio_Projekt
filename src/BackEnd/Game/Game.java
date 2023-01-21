@@ -21,15 +21,13 @@ public class Game implements Serializable {
     private int startX;
     private int mapSize = 5;// rozmiar mapy
     private ArrayList<Observer> observers = new ArrayList<Observer>();
-    private MainWindow mainWindow;
     private boolean userWantToAddItem;
     private String text;
     public ArrayList<Item> basicItems; //?
     public static ArrayList<Weapon> basicWepons = new ArrayList<>();
     public static ArrayList<Armor> basicArmors = new ArrayList<>();
     public static ArrayList<Potion> basicPotions = new ArrayList<>();
-    public static ArrayList<Item> allItems = new ArrayList<>(); //?
-
+    private boolean locationChanged = false;
 
     //==================================================================================================================
 
@@ -77,6 +75,14 @@ public class Game implements Serializable {
     }
     public void setObservers(ArrayList<Observer> observers) {
         this.observers = observers;
+    }
+
+    public boolean isLocationChanged() {
+        return locationChanged;
+    }
+
+    public void setLocationChanged(boolean locationChanged) {
+        this.locationChanged = locationChanged;
     }
     //==================================================================================================================
 
