@@ -1,16 +1,13 @@
 package GUI.Panels.ButtonPanels;
 
-
-
 import BackEnd.Game.Event.Loot;
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
-import BackEnd.Game.Room;
 import GUI.View.MainWindow;
 import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,54 +19,56 @@ public class LootPanel extends JPanel implements Subject {
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
     private JLabel itemName;
+    private JLabel staty;
+    private JPanel butonpanel;
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
     public LootPanel(Game game){
         this.game = game;
+        this.add(initiateComponents());
+    }
+    public JPanel initiateComponents(){
+        JPanel lootPanel = new JPanel();
+        lootPanel.setMinimumSize(new Dimension(900, 500));
+        lootPanel.setMaximumSize(new Dimension(900, 500));
+        lootPanel.setPreferredSize(new Dimension(900, 500));
+        lootPanel.setLayout(new FlowLayout());
 
-        //Ustawiam wielkości
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setMaximumSize(new Dimension(900, 500));
-        this.setPreferredSize(new Dimension(900, 500));
+        JLabel w = new JLabel("Natknałeś sie na bezpański przedmiot :" );
+        w.setFont(new Font("ButtonFont", Font.BOLD, 15));
+        itemName = setTitle();
+        staty = staty();
+        lootPanel.add(w);
+        lootPanel.add(Box.createRigidArea(new Dimension(1000, 15)));
+        lootPanel.add(itemName);
+        lootPanel.add(Box.createRigidArea(new Dimension(1000, 1)));
+        lootPanel.add(staty);
+        lootPanel.add(Box.createRigidArea(new Dimension(1000, 25)));
 
-        //Layout
-        this.setLayout(new FlowLayout());
+        JLabel z=new JLabel("DECYDUJ" );
+        z.setFont(new Font("ButtonFont", Font.BOLD, 20));
+        lootPanel.add(z);
+        lootPanel.add(Box.createRigidArea(new Dimension(1000, 1)));
+
+        butonpanel=createbuttonpanel();
+        //Dodaje komponenty
+        lootPanel.add(butonpanel);
+        return lootPanel;
+    }
+
+    public JPanel createbuttonpanel(){
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.setSize(700,50);
-
-        //Dodaje komponenty
-
         bierzLootButton = bierzLootButton(buttonPanel);
         buttonPanel.add(bierzLootButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         nieBierzLootButton = nieBierzLootButton(buttonPanel);
         buttonPanel.add(nieBierzLootButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-
-
-        itemName = setTitle();
-
-        JLabel w = new JLabel("Natknałeś sie na bezpański przedmiot :" );
-        w.setFont(new Font("ButtonFont", Font.BOLD, 15));
-        this.add(w);
-        this.add(Box.createRigidArea(new Dimension(1000, 15)));
-
-        this.add(itemName);
-        this.add(Box.createRigidArea(new Dimension(1000, 1)));
-        this.add(staty());
-        this.add(Box.createRigidArea(new Dimension(1000, 25)));
-
-        JLabel z=new JLabel("DECYDUJ" );
-        z.setFont(new Font("ButtonFont", Font.BOLD, 20));
-        this.add(z);
-        this.add(Box.createRigidArea(new Dimension(1000, 1)));
-
-        this.add(buttonPanel);
+        return buttonPanel;
     }
-
     public JLabel setTitle(){
         JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).shortName());
         entranceText.setFont(new Font("ButtonFont", Font.BOLD, 30));
@@ -77,7 +76,6 @@ public class LootPanel extends JPanel implements Subject {
     }
 
     public JLabel staty(){
-        //JLabel entranceText = new JLabel(loot.getLootTab().get(0).stats());
         JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).stats());
         entranceText.setFont(new Font("Veradana",Font.BOLD,25));
         return entranceText;
@@ -97,7 +95,13 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(true);
-                game.getPlayer().pickUpItem(game.getMap().getPlayerLocation(game.getPlayer()).getItem());
+                if(!game.getPlayer().isEqFull())
+                    game.getPlayer().pickUpItem(game.getMap().getPlayerLocation(game.getPlayer()).getItem());
+                else {
+//                    game.getMap().getPlayerLocation(game.getPlayer()).getItem();
+                        game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.FULLEQ);
+                        notifyObservers();
+                    }
                 notifyObservers();
             }});
         return bierzLootButton;
@@ -153,12 +157,14 @@ public class LootPanel extends JPanel implements Subject {
         bierzLootButton.setEnabled(true);
         nieBierzLootButton.setEnabled(true);
     }
-
-    public JLabel getItemName() {
-        return itemName;
-    }
-
     public void setItemName(JLabel itemName) {
         this.itemName = itemName;
     }
+    public JPanel getButonpanel() {
+        return butonpanel;
+    }
+    public void setStaty(JLabel staty) {
+        this.staty = staty;
+    }
+
 }

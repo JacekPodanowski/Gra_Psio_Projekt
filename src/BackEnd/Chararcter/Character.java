@@ -6,7 +6,7 @@ import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Profession.Profession;
 
 public abstract class Character {
-    protected double health;
+    protected double health=100;
     public double maxHealth=150.0;
     protected int strength;
     protected int intelligence;
