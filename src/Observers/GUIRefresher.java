@@ -40,18 +40,20 @@ public class GUIRefresher implements Observer{
     }
     @Override
     public void update(Game game) {
-        if(this.game == null) {
+        if (this.game == null) {
             this.game = game;
             initiate();
         } else if (this.game.isLocationChanged()) {
             this.game = game;
             refresh();
             this.game.setLocationChanged(false);
-        } else if (this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT){
+        }else if (this.game.isGameFinished()) {
+            this.game = game;
+            startMenu();
+        } else if (this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT) {
             this.game = game;
             endGame();
-        }
-        else {
+        } else {
             this.game = game;
             mapRefresh();
         }
@@ -79,7 +81,18 @@ public class GUIRefresher implements Observer{
         mainWindow.remove(mainWindow.getMainPanel());
         mainWindow.setMainPanel(new MainPanel(game, WindowStates.ENDGAME));
         mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.getMainPanel().getEndGamePanel().registerObserver(this);
         mainWindow.revalidate();
         mainWindow.repaint();
     }
+
+    public void startMenu(){
+        mainWindow.getMainPanel().removeAll();
+        mainWindow.remove(mainWindow.getMainPanel());
+        mainWindow.setMainPanel(new MainPanel(game, WindowStates.STARTMENU));
+        mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.revalidate();
+        mainWindow.repaint();
+    }
+
 }

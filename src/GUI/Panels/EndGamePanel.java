@@ -16,7 +16,8 @@ public class EndGamePanel extends JPanel implements Subject {
     private Game game;
     private ArrayList<Observer> observers = new ArrayList<>();
 
-    public EndGamePanel(){
+    public EndGamePanel(Game game){
+        this.game = game;
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
@@ -31,13 +32,8 @@ public class EndGamePanel extends JPanel implements Subject {
         endText2.setFont(new Font("ButtonFont", Font.BOLD, 25));
         this.add(endText2);
         this.add(Box.createRigidArea(new Dimension(10, 15)));
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-
-
+        this.add(newGameButton());
     }
-
 
     public JButton newGameButton(){
         JButton newGameButton = new JButton("Wracam do Kostki");
@@ -45,11 +41,12 @@ public class EndGamePanel extends JPanel implements Subject {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                game.finishGame();
+                notifyObservers();
             }
         });
 
-    return newGameButton;}
+        return newGameButton;}
 
     public JButton quitGmeButton(){
         JButton newGameButton = new JButton("Idę do domu");
@@ -57,7 +54,7 @@ public class EndGamePanel extends JPanel implements Subject {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                notifyObservers();
             }
         });
 
@@ -75,6 +72,8 @@ public class EndGamePanel extends JPanel implements Subject {
 
     @Override
     public void notifyObservers() {
-
+        for (Observer o: observers) {
+            o.update(game);
+        }
     }
 }
