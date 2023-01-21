@@ -100,7 +100,6 @@ public class LootPanel extends JPanel implements Subject {
                 else {
 //                    game.getMap().getPlayerLocation(game.getPlayer()).getItem();
                         game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.FULLEQ);
-                        notifyObservers();
                     }
                 notifyObservers();
             }});

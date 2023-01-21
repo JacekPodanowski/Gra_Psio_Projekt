@@ -22,6 +22,7 @@ public class BottomPanel extends JPanel implements Subject {
     private Game game;
     private LvlUpPanel lvlUpPanel;
     private InventoryPanel inventoryPanel;
+    private FullEqPanel fullEqPanel;
     private RestPanel restPanel;
     private StatsPanel statsPanel;
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -144,5 +145,13 @@ public class BottomPanel extends JPanel implements Subject {
         public void setExitPanel (ExitPanel exitPanel){
             this.exitPanel = exitPanel;
         }
+
+    public FullEqPanel getFullEqPanel() {
+        return fullEqPanel;
     }
+
+    public void setFullEqPanel(FullEqPanel fullEqPanel) {
+        this.fullEqPanel = fullEqPanel;
+    }
+}
 
