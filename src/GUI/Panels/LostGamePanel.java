@@ -10,13 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class EndGamePanel extends JPanel implements Subject {
+public class LostGamePanel extends JPanel implements Subject {
 
-
-    private Game game;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private Game game;
 
-    public EndGamePanel(Game game){
+    public LostGamePanel(Game game){
         this.game = game;
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
@@ -24,19 +23,16 @@ public class EndGamePanel extends JPanel implements Subject {
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JLabel endText1 = new JLabel("Uratowałeś swoje życie i wyszedłeś z Kostki");
-        endText1.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        JLabel endText1 = new JLabel("NIE ZYJESZ");
+        endText1.setFont(new Font("ButtonFont", Font.BOLD, 70));
         this.add(endText1);
-        this.add(Box.createRigidArea(new Dimension(10, 15)));
-        JLabel endText2 = new JLabel("Zdecyduj dalej co chcesz zrobic ze swoim życiem");
-        endText2.setFont(new Font("ButtonFont", Font.BOLD, 25));
-        this.add(endText2);
-        this.add(Box.createRigidArea(new Dimension(10, 15)));
+        this.add(Box.createRigidArea(new Dimension(20, 35)));
         this.add(newGameButton());
+
     }
 
     public JButton newGameButton(){
-        JButton newGameButton = new JButton("Wracam do Kostki");
+        JButton newGameButton = new JButton("Zmartwychwstanie");
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 15));
         newGameButton.addActionListener(new ActionListener() {
             @Override
