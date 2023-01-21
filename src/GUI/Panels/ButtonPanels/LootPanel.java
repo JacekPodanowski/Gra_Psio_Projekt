@@ -77,8 +77,9 @@ public class LootPanel extends JPanel implements Subject {
     }
 
     public JLabel staty(){
-        JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).stats());
-        entranceText.setFont(new Font("ButtonFont", Font.BOLD, 25));
+        JLabel entranceText = new JLabel(loot.getLootTab().get(0).stats());
+        //JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).stats());
+        entranceText.setFont(new Font("Veradana",Font.BOLD,25));
         return entranceText;
     }
 
@@ -89,7 +90,7 @@ public class LootPanel extends JPanel implements Subject {
         bierzLootButton.setMaximumSize(new Dimension(350, 50));
         bierzLootButton.setLocation(MainWindow.centerLocation(parent,bierzLootButton));
         bierzLootButton.setText("Weź przedmiot");
-        bierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        bierzLootButton.setFont(new Font("Veradana",Font.BOLD,25));
         
         bierzLootButton.addActionListener(new ActionListener() {
             @Override
@@ -111,7 +112,7 @@ public class LootPanel extends JPanel implements Subject {
 
         nieBierzLootButton.setLocation(MainWindow.centerLocation(parent,nieBierzLootButton));
         nieBierzLootButton.setText("Zostaw przedmiot");
-        nieBierzLootButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        nieBierzLootButton.setFont(new Font("Veradana",Font.BOLD,25));
         nieBierzLootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -32,6 +32,9 @@ public class BottomPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 300));
         this.setLayout(new FlowLayout());
         Border blackLine = BorderFactory.createLineBorder(Color.black);
+
+        //this.setBorder(blackLine);
+        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
         this.setBorder(blackLine);
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
             entrancePanel = new EntrancePanel(game);

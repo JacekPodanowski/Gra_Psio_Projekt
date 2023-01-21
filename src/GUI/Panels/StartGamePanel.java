@@ -9,9 +9,11 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -23,19 +25,26 @@ public class StartGamePanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public StartGamePanel(Game game){
+        //this.add(new JLabel(new ImageIcon(this.getClass().getResource("/escapethecube.png"))));
+        //this.setVisible(true);
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.setLayout(new FlowLayout());
+        this.setBackground(new Color(11,128,26));
+        JLabel headline = new JLabel("Witaj w grze: \"Ucieczka z kostki\"");
+        this.add(Box.createRigidArea(new Dimension(100, 200)));
+        headline.setFont(new Font("Times New Roman", Font.ITALIC, 40));
+        this.add(headline);
+        this.add(Box.createRigidArea(new Dimension(100, 300)));
+        //Border border = BorderFactory.createLineBorder(Color.white, 5);
+        //this.setBorder(border);
         this.game = game;
-
         //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
-
-        //Layout
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
         //Dodaje komponenty
         this.add(newGameButton(this));
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        //this.add(Box.createRigidArea(new Dimension(-5, 100)));
         this.add(loadGameButton(this));
     }
 
@@ -47,7 +56,9 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setMaximumSize(new Dimension(700, 50));
         newGameButton.setLocation(MainWindow.centerLocation(parent, newGameButton));
         newGameButton.setText("Rozpocznij nową grę");
-        newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        newGameButton.setFont(new Font("ButtonFont", Font.CENTER_BASELINE, 30));
+        newGameButton.setForeground(Color.BLACK);
+        newGameButton.setBackground(Color.GRAY);
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,7 +74,9 @@ public class StartGamePanel extends JPanel implements Subject {
         loadGameButton.setMaximumSize(new Dimension(700, 50));
         loadGameButton.setLocation(MainWindow.centerLocation(parent, loadGameButton));
         loadGameButton.setText("Wczytaj grę");
-        loadGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        loadGameButton.setFont(new Font("ButtonFont", Font.CENTER_BASELINE, 30));
+        loadGameButton.setForeground(Color.BLACK);
+        loadGameButton.setBackground(Color.gray);
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
