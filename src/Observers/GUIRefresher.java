@@ -89,6 +89,9 @@ public class GUIRefresher implements Observer{
         mainWindow.remove(mainWindow.getMainPanel());
         mainWindow.setMainPanel(new MainPanel(game, WindowStates.STARTMENU));
         mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.getMainPanel().getStartGamePanel().registerObserver(this);
+        mainWindow.setGame(null);
+        this.game = null;
         mainWindow.revalidate();
         mainWindow.repaint();
     }
