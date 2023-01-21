@@ -213,6 +213,6 @@ public class Player extends Character {
     @Override
     public void setStrength(int strength){
         this.strength = strength;
-        this.health = 100+ strength * 0.5;
+        this.health = health+ strength * 0.5;
     }
 }
