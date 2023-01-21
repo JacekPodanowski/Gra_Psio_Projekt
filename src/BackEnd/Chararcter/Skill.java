@@ -17,7 +17,7 @@ public class Skill {
         this.bonus = bonus;
     }
 
-    public int use(Character player, Character character){
+    public int calcDmg(Character player, Character character){
 
         double dmg;
         int resist = 0;
@@ -57,14 +57,17 @@ public class Skill {
         dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;
         dmg = dmg * (1 -resist/100.0);
 
+        return (int) dmg;
+    }
 
+    public int use(Character player, Character enemy){
+        int dmg = calcDmg(player, enemy);
         Random r = new Random();
         if(r.nextInt(110) > accuracy) {
             player.setAttackAvoided(true);
             dmg = 0;
         }
-
-        return (int) dmg;
+        return dmg;
     }
     public double reqDmgMultiplier(Character player, int attribute){
         double reqDmgMultiplier = 1;
@@ -89,6 +92,9 @@ public class Skill {
         return name;
     }
 
+    public int getBonus() {
+        return bonus;
+    }
 }
 
 

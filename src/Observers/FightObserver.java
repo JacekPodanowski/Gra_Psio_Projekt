@@ -2,6 +2,8 @@ package Observers;
 
 import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Player;
+import BackEnd.Chararcter.Profession.Mage;
+import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Event.Fight;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
@@ -34,12 +36,7 @@ public class FightObserver implements Observer{
             if(fightPanel.getAbilityChoice()==3)
                 player.setUsedSpecial(true);
 
-            fightPanel.getConsolePanel().setMessage("Atakujesz i zadajesz " + player.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) + " obrażeń.");
-            fightPanel.getConsolePanel().newLine();
-            fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
-            fightPanel.getConsolePanel().newLine();
-            fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
-            fightPanel.getConsolePanel().newLine();
+            playerAttack(fightPanel.getAbilityChoice());
             enemy.setAttackAvoided(false);
 
             fightPanel.getjButton5().setEnabled(false);
@@ -78,30 +75,58 @@ public class FightObserver implements Observer{
         }
     }
     public void enemyAttack(int enemyChoice){
-        switch(enemyChoice){
-            case 0:
+        fightPanel.getConsolePanel().setMessage(
+                "Przeciwnik używa umiejętności " + '\"' + enemy.getAbilities()[enemyChoice].toString() + '\"' + " i zadaje ");
+        if(player.isAttackAvoided())
+            fightPanel.getConsolePanel().setMessage("0 obrażeń, ponieważ uniknąłeś ciosu.");
+        else
+            fightPanel.getConsolePanel().setMessage(enemy.getAbilities()[enemyChoice].calcDmg(enemy, player) + ".");
+        fightPanel.getConsolePanel().newLine();
+        fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
+        fightPanel.getConsolePanel().newLine();
+        fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+        fightPanel.getConsolePanel().newLine();
+    }
+    public void playerAttack(int playerChoice) {
+        switch (playerChoice) {
+            case 1, 2, 0:
                 fightPanel.getConsolePanel().setMessage(
-                        "Przeciwnik atakuje i zadaje " +
-                                enemy.getAbilities()[fightPanel.getAbilityChoice()].use(player, enemy) +
-                                " obrażeń.");
+                        "Używasz umiejętności " + '\"' + player.getAbilities()[playerChoice].toString() + '\"' + " i zadajesz ");
+                if (enemy.isAttackAvoided())
+                    fightPanel.getConsolePanel().setMessage("0 obrażeń, ponieważ przeciwnik uniknął ciosu.");
+                else
+                    fightPanel.getConsolePanel().setMessage(enemy.getAbilities()[playerChoice].calcDmg(player, enemy) + " obrażeń.");
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
                 fightPanel.getConsolePanel().newLine();
                 break;
-            case 1:
-
-                break;
-            case 2:
-
-                break;
             case 3:
-
+                if(player.getProfession() instanceof Mage){
+                    fightPanel.getConsolePanel().setMessage("Używasz specjalnej umiejętności "
+                            + player.getAbilities()[playerChoice].toString()
+                            + " i leczysz " + player.getAbilities()[playerChoice].getBonus() * 10 + " obrażeń.");
+                } else if (player.getProfession() instanceof Warrior) {
+                    fightPanel.getConsolePanel().setMessage(
+                            "Używasz specjalnej umiejętności " + '\"' +  player.getAbilities()[playerChoice].toString()
+                                    + '\"' + ", ogłuszasz przeciwnika i zadajesz ");
+                } else {
+                    fightPanel.getConsolePanel().setMessage(
+                            "Używasz specjalnej umiejętności " + '\"' + player.getAbilities()[playerChoice].toString()
+                                    + '\"' + ", wystrzelasz potężną strzałę i zadajesz ");
+                }
+                if(!(player.getProfession() instanceof Mage))
+                    if (enemy.isAttackAvoided())
+                        fightPanel.getConsolePanel().setMessage("0 obrażeń, ponieważ przeciwnik uniknął ciosu.");
+                    else
+                        fightPanel.getConsolePanel().setMessage(enemy.getAbilities()[playerChoice].calcDmg(player, enemy) + " obrażeń.");
+                fightPanel.getConsolePanel().newLine();
+                fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
+                fightPanel.getConsolePanel().newLine();
+                fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
+                fightPanel.getConsolePanel().newLine();
                 break;
         }
-    }
-    public void playerAttack(){
-
     }
 }
