@@ -31,9 +31,16 @@ public class LootObserver implements Observer{
 
     public void refresh(){
         if (game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
+            lootPanel.remove(lootPanel.getButonpanel());
             lootPanel.remove(lootPanel.getItemName());
+
             lootPanel.setItemName(lootPanel.setTitle());
             lootPanel.add(lootPanel.getItemName());
+
+            lootPanel.add(lootPanel.getButonpanel());
+
+
+
             lootPanel.setLootButtonActive();
             lootPanel.revalidate();
             lootPanel.repaint();

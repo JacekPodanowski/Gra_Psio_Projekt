@@ -22,6 +22,7 @@ public class LootPanel extends JPanel implements Subject {
     private JButton bierzLootButton;
     private JButton nieBierzLootButton;
     private JLabel itemName;
+    private JPanel butonpanel;
     private ArrayList<Observer> observers = new ArrayList<>();
 
 
@@ -32,23 +33,27 @@ public class LootPanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
-
-        //Layout
         this.setLayout(new FlowLayout());
+
+
+        butonpanel=createbuttonpanel();
+        //Dodaje komponenty
+        this.add(butonpanel);
+    }
+
+
+    public JPanel createbuttonpanel(){
+
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.setSize(700,50);
-
-        //Dodaje komponenty
-
         bierzLootButton = bierzLootButton(buttonPanel);
         buttonPanel.add(bierzLootButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         nieBierzLootButton = nieBierzLootButton(buttonPanel);
         buttonPanel.add(nieBierzLootButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-
 
         itemName = setTitle();
 
@@ -66,10 +71,8 @@ public class LootPanel extends JPanel implements Subject {
         z.setFont(new Font("ButtonFont", Font.BOLD, 20));
         this.add(z);
         this.add(Box.createRigidArea(new Dimension(1000, 1)));
-
-        this.add(buttonPanel);
+        return buttonPanel;
     }
-
     public JLabel setTitle(){
         JLabel entranceText = new JLabel( game.getMap().getPlayerLocation(game.getPlayer()).getLootTab().get(0).shortName());
         entranceText.setFont(new Font("ButtonFont", Font.BOLD, 30));
@@ -160,5 +163,13 @@ public class LootPanel extends JPanel implements Subject {
 
     public void setItemName(JLabel itemName) {
         this.itemName = itemName;
+    }
+
+    public JPanel getButonpanel() {
+        return butonpanel;
+    }
+
+    public void setButonpanel(JPanel butonpanel) {
+        this.butonpanel = butonpanel;
     }
 }
