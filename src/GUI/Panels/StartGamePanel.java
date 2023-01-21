@@ -35,8 +35,6 @@ public class StartGamePanel extends JPanel implements Subject {
         this.setBackground(new Color(11,128,26));
         JLabel headline = new JLabel("Witaj w grze: \"Ucieczka z kostki\"");
         this.add(Box.createRigidArea(new Dimension(100, 200)));
-        //headline.setFont(new Font("Times New Roman", Font.ITALIC, 40));
-        final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();;
         headline.setFont(StyleElements.gameFont(40));
         this.add(headline);
         this.add(Box.createRigidArea(new Dimension(100, 300)));
