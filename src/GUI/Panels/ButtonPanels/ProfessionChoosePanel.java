@@ -52,7 +52,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
-                game.getPlayer().setHealth(2);
             }
         });
     }
@@ -69,7 +68,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
-                game.getPlayer().setHealth(2);
             }
         });
     }
@@ -86,7 +84,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
-                game.getPlayer().setHealth(2);
             }
         });
     }

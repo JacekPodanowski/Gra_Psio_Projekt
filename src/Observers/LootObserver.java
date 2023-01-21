@@ -53,8 +53,10 @@ public class LootObserver implements Observer{
         }else {
             bottomPanel.removeAll();
             bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.EMPTYROOM);
-            bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
-            bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
+            if(bottomPanel.getEmptyRoomPanel() == null) {
+                bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
+                bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
+            }
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
             bottomPanel.getLootPanel().removeObserver(this);
             bottomPanel.notifyObservers();

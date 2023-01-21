@@ -30,7 +30,7 @@ public class FullEqPanel extends JPanel implements Subject {
         JPanel foundItem = new JPanel();
         JLabel z=new JLabel("BRAK MIEJSCA W EKWIPUNKU" );
         z.setFont(new Font("ButtonFont", Font.BOLD, 20));
-        foundItem.add(z);
+        this.add(z);
         foundItem.add(Box.createRigidArea(new Dimension(0, 120)));
 
         foundItem.add(new JLabel("Znaleziony przedmiot to: "));
