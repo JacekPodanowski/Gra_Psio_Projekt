@@ -1,7 +1,7 @@
 package GUI.Panels.ButtonPanels;
 
-
-
+import BackEnd.Game.Event.Loot;
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.View.MainWindow;
 import Observable.Subject;
@@ -95,7 +95,13 @@ public class LootPanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 setLootButtonDisabled();
                 game.setUserWantToAddItem(true);
-                game.getPlayer().pickUpItem(game.getMap().getPlayerLocation(game.getPlayer()).getItem());
+                if(!game.getPlayer().isEqFull())
+                    game.getPlayer().pickUpItem(game.getMap().getPlayerLocation(game.getPlayer()).getItem());
+                else {
+//                    game.getMap().getPlayerLocation(game.getPlayer()).getItem();
+                        game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.FULLEQ);
+                        notifyObservers();
+                    }
                 notifyObservers();
             }});
         return bierzLootButton;

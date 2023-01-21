@@ -5,6 +5,7 @@ import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
+import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.LootPanel;
 
 public class LootObserver implements Observer{
@@ -28,7 +29,17 @@ public class LootObserver implements Observer{
     }
 
     public void refresh(){
-        if (game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
+        if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent1()==RoomEvent.FULLEQ) {
+
+            bottomPanel.setInventoryPanel(new InventoryPanel(game));
+            bottomPanel.getInventoryPanel().registerObserver(new InventoryObserver(bottomPanel));
+            bottomPanel.add(bottomPanel.getInventoryPanel());
+            bottomPanel.revalidate();
+            bottomPanel.repaint();
+
+        }else {
+
+            if(game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
             lootPanel.removeAll();
             lootPanel.setItemName(lootPanel.setTitle());
             lootPanel.setStaty(lootPanel.staty());
@@ -36,8 +47,7 @@ public class LootObserver implements Observer{
             lootPanel.setLootButtonActive();
             lootPanel.revalidate();
             lootPanel.repaint();
-        }
-        else {
+        }else {
             bottomPanel.removeAll();
             bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.EMPTYROOM);
             bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
@@ -49,4 +59,5 @@ public class LootObserver implements Observer{
             bottomPanel.repaint();
         }
     }
+}
 }
