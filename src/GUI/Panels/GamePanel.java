@@ -14,7 +14,7 @@ public class GamePanel extends JPanel implements Subject {
         //Border blackLine = BorderFactory.createLineBorder(Color.black);
         //this.setBorder(blackLine);
         //this.setBackground(Color.BLACK);
-        this.add(new JLabel(new ImageIcon(this.getClass().getResource("/resources/escapethecube.png"))));
+        this.add(new JLabel(new ImageIcon(this.getClass().getResource("/res/escapethecube.png"))));
         /*
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
 
