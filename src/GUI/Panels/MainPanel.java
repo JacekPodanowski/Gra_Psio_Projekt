@@ -52,7 +52,7 @@ public class MainPanel extends JPanel {
                 this.add(bottomPanel);
                 break;
             case ENDGAME:
-                endGamePanel = new EndGamePanel();
+                endGamePanel = new EndGamePanel(game);
                 this.add(endGamePanel);
                 break;
         }
