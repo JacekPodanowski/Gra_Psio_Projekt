@@ -1,7 +1,8 @@
 package Observers;
 
-import Game.Game;
+import BackEnd.Game.Game;
 
 public interface Observer {
     public void update(Game game);
+    public void refresh();
 }
