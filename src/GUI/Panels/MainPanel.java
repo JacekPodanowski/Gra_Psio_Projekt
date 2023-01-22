@@ -30,8 +30,6 @@ public class MainPanel extends JPanel {
             case STARTMENU:
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
                 this.add(Box.createRigidArea(new Dimension(0, 100)));
-
-
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
                 break;
@@ -46,7 +44,7 @@ public class MainPanel extends JPanel {
                 this.add(bottomPanel);
                 break;
             case ENDGAME:
-                endGamePanel = new EndGamePanel(game);
+                endGamePanel = new EndGamePanel();
                 this.add(endGamePanel);
                 break;
         }
@@ -122,3 +120,4 @@ public class MainPanel extends JPanel {
         this.endGamePanel = endGamePanel;
     }
 }
+

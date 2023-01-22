@@ -19,7 +19,6 @@ public class Player extends Character {
     private int location_X;
     private long exp;
     private boolean alive = true;
-    private boolean fullEq = false;
 
     public Player(int size) {
         super();
@@ -32,7 +31,6 @@ public class Player extends Character {
         weapon=new Weapon();
         this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
         this.getInventory()[1]=Game.generateItem('W');
-        health = 2;
     }
 
     @Override
@@ -51,17 +49,6 @@ public class Player extends Character {
         //character.setHealth(getHealth() - umiejetnosc.use[skillNumber](this.weapon.calculatedmg);
     }
 
-    public boolean isEqFull() {
-
-        boolean full = false;
-        for (int i = 0; i < inventory.length; i++) {
-            if (inventory[i] == null) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void pickUpItem(Item item){
 
         boolean succes= false;
@@ -72,23 +59,22 @@ public class Player extends Character {
                 return;
             }
         }
-// tu ma byc event
 
-//        System.out.println("Brak miejsca w ekwipunku ! ");
-//        System.out.println("Wybierz co wymienić : ");
-//        for (int i = 0; i < inventory.length; i++) {
-//            if (inventory[i] != null) {
-//                System.out.println(i+1 + ". " + inventory[i].toString());
-//            }
-//            else {
-//                System.out.println(i+1 +". -----");
-//            }
-//        }
-//        System.out.println("\n6. Zostaw Przedmiot\n");
-//
-//        int choice = Game.askForChoice(6)-1;
-//        System.out.println("Wymieniono "+ inventory[choice].toString()+ " na "+ item.toString());
-//        inventory[choice]=item;
+        System.out.println("Brak miejsca w ekwipunku ! ");
+        System.out.println("Wybierz co wymienić : ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null) {
+                System.out.println(i+1 + ". " + inventory[i].toString());
+            }
+            else {
+                System.out.println(i+1 +". -----");
+            }
+        }
+        System.out.println("\n6. Zostaw Przedmiot\n");
+
+        int choice = Game.askForChoice(6)-1;
+        System.out.println("Wymieniono "+ inventory[choice].toString()+ " na "+ item.toString());
+        inventory[choice]=item;
     }
 
     public void useItem(int choice){
@@ -205,13 +191,7 @@ public class Player extends Character {
         this.location_X = location_X;
     }
 
-    public boolean getFullEq() {
-        return fullEq;
-    }
 
-    public void setFullEq(boolean fullEq) {
-        this.fullEq = fullEq;
-    }
 
     public long getExp() {
         return exp;
@@ -233,6 +213,6 @@ public class Player extends Character {
     @Override
     public void setStrength(int strength){
         this.strength = strength;
-        this.health = health+ strength * 0.5;
+        this.health = 100+ strength * 0.5;
     }
 }

@@ -6,7 +6,7 @@ import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Profession.Profession;
 
 public abstract class Character {
-    protected double health=100;
+    protected double health;
     public double maxHealth=150.0;
     protected int strength;
     protected int intelligence;
@@ -20,7 +20,6 @@ public abstract class Character {
     protected Profession profession;
     private boolean playerTurn = true;
     private boolean usedSpecial = false;
-    private boolean attackAvoided = false;
 
 
     public Character() {
@@ -153,16 +152,12 @@ public abstract class Character {
     public void setPlayerTurn(boolean playerTurn) {
         this.playerTurn = playerTurn;
     }
+
     public boolean getUsedSpecial() {
         return usedSpecial;
     }
+
     public void setUsedSpecial(boolean usedSpecial) {
         this.usedSpecial = usedSpecial;
-    }
-    public boolean isAttackAvoided() {
-        return attackAvoided;
-    }
-    public void setAttackAvoided(boolean attackAvoided) {
-        this.attackAvoided = attackAvoided;
     }
 }

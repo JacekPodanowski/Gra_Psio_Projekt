@@ -4,6 +4,7 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -11,10 +12,9 @@ public class GamePanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
     public GamePanel(){
         this.setPreferredSize(new Dimension(450, 400));
-        //Border blackLine = BorderFactory.createLineBorder(Color.black);
-        //this.setBorder(blackLine);
-        //this.setBackground(Color.BLACK);
-        this.add(new JLabel(new ImageIcon(this.getClass().getResource("/res/escapethecube.png"))));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
+        this.setBackground(Color.BLACK);
         /*
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
 
