@@ -25,30 +25,33 @@ public class MainPanel extends JPanel {
         this.state = state;
         this.game = game;
         this.setPreferredSize(new Dimension(900, 700));
-        this.setLayout(new GridLayout(2, 1));
-        this.setBackground(Color.BLACK);
         switch(state) {
             case STARTMENU:
+                this.setBackground(Color.BLACK);
                 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
                 this.add(Box.createRigidArea(new Dimension(0, 100)));
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
                 break;
             case GAMESTART:
+                this.setLayout(new GridLayout(1, 1));
                 professionChoosePanel = new ProfessionChoosePanel(game);
                 this.add(professionChoosePanel);
                 break;
             case GAME:
+                this.setLayout(new GridLayout(2, 1));
                 topPanel = new TopPanel(game);
                 bottomPanel = new BottomPanel(game);
                 this.add(topPanel);
                 this.add(bottomPanel);
                 break;
             case ENDGAME:
+                this.setLayout(new GridLayout(2, 1));
                 endGamePanel = new EndGamePanel(game);
                 this.add(endGamePanel);
                 break;
             case LOSTGAME:
+                this.setLayout(new GridLayout(2, 1));
                 lostGamePanel = new LostGamePanel(game);
                 this.add(lostGamePanel);
                 break;

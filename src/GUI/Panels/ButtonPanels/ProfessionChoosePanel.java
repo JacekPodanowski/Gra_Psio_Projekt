@@ -25,12 +25,11 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
     public ProfessionChoosePanel(Game game){
         this.game = game;
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.BLACK);
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new FlowLayout());
         textPanel.setBackground(Color.black);
-        textPanel.add(Box.createRigidArea(new Dimension(900,0)));
 
         JButton textChooseType = new JButton();
         textChooseType.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -45,22 +44,23 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         textChooseType.setPreferredSize(new Dimension(900,50));
         textChooseType.setFont(new Font(null, Font.BOLD, 30));
 
-        textPanel.add(Box.createRigidArea(new Dimension(900,0)));
 
         Font font = new Font(null, Font.BOLD, 25);
 
         // dodanie komponentow
         textPanel.add(textChooseType);
-        textPanel.add(Box.createRigidArea(new Dimension(900,60)));
+        textPanel.add(Box.createRigidArea(new Dimension(1200,10)));
         // pola Wojownik, Mag, Lucznik
         textPanel.add(getTextTypeChar("Wojownik", font));
+        //textPanel.add(Box.createRigidArea(new Dimension(100,100)));
         textPanel.add(getTextTypeChar("Mag", font));
-        textPanel.add(getTextTypeChar("Lucznik", font));
-
+        //textPanel.add(Box.createRigidArea(new Dimension(100,100)));
+        textPanel.add(getTextTypeChar("Łucznik", font));
+        //textPanel.add(Box.createRigidArea(new Dimension(900,100)));
         this.add(textPanel);
 
         // przyciski z profesjami
-        this.add(Box.createRigidArea(new Dimension(0, 0)));
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
 
