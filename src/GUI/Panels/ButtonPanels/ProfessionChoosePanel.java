@@ -95,7 +95,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         return typeChar;
     }
 
-
     static class TextChooseTypeChar extends JComponent{
         @Override
         protected void paintComponent(Graphics g) {

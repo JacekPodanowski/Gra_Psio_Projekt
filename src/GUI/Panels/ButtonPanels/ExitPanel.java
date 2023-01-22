@@ -18,8 +18,7 @@ public class ExitPanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
-        JButton endGameButton = new JButton("Wyjście");
-        endGameButton.setSize(new Dimension(40, 40));
+        JButton endGameButton = new JButton();
         endGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

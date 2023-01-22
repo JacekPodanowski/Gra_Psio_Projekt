@@ -1,12 +1,12 @@
 package Observers;
 
 import BackEnd.Chararcter.Player;
+import BackEnd.Game.Event.EmptyRoom;
+import BackEnd.Game.Event.Loot;
 import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
-import GUI.Panels.ButtonPanels.FullEqPanel;
-import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.LootPanel;
 
 public class LootObserver implements Observer{
@@ -30,33 +30,19 @@ public class LootObserver implements Observer{
     }
 
     public void refresh(){
-
-        if(game.getMap().getPlayerLocation(game.getPlayer()).getEvent1()==RoomEvent.FULLEQ) {
-
-            bottomPanel.removeAll();
-            bottomPanel.setFullEqPanel(new FullEqPanel(game));
-            bottomPanel.getFullEqPanel().registerObserver(new FullEqObserver(bottomPanel));
-            bottomPanel.add(bottomPanel.getFullEqPanel());
-            bottomPanel.revalidate();
-            bottomPanel.repaint();
-
-        }else {
-
-            if(game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
-            lootPanel.removeAll();
+        if (game.getMap().getPlayerLocation(game.getPlayer()).countItems() > 0){
+            lootPanel.remove(lootPanel.getItemName());
             lootPanel.setItemName(lootPanel.setTitle());
-            lootPanel.setStaty(lootPanel.staty());
-            lootPanel.add(lootPanel.initiateComponents());
+            lootPanel.add(lootPanel.getItemName());
             lootPanel.setLootButtonActive();
             lootPanel.revalidate();
             lootPanel.repaint();
-        }else {
+        }
+        else {
             bottomPanel.removeAll();
             bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.EMPTYROOM);
-            if(bottomPanel.getEmptyRoomPanel() == null) {
-                bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
-                bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
-            }
+            bottomPanel.setEmptyRoomPanel(new EmptyRoomPanel(game));
+            bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
             bottomPanel.add(bottomPanel.getEmptyRoomPanel());
             bottomPanel.getLootPanel().removeObserver(this);
             bottomPanel.notifyObservers();
@@ -64,5 +50,4 @@ public class LootObserver implements Observer{
             bottomPanel.repaint();
         }
     }
-}
 }

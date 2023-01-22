@@ -22,20 +22,17 @@ public class BottomPanel extends JPanel implements Subject {
     private Game game;
     private LvlUpPanel lvlUpPanel;
     private InventoryPanel inventoryPanel;
-    private FullEqPanel fullEqPanel;
     private RestPanel restPanel;
     private StatsPanel statsPanel;
     private ArrayList<Observer> observers = new ArrayList<>();
-
-    public BottomPanel(Game game) {
+    public BottomPanel(Game game){
         this.game = game;
         this.setPreferredSize(new Dimension(900, 300));
         this.setMinimumSize(new Dimension(900, 300));
         this.setPreferredSize(new Dimension(900, 300));
         this.setLayout(new FlowLayout());
         Border blackLine = BorderFactory.createLineBorder(Color.black);
-
-        //this.setBorder(blackLine);
+        this.setBorder(blackLine);
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
             entrancePanel = new EntrancePanel(game);
             this.add(entrancePanel);
@@ -51,107 +48,99 @@ public class BottomPanel extends JPanel implements Subject {
             fightPanel = new FightPanel(game);
             new FightObserver(this);
             this.add(fightPanel);
-            for (int i = 0; i < game.getPlayer().getAbilities().length; i++) ;
+            for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.LOOT) {
             lootPanel = new LootPanel(game);
             lootPanel.registerObserver(new LootObserver(this));
             this.add(lootPanel);
         }
     }
-        public Game getGame () {
-            return game;
-        }
 
-        public void setGame (Game game){
-            this.game = game;
-        }
-
-        @Override
-        public void registerObserver (Observer observer){
-            observers.add(observer);
-        }
-
-        @Override
-        public void removeObserver (Observer observer){
-            observers.remove(observer);
-        }
-
-        @Override
-        public void notifyObservers () {
-            for (int i = 0; i < observers.size(); i++)
-                observers.get(i).update(this.getGame());
-        }
-
-        public ArrayList<Observer> getObservers () {
-            return observers;
-        }
-
-        public FightPanel getFightPanel () {
-            return fightPanel;
-        }
-
-        public LvlUpPanel getLvlUpPanel() {
-            return lvlUpPanel;
-        }
-
-        public void setLvlUpPanel (LvlUpPanel lvlUpPanel){
-            this.lvlUpPanel = lvlUpPanel;
-        }
-
-        public LootPanel getLootPanel () {
-            return lootPanel;
-        }
-
-        public void setLootPanel (LootPanel lootPanel){
-            this.lootPanel = lootPanel;
-        }
-
-        public EmptyRoomPanel getEmptyRoomPanel () {
-            return emptyRoomPanel;
-        }
-
-        public void setEmptyRoomPanel (EmptyRoomPanel emptyRoomPanel){
-            this.emptyRoomPanel = emptyRoomPanel;
-        }
-
-        public InventoryPanel getInventoryPanel () {
-            return inventoryPanel;
-        }
-
-        public void setInventoryPanel (InventoryPanel inventoryPanel){
-            this.inventoryPanel = inventoryPanel;
-        }
-
-        public RestPanel getRestPanel () {
-            return restPanel;
-        }
-
-        public void setRestPanel (RestPanel restPanel){
-            this.restPanel = restPanel;
-        }
-
-        public StatsPanel getStatsPanel () {
-            return statsPanel;
-        }
-
-        public void setStatsPanel (StatsPanel statsPanel){
-            this.statsPanel = statsPanel;
-        }
-
-        public ExitPanel getExitPanel () {
-            return exitPanel;
-        }
-
-        public void setExitPanel (ExitPanel exitPanel){
-            this.exitPanel = exitPanel;
-        }
-
-    public FullEqPanel getFullEqPanel() {
-        return fullEqPanel;
+    public Game getGame() {
+        return game;
     }
 
-    public void setFullEqPanel(FullEqPanel fullEqPanel) {
-        this.fullEqPanel = fullEqPanel;
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(int i = 0; i < observers.size(); i++)
+            observers.get(i).update(this.getGame());
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
+    }
+
+    public FightPanel getFightPanel() {
+        return fightPanel;
+    }
+
+    public LvlUpPanel getLvlUpPanel() {
+        return lvlUpPanel;
+    }
+
+    public void setLvlUpPanel(LvlUpPanel lvlUpPanel) {
+        this.lvlUpPanel = lvlUpPanel;
+    }
+
+    public LootPanel getLootPanel() {
+        return lootPanel;
+    }
+
+    public void setLootPanel(LootPanel lootPanel) {
+        this.lootPanel = lootPanel;
+    }
+
+    public EmptyRoomPanel getEmptyRoomPanel() {
+        return emptyRoomPanel;
+    }
+
+    public void setEmptyRoomPanel(EmptyRoomPanel emptyRoomPanel) {
+        this.emptyRoomPanel = emptyRoomPanel;
+    }
+
+    public InventoryPanel getInventoryPanel() {
+        return inventoryPanel;
+    }
+
+    public void setInventoryPanel(InventoryPanel inventoryPanel) {
+        this.inventoryPanel = inventoryPanel;
+    }
+
+    public RestPanel getRestPanel() {
+        return restPanel;
+    }
+
+    public void setRestPanel(RestPanel restPanel) {
+        this.restPanel = restPanel;
+    }
+
+    public StatsPanel getStatsPanel() {
+        return statsPanel;
+    }
+
+    public void setStatsPanel(StatsPanel statsPanel) {
+        this.statsPanel = statsPanel;
+    }
+
+    public ExitPanel getExitPanel() {
+        return exitPanel;
+    }
+
+    public void setExitPanel(ExitPanel exitPanel) {
+        this.exitPanel = exitPanel;
     }
 }
-
