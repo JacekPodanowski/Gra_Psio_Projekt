@@ -1,19 +1,15 @@
 package GUI.Panels;
 
-import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Game;
 import GUI.SaveLoadStrategy.LoadStrategy;
-import GUI.View.MainWindow;
 import GUI.View.SaveLoadWindow;
 import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -24,28 +20,41 @@ public class StartGamePanel extends JPanel implements Subject {
     private boolean czyWczytanaGra = false;
     private ArrayList<Observer> observers = new ArrayList<>();
 
+    private ImageIcon pictureNameGame;
+    private ImageIcon pictureMenuSymbol;
+    private JLabel titleImageLabel;
+
+    private JLabel menuSymbolLabel;
+
     public StartGamePanel(Game game){
-        //this.add(new JLabel(new ImageIcon(this.getClass().getResource("/escapethecube.png"))));
-        //this.setVisible(true);
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.setLayout(new FlowLayout());
-        this.setBackground(new Color(11,128,26));
-        JLabel headline = new JLabel("Witaj w grze: \"Ucieczka z kostki\"");
-        this.add(Box.createRigidArea(new Dimension(100, 200)));
-        headline.setFont(new Font("Times New Roman", Font.ITALIC, 40));
-        this.add(headline);
-        this.add(Box.createRigidArea(new Dimension(100, 300)));
-        //Border border = BorderFactory.createLineBorder(Color.white, 5);
-        //this.setBorder(border);
         this.game = game;
+
         //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
-        //Dodaje komponenty
+
+        //Layout
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        pictureNameGame = new ImageIcon("images/NameOfGame2.png");
+        pictureMenuSymbol = new ImageIcon("images/MenuSymbol.png");
+
+        titleImageLabel = new JLabel(pictureNameGame);
+        titleImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuSymbolLabel = new JLabel(pictureMenuSymbol);
+        menuSymbolLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.setBackground(Color.BLACK);
+
+        this.add(titleImageLabel);
+        this.add(Box.createRigidArea(new Dimension(0,50)));
         this.add(newGameButton(this));
-        //this.add(Box.createRigidArea(new Dimension(-5, 100)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(loadGameButton(this));
+        this.add(Box.createRigidArea(new Dimension(0,70)));
+        this.add(menuSymbolLabel);
+        //this.add(new MyMenuSymbol());
     }
 
 
@@ -54,11 +63,17 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setMinimumSize(new Dimension(700, 50));
         newGameButton.setPreferredSize(new Dimension(700, 50));
         newGameButton.setMaximumSize(new Dimension(700, 50));
-        newGameButton.setLocation(MainWindow.centerLocation(parent, newGameButton));
-        newGameButton.setText("Rozpocznij nową grę");
-        newGameButton.setFont(new Font("ButtonFont", Font.CENTER_BASELINE, 30));
-        newGameButton.setForeground(Color.BLACK);
-        newGameButton.setBackground(Color.GRAY);
+
+        newGameButton.setOpaque(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setBorderPainted(false);
+        newGameButton.setBackground(Color.BLACK);
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        newGameButton.add(new MyTextNewGameButton());
+        newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        newGameButton.setFocusable(false);
+
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,11 +87,17 @@ public class StartGamePanel extends JPanel implements Subject {
         loadGameButton.setMinimumSize(new Dimension(700, 50));
         loadGameButton.setPreferredSize(new Dimension(700, 50));
         loadGameButton.setMaximumSize(new Dimension(700, 50));
-        loadGameButton.setLocation(MainWindow.centerLocation(parent, loadGameButton));
-        loadGameButton.setText("Wczytaj grę");
-        loadGameButton.setFont(new Font("ButtonFont", Font.CENTER_BASELINE, 30));
-        loadGameButton.setForeground(Color.BLACK);
-        loadGameButton.setBackground(Color.gray);
+        loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        loadGameButton.add(new MyTextLoadButton());
+        loadGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
+
+
+        loadGameButton.setFocusable(false);
+        loadGameButton.setOpaque(false);
+        //loadGameButton.setContentAreaFilled(false);
+        loadGameButton.setBorderPainted(false);
+        loadGameButton.setBackground(Color.BLACK);
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,6 +115,34 @@ public class StartGamePanel extends JPanel implements Subject {
             }});
         return loadGameButton;
     }
+
+    static class MyTextNewGameButton extends JComponent{
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+            g2.drawString("Rozpocznij nową grę", 170,30 );
+        }
+    }
+    static class MyTextLoadButton extends JComponent{
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+            g2.drawString("Wczytaj grę", 240,30 );
+        }
+    }
+
+//    static class MyMenuSymbol extends JComponent{
+//        @Override
+//        protected void paintComponent(Graphics g) {
+//            Graphics2D g2 = (Graphics2D) g;
+////            g2.setPaint(Color.getHSBColor(0,1,0.5f));
+//            Image menuSymbol = new ImageIcon("images/MenuSymbol.png").getImage();
+//            g2.drawImage(menuSymbol, 375,0,null);
+//
+//        }
+//    }
 
     public boolean isCzyNowaGra() {
         return czyNowaGra;
