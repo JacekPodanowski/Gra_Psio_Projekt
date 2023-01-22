@@ -2,6 +2,7 @@ package GUI.Panels.ButtonPanels;
 
 import BackEnd.Chararcter.Profession.Archer;
 import BackEnd.Chararcter.Profession.Mage;
+import BackEnd.Chararcter.Profession.Profession;
 import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Game;
 import Observable.Subject;
@@ -63,30 +64,27 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
 
-        //initiateCharacter(game);
-        initiateWarrior(game);
-        initiateMage(game);
-        initiateArcher(game);
 
-        buttonPanel.add(warrior);
-        buttonPanel.add(mage);
-        buttonPanel.add(archer);
+        buttonPanel.add(initiateProfession(game, warrior, "images/Wojownik.png", new Warrior()));
+        buttonPanel.add(initiateProfession(game, mage, "images/Mag.png",  new Mage()));
+        buttonPanel.add(initiateProfession(game, archer, "images/Lucznik.png",  new Archer()));
         this.add(buttonPanel);
     }
-    private void initiateWarrior(Game game){
+    private  JButton initiateProfession(Game game, JButton typeChar, String fileName,
+                                               Profession profession){
 
-        warrior = new JButton();
-        warrior.setBackground(Color.getHSBColor(30,1,0.1f));
+        typeChar = new JButton();
+        typeChar.setBackground(Color.getHSBColor(30,1,0.1f));
         Border border = BorderFactory.createLineBorder(Color.getHSBColor(0,1,0.5f), 5);
-        warrior.setBorder(border);
+        typeChar.setBorder(border);
 
-        ImageIcon pictureWarrior = new ImageIcon("images/Wojownik.png");
-        warrior.add(new JLabel(pictureWarrior, JLabel.CENTER));
+        ImageIcon pictureWarrior = new ImageIcon(fileName);
+        typeChar.add(new JLabel(pictureWarrior, JLabel.CENTER));
 
-        warrior.addActionListener(new ActionListener() {
+        typeChar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().setProfession(new Warrior());
+                game.getPlayer().setProfession(profession);
                 game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
                 System.out.println(game.getPlayer().getProfession());
                 game.setLocationChanged(true);
@@ -94,46 +92,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 removeObserver(observers.get(0));
             }
         });
-    }
-    private void initiateMage(Game game){
-        mage = new JButton();
-        mage.setBackground(Color.getHSBColor(30,1,0.1f));
-        Border border = BorderFactory.createLineBorder(Color.getHSBColor(0,1,0.5f), 5);
-        mage.setBorder(border);
-
-        ImageIcon pictureWarrior = new ImageIcon("images/Mag.png");
-        mage.add(new JLabel(pictureWarrior, JLabel.CENTER));
-        //warrior.setText("Mag");
-
-        mage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.getPlayer().setProfession(new Mage());
-                game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
-                game.setLocationChanged(true);
-                notifyObservers();
-                removeObserver(observers.get(0));
-            }
-        });
-    }
-    private void initiateArcher(Game game){
-        archer = new JButton();
-        archer.setBackground(Color.getHSBColor(30,1,0.1f));
-        Border border = BorderFactory.createLineBorder(Color.getHSBColor(0,1,0.5f), 5);
-        archer.setBorder(border);
-
-        ImageIcon pictureWarrior = new ImageIcon("images/Lucznik.png");
-        archer.add(new JLabel(pictureWarrior, JLabel.CENTER));
-        archer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.getPlayer().setProfession(new Archer());
-                game.getPlayer().getProfession().attributesInitiation(game.getPlayer());
-                game.setLocationChanged(true);
-                notifyObservers();
-                removeObserver(observers.get(0));
-            }
-        });
+        return typeChar;
     }
 
     static class TextChooseTypeChar extends JComponent{
@@ -162,35 +121,6 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         return textChar1;
     }
 
-//    static class TextWojownik extends JComponent{
-//        @Override
-//        protected void paintComponent(Graphics g) {
-//            Graphics2D g2 = (Graphics2D) g;
-//            g2.setFont(new Font(null, Font.BOLD, 25));
-//            g2.setPaint(Color.getHSBColor(0,1,0.5f));
-//            g2.drawString("Wojownik", 70,30 );
-//        }
-//    }
-//
-//    static class TextMag extends JComponent{
-//        @Override
-//        protected void paintComponent(Graphics g) {
-//            Graphics2D g2 = (Graphics2D) g;
-//            g2.setFont(new Font(null, Font.BOLD, 25));
-//            g2.setPaint(Color.getHSBColor(0,1,0.5f));
-//            g2.drawString("Mag", 100,30 );
-//        }
-//    }
-//
-//    static class TextLucznik extends JComponent{
-//        @Override
-//        protected void paintComponent(Graphics g) {
-//            Graphics2D g2 = (Graphics2D) g;
-//            g2.setFont(new Font(null, Font.BOLD, 25));
-//            g2.setPaint(Color.getHSBColor(0,1,0.5f));
-//            g2.drawString("Lucznik", 80,30 );
-//        }
-//    }
 
     public Game getGame() {
         return game;
