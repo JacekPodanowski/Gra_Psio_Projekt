@@ -31,9 +31,13 @@ public class MainPanel extends JPanel {
         this.state = state;
         this.game = game;
         this.setPreferredSize(new Dimension(900, 700));
-        switch (state) {
+        this.setLayout(new GridLayout(2, 1));
+        this.setBackground(Color.BLACK);
+        switch(state) {
             case STARTMENU:
-                this.setLayout(new GridLayout(1, 1));
+                this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+                this.add(Box.createRigidArea(new Dimension(0, 100)));
+
                 startGamePanel = new StartGamePanel(game);
                 this.add(startGamePanel);
                 //this.add(new JLabel(new ImageIcon(this.getClass().getResource("/escapethecube.png"))));
@@ -66,11 +70,16 @@ public class MainPanel extends JPanel {
     public JLabel createTitleLabel(String text, int size) {
         JLabel label = new JLabel(text);
         label.setPreferredSize(new Dimension(900, 100));
-        label.setFont(new Font("LabelFont", Font.BOLD | Font.ITALIC, size));
-        label.setHorizontalTextPosition(SwingConstants.CENTER);
+        label.setFont(new Font("LabelFont", Font.BOLD|Font.ITALIC, size));
+        //label.setHorizontalTextPosition(SwingConstants.CENTER);
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setBackground(Color.BLACK);
         return label;
     }
+
+
+
+
 
 
     public TopPanel getTopPanel() {
