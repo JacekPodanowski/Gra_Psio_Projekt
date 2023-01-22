@@ -67,8 +67,8 @@ public class EmptyRoomPanel extends JPanel implements Subject {
 
     private JButton setBasicButton(String title){
         JButton button = new JButton(title);
-        button.setFont(new Font("czcionka", Font.BOLD|Font.ITALIC, 10));
-        Dimension d = new Dimension(100, 30);
+        button.setFont(new Font("czcionka", Font.BOLD|Font.ITALIC, 14));
+        Dimension d = new Dimension(175, 50);
         button.setMinimumSize(d);
         button.setMaximumSize(d);
         button.setPreferredSize(d);

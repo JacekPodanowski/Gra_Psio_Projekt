@@ -18,22 +18,29 @@ public class EntrancePanel extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JLabel entranceText = new JLabel("Budzisz się w dziwnym, pustym sześciennym pokoju. Nie jesteś pewien co się wydarzyło, jedyne co widzisz to drzwi w ścianie.");
-        JLabel entranceHint = new JLabel("Na mapie wybierz pokój, do którego chcesz przejść.");
-        entranceText.setFont(new Font("Arial",Font.ITALIC,15));
-        entranceHint.setFont(new Font("Arial",Font.ITALIC,15));
+        JLabel entranceText = new JLabel("Budzisz się w dziwnym, pustym sześciennym pokoju");
+        JLabel entranceText2 = new JLabel("Jedyne co się wyróżnia to drzwi w ścianie");
+        JLabel entranceHint = new JLabel("Na mapie wybierz pokój, do którego chcesz przejść");
+        entranceText.setFont(new Font("Arial",Font.PLAIN,25));
+        entranceText2.setFont(new Font("Arial",Font.PLAIN,20));
+        entranceHint.setFont(new Font("Arial",Font.ITALIC,17));
         JPanel panelText = new JPanel();
+        JPanel panelText2 = new JPanel();
         JPanel panelHint = new JPanel();
         panelText.setSize(500, 50);
+        panelText2.setSize(500, 50);
         panelHint.setSize(500, 50);
         panelText.setLayout(new BoxLayout(panelText, BoxLayout.LINE_AXIS));
         panelHint.setLayout(new BoxLayout(panelHint, BoxLayout.LINE_AXIS));
-        this.add(Box.createRigidArea(new Dimension(0, 120)));
+        this.add(Box.createRigidArea(new Dimension(0, 50)));
         this.add(panelText);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(panelText2);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(panelHint);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
         panelText.add(entranceText);
+        panelText2.add(entranceText2);
         panelHint.add(entranceHint);
     }
 }
