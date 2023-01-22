@@ -2,22 +2,16 @@ package GUI.Panels;
 
 import BackEnd.Game.Game;
 import GUI.SaveLoadStrategy.LoadStrategy;
-import GUI.StyleElements.StyleElements;
-import GUI.View.MainWindow;
 import GUI.View.SaveLoadWindow;
 import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.RoundRectangle2D;
-import java.io.*;
 import java.util.ArrayList;
 
-import static java.awt.Font.TRUETYPE_FONT;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class StartGamePanel extends JPanel implements Subject {
@@ -33,19 +27,8 @@ public class StartGamePanel extends JPanel implements Subject {
     private JLabel menuSymbolLabel;
 
     public StartGamePanel(Game game){
-        //this.add(new JLabel(new ImageIcon(this.getClass().getResource("/escapethecube.png"))));
-        //this.setVisible(true);
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.setLayout(new FlowLayout());
-        this.setBackground(new Color(11,128,26));
-        JLabel headline = new JLabel("Witaj w grze: \"Ucieczka z kostki\"");
-        this.add(Box.createRigidArea(new Dimension(100, 200)));
-        headline.setFont(StyleElements.gameFont(40));
-        this.add(headline);
-        this.add(Box.createRigidArea(new Dimension(100, 300)));
-        //Border border = BorderFactory.createLineBorder(Color.white, 5);
-        //this.setBorder(border);
         this.game = game;
+
         //Ustawiam wielkości
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
@@ -67,7 +50,7 @@ public class StartGamePanel extends JPanel implements Subject {
         this.add(titleImageLabel);
         this.add(Box.createRigidArea(new Dimension(0,50)));
         this.add(newGameButton(this));
-        //this.add(Box.createRigidArea(new Dimension(-5, 100)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(loadGameButton(this));
         this.add(Box.createRigidArea(new Dimension(0,70)));
         this.add(menuSymbolLabel);
