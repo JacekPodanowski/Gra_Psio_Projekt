@@ -71,7 +71,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         this.add(buttonPanel);
     }
     private  JButton initiateProfession(Game game, JButton typeChar, String fileName,
-                                               Profession profession){
+                                        Profession profession){
 
         typeChar = new JButton();
         typeChar.setBackground(Color.getHSBColor(30,1,0.1f));
