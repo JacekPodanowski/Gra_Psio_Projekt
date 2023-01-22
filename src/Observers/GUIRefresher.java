@@ -2,11 +2,9 @@ package Observers;
 
 import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
-import BackEnd.Game.Room;
 import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.Panels.MainPanel;
 import GUI.Panels.MapPanel;
-import GUI.Panels.TopPanel;
 import GUI.Panels.WindowStates;
 import GUI.View.MainWindow;
 
@@ -40,18 +38,23 @@ public class GUIRefresher implements Observer{
     }
     @Override
     public void update(Game game) {
-        if(this.game == null) {
+        if (this.game == null) {
             this.game = game;
             initiate();
         } else if (this.game.isLocationChanged()) {
             this.game = game;
             refresh();
             this.game.setLocationChanged(false);
-        } else if (this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT){
+        } else if (this.game.isGameFinished()) {
+            this.game = game;
+            startMenu();
+        }else if (game.getPlayer().getHealth()<0) {
+            this.game = game;
+            lostGame();
+        } else if (this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT) {
             this.game = game;
             endGame();
-        }
-        else {
+        } else {
             this.game = game;
             mapRefresh();
         }
@@ -79,7 +82,31 @@ public class GUIRefresher implements Observer{
         mainWindow.remove(mainWindow.getMainPanel());
         mainWindow.setMainPanel(new MainPanel(game, WindowStates.ENDGAME));
         mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.getMainPanel().getEndGamePanel().registerObserver(this);
         mainWindow.revalidate();
         mainWindow.repaint();
     }
+
+    public void startMenu(){
+        mainWindow.getMainPanel().removeAll();
+        mainWindow.remove(mainWindow.getMainPanel());
+        mainWindow.setMainPanel(new MainPanel(game, WindowStates.STARTMENU));
+        mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.getMainPanel().getStartGamePanel().registerObserver(this);
+        mainWindow.setGame(null);
+        this.game = null;
+        mainWindow.revalidate();
+        mainWindow.repaint();
+    }
+
+    public void lostGame(){
+        mainWindow.getMainPanel().removeAll();
+        mainWindow.remove(mainWindow.getMainPanel());
+        mainWindow.setMainPanel(new MainPanel(game, WindowStates.LOSTGAME));
+        mainWindow.add(mainWindow.getMainPanel());
+        mainWindow.getMainPanel().getLostGamePanel().registerObserver(this);
+        mainWindow.revalidate();
+        mainWindow.repaint();
+    }
+
 }

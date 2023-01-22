@@ -29,6 +29,8 @@ public class Game implements Serializable {
     public static ArrayList<Potion> basicPotions = new ArrayList<>();
     private boolean locationChanged = false;
 
+    private boolean gameFinished = false;
+
     //==================================================================================================================
 
 
@@ -42,7 +44,7 @@ public class Game implements Serializable {
     }
 
     public Game(int day, Player player, Map map) {
-    //public Game(int day, Player player, Map map){
+        //public Game(int day, Player player, Map map){
         this.day = day;
         this.player = player;
         this.map = map;
@@ -84,6 +86,15 @@ public class Game implements Serializable {
     public void setLocationChanged(boolean locationChanged) {
         this.locationChanged = locationChanged;
     }
+
+    public boolean isGameFinished() {
+        return gameFinished;
+    }
+
+    public void finishGame() {
+        this.gameFinished = true;
+    }
+
     //==================================================================================================================
 
 
@@ -360,9 +371,11 @@ public class Game implements Serializable {
                 break;
         }
 
-    return anwser;}
+        return anwser;
+    }
 
 
 
     //==================================================================================================================
 }
+

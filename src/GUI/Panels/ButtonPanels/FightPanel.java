@@ -130,7 +130,8 @@ public class FightPanel extends JPanel implements Subject {
         skill_1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 0);
+                if(game.getPlayer().getHealth() > 0)
+                    game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 0);
                 abilityChoice = 0;
                 notifyObservers();
             }});
@@ -144,7 +145,8 @@ public class FightPanel extends JPanel implements Subject {
         skill_2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 1);
+                if(game.getPlayer().getHealth() > 0)
+                    game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 1);
                 abilityChoice = 1;
                 notifyObservers();
             }});
@@ -158,7 +160,8 @@ public class FightPanel extends JPanel implements Subject {
         skill_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 2);
+                if(game.getPlayer().getHealth() > 0)
+                    game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 2);
                 abilityChoice = 2;
                 notifyObservers();
             }});
@@ -172,7 +175,8 @@ public class FightPanel extends JPanel implements Subject {
         skill_4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 3);
+                if(game.getPlayer().getHealth() > 0)
+                    game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), 3);
                 abilityChoice = 3;
                 notifyObservers();
             }});
