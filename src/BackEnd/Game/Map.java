@@ -2,12 +2,13 @@ package BackEnd.Game;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Map {
+public class Map implements Serializable {
     //================================================= ATRYBUTY KLASY =================================================
     private Room[][] tabOfRoom;  // tablica z pokojow 5x5 (na razie)
     private RoomType[][] roomTypes;

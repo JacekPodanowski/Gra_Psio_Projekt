@@ -39,7 +39,7 @@ public class MainWindow extends JFrame {
                 int playerSelection = JOptionPane.showConfirmDialog(MainWindow.this, "Czy chcesz zapisać grę?", "Potwierdż zamknięcie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (playerSelection == JOptionPane.YES_NO_OPTION) {
-                    SaveLoadWindow saveWindow = new SaveLoadWindow(game, new SaveStrategy());
+                    SaveLoadWindow saveWindow = new SaveLoadWindow(mainPanel.getGame(), new SaveStrategy());
                     saveWindow.setModal(true);
                     saveWindow.setAlwaysOnTop(true);
                     saveWindow.setVisible(true);
@@ -70,7 +70,7 @@ public class MainWindow extends JFrame {
         jMenuItemLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SaveLoadWindow loadWindow = new SaveLoadWindow(game, new LoadStrategy());
+                SaveLoadWindow loadWindow = new SaveLoadWindow(mainPanel.getGame(), new LoadStrategy());
                 loadWindow.setModal(true);
                 loadWindow.setAlwaysOnTop(true);
                 loadWindow.setVisible(true);
@@ -99,7 +99,7 @@ public class MainWindow extends JFrame {
         jMenuItemSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SaveLoadWindow saveWindow = new SaveLoadWindow(game, new SaveStrategy());
+                SaveLoadWindow saveWindow = new SaveLoadWindow(mainPanel.getGame(), new SaveStrategy());
                 saveWindow.setModal(true);
                 saveWindow.setAlwaysOnTop(true);
                 saveWindow.setVisible(true);

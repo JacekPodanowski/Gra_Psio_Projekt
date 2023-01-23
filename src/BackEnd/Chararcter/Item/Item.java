@@ -1,10 +1,11 @@
 package BackEnd.Chararcter.Item;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-public abstract class Item {
+public abstract class Item implements Serializable {
 
     protected String name;
     protected int value;

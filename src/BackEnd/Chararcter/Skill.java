@@ -1,8 +1,9 @@
 package BackEnd.Chararcter;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Skill {
+public class Skill implements Serializable {
 
 
     private String name;

@@ -7,11 +7,12 @@ import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Room {
+public class Room implements Serializable {
     //================================================= ATRYBUTY KLASY =================================================
     private boolean enter;
     private boolean exit;

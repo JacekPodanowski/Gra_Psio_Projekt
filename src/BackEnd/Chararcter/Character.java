@@ -5,7 +5,9 @@ import BackEnd.Chararcter.Item.Item;
 import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Profession.Profession;
 
-public abstract class Character {
+import java.io.Serializable;
+
+public abstract class Character implements Serializable {
     protected double health=100;
     public double maxHealth=150.0;
     protected int strength;

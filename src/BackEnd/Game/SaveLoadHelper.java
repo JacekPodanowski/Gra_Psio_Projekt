@@ -35,14 +35,13 @@ public class SaveLoadHelper {
     }
 
     public void save(Game game, int slotIndex){
-        //game.saveGame("SaveGame"+slotNumber+".bin");
+        game.saveGame("SaveGame"+slotIndex+".bin");
         slots[slotIndex] = LocalDateTime.now();
         saveSlots();
     }
 
     public Game load(int slotIndex){
-        //return BackEnd.Game.loadGame("SaveGame"+slotIndex+".bin");
-        return null;
+        return Game.loadGame("SaveGame"+slotIndex+".bin");
     }
 
     private LocalDateTime[] loadSlots(){
