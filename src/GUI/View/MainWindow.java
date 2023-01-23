@@ -30,7 +30,6 @@ public class MainWindow extends JFrame {
                 Toolkit.getDefaultToolkit().getScreenSize().height,
                 this.getWidth(),
                 this.getHeight()));
-        createMenuPanel();
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -59,65 +58,6 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
-
-
-    private void createMenuPanel() {
-        JMenu jMenu = new JMenu();
-        jMenu.setText("Opcje Gry");
-
-        JMenuItem jMenuItemLoad = new JMenuItem();
-        jMenuItemLoad.setText("Załaduj Grę");
-        jMenuItemLoad.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SaveLoadWindow loadWindow = new SaveLoadWindow(mainPanel.getGame(), new LoadStrategy());
-                loadWindow.setModal(true);
-                loadWindow.setAlwaysOnTop(true);
-                loadWindow.setVisible(true);
-                if (loadWindow.isFinishedSucceslyffly()) {
-                    game = loadWindow.getGame();
-
-
-                } else {
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
-            }
-        });
-        jMenu.add(jMenuItemLoad);
-
-        JMenuItem jMenuItemNewGame = new JMenuItem();
-        jMenuItemNewGame.setText("Nowa Gra");
-        jMenuItemNewGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game = new Game();
-
-            }
-        });
-        jMenu.add(jMenuItemNewGame);
-
-        JMenuItem jMenuItemSave = new JMenuItem();
-        jMenuItemSave.setText("Zapisz lub nadpisz Grę");
-        jMenuItemSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SaveLoadWindow saveWindow = new SaveLoadWindow(mainPanel.getGame(), new SaveStrategy());
-                saveWindow.setModal(true);
-                saveWindow.setAlwaysOnTop(true);
-                saveWindow.setVisible(true);
-                if (saveWindow.isFinishedSucceslyffly()) {
-                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                } else {
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
-            }
-        });
-        jMenu.add(jMenuItemSave);
-
-        JMenuBar jMenuBar = new JMenuBar();
-        jMenuBar.add(jMenu);
-        setJMenuBar(jMenuBar);
-    }
 
     public Observer getObserver() {
         return observer;

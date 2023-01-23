@@ -107,14 +107,11 @@ public class StartGamePanel extends JPanel implements Subject {
                 loadWindow.setModal(true);
                 loadWindow.setAlwaysOnTop(true);
                 loadWindow.setVisible(true);
-//                if (loadWindow.isFinishedSucceslyffly()) {
-//                    game = loadWindow.getGame();
-//                    game.setLocationChanged(true);
-//                    loadWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//                } else {
-//                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-//                }
-//                notifyObservers();
+                if (loadWindow.isFinishedSucceslyffly()) {
+                    loadWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                } else {
+                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                }
             }});
         return loadGameButton;
     }
