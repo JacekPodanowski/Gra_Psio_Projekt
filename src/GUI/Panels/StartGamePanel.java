@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class StartGamePanel extends JPanel implements Subject {
@@ -102,16 +103,18 @@ public class StartGamePanel extends JPanel implements Subject {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SaveLoadWindow loadWindow = new SaveLoadWindow(game, new LoadStrategy());
-                loadWindow.setModal(true);
-                loadWindow.setAlwaysOnTop(true);
-                loadWindow.setVisible(true);
+                loadWindow.registerObserver(observers.get(0));
                 if (loadWindow.isFinishedSucceslyffly()) {
                     game = loadWindow.getGame();
                     czyWczytanaGra = true;
-                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+                    loadWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 } else {
                     loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                 }
+                loadWindow.setModal(true);
+                loadWindow.setAlwaysOnTop(true);
+                loadWindow.setVisible(true);
             }});
         return loadGameButton;
     }

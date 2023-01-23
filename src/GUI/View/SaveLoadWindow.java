@@ -3,6 +3,8 @@ package GUI.View;
 import BackEnd.Game.Game;
 import BackEnd.Game.SaveLoadHelper;
 import GUI.SaveLoadStrategy.ISaveLoadStrategy;
+import Observable.Subject;
+import Observers.Observer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +13,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveLoadWindow extends JDialog {
+public class SaveLoadWindow extends JDialog implements Subject {
 
     Label title;
     SaveLoadHelper helper;
     List<JButton> slots;
     ISaveLoadStrategy strategy;
     Game game;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
     boolean finishedSucceslyffly;
 
@@ -49,6 +52,8 @@ public class SaveLoadWindow extends JDialog {
                     game = strategy.actionAfterClick(slots.indexOf(e.getSource()),game);
                     setVisible(false);
                     finishedSucceslyffly = true;
+                    game.setLocationChanged(true);
+                    notifyObservers();
                 }
             });
         }
@@ -60,5 +65,21 @@ public class SaveLoadWindow extends JDialog {
 
     public boolean isFinishedSucceslyffly() {
         return finishedSucceslyffly;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(int i = 0; i < observers.size(); i++)
+            observers.get(i).update(this.getGame());
     }
 }

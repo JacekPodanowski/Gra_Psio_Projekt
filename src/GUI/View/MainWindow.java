@@ -76,6 +76,8 @@ public class MainWindow extends JFrame {
                 loadWindow.setVisible(true);
                 if (loadWindow.isFinishedSucceslyffly()) {
                     game = loadWindow.getGame();
+
+
                 } else {
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                 }
