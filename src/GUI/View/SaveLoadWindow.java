@@ -51,7 +51,7 @@ public class SaveLoadWindow extends JDialog implements Subject {
                 public void actionPerformed(ActionEvent e) {
                     game = strategy.actionAfterClick(slots.indexOf(e.getSource()),game);
                     setVisible(false);
-                    finishedSucceslyffly = true;
+                    //finishedSucceslyffly = true;
                     game.setLocationChanged(true);
                     notifyObservers();
                 }

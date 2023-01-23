@@ -40,7 +40,10 @@ public class GUIRefresher implements Observer{
     public void update(Game game) {
         if (this.game == null) {
             this.game = game;
-            initiate();
+            if(this.game.getPlayer().getProfession() == null)
+                initiate();
+            else
+                refresh();
         } else if (this.game.isLocationChanged()) {
             this.game = game;
             refresh();

@@ -104,17 +104,17 @@ public class StartGamePanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 SaveLoadWindow loadWindow = new SaveLoadWindow(game, new LoadStrategy());
                 loadWindow.registerObserver(observers.get(0));
-                if (loadWindow.isFinishedSucceslyffly()) {
-                    game = loadWindow.getGame();
-                    czyWczytanaGra = true;
-
-                    loadWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                } else {
-                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
                 loadWindow.setModal(true);
                 loadWindow.setAlwaysOnTop(true);
                 loadWindow.setVisible(true);
+//                if (loadWindow.isFinishedSucceslyffly()) {
+//                    game = loadWindow.getGame();
+//                    game.setLocationChanged(true);
+//                    loadWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//                } else {
+//                    loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+//                }
+//                notifyObservers();
             }});
         return loadGameButton;
     }
