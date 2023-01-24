@@ -8,6 +8,7 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,10 @@ public class LootPanel extends JPanel implements Subject {
     public LootPanel(Game game){
         this.game = game;
         this.add(initiateComponents());
+        setBackground(new Color(199, 196, 181));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
+
     }
     public JPanel initiateComponents(){
         JPanel lootPanel = new JPanel();
@@ -34,6 +39,7 @@ public class LootPanel extends JPanel implements Subject {
         lootPanel.setMaximumSize(new Dimension(900, 500));
         lootPanel.setPreferredSize(new Dimension(900, 500));
         lootPanel.setLayout(new FlowLayout());
+        lootPanel.setOpaque(false);
 
         JLabel w = new JLabel("Natknałeś sie na bezpański przedmiot :" );
         w.setFont(new Font("ButtonFont", Font.BOLD, 15));

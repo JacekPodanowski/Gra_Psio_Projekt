@@ -6,6 +6,7 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,9 +27,13 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         this.add(restButton);
         this.add(useItemButton());
         this.add(statsDisplayButton());
+        setBackground(new Color(199, 196, 181));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
     }
     public JButton restButton(){
         JButton restButton = setBasicButton("Odpocznij");
+        restButton.setBackground(new Color(136, 93, 44));
         if(game.getMap().getTabOfRoom()[game.getPlayer().getLocation_X()][game.getPlayer().getLocation_Y()].isRested()){
             restButton.setEnabled(false);
         }
@@ -43,6 +48,7 @@ public class EmptyRoomPanel extends JPanel implements Subject {
     }
     public JButton useItemButton(){
         JButton useItemButton = setBasicButton("Użyj przedmiotu");
+        useItemButton.setBackground(new Color(136, 93, 44));
         useItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +61,7 @@ public class EmptyRoomPanel extends JPanel implements Subject {
 
     public JButton statsDisplayButton(){
         JButton useItemButton = setBasicButton("Wyświetl statystyki");
+        useItemButton.setBackground(new Color(136, 93, 44));
         useItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,8 +74,9 @@ public class EmptyRoomPanel extends JPanel implements Subject {
 
     private JButton setBasicButton(String title){
         JButton button = new JButton(title);
-        button.setFont(new Font("czcionka", Font.BOLD|Font.ITALIC, 14));
-        Dimension d = new Dimension(175, 50);
+        button.setBackground(new Color(136, 93, 44));
+        button.setFont(new Font("czcionka", Font.BOLD|Font.ITALIC, 16));
+        Dimension d = new Dimension(200, 50);
         button.setMinimumSize(d);
         button.setMaximumSize(d);
         button.setPreferredSize(d);

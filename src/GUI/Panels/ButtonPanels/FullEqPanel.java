@@ -7,6 +7,7 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,9 @@ public class FullEqPanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 500));
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
+        setBackground(new Color(199, 196, 181));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(goBack());
