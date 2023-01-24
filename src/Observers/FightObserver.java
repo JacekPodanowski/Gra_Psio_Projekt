@@ -48,7 +48,7 @@ public class FightObserver implements Observer{
             int enemyChoice = generate.nextInt(0, 3);
             enemy.attack(player, enemyChoice);
             enemyAttack(enemyChoice);
-            enemy.setAttackAvoided(false);
+            player.setAttackAvoided(false);
 
             fightPanel.getjButton5().setEnabled(true);
             fightPanel.getjButton6().setEnabled(true);
@@ -74,6 +74,7 @@ public class FightObserver implements Observer{
         }
     }
     public void enemyAttack(int enemyChoice){
+        fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().setMessage(
                 "Przeciwnik używa umiejętności " + '\"' + enemy.getAbilities()[enemyChoice].toString() + '\"' + " i zadaje ");
         if(player.isAttackAvoided())
@@ -84,9 +85,11 @@ public class FightObserver implements Observer{
         fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
         fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
-        fightPanel.getConsolePanel().newLine();
+
     }
     public void playerAttack(int playerChoice) {
+        fightPanel.getConsolePanel().newLine();
+        fightPanel.getConsolePanel().newLine();
         switch (playerChoice) {
             case 1, 2, 0:
                 fightPanel.getConsolePanel().setMessage(
@@ -99,7 +102,7 @@ public class FightObserver implements Observer{
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
-                fightPanel.getConsolePanel().newLine();
+                //fightPanel.getConsolePanel().newLine();
                 break;
             case 3:
                 if(player.getProfession() instanceof Mage){
@@ -124,8 +127,8 @@ public class FightObserver implements Observer{
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
-                fightPanel.getConsolePanel().newLine();
                 break;
         }
+        fightPanel.getConsolePanel().newLine();
     }
 }

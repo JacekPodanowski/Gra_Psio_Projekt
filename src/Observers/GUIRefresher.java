@@ -51,7 +51,7 @@ public class GUIRefresher implements Observer{
         } else if (this.game.isGameFinished()) {
             this.game = game;
             startMenu();
-        }else if (game.getPlayer().getHealth()<0) {
+        }else if (game.getPlayer().getHealth()<=0) {
             this.game = game;
             lostGame();
         } else if (this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT) {
