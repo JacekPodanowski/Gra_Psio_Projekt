@@ -5,6 +5,7 @@ import BackEnd.Game.Game;
 import BackEnd.Game.RoomType;
 import Observable.Subject;
 import Observers.Observer;
+import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,26 +27,37 @@ public class MapPanel extends JPanel implements Subject {
         this.setBorder(blackLine);
         rooms = new JButton[this.game.getMap().getTabOfRoom().length][this.game.getMap().getTabOfRoom()[0].length];
         this.setLayout(new GridLayout(this.game.getMap().getTabOfRoom().length, this.game.getMap().getTabOfRoom().length));
+        this.setBackground(Color.DARK_GRAY);
+
         for (int i = 0; i < this.game.getMap().getTabOfRoom().length; i++) {
             for (int j = 0; j < this.game.getMap().getTabOfRoom()[0].length; j++) {
                 rooms[i][j] = createButton(i, j);
-                if (this.game.getMap().getRoomTypes()[i][j] == RoomType.withPlayer) {
-                    rooms[i][j].setText("Znajdujesz się tutaj");
-                    rooms[i][j].setFont(new Font("jakis font", Font.BOLD | Font.ITALIC, 5));
-                }
+
                 if(this.game.getMap().getTabOfRoom()[i][j].isAvailable()) {
                     rooms[i][j].setVisible(true);
                     rooms[i][j].setEnabled(true);
-                    if (!this.game.getMap().getTabOfRoom()[i][j].isVisited())
+                    rooms[i][j].setBackground(new Color(180, 87,10));
+                    if (!this.game.getMap().getTabOfRoom()[i][j].isVisited()) {
                         rooms[i][j].setText("?");
+                        rooms[i][j].setFont(new Font("", Font.BOLD, 40));
+                        rooms[i][j].setBackground(new Color(131, 60, 60));
+                    }
                 } else {
                     if (this.game.getMap().getTabOfRoom()[i][j].isVisited()) {
                         rooms[i][j].setVisible(true);
                         rooms[i][j].setEnabled(false);
+                        rooms[i][j].setBackground(new Color(168, 118, 94));
                     } else {
                         rooms[i][j].setEnabled(false);
                         rooms[i][j].setVisible(false);
+                        rooms[i][j].setBackground(new Color(168, 118, 94));
                     }
+                }
+                if (this.game.getMap().getRoomTypes()[i][j] == RoomType.withPlayer) {
+                    ImageIcon charSymbol = new ImageIcon("images/CharSymbol.png");
+                    JLabel jLabel = new JLabel(charSymbol);
+                    rooms[i][j].add(jLabel);
+                    rooms[i][j].setBackground(new Color(90, 171, 71));
                 }
                 this.add(rooms[i][j]);
 

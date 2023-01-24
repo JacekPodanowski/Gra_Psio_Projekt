@@ -61,11 +61,11 @@ public class Skill implements Serializable {
         return (int) dmg;
     }
 
-    public int use(Character player, Character enemy){
-        int dmg = calcDmg(player, enemy);
+    public int use(Character ataker, Character target){
+        int dmg = calcDmg(ataker, target);
         Random r = new Random();
         if(r.nextInt(110) > accuracy) {
-            player.setAttackAvoided(true);
+            target.setAttackAvoided(true);
             dmg = 0;
         }
         return dmg;

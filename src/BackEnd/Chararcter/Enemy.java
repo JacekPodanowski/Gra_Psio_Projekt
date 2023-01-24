@@ -73,14 +73,14 @@ public class Enemy extends Character{
 
     }
     @Override
-    public void attack(Character character, int skillNumber) {
-        character.setHealth(character.getHealth() - this.abilities[skillNumber].use(this, character));
+    public void attack(Character target, int skillNumber) {
+        target.setHealth(target.getHealth() - this.abilities[skillNumber].use(this, target));
         setPlayerTurn(true);
     }
 
     @Override
-    public void setStrength(int strength) {
+    public void setStrength(int strength){
         this.strength = strength;
-        this.health = 75;
+        this.health = 75+ strength * 0.5;
     }
 }
