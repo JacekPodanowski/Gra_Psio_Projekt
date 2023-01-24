@@ -38,12 +38,10 @@ public class StartGamePanel extends JPanel implements Subject {
         //Layout
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        pictureNameGame = new ImageIcon("images/NameOfGame2.png");
-        pictureMenuSymbol = new ImageIcon("images/MenuSymbol.png");
 
-        titleImageLabel = new JLabel(pictureNameGame);
+        titleImageLabel = new JLabel(new ImageIcon("images/NameOfGame2.png"));
         titleImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        menuSymbolLabel = new JLabel(pictureMenuSymbol);
+        menuSymbolLabel = new JLabel(new ImageIcon("images/MenuSymbol.png"));
         menuSymbolLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.setBackground(Color.BLACK);
@@ -65,10 +63,12 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setPreferredSize(new Dimension(700, 50));
         newGameButton.setMaximumSize(new Dimension(700, 50));
 
-        newGameButton.setOpaque(false);
-        newGameButton.setContentAreaFilled(false);
+        newGameButton.setOpaque(true);
+        //newGameButton.setContentAreaFilled(false);
+
+
         newGameButton.setBorderPainted(false);
-        newGameButton.setBackground(Color.BLACK);
+        newGameButton.setBackground(Color.black);
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         newGameButton.add(new MyTextNewGameButton());

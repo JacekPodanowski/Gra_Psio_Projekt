@@ -18,25 +18,34 @@ public class EndGamePanel extends JPanel implements Subject {
 
     public EndGamePanel(Game game){
         this.game = game;
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setMaximumSize(new Dimension(900, 500));
-        this.setPreferredSize(new Dimension(900, 500));
+        this.setMinimumSize(new Dimension(900, 700));
+        this.setMaximumSize(new Dimension(900, 700));
+        this.setPreferredSize(new Dimension(900, 700));
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setBackground(Color.BLACK);
 
         JLabel endText1 = new JLabel("Uratowałeś swoje życie i wyszedłeś z Kostki");
+        endText1.setForeground(new Color(236, 168, 60));
         endText1.setFont(new Font("ButtonFont", Font.BOLD, 30));
+        endText1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(Box.createRigidArea(new Dimension(900, 250)));
         this.add(endText1);
-        this.add(Box.createRigidArea(new Dimension(10, 15)));
+
         JLabel endText2 = new JLabel("Zdecyduj dalej co chcesz zrobic ze swoim życiem");
+        endText2.setForeground(new Color(236, 168, 60));
         endText2.setFont(new Font("ButtonFont", Font.BOLD, 25));
+        endText2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(Box.createRigidArea(new Dimension(900,50)));
         this.add(endText2);
-        this.add(Box.createRigidArea(new Dimension(10, 15)));
+        this.add(Box.createRigidArea(new Dimension(900, 200)));
         this.add(newGameButton());
     }
 
     public JButton newGameButton(){
         JButton newGameButton = new JButton("Wracam do Kostki");
+        newGameButton.setBackground(new Color(136, 93, 44));
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 15));
         newGameButton.addActionListener(new ActionListener() {
             @Override

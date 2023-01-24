@@ -49,7 +49,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
         // dodanie komponentow
         textPanel.add(textChooseType);
-        textPanel.add(Box.createRigidArea(new Dimension(1200,10)));
+        textPanel.add(Box.createRigidArea(new Dimension(1200,100)));
         // pola Wojownik, Mag, Lucznik
         textPanel.add(getTextTypeChar("Wojownik", font));
         //textPanel.add(Box.createRigidArea(new Dimension(100,100)));

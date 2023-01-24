@@ -1,5 +1,8 @@
 package GUI.Panels;
 
+import BackEnd.Chararcter.Profession.Archer;
+import BackEnd.Chararcter.Profession.Mage;
+import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Event.*;
 import BackEnd.Game.Game;
 import GUI.Panels.ButtonPanels.*;
@@ -22,7 +25,7 @@ public class GamePanel extends JPanel implements Subject {
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
 
-        
+
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
             this.add(new JLabel(new ImageIcon("images/Entrance.png")));
 
@@ -35,7 +38,13 @@ public class GamePanel extends JPanel implements Subject {
 
 
         } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.FIGHT) {
-            this.add(new JLabel(new ImageIcon("images/RoomFight.png")));
+            if (game.getPlayer().getProfession() instanceof Mage)
+                this.add(new JLabel(new ImageIcon("images/RoomFightMage.png")));
+            else if (game.getPlayer().getProfession() instanceof Archer) {
+                this.add(new JLabel(new ImageIcon("images/RoomFightArcher.png")));
+            } else if (game.getPlayer().getProfession() instanceof Warrior) {
+                this.add(new JLabel(new ImageIcon("images/RoomFightWarrior.png")));
+            }
 
 
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++) ;

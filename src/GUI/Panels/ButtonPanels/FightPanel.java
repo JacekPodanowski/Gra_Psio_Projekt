@@ -127,6 +127,7 @@ public class FightPanel extends JPanel implements Subject {
         JButton skill_1 = new JButton();
         skill_1.setText(game.getPlayer().getAbilities()[0].toString());
         skill_1.setFont(new Font("ButtonFont", Font.BOLD, 20));
+
         skill_1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
