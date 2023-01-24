@@ -14,7 +14,7 @@ public class TopPanel extends JPanel {
         this.game = game;
         this.setPreferredSize(new Dimension(800, 400));
         this.setLayout(new GridLayout(1, 2));
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(game);
         mapPanel = new MapPanel(game);
         this.add(gamePanel);
         this.add(mapPanel);
