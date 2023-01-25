@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -20,9 +22,6 @@ public class StartGamePanel extends JPanel implements Subject {
     private boolean czyNowaGra = false;
     private boolean czyWczytanaGra = false;
     private ArrayList<Observer> observers = new ArrayList<>();
-
-    private ImageIcon pictureNameGame;
-    private ImageIcon pictureMenuSymbol;
     private JLabel titleImageLabel;
 
     private JLabel menuSymbolLabel;
@@ -63,10 +62,6 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.setPreferredSize(new Dimension(700, 50));
         newGameButton.setMaximumSize(new Dimension(700, 50));
 
-        newGameButton.setOpaque(true);
-        //newGameButton.setContentAreaFilled(false);
-
-
         newGameButton.setBorderPainted(false);
         newGameButton.setBackground(Color.black);
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -74,6 +69,20 @@ public class StartGamePanel extends JPanel implements Subject {
         newGameButton.add(new MyTextNewGameButton());
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 30));
         newGameButton.setFocusable(false);
+        newGameButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                newGameButton.setBackground(Color.getHSBColor(30,1,0.1f));
+                newGameButton.repaint();
+                newGameButton.revalidate();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                newGameButton.setBackground(Color.BLACK);
+                newGameButton.repaint();
+                newGameButton.revalidate();
+            }
+        });
 
         newGameButton.addActionListener(new ActionListener() {
             @Override
@@ -95,7 +104,7 @@ public class StartGamePanel extends JPanel implements Subject {
 
 
         loadGameButton.setFocusable(false);
-        loadGameButton.setOpaque(false);
+        loadGameButton.setOpaque(true);
         //loadGameButton.setContentAreaFilled(false);
         loadGameButton.setBorderPainted(false);
         loadGameButton.setBackground(Color.BLACK);
@@ -113,6 +122,20 @@ public class StartGamePanel extends JPanel implements Subject {
                     loadWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                 }
             }});
+        loadGameButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                loadGameButton.setBackground(Color.getHSBColor(30,1,0.1f));
+                loadGameButton.repaint();
+                loadGameButton.revalidate();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                loadGameButton.setBackground(Color.BLACK);
+                loadGameButton.repaint();
+                loadGameButton.revalidate();
+            }
+        });
         return loadGameButton;
     }
 
