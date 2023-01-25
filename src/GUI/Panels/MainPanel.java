@@ -56,6 +56,8 @@ public class MainPanel extends JPanel {
                 this.add(endGamePanel);
                 break;
             case LOSTGAME:
+                String sci ="death.wav";
+                this.playmusic(sci);
                 this.setLayout(new GridLayout(2, 1));
                 lostGamePanel = new LostGamePanel(game);
                 this.add(lostGamePanel);
@@ -139,5 +141,27 @@ public class MainPanel extends JPanel {
 
     public void setLostGamePanel(LostGamePanel lostGamePanel) {
         this.lostGamePanel = lostGamePanel;
+    }
+    public void playmusic(String plik){
+
+        try{
+            File music = new File(plik);
+            if (music.exists()){
+                AudioInputStream graj = AudioSystem.getAudioInputStream(music);
+                Clip klip = AudioSystem.getClip();
+                klip.open(graj);
+                klip.start();
+                klip.wait(5000);
+                klip.stop();
+            }
+            else {
+                System.out.println("brak pliku");
+            }
+
+        }
+        catch (Exception exception){
+            exception.printStackTrace();
+        }
+
     }
 }
