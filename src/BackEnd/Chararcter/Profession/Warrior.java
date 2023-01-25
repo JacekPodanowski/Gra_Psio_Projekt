@@ -19,4 +19,8 @@ public class Warrior implements Profession{
     public void specialAbility(Character character) {
         character.setAbility(new Skill("Ogłuszające uderzenie", 2, 70, 1), 3);
     }
+    @Override
+    public String toString() {
+        return "Wojownik";
+    }
 }

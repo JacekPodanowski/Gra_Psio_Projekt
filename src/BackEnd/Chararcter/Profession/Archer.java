@@ -19,4 +19,8 @@ public class Archer implements Profession{
     public void specialAbility(Character character) {
         character.setAbility(new Skill("Krytyczny strzał", 3, 100, 1), 3);
     }
+    @Override
+    public String toString() {
+        return "Łucznik";
+    }
 }

@@ -27,7 +27,6 @@ public class StatsPanel extends JPanel implements Subject {
 
 
         JPanel panel = new JPanel();
-        panel.setBorder(blackLine);
         panel.setLayout(new FlowLayout());
         panel.setOpaque(true);
         panel.setPreferredSize(new Dimension(750,150));
@@ -38,6 +37,8 @@ public class StatsPanel extends JPanel implements Subject {
         panel.add(equipment1());
         panel.add(Box.createRigidArea(new Dimension(50,100)));
         panel.add(equipment2());
+        panel.setBorder(blackLine);
+        panel.add(Box.createRigidArea(new Dimension(0, 2)));
 
         this.add(Box.createRigidArea(new Dimension(900,50)));
         this.add(panel);
@@ -49,9 +50,9 @@ public class StatsPanel extends JPanel implements Subject {
         JPanel panel = new JPanel();
         //panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setPreferredSize(new Dimension(300,180));
-        panel.setMaximumSize(new Dimension(300,180));
-        panel.setMinimumSize(new Dimension(300,180));
+        panel.setPreferredSize(new Dimension(300,150));
+        panel.setMaximumSize(new Dimension(300,150));
+        panel.setMinimumSize(new Dimension(300,150));
 
         panel.add(new JLabel("Twoja aktualna broń: "));
         panel.add(currentWeapon());
@@ -66,10 +67,12 @@ public class StatsPanel extends JPanel implements Subject {
         JPanel panel = new JPanel();
         //panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setPreferredSize(new Dimension(300,180));
-        panel.setMaximumSize(new Dimension(300,180));
-        panel.setMinimumSize(new Dimension(300,180));
+        panel.setPreferredSize(new Dimension(300,150));
+        panel.setMaximumSize(new Dimension(300,150));
+        panel.setMinimumSize(new Dimension(300,150));
 
+        panel.add(profession());
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(currentHealth());
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(currentStrngth());
@@ -89,6 +92,10 @@ public class StatsPanel extends JPanel implements Subject {
     public JLabel currentArmor(){
         JLabel currentArmor = new JLabel(game.getPlayer().getArmor().toString());
         return currentArmor;
+    }
+    public JLabel profession(){
+        JLabel currentStats = new JLabel("Profesja : "+game.getPlayer().getProfession().toString());
+        return currentStats;
     }
     public JLabel currentHealth(){
         JLabel currentStats = new JLabel("Życie : "+game.getPlayer().getHealth());

@@ -22,4 +22,9 @@ public class Mage implements Profession{
     public void specialAbility(Character character) {
         character.setAbility(new Skill("Leczenie", 0, 100, 3), 3);
     }
+
+    @Override
+    public String toString() {
+        return "Mag";
+    }
 }
