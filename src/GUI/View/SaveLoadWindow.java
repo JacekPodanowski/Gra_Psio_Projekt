@@ -13,9 +13,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static GUI.View.MainWindow.centerLocation;
+
 public class SaveLoadWindow extends JDialog implements Subject {
 
-    Label title;
+    JLabel title;
     SaveLoadHelper helper;
     List<JButton> slots;
     ISaveLoadStrategy strategy;
@@ -34,17 +36,26 @@ public class SaveLoadWindow extends JDialog implements Subject {
 
         this.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         this.setSize(200, 300);
+        this.setLocation(centerLocation(Toolkit.getDefaultToolkit().getScreenSize().width,
+                Toolkit.getDefaultToolkit().getScreenSize().height,
+                this.getWidth(),
+                this.getHeight()));
 
         JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(new Color(199, 196, 181));
         GridLayout gridLayout = new GridLayout(helper.getNumberOfSlots()+1, 1);
         mainPanel.setLayout(gridLayout);
         setContentPane(mainPanel);
-        title = new Label(strategy.getTitle());
+        title = new JLabel(strategy.getTitle());
+        title.setFont(new Font("", Font.BOLD, 16));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         mainPanel.add(title);
         slots = new ArrayList<JButton>();
 
         for (int i = 0; i < helper.getNumberOfSlots(); i++) {
             slots.add(strategy.createButton(i));
+            slots.get(i).setBackground(new Color(136, 93, 44));
             mainPanel.add(slots.get(i));
             slots.get(i).addActionListener(new ActionListener() {
                 @Override
