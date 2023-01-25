@@ -29,7 +29,10 @@ public class GamePanel extends JPanel implements Subject {
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
             this.add(new JLabel(new ImageIcon("images/Entrance.png")));
 
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EMPTYROOM) {
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EMPTYROOM ||
+        game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.INVENTORY ||
+        game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.STATS ||
+        game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.REST) {
             this.add(new JLabel(new ImageIcon("images/RoomEmpty.png")));
 
 
@@ -48,7 +51,8 @@ public class GamePanel extends JPanel implements Subject {
 
 
             for (int i = 0; i < game.getPlayer().getAbilities().length; i++) ;
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.LOOT) {
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.LOOT ||
+            game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.FULLEQ) {
             this.add(new JLabel(new ImageIcon("images/RoomLoot.png")));
 
         }

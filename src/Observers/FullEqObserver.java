@@ -39,6 +39,7 @@ public class FullEqObserver implements Observer{
             bottomPanel.getEmptyRoomPanel().registerObserver(new EmptyRoomObserver(bottomPanel));
             bottomPanel.getGame().getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.EMPTYROOM);
         }
+        bottomPanel.notifyObservers();
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }
