@@ -24,17 +24,15 @@ public class InventoryPanel extends JPanel implements Subject {
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(new FlowLayout());
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         panel.add(Box.createRigidArea(new Dimension(20, 0)));
-        panel.setPreferredSize(new Dimension(800,230));
-        panel.setMaximumSize(new Dimension(800,230));
-        panel.setMinimumSize(new Dimension(800,230));
+        panel.setPreferredSize(new Dimension(700,240));
+        panel.setMaximumSize(new Dimension(700,240));
+        panel.setMinimumSize(new Dimension(700,240));
         panel.setBorder(blackLine);
-        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Font font = new Font("", Font.BOLD, 14);
 
         JPanel equipment = new JPanel();
         equipment.setLayout(new BoxLayout(equipment, BoxLayout.PAGE_AXIS));
@@ -48,10 +46,9 @@ public class InventoryPanel extends JPanel implements Subject {
         panel.add(equipment);
         panel.add(Box.createRigidArea(new Dimension(20, 0)));
         panel.add(inventoryPieces());
-
-        this.add(Box.createRigidArea(new Dimension(900,10)));
         this.add(panel);
-        this.add(Box.createRigidArea(new Dimension(900,10)));
+
+
         this.add(goBack());
     }
 
@@ -95,12 +92,19 @@ public class InventoryPanel extends JPanel implements Subject {
         return inventoryPieces;
     }
 
-    private JButton goBack(){
+    private JPanel goBack(){
+        JPanel panelButton = new JPanel();
+        panelButton.setPreferredSize(new Dimension(105,240));
+        panelButton.setMaximumSize(new Dimension(105,240));
+        panelButton.setMinimumSize(new Dimension(105,240));
+        panelButton.setOpaque(false);
+
         JButton button = new JButton("Powrót");
-        button.setFont(new Font("", Font.BOLD, 18));
+        button.setFont(new Font("", Font.BOLD, 15));
         button.setBackground(new Color(136, 93, 44));
-        button.setPreferredSize(new Dimension(100,40));
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setPreferredSize(new Dimension(100,60));
+        //button.setAlignmentX(Component.BOTTOM_ALIGNMENT);
+
 
         button.addActionListener(new ActionListener() {
             @Override
@@ -109,7 +113,9 @@ public class InventoryPanel extends JPanel implements Subject {
                 notifyObservers();
             }
         });
-        return button;
+        panelButton.add(Box.createRigidArea(new Dimension(80,170)));
+        panelButton.add(button);
+        return panelButton;
     }
 
     @Override
