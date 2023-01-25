@@ -33,22 +33,18 @@ public class FightObserver implements Observer{
     }
     public void refresh(){
         if(player.getHealth() > 0 && enemy.getHealth() > 0){
-            if(fightPanel.getAbilityChoice()==3)
-                player.setUsedSpecial(true);
-
-            playerAttack(fightPanel.getAbilityChoice());
-            enemy.setAttackAvoided(false);
-
             fightPanel.getjButton5().setEnabled(false);
             fightPanel.getjButton6().setEnabled(false);
             fightPanel.getjButton7().setEnabled(false);
             fightPanel.getjButton8().setEnabled(false);
-
-            Random generate = new Random();
-            int enemyChoice = generate.nextInt(0, 3);
-            enemy.attack(player, enemyChoice);
-            enemyAttack(enemyChoice);
-            player.setAttackAvoided(false);
+            if(!(player.getAgility() < enemy.getAgility())) {
+                playerAttack(fightPanel.getAbilityChoice());
+                enemyAttack();
+            }
+            else {
+                enemyAttack();
+                playerAttack(fightPanel.getAbilityChoice());
+            }
             if(!(player.getHealth() > 0))
                 refresh();
             else {
@@ -76,7 +72,10 @@ public class FightObserver implements Observer{
             }
         }
     }
-    public void enemyAttack(int enemyChoice){
+    public void enemyAttack(){
+        Random generate = new Random();
+        int enemyChoice = generate.nextInt(0, 3);
+        enemy.attack(player, enemyChoice);
         fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().setMessage(
                 "Przeciwnik używa umiejętności " + '\"' + enemy.getAbilities()[enemyChoice].toString() + '\"' + " i zadaje ");
@@ -89,8 +88,10 @@ public class FightObserver implements Observer{
         fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
 
+        player.setAttackAvoided(false);
     }
     public void playerAttack(int playerChoice) {
+        game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), playerChoice);
         fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().newLine();
         switch (playerChoice) {
@@ -133,5 +134,9 @@ public class FightObserver implements Observer{
                 break;
         }
         fightPanel.getConsolePanel().newLine();
+
+        if(fightPanel.getAbilityChoice()==3)
+            player.setUsedSpecial(true);
+        enemy.setAttackAvoided(false);
     }
 }
