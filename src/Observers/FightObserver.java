@@ -49,12 +49,15 @@ public class FightObserver implements Observer{
             enemy.attack(player, enemyChoice);
             enemyAttack(enemyChoice);
             player.setAttackAvoided(false);
-
-            fightPanel.getjButton5().setEnabled(true);
-            fightPanel.getjButton6().setEnabled(true);
-            fightPanel.getjButton7().setEnabled(true);
-            if(!player.getUsedSpecial())
-                fightPanel.getjButton8().setEnabled(true);
+            if(!(player.getHealth() > 0))
+                refresh();
+            else {
+                fightPanel.getjButton5().setEnabled(true);
+                fightPanel.getjButton6().setEnabled(true);
+                fightPanel.getjButton7().setEnabled(true);
+                if (!player.getUsedSpecial())
+                    fightPanel.getjButton8().setEnabled(true);
+            }
         }
         else {
             if(player.getHealth() > 0){

@@ -58,6 +58,9 @@ public class Skill implements Serializable {
         dmg = Basicdmg * reqDmgMultiplier * damageMultiplier;
         dmg = dmg * (1 -resist/100.0);
 
+        if(dmg < 0)
+            dmg = 0;
+
         return (int) dmg;
     }
 
