@@ -223,14 +223,14 @@ public class Game implements Serializable {
         Armor armor6 = new Armor("Tunika", 3, "Zwykły", 15, 15, 15,2);
         Armor armor7 = new Armor("Przeszywalnica", 6, "Zwykły", 25, 20, 25,3);
         Armor armor8 = new Armor("Magiczny Koc", 10, "Zwykły", 10, 50, 25,4);
-        Armor armor9 = new Armor("Naładowana Sutanna", 20, "Zwykły", 20, 80, 30,5);
+        Armor armor9 = new Armor("Naładowana Sutanna", 20, "Zwykły", 20, 50, 30,5);
 
         //Armor na Warrior
         Armor armor10 = new Armor("Beczka", 1, "Zwykły", 30, 0, 5,1);
         Armor armor11 = new Armor("Skórzana Szata", 7, "Zwykły", 30, 10, 20,2);
-        Armor armor12 = new Armor("Żółwia skorupa", 10, "Zwykły", 85, 10, 10,3);
+        Armor armor12 = new Armor("Żółwia skorupa", 10, "Zwykły", 50, 10, 10,3);
         Armor armor13 = new Armor("Kolczuga", 15, "Zwykły", 40, 10, 20,4);
-        Armor armor14 = new Armor("Rycerska Zbroja", 25, "Zwykły", 60, 20, 30,5);
+        Armor armor14 = new Armor("Rycerska Zbroja", 25, "Zwykły", 50, 20, 30,5);
 
         basicArmors.add(armor0);
         basicArmors.add(armor1);
