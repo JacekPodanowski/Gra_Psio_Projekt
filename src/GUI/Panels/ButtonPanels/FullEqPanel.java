@@ -32,24 +32,24 @@ public class FullEqPanel extends JPanel implements Subject {
         this.add(z);
 
         JPanel panel = new JPanel();
-        panel.setMinimumSize(new Dimension(900, 250));
-        panel.setMaximumSize(new Dimension(900, 250));
-        panel.setPreferredSize(new Dimension(900, 250));
+        panel.setMinimumSize(new Dimension(900, 202));
+        panel.setMaximumSize(new Dimension(900, 202));
+        panel.setPreferredSize(new Dimension(900, 202));
         panel.setLayout(new FlowLayout());
         panel.setOpaque(false);
 
         JPanel panelItem = new JPanel();
         panelItem.add(Box.createRigidArea(new Dimension(50, 0)));
         panelItem.setLayout(new BoxLayout(panelItem, BoxLayout.PAGE_AXIS));
-        panelItem.setMinimumSize(new Dimension(700, 240));
-        panelItem.setMaximumSize(new Dimension(700, 240));
-        panelItem.setPreferredSize(new Dimension(700, 240));
+        panelItem.setMinimumSize(new Dimension(700, 200));
+        panelItem.setMaximumSize(new Dimension(700, 200));
+        panelItem.setPreferredSize(new Dimension(700, 200));
         panelItem.setBorder(blackLine);
 
         Item item = game.getMap().getPlayerLocation(game.getPlayer()).getItem();
         String itemStats = item.toString();
         panelItem.add(new JLabel("Znaleziony przedmiot to: "+itemStats));
-        panelItem.add(Box.createRigidArea(new Dimension(0, 20)));
+        panelItem.add(Box.createRigidArea(new Dimension(0, 5)));
         panelItem.add(inventoryPieces(item));
 
         panel.add(panelItem);
@@ -94,7 +94,7 @@ public class FullEqPanel extends JPanel implements Subject {
                 button.setSize(80, 20);
                 inventoryPieces.add(button);
             }
-            inventoryPieces.add(Box.createRigidArea(new Dimension(0, 10)));
+            inventoryPieces.add(Box.createRigidArea(new Dimension(0, 5)));
         }
         //inventoryPieces.add(Box.createRigidArea(new Dimension(0, 120)));
         return inventoryPieces;
@@ -102,9 +102,9 @@ public class FullEqPanel extends JPanel implements Subject {
 
     private JPanel goBack(){
         JPanel panelButton = new JPanel();
-        panelButton.setPreferredSize(new Dimension(105,240));
-        panelButton.setMaximumSize(new Dimension(105,240));
-        panelButton.setMinimumSize(new Dimension(105,240));
+        panelButton.setPreferredSize(new Dimension(105,202));
+        panelButton.setMaximumSize(new Dimension(105,202));
+        panelButton.setMinimumSize(new Dimension(105,202));
         panelButton.setOpaque(false);
 
         JButton button = new JButton("Powrót");
@@ -121,7 +121,7 @@ public class FullEqPanel extends JPanel implements Subject {
                 notifyObservers();
             }
         });
-        panelButton.add(Box.createRigidArea(new Dimension(80,170)));
+        panelButton.add(Box.createRigidArea(new Dimension(80,130)));
         panelButton.add(button);
         return panelButton;
     }

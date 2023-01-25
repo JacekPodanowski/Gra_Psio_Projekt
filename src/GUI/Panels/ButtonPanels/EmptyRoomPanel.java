@@ -23,13 +23,25 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         this.setMinimumSize(d);
         this.setMaximumSize(d);
         this.setPreferredSize(d);
-        this.restButton = restButton();
-        this.add(restButton);
-        this.add(useItemButton());
-        this.add(statsDisplayButton());
+        JLabel text = new JLabel("Co by zrobić w pustym pokoju?");
+        text.setFont(new Font("", Font.BOLD, 25));
+
+        JPanel panelButtons = new JPanel();
+        panelButtons.setOpaque(false);
+        panelButtons.setLayout(new FlowLayout());
+
+        restButton = restButton();
+        panelButtons.add(restButton);
+        panelButtons.add(useItemButton());
+        panelButtons.add(statsDisplayButton());
         setBackground(new Color(199, 196, 181));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
+
+        this.add(Box.createRigidArea(new Dimension(900,70)));
+        this.add(text);
+        this.add(Box.createRigidArea(new Dimension(900,60)));
+        this.add(panelButtons);
     }
     public JButton restButton(){
         JButton restButton = setBasicButton("Odpocznij");
