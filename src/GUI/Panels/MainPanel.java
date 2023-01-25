@@ -6,10 +6,14 @@ import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.View.MainWindow;
 import Observers.Observer;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
@@ -52,6 +56,8 @@ public class MainPanel extends JPanel {
                 this.add(endGamePanel);
                 break;
             case LOSTGAME:
+                String sci ="ooo.wav";
+                this.playmusic(sci);
                 this.setLayout(new GridLayout(2, 1));
                 lostGamePanel = new LostGamePanel(game);
                 this.add(lostGamePanel);
@@ -135,5 +141,25 @@ public class MainPanel extends JPanel {
 
     public void setLostGamePanel(LostGamePanel lostGamePanel) {
         this.lostGamePanel = lostGamePanel;
+    }
+    public void playmusic(String plik){
+
+        try{
+            File music = new File(plik);
+            if (music.exists()){
+                AudioInputStream graj = AudioSystem.getAudioInputStream(music);
+                Clip klip = AudioSystem.getClip();
+                klip.open(graj);
+                klip.start();
+            }
+            else {
+                System.out.println("brak pliku");
+            }
+
+        }
+        catch (Exception exception){
+            exception.printStackTrace();
+        }
+
     }
 }
