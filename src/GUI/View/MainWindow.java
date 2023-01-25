@@ -25,6 +25,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         Dimension d = new Dimension(900, 700);
         this.setSize(d);
+        this.setResizable(false);
         this.setPreferredSize(d);
         this.setLocation(centerLocation(Toolkit.getDefaultToolkit().getScreenSize().width,
                 Toolkit.getDefaultToolkit().getScreenSize().height,
