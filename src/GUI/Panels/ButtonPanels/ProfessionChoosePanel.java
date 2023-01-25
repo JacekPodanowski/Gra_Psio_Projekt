@@ -48,16 +48,19 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         Font font = new Font(null, Font.BOLD, 25);
 
         // dodanie komponentow
+        textPanel.add(Box.createRigidArea(new Dimension(1200,60)));
         textPanel.add(textChooseType);
-        textPanel.add(Box.createRigidArea(new Dimension(1200,100)));
+        textPanel.add(Box.createRigidArea(new Dimension(1200,55)));
         // pola Wojownik, Mag, Lucznik
         textPanel.add(getTextTypeChar("Wojownik", font));
-        //textPanel.add(Box.createRigidArea(new Dimension(100,100)));
+        textPanel.add(Box.createRigidArea(new Dimension(200,0)));
         textPanel.add(getTextTypeChar("Mag", font));
-        //textPanel.add(Box.createRigidArea(new Dimension(100,100)));
+        textPanel.add(Box.createRigidArea(new Dimension(180,0)));
         textPanel.add(getTextTypeChar("Łucznik", font));
-        //textPanel.add(Box.createRigidArea(new Dimension(900,100)));
+        textPanel.add(Box.createRigidArea(new Dimension(5,0)));
         this.add(textPanel);
+
+        
 
         // przyciski z profesjami
 
@@ -108,9 +111,7 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
         JButton textChar1 = new JButton();
         textChar1.setContentAreaFilled(false);
 
-        textChar1.setMinimumSize(new Dimension(290,50));
-        textChar1.setMaximumSize(new Dimension(290,50));
-        textChar1.setPreferredSize(new Dimension(290,50));
+
 
         textChar1.setText(typeChar);
         textChar1.setForeground(Color.getHSBColor(0,1,0.5f));
