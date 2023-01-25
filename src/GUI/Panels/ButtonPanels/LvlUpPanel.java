@@ -59,16 +59,18 @@ public class LvlUpPanel extends JPanel implements Subject {
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setSize(500,100);
-        buttonsPanel.setBorder(blackLine);
+        buttonsPanel.setOpaque(false);
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.LINE_AXIS));
 
         //Dodaje komponenty
 
         buttonsPanel.add(addStat('S'));
-        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         buttonsPanel.add(addStat('I'));
-        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         buttonsPanel.add(addStat('A'));
+
+        this.add(Box.createRigidArea(new Dimension(500,60)));
         this.add(buttonsPanel);
     }
 
@@ -77,6 +79,8 @@ public class LvlUpPanel extends JPanel implements Subject {
         switch (stat){
             case 'A':
                 button.setText("Dodaj zręczność");
+                button.setFont(new Font("", Font.BOLD, 20));
+                button.setBackground(new Color(136, 93, 44));
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -88,6 +92,8 @@ public class LvlUpPanel extends JPanel implements Subject {
                 break;
             case 'I':
                 button.setText("Dodaj inteligencję");
+                button.setFont(new Font("", Font.BOLD, 20));
+                button.setBackground(new Color(136, 93, 44));
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -99,6 +105,8 @@ public class LvlUpPanel extends JPanel implements Subject {
                 break;
             case 'S':
                 button.setText("Dodaj siłę");
+                button.setFont(new Font("", Font.BOLD, 20));
+                button.setBackground(new Color(136, 93, 44));
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
