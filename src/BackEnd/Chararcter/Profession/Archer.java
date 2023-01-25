@@ -17,7 +17,7 @@ public class Archer implements Profession{
 
     @Override
     public void specialAbility(Character character) {
-        character.setAbility(new Skill("Rozdzierająca strzała", 3, 100, 1), 3);
+        character.setAbility(new Skill("Rozdzierająca strzała", 5, 100, 1), 3);
     }
     @Override
     public String toString() {
