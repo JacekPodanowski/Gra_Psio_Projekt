@@ -39,7 +39,7 @@ public class SaveLoadHelper {
 
     public void save(Game game, int slotIndex){
         game.saveGame("SaveGame"+slotIndex+".bin");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         slots[slotIndex] = LocalDateTime.parse(LocalDateTime.now().format(formatter));
         saveSlots();
     }
