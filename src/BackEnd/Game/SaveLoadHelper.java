@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class SaveLoadHelper {
     private final int numberOfSlots = 4;
@@ -29,7 +30,8 @@ public class SaveLoadHelper {
         if(slots[index] ==null){
             return "puste";
         } else{
-            return slots[index].toString();
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+            return formatter1.format(LocalDateTime.now());
         }
     }
     public boolean isEmptySlot(int index)
@@ -39,8 +41,9 @@ public class SaveLoadHelper {
 
     public void save(Game game, int slotIndex){
         game.saveGame("SaveGame"+slotIndex+".bin");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        slots[slotIndex] = LocalDateTime.parse(LocalDateTime.now().format(formatter));
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        String date = formatter1.format(LocalDateTime.now());
+        slots[slotIndex] = LocalDateTime.parse(date, formatter1); //LocalDateTime.parse(LocalDateTime.now().format(formatter));
         saveSlots();
     }
 
@@ -63,10 +66,10 @@ public class SaveLoadHelper {
         }
         return slots;}
 
-    private void saveSlots(){
+    private void saveSlots() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));) {
             outputStream.writeObject(slots);
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Nie znalezione Pliku");
             e.printStackTrace();
         } catch (IOException e) {
@@ -74,7 +77,4 @@ public class SaveLoadHelper {
             throw new RuntimeException(e);
         }
     }
-
-
-
 }
