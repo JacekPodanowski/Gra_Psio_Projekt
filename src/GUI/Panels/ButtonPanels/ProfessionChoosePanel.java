@@ -13,12 +13,11 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ProfessionChoosePanel extends JPanel implements Subject {
-    private JButton warrior;
-    private JButton mage;
-    private JButton archer;
     private Game game;
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -66,18 +65,19 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
+        buttonPanel.setBackground(Color.BLACK);
 
 
-        buttonPanel.add(initiateProfession(game, warrior, "images/Wojownik.png", new Warrior()));
-        buttonPanel.add(initiateProfession(game, mage, "images/Mag.png",  new Mage()));
-        buttonPanel.add(initiateProfession(game, archer, "images/Lucznik.png",  new Archer()));
+        buttonPanel.add(initiateProfession(game, "images/Wojownik.png", new Warrior()));
+        buttonPanel.add(initiateProfession(game, "images/Mag.png",  new Mage()));
+        buttonPanel.add(initiateProfession(game, "images/Lucznik.png",  new Archer()));
         this.add(buttonPanel);
     }
-    private  JButton initiateProfession(Game game, JButton typeChar, String fileName,
+    private  JButton initiateProfession(Game game, String fileName,
                                         Profession profession){
 
-        typeChar = new JButton();
-        typeChar.setBackground(Color.getHSBColor(30,1,0.1f));
+        JButton typeChar = new JButton();
+        typeChar.setBackground(Color.BLACK);
         Border border = BorderFactory.createLineBorder(Color.getHSBColor(0,1,0.5f), 5);
         typeChar.setBorder(border);
 
@@ -93,6 +93,20 @@ public class ProfessionChoosePanel extends JPanel implements Subject {
                 game.setLocationChanged(true);
                 notifyObservers();
                 removeObserver(observers.get(0));
+            }
+        });
+        typeChar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                typeChar.setBackground(Color.getHSBColor(30,1,0.1f));
+                typeChar.repaint();
+                typeChar.revalidate();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                typeChar.setBackground(Color.BLACK);
+                typeChar.repaint();
+                typeChar.revalidate();
             }
         });
         return typeChar;

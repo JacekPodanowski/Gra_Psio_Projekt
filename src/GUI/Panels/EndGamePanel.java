@@ -9,6 +9,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class EndGamePanel extends JPanel implements Subject {
@@ -50,7 +52,6 @@ public class EndGamePanel extends JPanel implements Subject {
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 20));
 
-        newGameButton.setOpaque(false);
         newGameButton.setFocusable(false);
         newGameButton.setBorderPainted(false);
 
@@ -62,6 +63,20 @@ public class EndGamePanel extends JPanel implements Subject {
             public void actionPerformed(ActionEvent e) {
                 game.finishGame();
                 notifyObservers();
+            }
+        });
+        newGameButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                newGameButton.setBackground(Color.getHSBColor(30,1,0.1f));
+                newGameButton.repaint();
+                newGameButton.revalidate();
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                newGameButton.setBackground(Color.BLACK);
+                newGameButton.repaint();
+                newGameButton.revalidate();
             }
         });
 

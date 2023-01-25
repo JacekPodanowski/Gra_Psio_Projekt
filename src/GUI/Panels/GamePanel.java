@@ -21,8 +21,8 @@ public class GamePanel extends JPanel implements Subject {
         this.game = game;
         this.setPreferredSize(new Dimension(450, 400));
         this.setLayout(new GridBagLayout());
-        this.setBackground(Color.BLACK);
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBackground(Color.DARK_GRAY);
+        Border blackLine = BorderFactory.createMatteBorder(1, 1, 1, 0, Color.BLACK);
         this.setBorder(blackLine);
 
 

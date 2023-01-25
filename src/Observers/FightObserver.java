@@ -41,7 +41,8 @@ public class FightObserver implements Observer{
                 playerAttack(fightPanel.getAbilityChoice());
                 if(!(enemy.getHealth() > 0))
                     refresh();
-                enemyAttack();
+                if(player.isPlayerTurn())
+                    enemyAttack();
                 if(!(player.getHealth() > 0))
                     refresh();
             }
