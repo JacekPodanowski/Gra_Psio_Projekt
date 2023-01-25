@@ -22,7 +22,7 @@ public class SaveStrategy implements ISaveLoadStrategy {
 
     @Override
     public String getTitle() {
-        return "Zapis gry";
+        return "            Zapis gry";
     }
 
     @Override

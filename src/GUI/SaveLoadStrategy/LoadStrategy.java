@@ -28,7 +28,7 @@ public class LoadStrategy implements ISaveLoadStrategy {
 
     @Override
     public String getTitle() {
-        return "Odczyt gry";
+        return "          Odczyt gry";
     }
 
     @Override
