@@ -24,6 +24,7 @@ public class MainPanel extends JPanel {
     public MainPanel(Game game, WindowStates state){
         this.state = state;
         this.game = game;
+        setBackground(new Color(199, 196, 181));
         this.setPreferredSize(new Dimension(900, 700));
         switch(state) {
             case STARTMENU:

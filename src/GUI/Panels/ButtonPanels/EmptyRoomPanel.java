@@ -35,8 +35,8 @@ public class EmptyRoomPanel extends JPanel implements Subject {
         panelButtons.add(useItemButton());
         panelButtons.add(statsDisplayButton());
         setBackground(new Color(199, 196, 181));
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
 
         this.add(Box.createRigidArea(new Dimension(900,70)));
         this.add(text);

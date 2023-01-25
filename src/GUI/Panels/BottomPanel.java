@@ -33,7 +33,7 @@ public class BottomPanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 300));
         this.setPreferredSize(new Dimension(900, 300));
         this.setLayout(new FlowLayout());
-
+        setBackground(new Color(199, 196, 181));
 
         //this.setBorder(blackLine);
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
@@ -58,8 +58,8 @@ public class BottomPanel extends JPanel implements Subject {
             this.add(lootPanel);
         }
 
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
     }
         public Game getGame () {
             return game;

@@ -32,8 +32,8 @@ public class FightPanel extends JPanel implements Subject {
         this.add(new NewJPanel());
         setPreferredSize(new Dimension(900,300));
         setBackground(new Color(199, 196, 181));
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
     }
 
     public class NewJPanel extends javax.swing.JPanel {

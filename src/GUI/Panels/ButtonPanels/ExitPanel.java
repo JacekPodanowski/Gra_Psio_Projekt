@@ -21,8 +21,8 @@ public class ExitPanel extends JPanel implements Subject {
         this.setMaximumSize(new Dimension(900, 500));
         this.setPreferredSize(new Dimension(900, 500));
         setBackground(new Color(199, 196, 181));
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
 
         JLabel text = new JLabel("Czy to jest wyjście?");
         text.setFont(new Font("Verdana",Font.BOLD,25));

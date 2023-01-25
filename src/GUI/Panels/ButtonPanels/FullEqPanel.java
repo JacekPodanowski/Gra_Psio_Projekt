@@ -23,7 +23,7 @@ public class FullEqPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 300));
         setBackground(new Color(199, 196, 181));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        this.setBorder(blackLine);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JLabel z=new JLabel("BRAK MIEJSCA W EKWIPUNKU" );
