@@ -50,9 +50,9 @@ public class StatsPanel extends JPanel implements Subject {
         JPanel panel = new JPanel();
         //panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setPreferredSize(new Dimension(300,150));
-        panel.setMaximumSize(new Dimension(300,150));
-        panel.setMinimumSize(new Dimension(300,150));
+        panel.setPreferredSize(new Dimension(300,125));
+        panel.setMaximumSize(new Dimension(300,125));
+        panel.setMinimumSize(new Dimension(300,125));
 
         panel.add(new JLabel("Twoja aktualna broń: "));
         panel.add(currentWeapon());
@@ -67,9 +67,9 @@ public class StatsPanel extends JPanel implements Subject {
         JPanel panel = new JPanel();
         //panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setPreferredSize(new Dimension(300,150));
-        panel.setMaximumSize(new Dimension(300,150));
-        panel.setMinimumSize(new Dimension(300,150));
+        panel.setPreferredSize(new Dimension(300,125));
+        panel.setMaximumSize(new Dimension(300,125));
+        panel.setMinimumSize(new Dimension(300,125));
 
         panel.add(profession());
         panel.add(Box.createRigidArea(new Dimension(0, 10)));

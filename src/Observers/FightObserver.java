@@ -37,11 +37,13 @@ public class FightObserver implements Observer{
             fightPanel.getjButton6().setEnabled(false);
             fightPanel.getjButton7().setEnabled(false);
             fightPanel.getjButton8().setEnabled(false);
-            if(!(player.getAgility() < enemy.getAgility())) {
+            if(player.getAgility() < enemy.getAgility())
+                player.setPlayerTurn(false);
+            if(player.isPlayerTurn()) {
                 playerAttack(fightPanel.getAbilityChoice());
                 if(!(enemy.getHealth() > 0))
                     refresh();
-                if(player.isPlayerTurn())
+                if(!player.isPlayerTurn())
                     enemyAttack();
                 if(!(player.getHealth() > 0))
                     refresh();
@@ -81,6 +83,8 @@ public class FightObserver implements Observer{
         Random generate = new Random();
         int enemyChoice = generate.nextInt(0, 3);
         enemy.attack(player, enemyChoice);
+        player.setPlayerTurn(true);
+        fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().setMessage(
                 "Przeciwnik używa umiejętności " + '\"' + enemy.getAbilities()[enemyChoice].toString() + '\"' + " i zadaje ");
@@ -97,6 +101,8 @@ public class FightObserver implements Observer{
     }
     public void playerAttack(int playerChoice) {
         game.getPlayer().attack(game.getMap().getPlayerLocation(game.getPlayer()).getEnemy(), playerChoice);
+        if(!(fightPanel.getAbilityChoice() == 3 && player.getProfession() instanceof Warrior))
+            player.setPlayerTurn(false);
         fightPanel.getConsolePanel().newLine();
         fightPanel.getConsolePanel().newLine();
         switch (playerChoice) {
@@ -111,7 +117,6 @@ public class FightObserver implements Observer{
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
-                //fightPanel.getConsolePanel().newLine();
                 break;
             case 3:
                 if(player.getProfession() instanceof Mage){
@@ -138,7 +143,6 @@ public class FightObserver implements Observer{
                 fightPanel.getConsolePanel().setMessage("Życie przeciwnika: " + enemy.getHealth());
                 break;
         }
-        fightPanel.getConsolePanel().newLine();
 
         if(fightPanel.getAbilityChoice()==3)
             player.setUsedSpecial(true);
