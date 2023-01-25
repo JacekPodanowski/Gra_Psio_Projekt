@@ -24,11 +24,16 @@ public class InventoryPanel extends JPanel implements Subject {
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.add(goBack());
+        this.setLayout(new FlowLayout());
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-        panel.add(Box.createRigidArea(new Dimension(50, 0)));
+        panel.add(Box.createRigidArea(new Dimension(20, 0)));
+        panel.setPreferredSize(new Dimension(700,240));
+        panel.setMaximumSize(new Dimension(700,240));
+        panel.setMinimumSize(new Dimension(700,240));
+        panel.setBorder(blackLine);
+
         JPanel equipment = new JPanel();
         equipment.setLayout(new BoxLayout(equipment, BoxLayout.PAGE_AXIS));
         equipment.add(new JLabel("Twoja aktualna broń: "));
@@ -37,10 +42,14 @@ public class InventoryPanel extends JPanel implements Subject {
         equipment.add(new JLabel("Twoja aktualna zbroja: "));
         equipment.add(currentArmor());
         equipment.add(Box.createRigidArea(new Dimension(0, 120)));
+
         panel.add(equipment);
         panel.add(Box.createRigidArea(new Dimension(20, 0)));
         panel.add(inventoryPieces());
         this.add(panel);
+
+
+        this.add(goBack());
     }
 
     public JLabel currentWeapon(){
@@ -66,6 +75,7 @@ public class InventoryPanel extends JPanel implements Subject {
                 final int z = i;
                 JButton button = new JButton(i + 1 + ". " + game.getPlayer().getInventory()[i].toString());
                 button.setEnabled(true);
+                button.setBackground(new Color(136, 93, 44));
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -82,8 +92,20 @@ public class InventoryPanel extends JPanel implements Subject {
         return inventoryPieces;
     }
 
-    public JButton goBack(){
+    private JPanel goBack(){
+        JPanel panelButton = new JPanel();
+        panelButton.setPreferredSize(new Dimension(105,240));
+        panelButton.setMaximumSize(new Dimension(105,240));
+        panelButton.setMinimumSize(new Dimension(105,240));
+        panelButton.setOpaque(false);
+
         JButton button = new JButton("Powrót");
+        button.setFont(new Font("", Font.BOLD, 15));
+        button.setBackground(new Color(136, 93, 44));
+        button.setPreferredSize(new Dimension(100,60));
+        //button.setAlignmentX(Component.BOTTOM_ALIGNMENT);
+
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,7 +113,9 @@ public class InventoryPanel extends JPanel implements Subject {
                 notifyObservers();
             }
         });
-        return button;
+        panelButton.add(Box.createRigidArea(new Dimension(80,170)));
+        panelButton.add(button);
+        return panelButton;
     }
 
     @Override
