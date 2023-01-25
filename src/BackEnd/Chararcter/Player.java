@@ -32,7 +32,7 @@ public class Player extends Character {
         weapon=new Weapon();
         this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
         this.getInventory()[1]=Game.generateItem('W');
-        health = 1;
+        health = 100;
     }
 
     @Override
