@@ -22,8 +22,8 @@ public class EntrancePanel extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         //this.setBackground(Color.BLACK);
-        JLabel entranceText = new JLabel("Budzisz się w dziwnym, pustym sześciennym pokoju");
-        JLabel entranceText2 = new JLabel("Jedyne co się wyróżnia to drzwi w ścianie");
+        JLabel entranceText = new JLabel("Budzisz się w dziwnym, pustym sześciennym pokoju.");
+        JLabel entranceText2 = new JLabel("Jedyne co się wyróżnia to drzwi w ścianie.");
         JLabel entranceHint = new JLabel("Na mapie wybierz pokój, do którego chcesz przejść");
         entranceText.setFont(new Font("Verdana",Font.BOLD,25));
         entranceText2.setFont(new Font("Verdana",Font.BOLD,20));
