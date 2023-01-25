@@ -65,8 +65,8 @@ public class MapPanel extends JPanel implements Subject {
                         this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.DOWN &&
                         this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.UP &&
                         this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.ENTRANCE &&
-                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.EXIT);
-                    //rooms[i][j].setEnabled(false);
+                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.EXIT)
+                    rooms[i][j].setEnabled(false);
 
 //                if(this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.EMPTYROOM &&
 //                        this.game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() != RoomEvent.DOWN &&
