@@ -39,21 +39,25 @@ public class FightObserver implements Observer{
             fightPanel.getjButton8().setEnabled(false);
             if(!(player.getAgility() < enemy.getAgility())) {
                 playerAttack(fightPanel.getAbilityChoice());
+                if(!(enemy.getHealth() > 0))
+                    refresh();
                 enemyAttack();
+                if(!(player.getHealth() > 0))
+                    refresh();
             }
             else {
                 enemyAttack();
+                if(!(player.getHealth() > 0))
+                    refresh();
                 playerAttack(fightPanel.getAbilityChoice());
+                if(!(enemy.getHealth() > 0))
+                    refresh();
             }
-            if(!(player.getHealth() > 0))
-                refresh();
-            else {
-                fightPanel.getjButton5().setEnabled(true);
-                fightPanel.getjButton6().setEnabled(true);
-                fightPanel.getjButton7().setEnabled(true);
-                if (!player.getUsedSpecial())
-                    fightPanel.getjButton8().setEnabled(true);
-            }
+            fightPanel.getjButton5().setEnabled(true);
+            fightPanel.getjButton6().setEnabled(true);
+            fightPanel.getjButton7().setEnabled(true);
+            if (!player.getUsedSpecial())
+                fightPanel.getjButton8().setEnabled(true);
         }
         else {
             if(player.getHealth() > 0){
