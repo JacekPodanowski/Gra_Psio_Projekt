@@ -75,7 +75,6 @@ public class Enemy extends Character{
     @Override
     public void attack(Character target, int skillNumber) {
         target.setHealth(target.getHealth() - this.abilities[skillNumber].use(this, target));
-        setPlayerTurn(true);
     }
 
     @Override

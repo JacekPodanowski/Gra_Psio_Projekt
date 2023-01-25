@@ -28,28 +28,22 @@ public class Skill implements Serializable {
             case 'S':
                 resist = character.getArmor().getStrengthProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getStrength());
-                if (this.bonus == 0)
-                    this.turnSetter(player, character);
                 break;
 
             case 'I':
                 resist = character.getArmor().getMagicProtection();
                 if (this.bonus == 0) {
                     reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
-                    this.turnSetter(player, character);
                 } else {
                     double health = player.getHealth();
                     player.setHealth(player.getHealth() + this.bonus * 10);
                     System.out.print(", uleczono o " + (player.getHealth() - health));
-                    this.turnSetter(player, character);
                 }
                 break;
 
             case 'A':
                 resist = character.getArmor().getAgilityProtection();
                 reqDmgMultiplier = this.reqDmgMultiplier(player, player.getIntelligence());
-                if (this.bonus == 0)
-                    this.turnSetter(player, character);
                 break;
         }
         //==================================REZISTY==============================================
@@ -84,11 +78,8 @@ public class Skill implements Serializable {
         }
         return reqDmgMultiplier;
     }
-    public void turnSetter(Character character, Character character1){
-        if(character instanceof Player)
-            character.setPlayerTurn(!character.isPlayerTurn());
-        else
-            character1.setPlayerTurn(!character1.isPlayerTurn());
+    public void turnSetter(Character character){
+        character.setPlayerTurn(!character.isPlayerTurn());
     }
 
     @Override

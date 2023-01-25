@@ -32,7 +32,6 @@ public class Player extends Character {
         weapon=new Weapon();
         this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
         this.getInventory()[1]=Game.generateItem('W');
-        health = 100;
     }
 
     @Override
@@ -46,7 +45,6 @@ public class Player extends Character {
     @Override
     public void attack(Character target, int skillNumber) {
         target.setHealth(target.getHealth() - abilities[skillNumber].use(this, target));
-        setPlayerTurn(false);
         //umiejetnosc[skillNumber].use(this.weapon.calculatedmg());
         //character.setHealth(getHealth() - umiejetnosc.use[skillNumber](this.weapon.calculatedmg);
     }
