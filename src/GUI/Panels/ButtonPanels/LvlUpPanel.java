@@ -78,7 +78,7 @@ public class LvlUpPanel extends JPanel implements Subject {
         JButton button = new JButton();
         switch (stat){
             case 'A':
-                button.setText("Dodaj zręczność");
+                button.setText(" Dodaj zręczność ");
                 button.setFont(new Font("", Font.BOLD, 20));
                 button.setBackground(new Color(136, 93, 44));
                 button.addActionListener(new ActionListener() {
@@ -104,7 +104,7 @@ public class LvlUpPanel extends JPanel implements Subject {
                 });
                 break;
             case 'S':
-                button.setText("Dodaj siłę");
+                button.setText("    Dodaj siłę    ");
                 button.setFont(new Font("", Font.BOLD, 20));
                 button.setBackground(new Color(136, 93, 44));
                 button.addActionListener(new ActionListener() {
