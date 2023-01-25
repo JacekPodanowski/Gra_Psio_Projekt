@@ -22,16 +22,48 @@ public class LvlUpPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 500));
         setBackground(new Color(199, 196, 181));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+        //this.setBorder(blackLine);
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.add(new JLabel("Wygrywasz! Ta walka wiele cię nauczyła, możesz rozwinąć jedną ze swoich statystyk."));
+        //this.setBackground(Color.BLACK);
+        JLabel lvlup1 = new JLabel("Pokonałeś przeciwnika !");
+        JLabel lvlup2 = new JLabel("Ta walka wiele cię nauczyła ");
+        JLabel lvlup3 = new JLabel("Wybierz atrybut, który chcesz rozwinąć ");
+        lvlup1.setFont(new Font("Verdana",Font.BOLD,30));
+        lvlup2.setFont(new Font("Verdana",Font.ITALIC,17));
+        lvlup3.setFont(new Font("Verdana",Font.ITALIC,17));
+
+        JPanel panelText = new JPanel();
+        JPanel panelText2 = new JPanel();
+        JPanel panelText3 = new JPanel();
+        panelText.setOpaque(false);
+        panelText2.setOpaque(false);
+        panelText3.setOpaque(false);
+        panelText.setSize(500, 50);
+        panelText2.setSize(500, 50);
+        panelText3.setSize(500, 50);
+        panelText.setLayout(new BoxLayout(panelText, BoxLayout.LINE_AXIS));
+        panelText2.setLayout(new BoxLayout(panelText2, BoxLayout.LINE_AXIS));
+        panelText3.setLayout(new BoxLayout(panelText3, BoxLayout.LINE_AXIS));
+        this.add(Box.createRigidArea(new Dimension(0, 1)));
+        this.add(panelText);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+        this.add(panelText2);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(panelText3);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
+        panelText.add(lvlup1);
+        panelText2.add(lvlup2);
+        panelText3.add(lvlup3);
 
 
         JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setSize(500,100);
+        buttonsPanel.setBorder(blackLine);
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.LINE_AXIS));
 
         //Dodaje komponenty
+
         buttonsPanel.add(addStat('S'));
         buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonsPanel.add(addStat('I'));
