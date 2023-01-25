@@ -67,7 +67,7 @@ public class Skill implements Serializable {
     public int use(Character ataker, Character target){
         int dmg = calcDmg(ataker, target);
         Random r = new Random();
-        if(r.nextInt(110) > accuracy) {
+        if(r.nextInt(100) > accuracy) {
             target.setAttackAvoided(true);
             dmg = 0;
         }
