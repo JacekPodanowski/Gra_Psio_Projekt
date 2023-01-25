@@ -28,6 +28,7 @@ public class ExitPanel extends JPanel implements Subject {
         text.setFont(new Font("Verdana",Font.BOLD,25));
         text.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton endGameButton = new JButton("Wyjście");
+        endGameButton.setFont(new Font("", Font.BOLD, 15));
         //endGameButton.setSize(new Dimension(60, 40));
         endGameButton.setPreferredSize(new Dimension(150,50));
         endGameButton.setBackground(new Color(136, 93, 44));

@@ -18,15 +18,14 @@ public class FullEqPanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
     public FullEqPanel(Game game){
         this.game = game;
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setMaximumSize(new Dimension(900, 500));
-        this.setPreferredSize(new Dimension(900, 500));
+        this.setMinimumSize(new Dimension(900, 300));
+        this.setMaximumSize(new Dimension(900, 300));
+        this.setPreferredSize(new Dimension(900, 300));
         setBackground(new Color(199, 196, 181));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackLine);
-
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.add(goBack());
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         panel.add(Box.createRigidArea(new Dimension(50, 0)));
@@ -49,6 +48,7 @@ public class FullEqPanel extends JPanel implements Subject {
         panel.add(Box.createRigidArea(new Dimension(20, 0)));
         panel.add(inventoryPieces(item));
         this.add(panel);
+        this.add(goBack());
     }
 
     public JLabel currentWeapon(){
@@ -92,6 +92,7 @@ public class FullEqPanel extends JPanel implements Subject {
 
     public JButton goBack(){
         JButton button = new JButton("Zostaw");
+        button.setBackground(new Color(136, 93, 44));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
