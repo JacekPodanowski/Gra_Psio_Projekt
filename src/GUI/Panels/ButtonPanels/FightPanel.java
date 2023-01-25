@@ -180,6 +180,7 @@ public class FightPanel extends JPanel implements Subject {
         skill_4.setText(game.getPlayer().getAbilities()[3].toString());
         skill_4.setFont(new Font("ButtonFont", Font.BOLD, 20));
         skill_4.setBackground(new Color(136, 93, 44));
+        skill_4.setForeground(new Color(0xA51313));
         skill_4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

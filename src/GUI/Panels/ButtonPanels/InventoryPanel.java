@@ -36,11 +36,23 @@ public class InventoryPanel extends JPanel implements Subject {
 
         JPanel equipment = new JPanel();
         equipment.setLayout(new BoxLayout(equipment, BoxLayout.PAGE_AXIS));
-        equipment.add(new JLabel("Twoja aktualna broń: "));
+
+        JLabel ooo= new JLabel("Twoja aktualna broń: ");
+        ooo.setFont(new Font("Verdana",Font.BOLD,20));
+        equipment.add(ooo);
+
         equipment.add(currentWeapon());
+        equipment.add(currentWeaponStats());
+
         equipment.add(Box.createRigidArea(new Dimension(0, 10)));
-        equipment.add(new JLabel("Twoja aktualna zbroja: "));
+
+        JLabel aaa= new JLabel("Twoja aktualna zbroja: ");
+        aaa.setFont(new Font("Verdana",Font.BOLD,20));
+        equipment.add(aaa);
+
         equipment.add(currentArmor());
+        equipment.add(currentArmorStats());
+
         equipment.add(Box.createRigidArea(new Dimension(0, 120)));
 
         panel.add(equipment);
@@ -53,11 +65,23 @@ public class InventoryPanel extends JPanel implements Subject {
     }
 
     public JLabel currentWeapon(){
-        JLabel currentWeapon = new JLabel(game.getPlayer().getWeapon().toString());
+        JLabel currentWeapon = new JLabel("--> "+game.getPlayer().getWeapon().shortName());
+        currentWeapon.setFont(new Font("Verdana",Font.PLAIN,17));
+        return currentWeapon;
+    }
+    public JLabel currentWeaponStats(){
+        JLabel currentWeapon = new JLabel(game.getPlayer().getWeapon().stats());
+        currentWeapon.setFont(new Font("Verdana",Font.ITALIC,12));
         return currentWeapon;
     }
     public JLabel currentArmor(){
-        JLabel currentArmor = new JLabel(game.getPlayer().getArmor().toString());
+        JLabel currentArmor = new JLabel("-->"+game.getPlayer().getArmor().shortName());
+        currentArmor.setFont(new Font("Verdana",Font.PLAIN,17));
+        return currentArmor;
+    }
+    public JLabel currentArmorStats(){
+        JLabel currentArmor = new JLabel(game.getPlayer().getArmor().stats());
+        currentArmor.setFont(new Font("Verdana",Font.ITALIC,12));
         return currentArmor;
     }
     public JPanel inventoryPieces(){

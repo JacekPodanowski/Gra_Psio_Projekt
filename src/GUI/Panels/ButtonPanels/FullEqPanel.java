@@ -71,7 +71,7 @@ public class FullEqPanel extends JPanel implements Subject {
         inventoryPieces.setMaximumSize(new Dimension(700, 200));
         inventoryPieces.setPreferredSize(new Dimension(700, 200));
         inventoryPieces.setLayout(new BoxLayout(inventoryPieces, BoxLayout.PAGE_AXIS));
-        inventoryPieces.add(new JLabel("Ekwipunek:"));
+        inventoryPieces.add(new JLabel("Wymień jakiś przedmiot :"));
         for(int i = 0; i < game.getPlayer().getInventory().length; i++) {
             if (game.getPlayer().getInventory()[i] == null) {
                 JButton button = new JButton(i + 1 + ". -------------------");
@@ -107,7 +107,7 @@ public class FullEqPanel extends JPanel implements Subject {
         panelButton.setMinimumSize(new Dimension(105,202));
         panelButton.setOpaque(false);
 
-        JButton button = new JButton("Powrót");
+        JButton button = new JButton("Zostaw");
         button.setFont(new Font("", Font.BOLD, 15));
         button.setBackground(new Color(136, 93, 44));
         button.setPreferredSize(new Dimension(100,60));
