@@ -17,7 +17,7 @@ public class BottomPanel extends JPanel implements Subject {
     private EntrancePanel entrancePanel;
     private FightPanel fightPanel;
     private LootPanel lootPanel;
-    private ProfessionChoosePanel professionChoosePanel;
+    //private ProfessionChoosePanel professionChoosePanel;
     private ExitPanel exitPanel;
     private Game game;
     private LvlUpPanel lvlUpPanel;
@@ -33,7 +33,7 @@ public class BottomPanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 300));
         this.setPreferredSize(new Dimension(900, 300));
         this.setLayout(new FlowLayout());
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
+
 
         //this.setBorder(blackLine);
         if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
@@ -57,6 +57,9 @@ public class BottomPanel extends JPanel implements Subject {
             lootPanel.registerObserver(new LootObserver(this));
             this.add(lootPanel);
         }
+
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
     }
         public Game getGame () {
             return game;

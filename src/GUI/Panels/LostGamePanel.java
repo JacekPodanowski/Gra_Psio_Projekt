@@ -17,16 +17,21 @@ public class LostGamePanel extends JPanel implements Subject {
 
     public LostGamePanel(Game game){
         this.game = game;
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setMaximumSize(new Dimension(900, 500));
-        this.setPreferredSize(new Dimension(900, 500));
-
+        this.setMinimumSize(new Dimension(900, 700));
+        this.setMaximumSize(new Dimension(900, 700));
+        this.setPreferredSize(new Dimension(900, 700));
+        this.setBackground(Color.BLACK);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JLabel endText1 = new JLabel("NIE ZYJESZ");
+
+        //JLabel endText1 = new JLabel("NIE ZYJESZ");
+        JLabel endText1 = new JLabel(new ImageIcon("images/YouDied.png"));
+        endText1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         endText1.setFont(new Font("ButtonFont", Font.BOLD, 70));
+        this.add(Box.createRigidArea(new Dimension(900,150)));
         this.add(endText1);
-        this.add(Box.createRigidArea(new Dimension(20, 35)));
+        this.add(Box.createRigidArea(new Dimension(900, 250)));
         this.add(newGameButton());
 
     }
@@ -34,6 +39,8 @@ public class LostGamePanel extends JPanel implements Subject {
     public JButton newGameButton(){
         JButton newGameButton = new JButton("Zmartwychwstanie");
         newGameButton.setFont(new Font("ButtonFont", Font.BOLD, 15));
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        newGameButton.setBackground(new Color(136, 93, 44));
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

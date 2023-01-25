@@ -4,6 +4,7 @@ import BackEnd.Game.Game;
 import GUI.View.MainWindow;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,9 @@ public class EntrancePanel extends JPanel {
         this.setMinimumSize(d);
         this.setMaximumSize(d);
         this.setPreferredSize(d);
+        setBackground(new Color(199, 196, 181));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         //this.setBackground(Color.BLACK);
@@ -24,9 +28,13 @@ public class EntrancePanel extends JPanel {
         entranceText.setFont(new Font("Verdana",Font.BOLD,25));
         entranceText2.setFont(new Font("Verdana",Font.BOLD,20));
         entranceHint.setFont(new Font("Verdana",Font.ITALIC,17));
+
         JPanel panelText = new JPanel();
         JPanel panelText2 = new JPanel();
         JPanel panelHint = new JPanel();
+        panelText.setOpaque(false);
+        panelText2.setOpaque(false);
+        panelHint.setOpaque(false);
         panelText.setSize(500, 50);
         panelText2.setSize(500, 50);
         panelHint.setSize(500, 50);

@@ -7,6 +7,7 @@ import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,10 @@ public class FightPanel extends JPanel implements Subject {
     public FightPanel(Game game){
         this.game = game;
         this.add(new NewJPanel());
+        setPreferredSize(new Dimension(900,300));
+        setBackground(new Color(199, 196, 181));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
     }
 
     public class NewJPanel extends javax.swing.JPanel {
@@ -61,6 +66,10 @@ public class FightPanel extends JPanel implements Subject {
             consolePanel.setRows(5);
             jScrollPane2.setViewportView(consolePanel);
 
+            jPanel2.setOpaque(false);
+            jScrollPane2.setOpaque(false);
+            setOpaque(false);
+
 
             javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
             jPanel2.setLayout(jPanel2Layout);
@@ -79,7 +88,7 @@ public class FightPanel extends JPanel implements Subject {
                                                     .addComponent(jButton8))
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                     .addGap(20, 20, 20)
-                                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 650,
+                                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 750,
                                                             //to jest długość wzdłuż konsoli
                                                             javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addContainerGap(35, Short.MAX_VALUE))
@@ -88,7 +97,7 @@ public class FightPanel extends JPanel implements Subject {
             jPanel2Layout.setVerticalGroup(
                     jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addContainerGap()
+                                    //.addContainerGap()
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                                     //wysokość konsoli
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -127,6 +136,8 @@ public class FightPanel extends JPanel implements Subject {
         JButton skill_1 = new JButton();
         skill_1.setText(game.getPlayer().getAbilities()[0].toString());
         skill_1.setFont(new Font("ButtonFont", Font.BOLD, 20));
+        skill_1.setBackground(new Color(136, 93, 44));
+
         skill_1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -142,6 +153,7 @@ public class FightPanel extends JPanel implements Subject {
         JButton skill_2 = new JButton();
         skill_2.setText(game.getPlayer().getAbilities()[1].toString());
         skill_2.setFont(new Font("ButtonFont", Font.BOLD, 20));
+        skill_2.setBackground(new Color(136, 93, 44));
         skill_2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -157,6 +169,7 @@ public class FightPanel extends JPanel implements Subject {
         JButton skill_3 = new JButton();
         skill_3.setText(game.getPlayer().getAbilities()[2].toString());
         skill_3.setFont(new Font("ButtonFont", Font.BOLD, 20));
+        skill_3.setBackground(new Color(136, 93, 44));
         skill_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -172,6 +185,7 @@ public class FightPanel extends JPanel implements Subject {
         JButton skill_4 = new JButton();
         skill_4.setText(game.getPlayer().getAbilities()[3].toString());
         skill_4.setFont(new Font("ButtonFont", Font.BOLD, 20));
+        skill_4.setBackground(new Color(136, 93, 44));
         skill_4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

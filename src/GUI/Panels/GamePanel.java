@@ -1,7 +1,13 @@
 package GUI.Panels;
 
+import BackEnd.Chararcter.Profession.Archer;
+import BackEnd.Chararcter.Profession.Mage;
+import BackEnd.Chararcter.Profession.Warrior;
+import BackEnd.Game.Event.*;
+import BackEnd.Game.Game;
+import GUI.Panels.ButtonPanels.*;
 import Observable.Subject;
-import Observers.Observer;
+import Observers.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,27 +16,47 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
-    public GamePanel(){
+    private Game game;
+    public GamePanel(Game game){
+        this.game = game;
         this.setPreferredSize(new Dimension(450, 400));
-        //Border blackLine = BorderFactory.createLineBorder(Color.black);
-        //this.setBorder(blackLine);
-        //this.setBackground(Color.BLACK);
-        //this.add(new JLabel(new ImageIcon(this.getClass().getResource("/escapethecube.png"))));
-        /*
-        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Entrance) {
+        this.setLayout(new GridBagLayout());
+        this.setBackground(Color.BLACK);
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackLine);
 
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof EmptyRoom) {
 
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Exit) {
+        if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.ENTRANCE) {
+            this.add(new JLabel(new ImageIcon("images/Entrance.png")));
 
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Fight) {
-            for (int i = 0; i < game.getPlayer().getAbilities().length; i++);
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EMPTYROOM) {
+            this.add(new JLabel(new ImageIcon("images/RoomEmpty.png")));
 
-        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent() instanceof Loot) {
+
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.EXIT) {
+            this.add(new JLabel(new ImageIcon("images/Exit.png")));
+
+
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.FIGHT) {
+            if (game.getPlayer().getProfession() instanceof Mage)
+                this.add(new JLabel(new ImageIcon("images/RoomFightMage.png")));
+            else if (game.getPlayer().getProfession() instanceof Archer) {
+                this.add(new JLabel(new ImageIcon("images/RoomFightArcher.png")));
+            } else if (game.getPlayer().getProfession() instanceof Warrior) {
+                this.add(new JLabel(new ImageIcon("images/RoomFightWarrior.png")));
+            }
+
+
+            for (int i = 0; i < game.getPlayer().getAbilities().length; i++) ;
+        } else if (game.getMap().getPlayerLocation(game.getPlayer()).getEvent1() == RoomEvent.LOOT) {
+            this.add(new JLabel(new ImageIcon("images/RoomLoot.png")));
 
         }
-        return gamePanel;
-         */
+
+
+
+        //return gamePanel;
+
     }
 
     @Override
