@@ -46,11 +46,11 @@ public class LootPanel extends JPanel implements Subject {
         itemName = setTitle();
         staty = staty();
         lootPanel.add(w);
-        lootPanel.add(Box.createRigidArea(new Dimension(1000, 15)));
+        lootPanel.add(Box.createRigidArea(new Dimension(1000, 5)));
         lootPanel.add(itemName);
         lootPanel.add(Box.createRigidArea(new Dimension(1000, 1)));
         lootPanel.add(staty);
-        lootPanel.add(Box.createRigidArea(new Dimension(1000, 25)));
+        lootPanel.add(Box.createRigidArea(new Dimension(1000, 15)));
 
         JLabel z=new JLabel("DECYDUJ" );
         z.setFont(new Font("ButtonFont", Font.BOLD, 20));
@@ -65,6 +65,7 @@ public class LootPanel extends JPanel implements Subject {
 
     public JPanel createbuttonpanel(){
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.setSize(700,50);
         bierzLootButton = bierzLootButton(buttonPanel);
@@ -92,6 +93,7 @@ public class LootPanel extends JPanel implements Subject {
         bierzLootButton.setMinimumSize(new Dimension(350, 50));
         bierzLootButton.setPreferredSize(new Dimension(350, 50));
         bierzLootButton.setMaximumSize(new Dimension(350, 50));
+        bierzLootButton.setBackground(new Color(136, 93, 44));
         bierzLootButton.setLocation(MainWindow.centerLocation(parent,bierzLootButton));
         bierzLootButton.setText("Weź przedmiot");
         bierzLootButton.setFont(new Font("Veradana",Font.BOLD,25));
@@ -118,6 +120,7 @@ public class LootPanel extends JPanel implements Subject {
         nieBierzLootButton.setMinimumSize(new Dimension(350, 50));
         nieBierzLootButton.setPreferredSize(new Dimension(350, 50));
         nieBierzLootButton.setMaximumSize(new Dimension(350, 50));
+        nieBierzLootButton.setBackground(new Color(136, 93, 44));
 
         nieBierzLootButton.setLocation(MainWindow.centerLocation(parent,nieBierzLootButton));
         nieBierzLootButton.setText("Zostaw przedmiot");
