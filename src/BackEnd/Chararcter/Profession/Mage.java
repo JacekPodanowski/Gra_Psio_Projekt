@@ -20,7 +20,7 @@ public class Mage implements Profession{
 
     @Override
     public void specialAbility(Character character) {
-        character.setAbility(new Skill("Leczenie", 0, 100, 3), 3);
+        character.setAbility(new Skill("Magiczna regeneracja", 0, 100, 3), 3);
     }
 
     @Override
