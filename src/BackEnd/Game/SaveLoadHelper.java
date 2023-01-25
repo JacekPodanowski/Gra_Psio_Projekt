@@ -1,12 +1,14 @@
 package BackEnd.Game;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class SaveLoadHelper {
     private final int numberOfSlots = 4;
-    private LocalDate[] slots;
+    private LocalDateTime[] slots;
     private final String filePath = "save.bin";
 
     public SaveLoadHelper(){
@@ -14,7 +16,7 @@ public class SaveLoadHelper {
         if (file.exists()){
             slots = loadSlots();
         }else {
-            slots = new LocalDate[numberOfSlots];
+            slots = new LocalDateTime[numberOfSlots];
         }
     }
 
@@ -37,7 +39,8 @@ public class SaveLoadHelper {
 
     public void save(Game game, int slotIndex){
         game.saveGame("SaveGame"+slotIndex+".bin");
-        slots[slotIndex] = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+        slots[slotIndex] = LocalDateTime.parse(LocalDateTime.now().format(formatter));
         saveSlots();
     }
 
@@ -45,10 +48,10 @@ public class SaveLoadHelper {
         return Game.loadGame("SaveGame"+slotIndex+".bin");
     }
 
-    private LocalDate[] loadSlots(){
-        LocalDate[] slots = null;
+    private LocalDateTime[] loadSlots(){
+        LocalDateTime[] slots = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath))){
-            slots = (LocalDate[]) inputStream.readObject();
+            slots = (LocalDateTime[]) inputStream.readObject();
         } catch (FileNotFoundException e) {
             System.out.println("Nie odnaleziono pliku");
             throw new RuntimeException(e);
