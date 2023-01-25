@@ -23,7 +23,7 @@ public class FullEqPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 300));
         setBackground(new Color(199, 196, 181));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        this.setBorder(blackLine);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JLabel z=new JLabel("BRAK MIEJSCA W EKWIPUNKU" );
@@ -32,46 +32,52 @@ public class FullEqPanel extends JPanel implements Subject {
         this.add(z);
 
         JPanel panel = new JPanel();
-        panel.setMinimumSize(new Dimension(900, 202));
-        panel.setMaximumSize(new Dimension(900, 202));
-        panel.setPreferredSize(new Dimension(900, 202));
-        panel.setLayout(new FlowLayout());
-        panel.setOpaque(false);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+        panel.setPreferredSize(new Dimension(800,240));
+        panel.setMaximumSize(new Dimension(800,240));
+        panel.setMinimumSize(new Dimension(800,240));
+        panel.setBorder(blackLine);
 
-        JPanel panelItem = new JPanel();
-        panelItem.add(Box.createRigidArea(new Dimension(50, 0)));
-        panelItem.setLayout(new BoxLayout(panelItem, BoxLayout.PAGE_AXIS));
-        panelItem.setMinimumSize(new Dimension(700, 200));
-        panelItem.setMaximumSize(new Dimension(700, 200));
-        panelItem.setPreferredSize(new Dimension(700, 200));
-        panelItem.setBorder(blackLine);
+        JPanel equipment = new JPanel();
+        equipment.setLayout(new BoxLayout(equipment, BoxLayout.PAGE_AXIS));
 
         Item item = game.getMap().getPlayerLocation(game.getPlayer()).getItem();
-        String itemStats = item.toString();
-        panelItem.add(new JLabel("Znaleziony przedmiot to: "+itemStats));
-        panelItem.add(Box.createRigidArea(new Dimension(0, 5)));
-        panelItem.add(inventoryPieces(item));
+        String itemName = item.shortName();
+        String itemStats = item.stats();
 
-        panel.add(panelItem);
-        panel.add(goBack());
+        JLabel ooo= new JLabel("Znaleziony przedmiot to : ");
+        ooo.setFont(new Font("Verdana",Font.BOLD,15));
+        equipment.add(ooo);
+
+        equipment.add(Label("--> "+itemName));
+        equipment.add(Label(itemStats));
+
+        equipment.add(Box.createRigidArea(new Dimension(0, 120)));
+
+        panel.add(equipment);
+        panel.add(Box.createRigidArea(new Dimension(20, 0)));
+        panel.add(inventoryPieces(item));
         this.add(panel);
+
+
     }
 
-    public JLabel currentWeapon(){
-        JLabel currentWeapon = new JLabel(game.getPlayer().getWeapon().toString());
+    public JLabel Label(String a){
+        JLabel currentWeapon = new JLabel(a);
+        currentWeapon.setFont(new Font("Verdana",Font.PLAIN,15));
         return currentWeapon;
     }
-    public JLabel currentArmor(){
-        JLabel currentArmor = new JLabel(game.getPlayer().getArmor().toString());
-        return currentArmor;
-    }
+
     public JPanel inventoryPieces(Item item){
         JPanel inventoryPieces = new JPanel();
         inventoryPieces.setMinimumSize(new Dimension(700, 200));
         inventoryPieces.setMaximumSize(new Dimension(700, 200));
         inventoryPieces.setPreferredSize(new Dimension(700, 200));
         inventoryPieces.setLayout(new BoxLayout(inventoryPieces, BoxLayout.PAGE_AXIS));
-        inventoryPieces.add(new JLabel("Wymień jakiś przedmiot :"));
+        JLabel ooo= new JLabel("Wymień jakiś przedmiot :");
+        ooo.setFont(new Font("Verdana",Font.BOLD,15));
+        inventoryPieces.add(ooo);
+
         for(int i = 0; i < game.getPlayer().getInventory().length; i++) {
             if (game.getPlayer().getInventory()[i] == null) {
                 JButton button = new JButton(i + 1 + ". -------------------");
@@ -96,21 +102,22 @@ public class FullEqPanel extends JPanel implements Subject {
             }
             inventoryPieces.add(Box.createRigidArea(new Dimension(0, 5)));
         }
+        inventoryPieces.add(goBack());
         //inventoryPieces.add(Box.createRigidArea(new Dimension(0, 120)));
         return inventoryPieces;
     }
 
-    private JPanel goBack(){
-        JPanel panelButton = new JPanel();
-        panelButton.setPreferredSize(new Dimension(105,202));
-        panelButton.setMaximumSize(new Dimension(105,202));
-        panelButton.setMinimumSize(new Dimension(105,202));
-        panelButton.setOpaque(false);
+    private JButton goBack(){
+//        JPanel panelButton = new JPanel();
+//        panelButton.setPreferredSize(new Dimension(105,240));
+//        panelButton.setMaximumSize(new Dimension(105,240));
+//        panelButton.setMinimumSize(new Dimension(105,240));
+//        panelButton.setOpaque(false);
 
-        JButton button = new JButton("Zostaw");
+        JButton button = new JButton("   Zostaw   ");
         button.setFont(new Font("", Font.BOLD, 15));
         button.setBackground(new Color(136, 93, 44));
-        button.setPreferredSize(new Dimension(100,60));
+        button.setPreferredSize(new Dimension(125,20));
         //button.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
 
@@ -121,9 +128,9 @@ public class FullEqPanel extends JPanel implements Subject {
                 notifyObservers();
             }
         });
-        panelButton.add(Box.createRigidArea(new Dimension(80,130)));
-        panelButton.add(button);
-        return panelButton;
+//        panelButton.add(Box.createRigidArea(new Dimension(80,170)));
+//        panelButton.add(button);
+        return button;
     }
 
     @Override

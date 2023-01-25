@@ -33,8 +33,8 @@ public class RestPanel extends JPanel implements Subject {
         JPanel panel = generatePanel();
         this.add(panel);
 
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
 
     }
 

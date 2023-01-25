@@ -20,8 +20,8 @@ public class LostGamePanel extends JPanel implements Subject {
         this.setMinimumSize(new Dimension(900, 700));
         this.setMaximumSize(new Dimension(900, 700));
         this.setPreferredSize(new Dimension(900, 700));
-        this.setBackground(Color.BLACK);
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+//        this.setBackground(Color.BLACK);
+//        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 
         //JLabel endText1 = new JLabel("NIE ZYJESZ");

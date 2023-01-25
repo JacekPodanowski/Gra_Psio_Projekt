@@ -20,8 +20,8 @@ public class TopPanel extends JPanel {
         mapPanel = new MapPanel(game);
         this.add(gamePanel);
         this.add(mapPanel);
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
     }
 
     public MapPanel getMapPanel() {

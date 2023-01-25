@@ -29,8 +29,8 @@ public class LootPanel extends JPanel implements Subject {
         this.game = game;
         this.add(initiateComponents());
         setBackground(new Color(199, 196, 181));
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
 
     }
     public JPanel initiateComponents(){

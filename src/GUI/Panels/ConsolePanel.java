@@ -11,8 +11,8 @@ public class ConsolePanel extends JTextArea {
     public ConsolePanel(){
         this.setEditable(false);
         this.setVisible(true);
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
     }
     public void setMessage(String message) {
         this.setText(this.getText() + message);

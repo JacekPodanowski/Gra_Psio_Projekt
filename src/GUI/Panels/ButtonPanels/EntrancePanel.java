@@ -17,8 +17,8 @@ public class EntrancePanel extends JPanel {
         this.setMaximumSize(d);
         this.setPreferredSize(d);
         setBackground(new Color(199, 196, 181));
-        Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
+//        this.setBorder(blackLine);
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         //this.setBackground(Color.BLACK);

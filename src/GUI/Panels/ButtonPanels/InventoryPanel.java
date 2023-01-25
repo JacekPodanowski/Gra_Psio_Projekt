@@ -22,16 +22,16 @@ public class InventoryPanel extends JPanel implements Subject {
         this.setPreferredSize(new Dimension(900, 500));
         setBackground(new Color(199, 196, 181));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackLine);
+        //this.setBorder(blackLine);
 
         this.setLayout(new FlowLayout());
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         panel.add(Box.createRigidArea(new Dimension(20, 0)));
-        panel.setPreferredSize(new Dimension(700,240));
-        panel.setMaximumSize(new Dimension(700,240));
-        panel.setMinimumSize(new Dimension(700,240));
+        panel.setPreferredSize(new Dimension(800,240));
+        panel.setMaximumSize(new Dimension(800,240));
+        panel.setMinimumSize(new Dimension(800,240));
         panel.setBorder(blackLine);
 
         JPanel equipment = new JPanel();
@@ -61,7 +61,7 @@ public class InventoryPanel extends JPanel implements Subject {
         this.add(panel);
 
 
-        this.add(goBack());
+        //this.add(goBack());
     }
 
     public JLabel currentWeapon(){
@@ -112,21 +112,22 @@ public class InventoryPanel extends JPanel implements Subject {
             }
             inventoryPieces.add(Box.createRigidArea(new Dimension(0, 10)));
         }
+        inventoryPieces.add(goBack());
         inventoryPieces.add(Box.createRigidArea(new Dimension(0, 120)));
         return inventoryPieces;
     }
 
-    private JPanel goBack(){
-        JPanel panelButton = new JPanel();
-        panelButton.setPreferredSize(new Dimension(105,240));
-        panelButton.setMaximumSize(new Dimension(105,240));
-        panelButton.setMinimumSize(new Dimension(105,240));
-        panelButton.setOpaque(false);
+    private JButton goBack(){
+//        JPanel panelButton = new JPanel();
+//        panelButton.setPreferredSize(new Dimension(105,240));
+//        panelButton.setMaximumSize(new Dimension(105,240));
+//        panelButton.setMinimumSize(new Dimension(105,240));
+//        panelButton.setOpaque(false);
 
-        JButton button = new JButton("Powrót");
+        JButton button = new JButton("   Powrót   ");
         button.setFont(new Font("", Font.BOLD, 15));
         button.setBackground(new Color(136, 93, 44));
-        button.setPreferredSize(new Dimension(100,60));
+        button.setPreferredSize(new Dimension(125,20));
         //button.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
 
@@ -137,9 +138,9 @@ public class InventoryPanel extends JPanel implements Subject {
                 notifyObservers();
             }
         });
-        panelButton.add(Box.createRigidArea(new Dimension(80,170)));
-        panelButton.add(button);
-        return panelButton;
+//        panelButton.add(Box.createRigidArea(new Dimension(80,170)));
+//        panelButton.add(button);
+        return button;
     }
 
     @Override
