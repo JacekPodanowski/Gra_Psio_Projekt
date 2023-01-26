@@ -1,14 +1,11 @@
 package GUI.Panels;
 
 import BackEnd.Game.*;
-import BackEnd.Game.Event.*;
-import BackEnd.Game.Event.Event;
 import GUI.Panels.ButtonPanels.*;
 import Observable.Subject;
 import Observers.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 

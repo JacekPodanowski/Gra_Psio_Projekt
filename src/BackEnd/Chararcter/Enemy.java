@@ -66,12 +66,6 @@ public class Enemy extends Character{
         if(r.nextBoolean())
             inventory[3]= Game.generateItem('P');
     }
-
-
-    @Override
-    public void death() {
-
-    }
     @Override
     public void attack(Character target, int skillNumber) {
         target.setHealth(target.getHealth() - this.abilities[skillNumber].use(this, target));

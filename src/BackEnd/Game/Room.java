@@ -1,9 +1,7 @@
 package BackEnd.Game;
 
 import BackEnd.Chararcter.Enemy;
-import BackEnd.Chararcter.Item.Armor;
 import BackEnd.Chararcter.Item.Item;
-import BackEnd.Chararcter.Item.Weapon;
 import BackEnd.Chararcter.Player;
 import BackEnd.Game.Event.*;
 

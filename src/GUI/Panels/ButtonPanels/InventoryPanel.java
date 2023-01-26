@@ -1,6 +1,6 @@
 package GUI.Panels.ButtonPanels;
 
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import Observable.Subject;
 import Observers.Observer;

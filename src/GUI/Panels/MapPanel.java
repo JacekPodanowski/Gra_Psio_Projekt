@@ -1,11 +1,10 @@
 package GUI.Panels;
 
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import BackEnd.Game.RoomType;
 import Observable.Subject;
 import Observers.Observer;
-import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import javax.swing.border.Border;

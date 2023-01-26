@@ -1,13 +1,11 @@
 package GUI.Panels.ButtonPanels;
 
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import Observable.Subject;
 import Observers.Observer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

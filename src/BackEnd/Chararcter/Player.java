@@ -33,25 +33,12 @@ public class Player extends Character {
         this.getInventory()[0]=new Potion("Woda",0,"Zwykły",10);
         this.getInventory()[1]=Game.generateItem('W');
     }
-
-    @Override
-    public void death() {
-        alive=false;
-        System.out.println("No coz, umarles");
-        //wyswietyla statystyki
-
-    }
-
     @Override
     public void attack(Character target, int skillNumber) {
         target.setHealth(target.getHealth() - abilities[skillNumber].use(this, target));
-        //umiejetnosc[skillNumber].use(this.weapon.calculatedmg());
-        //character.setHealth(getHealth() - umiejetnosc.use[skillNumber](this.weapon.calculatedmg);
     }
 
     public boolean isEqFull() {
-
-        boolean full = false;
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i] == null) {
                 return false;
@@ -60,35 +47,15 @@ public class Player extends Character {
         return true;
     }
 
-    public void pickUpItem(Item item){
-
-        boolean succes= false;
+    public void pickUpItem(Item item) {
         for (int i = 0; i < inventory.length; i++) {
-            if(inventory[i]==null){
-                inventory[i]=item;
+            if (inventory[i] == null) {
+                inventory[i] = item;
                 System.out.println("Podniesiono " + item.toString());
                 return;
             }
         }
-// tu ma byc event
-
-//        System.out.println("Brak miejsca w ekwipunku ! ");
-//        System.out.println("Wybierz co wymienić : ");
-//        for (int i = 0; i < inventory.length; i++) {
-//            if (inventory[i] != null) {
-//                System.out.println(i+1 + ". " + inventory[i].toString());
-//            }
-//            else {
-//                System.out.println(i+1 +". -----");
-//            }
-//        }
-//        System.out.println("\n6. Zostaw Przedmiot\n");
-//
-//        int choice = Game.askForChoice(6)-1;
-//        System.out.println("Wymieniono "+ inventory[choice].toString()+ " na "+ item.toString());
-//        inventory[choice]=item;
     }
-
     public void useItem(int choice){
         if (inventory[choice] instanceof Potion) {
             health = health + ((Potion) inventory[choice]).getHealing();

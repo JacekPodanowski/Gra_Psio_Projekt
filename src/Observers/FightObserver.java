@@ -4,13 +4,11 @@ import BackEnd.Chararcter.Enemy;
 import BackEnd.Chararcter.Player;
 import BackEnd.Chararcter.Profession.Mage;
 import BackEnd.Chararcter.Profession.Warrior;
-import BackEnd.Game.Event.Fight;
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.FightPanel;
 import GUI.Panels.ButtonPanels.LvlUpPanel;
-import GUI.Panels.TopPanel;
 
 import java.util.Random;
 

@@ -1,12 +1,11 @@
 package Observers;
 
 import BackEnd.Chararcter.Player;
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
 import GUI.Panels.ButtonPanels.FullEqPanel;
-import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.LootPanel;
 
 public class LootObserver implements Observer{

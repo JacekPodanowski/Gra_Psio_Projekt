@@ -1,11 +1,8 @@
 package Observers;
 
-import BackEnd.Game.Event.EmptyRoom;
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
-import GUI.Panels.ButtonPanels.EmptyRoomPanel;
-import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.RestPanel;
 
 public class RestObserver implements Observer{

@@ -33,9 +33,6 @@ public abstract class Character implements Serializable {
         this.level = 1;
         addBasicAttacks();
     }
-
-
-    public abstract void death();
     public abstract void attack(Character character, int skillNumber);
     public void displayInventory(){
         for(int i = 0; i < this.inventory.length; i++)

@@ -1,6 +1,6 @@
 package Observers;
 
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
 import GUI.Panels.GamePanel;

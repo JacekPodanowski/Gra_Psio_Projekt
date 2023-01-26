@@ -1,11 +1,10 @@
 package Observers;
 
-import BackEnd.Game.Event.RoomEvent;
+import BackEnd.Game.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.EmptyRoomPanel;
 import GUI.Panels.ButtonPanels.FullEqPanel;
-import GUI.Panels.ButtonPanels.InventoryPanel;
 
 public class FullEqObserver implements Observer{
     private Game game;

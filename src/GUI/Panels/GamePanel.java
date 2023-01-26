@@ -3,9 +3,8 @@ package GUI.Panels;
 import BackEnd.Chararcter.Profession.Archer;
 import BackEnd.Chararcter.Profession.Mage;
 import BackEnd.Chararcter.Profession.Warrior;
-import BackEnd.Game.Event.*;
 import BackEnd.Game.Game;
-import GUI.Panels.ButtonPanels.*;
+import BackEnd.Game.RoomEvent;
 import Observable.Subject;
 import Observers.*;
 
