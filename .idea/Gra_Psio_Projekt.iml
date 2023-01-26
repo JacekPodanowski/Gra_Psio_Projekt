@@ -22,7 +22,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="google.code.maven.play.plugin.eamelink.mockito.all" level="application" />
     <orderEntry type="module-library">
       <library name="JUnit5.8.1">
         <CLASSES>
@@ -65,5 +64,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="google.code.maven.play.plugin.eamelink.mockito.all" level="application" />
   </component>
 </module>
