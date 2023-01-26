@@ -8,8 +8,8 @@ import BackEnd.Chararcter.Profession.Profession;
 import java.io.Serializable;
 
 public abstract class Character implements Serializable {
-    protected double health=100;
-    public double maxHealth=150.0;
+    protected double health = 100;
+    public double maxHealth = 150.0;
     protected int strength;
     protected int intelligence;
     protected int agility;

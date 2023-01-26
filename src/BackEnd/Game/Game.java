@@ -351,19 +351,19 @@ public class Game implements Serializable {
         anwser = random.nextInt(6);
         switch (anwser){
             case 0 :
-                player.healMissingHealth(5);
+                player.setHealth(player.getHealth() + 10);
                 break;
             case 1 :
-                player.healMissingHealth(10);
+                player.setHealth(player.getHealth() + 25);
                 break;
             case 2 :
-                player.setHealth(player.getHealth()-15);
+                player.setHealth(player.getHealth() - 15);
                 break;
             case 3 :
                 break;
             case 4 :
                 player.setInventory(new Item[5]);
-                player.healMissingHealth(10);
+                player.setHealth(player.getHealth() + 10);
                 break;
             case 5 :
                 player.setWeapon(new Weapon());

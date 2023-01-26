@@ -47,23 +47,23 @@ public class RestPanel extends JPanel implements Subject {
 
       switch (game.generateRestEvent()){
         case 0 :
-            panel.add(textLabel("Wstajesz czując się nieco lepeij"));
+            panel.add(textLabel("Wstajesz czując się nieco lepiej."));
             break;
         case 1 :
-            panel.add(textLabel("Wstajesz czując się znacznie lepeij"));
+            panel.add(textLabel("Wstajesz czując się znacznie lepiej."));
             break;
         case 2 :
-            panel.add(textLabel("Budzą cie 3 szybkie lecz bolesne ciosy kijem ale pokój wydaje się być pusty"));
-            panel.add(textLabel("Zycie zmiejszone o 15 punktów"));
+            panel.add(textLabel("Budzą cię 3 szybkie i bolesne ciosy kijem, jednak pokój wydaje się być pusty."));
+            panel.add(textLabel("Zycie zmiejszone o 15 punktów."));
             break;
         case 3 :
-            panel.add(textLabel("Wstajesz i ruszasz dalej"));
+            panel.add(textLabel("Wstajesz i ruszasz dalej."));
             break;
         case 4 :
-            panel.add(textLabel("Budzą się wypoczęty lecz nigdzie nie możesz znaleść swojej torby"));
+            panel.add(textLabel("Budzą się wypoczęty, lecz nigdzie nie możesz znaleźć swojej torby."));
             break;
         case 5 :
-            panel.add(textLabel("Budzisz się kompletnie nagi a po twoim sprzęcie ani śladu, ciekawe jako to sie stało ?"));
+            panel.add(textLabel("Budzisz się kompletnie nagi, po twoim sprzęcie ani śladu, ciekawe jako to sie stało?"));
             break;
         }
         panel.add(Box.createRigidArea(new Dimension(900, 50)));
