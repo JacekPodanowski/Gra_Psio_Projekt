@@ -40,6 +40,11 @@ class SkillTest {
         assertEquals(1.005, skill.reqDmgMultiplier(player, 1));
     }
 
+    @Test
+    void usu(){
+        assertEquals(10, skill.use(player, enemy));
+    }
+
 //    @Test
 //    void turnSetter() {
 //        Skill skill1 = Mockito.mock(Skill.class);

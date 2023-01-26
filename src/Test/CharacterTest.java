@@ -20,6 +20,8 @@ class CharacterTest {
     @Test
     void healMissingHealth() {
         Player player1 = Mockito.mock(Player.class);
+        player1.healMissingHealth(5);
+
         verify(player1).healMissingHealth(5);
     }
 }
