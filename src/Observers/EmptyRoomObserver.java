@@ -31,13 +31,15 @@ public class EmptyRoomObserver implements Observer{
                 bottomPanel.setInventoryPanel(new InventoryPanel(game));
                 bottomPanel.getInventoryPanel().registerObserver(new InventoryObserver(bottomPanel));
                 bottomPanel.add(bottomPanel.getInventoryPanel());
+                bottomPanel.notifyObservers();
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }
             case REST -> {
                 bottomPanel.setRestPanel((new RestPanel(game)));
                 bottomPanel.getRestPanel().registerObserver(new RestObserver(bottomPanel));
-                bottomPanel.add(bottomPanel.getRestPanel());//tu sie wywala jakis box layout
+                bottomPanel.add(bottomPanel.getRestPanel());
+                bottomPanel.notifyObservers();
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }
@@ -45,6 +47,7 @@ public class EmptyRoomObserver implements Observer{
                 bottomPanel.setStatsPanel(new StatsPanel(game));
                 bottomPanel.getStatsPanel().registerObserver(new StatsObserver(bottomPanel));
                 bottomPanel.add(bottomPanel.getStatsPanel());
+                bottomPanel.notifyObservers();
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
             }

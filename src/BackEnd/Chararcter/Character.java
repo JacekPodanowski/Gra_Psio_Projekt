@@ -52,7 +52,7 @@ public abstract class Character implements Serializable {
 
     public void healMissingHealth(int procent){
         double diff = maxHealth-health;
-        health = health+diff*procent/100;
+        health = (int) health+diff*procent/100;
     }
 
 
