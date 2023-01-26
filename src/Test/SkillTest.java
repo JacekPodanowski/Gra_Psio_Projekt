@@ -6,12 +6,16 @@ import BackEnd.Chararcter.Player;
 import BackEnd.Chararcter.Skill;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class SkillTest {
 
     private Skill skill;
+    private Skill skill1;
     private Player player;
     private Enemy enemy;
 
@@ -19,24 +23,26 @@ class SkillTest {
 
     @BeforeEach
     void setUp() {
-        skill = new Skill("Krytyczny strzał", 3, 100, 1);
+        skill = new Skill("Ogłuszające uderzenie", 2, 70, 1);
+
         player = new Player(1);
         enemy = new Enemy(3);
     }
 
     @Test
     void calcDmg() {
-        assertEquals(15, skill.calcDmg(player,enemy));
+        assertEquals(8, skill.calcDmg(player,enemy));
     }
 
 
     @Test
     void reqDmgMultiplier() {
-        assertEquals(13, skill.reqDmgMultiplier(player, 1));
+        assertEquals(1.005, skill.reqDmgMultiplier(player, 1));
     }
 
-    @Test
-    void turnSetter() {
-
-    }
+//    @Test
+//    void turnSetter() {
+//        Skill skill1 = Mockito.mock(Skill.class);
+//        verify(skill1).turnSetter(player);
+//    }
 }
