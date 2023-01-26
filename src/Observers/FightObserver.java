@@ -5,10 +5,12 @@ import BackEnd.Chararcter.Player;
 import BackEnd.Chararcter.Profession.Mage;
 import BackEnd.Chararcter.Profession.Warrior;
 import BackEnd.Game.Event.Fight;
+import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.FightPanel;
 import GUI.Panels.ButtonPanels.LvlUpPanel;
+import GUI.Panels.TopPanel;
 
 import java.util.Random;
 
@@ -68,6 +70,8 @@ public class FightObserver implements Observer{
                 bottomPanel.setLvlUpPanel(new LvlUpPanel(game));
                 bottomPanel.add(bottomPanel.getLvlUpPanel());
                 bottomPanel.getLvlUpPanel().registerObserver(new LvlUpObserver(bottomPanel));
+                game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.LOOT);
+                bottomPanel.notifyObservers();
                 bottomPanel.revalidate();
                 bottomPanel.repaint();
                 enemy.setUsedSpecial(false);
@@ -112,7 +116,7 @@ public class FightObserver implements Observer{
                 if (enemy.isAttackAvoided())
                     fightPanel.getConsolePanel().setMessage("0 obrażeń, ponieważ przeciwnik uniknął ciosu.");
                 else
-                    fightPanel.getConsolePanel().setMessage(enemy.getAbilities()[playerChoice].calcDmg(player, enemy) + " obrażeń.");
+                    fightPanel.getConsolePanel().setMessage(player.getAbilities()[playerChoice].calcDmg(player, enemy) + " obrażeń.");
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();
@@ -136,7 +140,7 @@ public class FightObserver implements Observer{
                     if (enemy.isAttackAvoided())
                         fightPanel.getConsolePanel().setMessage("0 obrażeń, ponieważ przeciwnik uniknął ciosu.");
                     else
-                        fightPanel.getConsolePanel().setMessage(enemy.getAbilities()[playerChoice].calcDmg(player, enemy) + " obrażeń.");
+                        fightPanel.getConsolePanel().setMessage(player.getAbilities()[playerChoice].calcDmg(player, enemy) + " obrażeń.");
                 fightPanel.getConsolePanel().newLine();
                 fightPanel.getConsolePanel().setMessage("Twoje życie: " + player.getHealth());
                 fightPanel.getConsolePanel().newLine();

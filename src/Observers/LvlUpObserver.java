@@ -24,7 +24,6 @@ public class LvlUpObserver implements Observer{
     public void refresh(){
         bottomPanel.removeAll();
         bottomPanel.getLvlUpPanel().removeObserver(this);
-        game.getMap().getPlayerLocation(game.getPlayer()).setEvent1(RoomEvent.LOOT);
         bottomPanel.setLootPanel(new LootPanel(game));
         bottomPanel.getLootPanel().registerObserver(new LootObserver(bottomPanel));
         bottomPanel.add(bottomPanel.getLootPanel());

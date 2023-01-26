@@ -3,6 +3,7 @@ package Observers;
 import BackEnd.Game.Event.RoomEvent;
 import BackEnd.Game.Game;
 import GUI.Panels.ButtonPanels.ProfessionChoosePanel;
+import GUI.Panels.GamePanel;
 import GUI.Panels.MainPanel;
 import GUI.Panels.MapPanel;
 import GUI.Panels.WindowStates;
@@ -64,7 +65,10 @@ public class GUIRefresher implements Observer{
     }
     public void mapRefresh(){
         mainWindow.getMainPanel().getTopPanel().remove(mainWindow.getMainPanel().getTopPanel().getMapPanel());
+        mainWindow.getMainPanel().getTopPanel().remove(mainWindow.getMainPanel().getTopPanel().getGamePanel());
         mainWindow.getMainPanel().getTopPanel().setMapPanel(new MapPanel(game));
+        mainWindow.getMainPanel().getTopPanel().setGamePanel(new GamePanel(game));
+        mainWindow.getMainPanel().getTopPanel().add(mainWindow.getMainPanel().getTopPanel().getGamePanel());
         mainWindow.getMainPanel().getTopPanel().add(mainWindow.getMainPanel().getTopPanel().getMapPanel());
         mainWindow.getMainPanel().getTopPanel().getMapPanel().registerObserver(this);
         mainWindow.getMainPanel().getTopPanel().revalidate();

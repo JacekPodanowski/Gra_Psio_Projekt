@@ -5,6 +5,7 @@ import GUI.Panels.BottomPanel;
 import GUI.Panels.ButtonPanels.InventoryPanel;
 import GUI.Panels.ButtonPanels.RestPanel;
 import GUI.Panels.ButtonPanels.StatsPanel;
+import GUI.Panels.TopPanel;
 
 public class EmptyRoomObserver implements Observer{
     private Game game;
